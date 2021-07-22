@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>Welcome to L61q4Cheng&#39;Blog</title>
+  <title>Dalvik指令集 | Welcome to L61q4Cheng&#39;Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Dalvik指令集   语    法 含      义    V void,只用于返回值类型   Z boolean   B byte   S short   C char   I int   J long   F float   D double   L Java类类型   [ 数组类型   1、空操作指令助记符为nop，值为00，通常用来做对齐代码，无实际操作。 2、数据操作指令 move3、">
+  <meta name="description" content="语    法 含      义    V void,只用于返回值类型   Z boolean   B byte   S short   C char   I int   J long   F float   D double   L Java类类型   [ 数组类型   1、空操作指令助记符为nop，值为00，通常用来做对齐代码，无实际操作。 2、数据操作指令 move3、返回指令  ret">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Welcome to L61q4Cheng&#39;Blog">
+<meta property="og:title" content="Dalvik指令集">
 <meta property="og:url" content="http://example.com/2021/07/22/Dalvik%E6%8C%87%E4%BB%A4%E9%9B%86/index.html">
 <meta property="og:site_name" content="Welcome to L61q4Cheng&#39;Blog">
-<meta property="og:description" content="Dalvik指令集   语    法 含      义    V void,只用于返回值类型   Z boolean   B byte   S short   C char   I int   J long   F float   D double   L Java类类型   [ 数组类型   1、空操作指令助记符为nop，值为00，通常用来做对齐代码，无实际操作。 2、数据操作指令 move3、">
+<meta property="og:description" content="语    法 含      义    V void,只用于返回值类型   Z boolean   B byte   S short   C char   I int   J long   F float   D double   L Java类类型   [ 数组类型   1、空操作指令助记符为nop，值为00，通常用来做对齐代码，无实际操作。 2、数据操作指令 move3、返回指令  ret">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-07-22T09:08:53.559Z">
-<meta property="article:modified_time" content="2021-07-22T09:08:53.560Z">
+<meta property="article:modified_time" content="2021-07-22T09:16:21.193Z">
 <meta property="article:author" content="L61q4_Cheng">
 <meta name="twitter:card" content="summary">
   
@@ -87,9 +87,19 @@
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Dalvik指令集
+    </h1>
+  
+
+      </header>
+    
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="Dalvik指令集"><a href="#Dalvik指令集" class="headerlink" title="Dalvik指令集"></a>Dalvik指令集</h1><table>
+        <table>
 <thead>
 <tr>
 <th>语    法</th>
@@ -142,14 +152,11 @@
 </tr>
 </tbody></table>
 <h3 id="1、空操作指令"><a href="#1、空操作指令" class="headerlink" title="1、空操作指令"></a>1、空操作指令</h3><p>助记符为nop，值为00，通常用来做对齐代码，无实际操作。</p>
-<h3 id="2、数据操作指令-move"><a href="#2、数据操作指令-move" class="headerlink" title="2、数据操作指令 move"></a>2、数据操作指令 move</h3><h3 id="3、返回指令-return"><a href="#3、返回指令-return" class="headerlink" title="3、返回指令  return"></a>3、返回指令  return</h3><blockquote>
-<p>“return-void”表示函数从一个void方法返回。</p>
+<h3 id="2、数据操作指令-move"><a href="#2、数据操作指令-move" class="headerlink" title="2、数据操作指令 move"></a>2、数据操作指令 move</h3><h3 id="3、返回指令-return"><a href="#3、返回指令-return" class="headerlink" title="3、返回指令  return"></a>3、返回指令  return</h3><p>“return-void”表示函数从一个void方法返回。</p>
 <p>“return vAA表示函数返回一个32位非对象类型的值,回值寄存器为8位的寄存器vAA</p>
 <p>“return-wide vAA表示函数返回一个64位非对象类型的值。返回值为8位的寄存器对vAA</p>
 <p>“return object vAA”表示函数返回一个对象类型的值。返回值为8位的寄存器vAA</p>
-</blockquote>
 <h3 id="4、数据定义指令-const"><a href="#4、数据定义指令-const" class="headerlink" title="4、数据定义指令 const"></a>4、数据定义指令 const</h3><p>用来定义程序中用到的常量、字符串、类等数据。</p>
-<blockquote>
 <p>“const/high16   vAA,#+B000”将数值右边零扩展为32位后赋给寄存器vAA。</p>
 <p>“const-wide/16  vAA,#+BBBB”将数值符号扩展为64位后赋给寄存器对vAA.</p>
 <p>“const-wide/32  vAA,#+BBBBBBBB”将数值符号扩展为64位后赋给寄存器对vAA</p>
@@ -159,23 +166,17 @@
 <p>“const-string-/jumbo vAA, string@BBBBBBBB”通过字符串索引(较大)构造一个字符串并赋给寄存器vAA。</p>
 <p>“const-class- vAA,type@BBBB”通过类型索引获取一个类引用并赋给寄存器vAA</p>
 <p>“const-class-/jumbo vAAAA,type@BBBBBBBB”通过给定的类型索引获取一个类引用并赋给寄存器 VAAAA.这条指令占用两个字节,值为 OxOOff( Android 4.4.0中新增的指)</p>
-</blockquote>
 <h3 id="5、实例操作指令"><a href="#5、实例操作指令" class="headerlink" title="5、实例操作指令"></a>5、实例操作指令</h3><p>类型转换，检查，新建。</p>
-<blockquote>
 <p>“check-cast vAA,type@BBBB”将vAA寄存器中的对象引用转换成指定的类型,如果失败会抛出 ClassCastException异常。如果类型B指定的是基本类型,对于非基本类型的A来说,运行时始终会失败。</p>
 <p>”instance-of vA,vB,type@CCCC”判断vB寄存器中的对象引用是否可以转换成指定的类型,如果可以vA寄存器赋值为1,否则vA寄存器赋值为0。</p>
 <p>“new-instance VAA,type@BBBB”构造一个指定类型对象的新实例,并将对象引用赋值给vAA寄存器,类型符tpe指定的类型不能是数组类.</p>
 <p>“check-cast/jumbo VAAAA, type@BBBBBBBB”指令功能与“ check-cast vAA,type@BBBB”相同,只是寄存器值与指令的索引取值范围更大( Android4.0中新增的指令)</p>
 <p>“ instance-of/jumbo VAAAA, VBBBB,type@ CCCCCCCC”指令功能与“ instance-of vA ,vB ,type @cCCC”相同,只是寄存器值与指令的索引取值范围更大( Android40中新增的指令)。</p>
 <p>“new-instance/jumbo VAAA/,type@ BBBBBBBB”指令功能与“new- instance VAA,type@BBBB”相同,只是寄存器值与指令的索引取值范围更大( Android4.0中新增的指令)</p>
-</blockquote>
-<h3 id="6、锁指令-monitor-多用在多线程程序中对同一对象的操作"><a href="#6、锁指令-monitor-多用在多线程程序中对同一对象的操作" class="headerlink" title="6、锁指令  monitor  (多用在多线程程序中对同一对象的操作)"></a>6、锁指令  monitor  (多用在多线程程序中对同一对象的操作)</h3><blockquote>
-<p>“monitor-enter  vAA”为指定的对象获得锁。</p>
+<h3 id="6、锁指令-monitor-多用在多线程程序中对同一对象的操作"><a href="#6、锁指令-monitor-多用在多线程程序中对同一对象的操作" class="headerlink" title="6、锁指令  monitor  (多用在多线程程序中对同一对象的操作)"></a>6、锁指令  monitor  (多用在多线程程序中对同一对象的操作)</h3><p>“monitor-enter  vAA”为指定的对象获得锁。</p>
 <p>“monitor -exit vAA” 释放指定的对象的锁。</p>
-</blockquote>
 <h3 id="7、数组操作指令"><a href="#7、数组操作指令" class="headerlink" title="7、数组操作指令"></a>7、数组操作指令</h3><p>包括数组长度，新建数组，数组赋值，数组元素取值与赋值等操作。</p>
-<blockquote>
-<p> “array length vA,vB”获取给定vB寄存器中数组的长度并将值赋给vA寄存器，数组长度指的是数组的条目个数。</p>
+<p>“array length vA,vB”获取给定vB寄存器中数组的长度并将值赋给vA寄存器，数组长度指的是数组的条目个数。</p>
 <p>“new- array vA,vB,type@CCCC”构造指定类型( (type@CCCC)与大小(vB)的数组并将值赋给vA寄存器.</p>
 <p>“ filled-new array{ vC,vD,vE,vF},type@BBBB构造指定类型( type@BBBB))与大小(vA)的数组填充数组内容。vA寄存器是隐含使用的，除了指定数组的大小外还指定了参数的个数，vC~vG是使用到的参数寄存器序列。</p>
 <p>“filled-new-array/range{vCCCC..vNNNN),type@BBBB指令功能与“ filled-new  array{vC,vD,vE, vfF,vG},type@BBBB”相同，只是参数寄存器使用range字节码后指定了取值范围，vC是第一个参数寄存器，N=A+C-1。</p>
@@ -183,37 +184,26 @@
 <p>“new- -array/jumbo vAAAA, VBBBB,type@CCCCCCCC指令功能与“new- array vA,vB,type @CCCC相同，只是寄存器值与指令的索引取值范围更大( Android4.0中新增的指令)</p>
 <p>“filled new-array/jumb{vCCCC..vNNNN),type@BBBBBBBB指令功能与 filled-new-array/range fvCCCC.nn)， type@BBBE”相同，只是索引取值范围更大( Android4.0中新增的指令)。</p>
 <p>“ arrayop vAA,vBB,vCC对vBB寄存器指定的数组元素进入取值与赋值。vCC寄存器指定数组元素索引，vAA寄存器用来存放读取的或需要设置的数组元素的值。读取元素使用aget类指令，元素赋值使用aput类指令，根据数组中存储的类型指令后面会紧跟不同的指令后，指令列表有aget aget-wide, aget-object, aget-boolean, aget-byte, aget-char aget-short, aput, aput-wide, aput-object, aput-boolean, aput-byte,aput-char,aput-short.</p>
-</blockquote>
-<h3 id="8、异常指令-抛出异常"><a href="#8、异常指令-抛出异常" class="headerlink" title="8、异常指令  抛出异常"></a>8、异常指令  抛出异常</h3><blockquote>
-<p>“throw vAA”抛出vAA寄存器中指定类型的异常。</p>
-</blockquote>
-<h3 id="9、跳转指令-当前地址跳转到指定的偏移量。"><a href="#9、跳转指令-当前地址跳转到指定的偏移量。" class="headerlink" title="9、跳转指令   当前地址跳转到指定的偏移量。"></a>9、跳转指令   当前地址跳转到指定的偏移量。</h3><h4 id="1-无条件跳转-goto"><a href="#1-无条件跳转-goto" class="headerlink" title="1)  无条件跳转(goto)"></a>1)  无条件跳转(goto)</h4><blockquote>
-<p>“goto +AA”无条件跳转到指定偏移处，偏移量AA不能为0.</p>
+<h3 id="8、异常指令-抛出异常"><a href="#8、异常指令-抛出异常" class="headerlink" title="8、异常指令  抛出异常"></a>8、异常指令  抛出异常</h3><p>“throw vAA”抛出vAA寄存器中指定类型的异常。</p>
+<h3 id="9、跳转指令-当前地址跳转到指定的偏移量。"><a href="#9、跳转指令-当前地址跳转到指定的偏移量。" class="headerlink" title="9、跳转指令   当前地址跳转到指定的偏移量。"></a>9、跳转指令   当前地址跳转到指定的偏移量。</h3><h4 id="1-无条件跳转-goto"><a href="#1-无条件跳转-goto" class="headerlink" title="1)  无条件跳转(goto)"></a>1)  无条件跳转(goto)</h4><p>“goto +AA”无条件跳转到指定偏移处，偏移量AA不能为0.</p>
 <p>“goto/16 +AAAA”无条件跳转到指定偏移处，偏移量AAAA不能为0.</p>
 <p>“goto/32 +AAAAAAAA”无条件跳转到指定偏移处.</p>
-</blockquote>
-<h4 id="2-分支跳转（switch）"><a href="#2-分支跳转（switch）" class="headerlink" title="2)  分支跳转（switch）"></a>2)  分支跳转（switch）</h4><blockquote>
-<p>“ packed- switch vAA +BBBBBBBB”分支跳转指令。vAA寄存器为 switch分支中需要判断的值， BBBBBBBB脂向一个 packed-switch- payload格式的偏移表，表中的值是有规律递增的。</p>
+<h4 id="2-分支跳转（switch）"><a href="#2-分支跳转（switch）" class="headerlink" title="2)  分支跳转（switch）"></a>2)  分支跳转（switch）</h4><p>“ packed- switch vAA +BBBBBBBB”分支跳转指令。vAA寄存器为 switch分支中需要判断的值， BBBBBBBB脂向一个 packed-switch- payload格式的偏移表，表中的值是有规律递增的。</p>
 <p>“ sparse- switch VAA,+ BBBBBBBB”分支跳转指令。vAA寄存器为 switch分支中需要判断的值， BBBBBBBB指向一个 sparse-switch- payload格式的偏移表，表中的值是无规律的偏移量。</p>
-</blockquote>
-<h4 id="3）条件跳转-if"><a href="#3）条件跳转-if" class="headerlink" title="3）条件跳转  (if)"></a>3）条件跳转  (if)</h4><blockquote>
-<p>“if-eq”如果vA等于vB则跳转。Java语法表示为“if(vA==vB)</p>
+<h4 id="3）条件跳转-if"><a href="#3）条件跳转-if" class="headerlink" title="3）条件跳转  (if)"></a>3）条件跳转  (if)</h4><p>“if-eq”如果vA等于vB则跳转。Java语法表示为“if(vA==vB)</p>
 <p>“if-ne”如果v不等于vB则跳转   Java语法表示为“if(vA！=vB)</p>
 <p>“if-lt”如果vA小于vB则跳转      Java语法表示为“if(vA&lt;VB)”</p>
 <p>“if-ge”如果vA大于等于vB则跳转  Java语法表示为“if(vA&gt;=vB)</p>
 <p>“if-gt”如果vA大于vB则跳转。   Java语法表示为“if(vA&gt;VB)”</p>
 <p>“if-le”如果vA小于等于vB则跳转。Java法表示为“if(vA&lt;=vB)</p>
 <p>“if -testz vAA,+BBBB”条件跳转指令。拿AA寄存器与0比较,如果比较结果满足或值为0时就跳转到BBBB指定的偏移处。偏移量BBBB不能为0。</p>
-</blockquote>
-<h4 id="if-test类型的指令有以下几条"><a href="#if-test类型的指令有以下几条" class="headerlink" title="if- test类型的指令有以下几条:"></a><strong>if- test类型的指令有以下几条:</strong></h4><blockquote>
-<p>“ if-eqz如果vAA为0则跳转。Java语法表示为“if(!vAA)”</p>
+<h4 id="if-test类型的指令有以下几条"><a href="#if-test类型的指令有以下几条" class="headerlink" title="if- test类型的指令有以下几条:"></a><strong>if- test类型的指令有以下几条:</strong></h4><p>“ if-eqz如果vAA为0则跳转。Java语法表示为“if(!vAA)”</p>
 <p>“if-nez”如果vAA不为0则跳转。Java语法表示为“if(vAA)”</p>
 <p>“if-ltz”如果vAA小于0则跳转。Java语表示为“if(vAA&lt;0)”</p>
 <p>“if-gez”如果vAA大于等于0则跳转。Java语法表示为“if(vAA&gt;=0)</p>
 <p>“if-gtz如果vAA大于0则跳转。Java语法表示为“if(vAA&gt;0)</p>
 <p>“if-lez”如果vAA小于等于0则跳转。Java语法表示为“if(vAA&lt;=0)</p>
 <p>10、比较指令  对两个寄存器的值进行比较</p>
-</blockquote>
 <p>格式：compkind vAA,vBB,vCC</p>
 <p>注：vBB和vCC是两个需要比较的寄存器，并把比较的结果放到vAA寄存器中</p>
 <p>“cmpl-float”比较两个单精度浮点数。如果vBB寄存器大于vCC寄存器，则结果为-1,相等则结果为0,小于的话结果为1.</p>
@@ -229,7 +219,6 @@
 <p>格式：“nvokek-ind{vC,vD,vE,vF,vG},meth@BBBB”、“invokekind/rangce{vCCCC..vNNNN},meth@B         BBB”两类,两类指令在作用上并无不同,只是后者在设置参数寄存器时使用了range来指定寄存器的范围。</p>
 <p>13、数据转换指令    将一种类型的数值转换成另一种类型。</p>
 <p>格式：unop,vA,vB   vB寄存器或vB寄存器对存放需要转换的数据，转换后的结果保存在vA寄存器或vA寄存器中。</p>
-<blockquote>
 <p>“neg-int”对整型数求补。 </p>
 <p>“not-int”对整形数求反。 </p>
 <p>“neg-long”对长整型数求补。</p>
@@ -251,20 +240,16 @@
 <p>“int-to-byte”将整型转换为字节型。</p>
 <p>“int-to-char”将整形转换为字符串。</p>
 <p>“int-to-short”将整型转换为短整型。</p>
-</blockquote>
 <p>14、数据运算指令</p>
 <p>包括算数运算指令和逻辑运算指令</p>
 <p>数据运算指令有如下四类</p>
-<blockquote>
 <p>1)binop vAA，vBB，vCC＂将vBB寄存器与vCC寄存器进行运算，结果保存到AA寄存器。</p>
 <p>2)binop/2 addr vA，vB”将vA寄存器与vB寄存器进行运算，结果保存到vA寄存器 。</p>
 <p>3)binp/lit6 vA，vB,#+CCCC”将vB寄存器与常量CCCC进行运算，结果保存到vA寄存器。</p>
 <p>4)binp/lit VAA， VBB,#+CC＂将vBB寄存器与常量CC进行运算，结果保存到vAA寄存器。</p>
 <p>后面3类指令比第1类指令分别多出了2addr、lit6、lit8等指令后缀。</p>
-</blockquote>
 <p><strong>四类指令中基础字节码相同的指令执行的运算操作是类似的。</strong>第1类指令中，根据数据的类型不同会在基础字码后面加上数据类型后缀，如-int或-long分别表示操作的数据类型为整型与长整型。</p>
 <p>第一类指令可归类如下</p>
-<blockquote>
 <p>“add-type”vBB寄存器与vCC寄存器值进行加法运算(vBB+vCC)。</p>
 <p>“sub-type”vBB寄存器与vCC寄存器值进行减法运算(vBB-vCC)。</p>
 <p>“mul-type”vBB寄存器与vCC寄存器值进行乘法运算( vBB x vCC) 。</p>
@@ -276,13 +261,12 @@
 <p>“shi-type＂vBB寄存器值(有符号数)左移vCC位(vBB＜＜vCC)。 </p>
 <p>“shr-type＂wB寄存器值(有符号数)右移vCC位(vBB＞＞CC)。</p>
 <p>“ ushr-type＂wBB寄存器值(无符号数)右移vCC位(vBB＞＞vCC)。</p>
-</blockquote>
 <p>其中基础字节码后面的-type可以是-int、-long,-float,-double。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/07/22/Dalvik%E6%8C%87%E4%BB%A4%E9%9B%86/" data-id="ckrep1y9v0000jktwh2mebvj7" data-title="" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2021/07/22/Dalvik%E6%8C%87%E4%BB%A4%E9%9B%86/" data-id="ckrep1y9v0000jktwh2mebvj7" data-title="Dalvik指令集" class="article-share-link">分享</a>
       
       
       
@@ -333,7 +317,7 @@
       <ul>
         
           <li>
-            <a href="/2021/07/22/Dalvik%E6%8C%87%E4%BB%A4%E9%9B%86/">(no title)</a>
+            <a href="/2021/07/22/Dalvik%E6%8C%87%E4%BB%A4%E9%9B%86/">Dalvik指令集</a>
           </li>
         
           <li>
