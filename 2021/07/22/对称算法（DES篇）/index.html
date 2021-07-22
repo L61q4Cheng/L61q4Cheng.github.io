@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Welcome to L61q4Cheng&#39;Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="title:对称算法（DES篇）DES (Data Encryption Standard)算法是世界上最常用的加密算法。在很长时间内，许多人心目中“密码生成”与DES一直是个同义词。尽管最近有个叫Electronic Frontier Foundation的组织造了台价值22万的机器尝试破解DES加密的数据，DES和它的变种“三重数据加密算法”仍将在政府和银行中广泛应用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Welcome to L61q4Cheng&#39;Blog">
+<meta property="og:url" content="http://example.com/2021/07/22/%E5%AF%B9%E7%A7%B0%E7%AE%97%E6%B3%95%EF%BC%88DES%E7%AF%87%EF%BC%89/index.html">
+<meta property="og:site_name" content="Welcome to L61q4Cheng&#39;Blog">
+<meta property="og:description" content="title:对称算法（DES篇）DES (Data Encryption Standard)算法是世界上最常用的加密算法。在很长时间内，许多人心目中“密码生成”与DES一直是个同义词。尽管最近有个叫Electronic Frontier Foundation的组织造了台价值22万的机器尝试破解DES加密的数据，DES和它的变种“三重数据加密算法”仍将在政府和银行中广泛应用。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-22T10:07:18.850Z">
+<meta property="article:modified_time" content="2021-07-22T10:07:18.851Z">
+<meta property="article:author" content="L61q4_Cheng">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Welcome to L61q4Cheng'Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Welcome to L61q4Cheng&#39;Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一个逆向小白</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-对称算法（DES篇）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/07/22/%E5%AF%B9%E7%A7%B0%E7%AE%97%E6%B3%95%EF%BC%88DES%E7%AF%87%EF%BC%89/" class="article-date">
+  <time class="dt-published" datetime="2021-07-22T10:07:18.850Z" itemprop="datePublished">2021-7-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="title-对称算法（DES篇）"><a href="#title-对称算法（DES篇）" class="headerlink" title="title:对称算法（DES篇）"></a>title:对称算法（DES篇）</h2><p><strong>DES</strong> (Data Encryption Standard)算法是世界上最常用的加密算法。在很长时间内，许多人心目中“密码生成”与DES一直是个同义词。尽管最近有个叫Electronic Frontier Foundation的组织造了台价值22万的机器尝试破解DES加密的数据，DES和它的变种“三重数据加密算法”仍将在政府和银行中广泛应用。</p>
+<span id="more"></span>
+
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a><strong>概念</strong></h2><p>DES全称为Data Encryption Standard，即数据加密标准。1997年数据加密标准DES正式公布，其分组长度为64比特，密钥长度为64比特，其中8比特为奇偶校验位，所以实际长度为56比特。</p>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>数据加密标准，速度较快，适用于加密大量数据的场合。</p>
+<h2 id="原理概述"><a href="#原理概述" class="headerlink" title="原理概述"></a>原理概述</h2><p>DES是一个<strong>分组加密算法</strong>，就是将明文分组进行加密，每次按顺序取明文一部分，一个典型的DES以64位为分组，加密解密用算法相同。它的密钥长度为56位，因为每组第8位是用来做奇偶校验，密钥可以是任意56位的数，保密性依赖于密钥。</p>
+<p>利用56+8奇偶校验位（第8,16,24,32,40,48,56,64）=64位的密钥对以64位为单位的块数据进行加解密。</p>
+<h2 id="具体加密步骤"><a href="#具体加密步骤" class="headerlink" title="具体加密步骤"></a>具体加密步骤</h2><p><strong>所需参数：</strong></p>
+<p>key：8个字节共64位的工作密钥</p>
+<p>data：8个字节共64位的需要被加密或被解密的数据</p>
+<p>mode：DES工作方式，加密或者解密</p>
+<h3 id="1、置换IP：（生成16个子密钥，每个密钥长度为48-bit）"><a href="#1、置换IP：（生成16个子密钥，每个密钥长度为48-bit）" class="headerlink" title="1、置换IP：（生成16个子密钥，每个密钥长度为48 bit）"></a><strong>1、置换IP：（生成16个子密钥，每个密钥长度为48 bit）</strong></h3><p>利用<strong>初始置换</strong>IP(Initial Permutation)对明文X进行换位处理，打乱原来的次序，得到一个乱序的64 bit 明文组。使用64位的密钥key将64位的明文输入块变为64位的密文输出块。</p>
+<p>注意：这里的数字表示的是原数据的位置，不是数据</p>
+<p>即将X中的58位数据放在转换后生成的X’表的第1位，X中的第50位放在X’的第2位，X中的42位放在第3位…X中的第7位放在X’的最后一位。</p>
+<p><strong>置换表如下：（纵向看）</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>58</td>
+<td>50</td>
+<td>42</td>
+<td>34</td>
+<td>26</td>
+<td>18</td>
+<td>10</td>
+<td>2</td>
+</tr>
+<tr>
+<td>1</td>
+<td>60</td>
+<td>52</td>
+<td>44</td>
+<td>36</td>
+<td>28</td>
+<td>20</td>
+<td>12</td>
+<td>4</td>
+</tr>
+<tr>
+<td>2</td>
+<td>62</td>
+<td>54</td>
+<td>46</td>
+<td>38</td>
+<td>30</td>
+<td>22</td>
+<td>14</td>
+<td>6</td>
+</tr>
+<tr>
+<td>3</td>
+<td>64</td>
+<td>56</td>
+<td>48</td>
+<td>40</td>
+<td>32</td>
+<td>24</td>
+<td>16</td>
+<td>8</td>
+</tr>
+<tr>
+<td>4</td>
+<td>57</td>
+<td>49</td>
+<td>41</td>
+<td>33</td>
+<td>25</td>
+<td>17</td>
+<td>9</td>
+<td>1</td>
+</tr>
+<tr>
+<td>5</td>
+<td>59</td>
+<td>51</td>
+<td>43</td>
+<td>35</td>
+<td>27</td>
+<td>19</td>
+<td>11</td>
+<td>3</td>
+</tr>
+<tr>
+<td>6</td>
+<td>61</td>
+<td>53</td>
+<td>45</td>
+<td>37</td>
+<td>29</td>
+<td>21</td>
+<td>13</td>
+<td>5</td>
+</tr>
+<tr>
+<td>7</td>
+<td>63</td>
+<td>55</td>
+<td>47</td>
+<td>39</td>
+<td>31</td>
+<td>23</td>
+<td>15</td>
+<td>7</td>
+</tr>
+</tbody></table>
+<p>代码实现（C语言）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">const unsigned char IP_Table[64] = </span><br><span class="line">&#123; 58, 50, 42, 34, 26, 18, 10, 2, 60, 52,44, </span><br><span class="line">  36, 28, 20, 12, 4, 62, 54, 46, 38, 30,22, </span><br><span class="line">  14, 6, 64, 56, 48, 40, 32, 24, 16, 8,57, </span><br><span class="line">  49, 41, 33, 25, 17, 9, 1, 59, 51, 43,35, </span><br><span class="line">  27, 19, 11, 3, 61, 53, 45, 37, 29, 21,13, </span><br><span class="line">  5, 63, 55, 47, 39, 31, 23, 15, 7 &#125;; </span><br><span class="line">int IP_Substitution(const unsigned char* BitPlain, unsigned char* Bit_IP_Table)</span><br><span class="line">&#123; </span><br><span class="line">    int ret = 0; </span><br><span class="line">    for (int i = 0; i &lt; 64; i++) &#123; </span><br><span class="line">    Bit_IP_Table[i] = BitPlain[IP_Table[i] - 1]; </span><br><span class="line">    &#125; </span><br><span class="line">  return ret; </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<h3 id="2、分组（L，R组）"><a href="#2、分组（L，R组）" class="headerlink" title="2、分组（L，R组）"></a><strong>2、分组（L，R组）</strong></h3><p>把输出块分为L0、R0两部分，每部分均为32位。0-3为L组，3-7为R组</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>58</td>
+<td>50</td>
+<td>42</td>
+<td>34</td>
+<td>26</td>
+<td>18</td>
+<td>10</td>
+<td>2</td>
+</tr>
+<tr>
+<td>1</td>
+<td>60</td>
+<td>52</td>
+<td>44</td>
+<td>36</td>
+<td>28</td>
+<td>20</td>
+<td>12</td>
+<td>4</td>
+</tr>
+<tr>
+<td>2</td>
+<td>62</td>
+<td>54</td>
+<td>46</td>
+<td>38</td>
+<td>30</td>
+<td>22</td>
+<td>14</td>
+<td>6</td>
+</tr>
+<tr>
+<td>3</td>
+<td>64</td>
+<td>56</td>
+<td>48</td>
+<td>40</td>
+<td>32</td>
+<td>24</td>
+<td>16</td>
+<td>8</td>
+</tr>
+<tr>
+<td>4</td>
+<td>57</td>
+<td>49</td>
+<td>41</td>
+<td>33</td>
+<td>25</td>
+<td>17</td>
+<td>9</td>
+<td>1</td>
+</tr>
+<tr>
+<td>5</td>
+<td>59</td>
+<td>51</td>
+<td>43</td>
+<td>35</td>
+<td>27</td>
+<td>19</td>
+<td>11</td>
+<td>3</td>
+</tr>
+<tr>
+<td>6</td>
+<td>61</td>
+<td>53</td>
+<td>45</td>
+<td>37</td>
+<td>29</td>
+<td>21</td>
+<td>13</td>
+<td>5</td>
+</tr>
+<tr>
+<td>7</td>
+<td>63</td>
+<td>55</td>
+<td>47</td>
+<td>39</td>
+<td>31</td>
+<td>23</td>
+<td>15</td>
+<td>7</td>
+</tr>
+</tbody></table>
+<p>代码实现（C语言）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">unsigned char Bit_IP_Table[64]; //初始置换后的明文表 </span><br><span class="line">unsigned char BitL_Table[17][32]; //L表Bit组 </span><br><span class="line">unsigned char BitR_Table[17][32]; //R表Bit组 </span><br><span class="line"></span><br><span class="line">memcpy(BitL_Table[0], Bit_IP_Table, 32); </span><br><span class="line">memcpy(BitR_Table[0], &amp;Bit_IP_Table[32],32); </span><br></pre></td></tr></table></figure>
+
+<h3 id="3、右分组（R组）由32位扩展为48位"><a href="#3、右分组（R组）由32位扩展为48位" class="headerlink" title="3、右分组（R组）由32位扩展为48位"></a><strong>3、右分组（R组）由32位扩展为48位</strong></h3><p>通过扩展置换变对R组进行扩展，原理和前面的置换表差不多，<strong>就是多了一些重复的映射</strong></p>
+<p>第0列、5列为拓展数据，1-4列为原始数据，</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>32</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+</tr>
+<tr>
+<td>1</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+</tr>
+<tr>
+<td>2</td>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+<td>12</td>
+<td>13</td>
+</tr>
+<tr>
+<td>3</td>
+<td>12</td>
+<td>13</td>
+<td>14</td>
+<td>15</td>
+<td>16</td>
+<td>17</td>
+</tr>
+<tr>
+<td>4</td>
+<td>16</td>
+<td>17</td>
+<td>18</td>
+<td>19</td>
+<td>20</td>
+<td>21</td>
+</tr>
+<tr>
+<td>5</td>
+<td>20</td>
+<td>21</td>
+<td>22</td>
+<td>23</td>
+<td>24</td>
+<td>25</td>
+</tr>
+<tr>
+<td>6</td>
+<td>24</td>
+<td>25</td>
+<td>26</td>
+<td>27</td>
+<td>28</td>
+<td>29</td>
+</tr>
+<tr>
+<td>7</td>
+<td>28</td>
+<td>29</td>
+<td>30</td>
+<td>31</td>
+<td>32</td>
+<td>1</td>
+</tr>
+</tbody></table>
+<p>代码实现（C语言）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">const unsigned char E_Table[48] = </span><br><span class="line">&#123; 32, 1, 2, 3, 4, 5, 4, 5, 6, 7, 8, 9, 8, 9, </span><br><span class="line">10, 11, 12, 13, 12, 13, 14, 15, 16, 17, 16, </span><br><span class="line">17, 18, 19, 20, 21, 20, 21, 22, 23, 24, 25, </span><br><span class="line">24, 25, 26, 27, 28, 29, 28, 29, 30, 31, 32, 1&#125;; </span><br><span class="line">int E_Substitution(const unsigned char* BitR_Table, unsigned char* BitE_Table） </span><br><span class="line">&#123; </span><br><span class="line">    int ret = 0; </span><br><span class="line">    for (int i = 0; i &lt; 48; i++) &#123; </span><br><span class="line">        BitE_Table[i] = BitR_Table[E_Table[i] - 1]; </span><br><span class="line">    &#125; </span><br><span class="line">    return ret; </span><br><span class="line">&#125; </span><br><span class="line">#### 4.扩展的R组和48位密钥进行异或 </span><br><span class="line">int DES_XOR(const unsigned char* Bit1_Table, const unsigned char* Bit2_Table, unsigned char* Bit_Xor/*异或运算的结果*/, int nBit/*异或运算的位数*/) &#123; </span><br><span class="line">    int ret = 0; </span><br><span class="line">    for (int i = 0; i &lt; nBit; i++) &#123; </span><br><span class="line">        Bit_Xor[i] = Bit1_Table[i] ^ Bit2_Table[i]; </span><br><span class="line">    &#125; </span><br><span class="line">    return ret; </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<h3 id="4、将48位异或的结果转换为32位"><a href="#4、将48位异或的结果转换为32位" class="headerlink" title="4、将48位异或的结果转换为32位"></a><strong>4、将48位异或的结果转换为32位</strong></h3><p>详细过程：</p>
+<p>先将48为分成<strong>8组</strong>，每组<strong>6位</strong>，在将6位数字经过变化转换为<strong>4位</strong></p>
+<p>**6-&gt;4操作:**例（一个6位的分组）</p>
+<p>100101</p>
+<p>将该分组的<strong>第一位和最后一位</strong>取出来，以二进制的形式表示，作为<strong>行索引</strong></p>
+<p>将该分组的<strong>第2到5位</strong>取出来，以二进制的形式表示，作为<strong>列索引</strong></p>
+<p>代码实现（C语言）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">const unsigned char S_Table[8][4][16] = &#123; </span><br><span class="line">    //S1盒 </span><br><span class="line">    14, 4, 13, 1, 2, 15, 11, 8, 3, 10, 6, 12, 5, 9, 0, 7, </span><br><span class="line">    0, 15, 7, 4, 14, 2, 13, 1, 10, 6, 12, 11, 9, 5, 3, 8, </span><br><span class="line">    4, 1, 14, 8, 13, 6, 2, 11, 15, 12, 9, 7, 3, 10, 5, 0, </span><br><span class="line">    15, 12, 8, 2, 4, 9, 1, 7, 5, 11, 3, 14, 10, 0, 6, 13, </span><br><span class="line">    //S2盒 </span><br><span class="line">    15, 1, 8, 14, 6, 11, 3, 4, 9, 7, 2, 13, 12, 0, 5, 10,</span><br><span class="line">    3, 13, 4, 7, 15, 2, 8, 14, 12, 0, 1, 10, 6, 9, 11, 5, </span><br><span class="line">    0, 14, 7, 11, 10, 4, 13, 1, 5, 8, 12, 6, 9, 3, 2, 15, </span><br><span class="line">    13, 8, 10, 1, 3, 15, 4, 2, 11, 6, 7, 12, 0, 5, 14, 9, </span><br><span class="line">    //S3盒 </span><br><span class="line">    10, 0, 9, 14, 6, 3, 15, 5, 1, 13, 12, 7, 11, 4, 2, 8, </span><br><span class="line">    13, 7, 0, 9, 3, 4, 6, 10, 2, 8, 5, 14, 12, 11, 15, 1, </span><br><span class="line">    13, 6, 4, 9, 8, 15, 3, 0, 11, 1, 2, 12, 5, 10, 14, 7, </span><br><span class="line">    1, 10, 13, 0, 6, 9, 8, 7, 4, 15, 14, 3, 11, 5, 2, 12, </span><br><span class="line">    //S4盒 </span><br><span class="line">    7, 13, 14, 3, 0, 6, 9, 10, 1, 2, 8, 5, 11, 12, 4, 15, </span><br><span class="line">    13, 8, 11, 5, 6, 15, 0, 3, 4, 7, 2, 12, 1, 10, 14, 9, </span><br><span class="line">    10, 6, 9, 0, 12, 11, 7, 13, 15, 1, 3, 14, 5, 2, 8, 4,</span><br><span class="line">     3, 15, 0, 6, 10, 1, 13, 8, 9, 4, 5, 11, 12, 7, 2, 14, </span><br><span class="line">     //S5盒 </span><br><span class="line">     2, 12, 4, 1, 7, 10, 11, 6, 8, 5, 3, 15, 13, 0, 14, 9, </span><br><span class="line">     14, 11, 2, 12, 4, 7, 13, 1, 5, 0, 15, 10, 3, 9, 8, 6, </span><br><span class="line">     4, 2, 1, 11, 10, 13, 7, 8, 15, 9, 12, 5, 6, 3, 0, 14,</span><br><span class="line">      11, 8, 12, 7, 1, 14, 2, 13, 6, 15, 0, 9, 10, 4, 5, 3,</span><br><span class="line">     //S6盒 </span><br><span class="line">      12, 1, 10, 15, 9, 2, 6, 8, 0, 13, 3, 4, 14, 7, 5, 11, </span><br><span class="line">      10, 15, 4, 2, 7, 12, 9, 5, 6, 1, 13, 14, 0, 11, 3, 8, </span><br><span class="line">      9, 14, 15, 5, 2, 8, 12, 3, 7, 0, 4, 10, 1, 13, 11, 6, </span><br><span class="line">      4, 3, 2, 12, 9, 5, 15, 10, 11, 14, 1, 7, 6, 0, 8, 13, </span><br><span class="line">      //S7盒 </span><br><span class="line">      4, 11, 2, 14, 15, 0, 8, 13, 3, 12, 9, 7, 5, 10, 6, 1, </span><br><span class="line">      13, 0, 11, 7, 4, 9, 1, 10, 14, 3, 5, 12, 2, 15, 8, 6,</span><br><span class="line">      1, 4, 11, 13, 12, 3, 7, 14, 10, 15, 6, 8, 0, 5, 9, 2,</span><br><span class="line">      6, 11, 13, 8, 1, 4, 10, 7, 9, 5, 0, 15, 14, 2, 3, 12,</span><br><span class="line">      //S8盒 </span><br><span class="line">      13, 2, 8, 4, 6, 15, 11, 1, 10, 9, 3, 14, 5, 0, 12, 7, </span><br><span class="line">      1, 15, 13, 8, 10, 3, 7, 4, 12, 5, 6, 11, 0, 14, 9, 2, </span><br><span class="line">      7, 11, 4, 1, 9, 12, 14, 2, 0, 6, 10, 13, 15, 3, 5, 8, </span><br><span class="line">      2, 1, 14, 7, 4, 10, 8, 13, 15, 12, 9, 0, 3, 5, 6, 11 &#125;; </span><br><span class="line">unsigned char Bit_Xor[8][6]; //存放异或运算的结果 </span><br><span class="line">unsigned char Bit_Integer[8][4]; //将整数变成Bit位 </span><br><span class="line">unsigned char Row; //S盒的行号 unsigned char Col; </span><br><span class="line">//S盒的列号 </span><br><span class="line">unsigned char Integer; </span><br><span class="line">//从S盒中取得的32位整数 </span><br><span class="line">for (int i = 0; i &lt; 8; i++) &#123; </span><br><span class="line">//计算S盒的行号和列号 </span><br><span class="line">    Row = (Bit_Xor[i][0] &lt;&lt; 1) + Bit_Xor[i][5];</span><br><span class="line">     Col = (Bit_Xor[i][1] &lt;&lt; 3) + (Bit_Xor[i][2] &lt;&lt; 2) + (Bit_Xor[i][3] &lt;&lt; 1) + Bit_Xor[i][4]; </span><br><span class="line"> //从S盒中取得整数 </span><br><span class="line"> Integer = S_Table[i][Row][Col]; </span><br><span class="line"> //将取得的4Bit数转换成Bit组 </span><br><span class="line">for (int j = 0; j &lt; 4; j++) &#123; </span><br><span class="line">     Bit_Integer[i][j] = Integer &gt;&gt; (3 - j) &amp; 1; </span><br><span class="line"> &#125; </span><br><span class="line"> &#125; </span><br></pre></td></tr></table></figure>
+
+<h3 id="5、p置换"><a href="#5、p置换" class="headerlink" title="5、p置换"></a><strong>5、p置换</strong></h3><p>同最开始的初始置换，只是对数据进行了打乱操作</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>16</td>
+<td>7</td>
+<td>20</td>
+<td>21</td>
+<td>29</td>
+<td>12</td>
+<td>28</td>
+<td>17</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>15</td>
+<td>23</td>
+<td>26</td>
+<td>5</td>
+<td>18</td>
+<td>31</td>
+<td>10</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>8</td>
+<td>24</td>
+<td>14</td>
+<td>32</td>
+<td>27</td>
+<td>3</td>
+<td>9</td>
+</tr>
+<tr>
+<td>3</td>
+<td>19</td>
+<td>13</td>
+<td>30</td>
+<td>6</td>
+<td>22</td>
+<td>11</td>
+<td>4</td>
+<td>25</td>
+</tr>
+</tbody></table>
+<p>代码实现（C语言）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">const unsigned char P_Table[32] =</span><br><span class="line">&#123;</span><br><span class="line">    16, 7,  20, 21, 29, 12, 28, 17,</span><br><span class="line">    1,  15, 23, 26, 5,  18, 31, 10,</span><br><span class="line">    2,  8,  24, 14, 32, 27, 3,  9,</span><br><span class="line">    19, 13, 30, 6,  22, 11, 4,  25</span><br><span class="line">&#125;;</span><br><span class="line">int P_Substitution(const unsigned char *Bit_Integer, unsigned char* BitP_Table)</span><br><span class="line">&#123;</span><br><span class="line">    int ret = 0;</span><br><span class="line">    for (int i = 0; i &lt; 32; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        BitP_Table[i] = Bit_Integer[P_Table[i] - 1];</span><br><span class="line">    &#125;</span><br><span class="line">    return ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6、将返回的结果和L组进行异或操作，作为新的R组，并将旧的R组赋值给新的L组"><a href="#6、将返回的结果和L组进行异或操作，作为新的R组，并将旧的R组赋值给新的L组" class="headerlink" title="6、将返回的结果和L组进行异或操作，作为新的R组，并将旧的R组赋值给新的L组"></a>6、<strong>将返回的结果和L组进行异或操作，作为新的R组，并将旧的R组赋值给新的L组</strong></h3><p>代码实现（C语言）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">R[i+1] = L[i] ^ F(R[i], K[i]);</span><br><span class="line">L[i+1] = R[i];</span><br></pre></td></tr></table></figure>
+
+<h3 id="7、按照3、4、5、6步重复16次"><a href="#7、按照3、4、5、6步重复16次" class="headerlink" title="7、按照3、4、5、6步重复16次"></a><strong>7、按照3、4、5、6步重复16次</strong></h3><p>代码实现（C语言）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">for (int i = 0; i &lt; 16; i++)</span><br><span class="line">&#123;</span><br><span class="line">    //将R组和子密钥组进行F函数运算</span><br><span class="line">    DES_F_Function(BitR_Table[i], BitSubKey[i], Bit_F_Out);</span><br><span class="line">     //L组盒F函数的输出结果进行异或运算</span><br><span class="line">    DES_XOR(BitL_Table[i], Bit_F_Out, BitR_Table[i + 1], 32);</span><br><span class="line">     //Li+1 = Ri</span><br><span class="line">    memcpy(BitL_Table[i + 1], BitR_Table[i], 32);</span><br><span class="line">&#125; </span><br><span class="line">//L[16]和R[16]进行交叉合并</span><br><span class="line">memcpy(BitRL_Table,         BitR_Table[16], 32);</span><br><span class="line">memcpy(&amp;BitRL_Table[32],    BitL_Table[16], 32);</span><br></pre></td></tr></table></figure>
+
+<h3 id="8、逆初始值置换"><a href="#8、逆初始值置换" class="headerlink" title="8、逆初始值置换"></a>8、<strong>逆初始值置换</strong></h3><p>对上述16步操作后的结果进行<strong>逆初始值置换</strong>操作,也是类似于初始置换表</p>
+<p>代码实现（C语言）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">const unsigned char reIP_Table[64] =</span><br><span class="line">&#123;</span><br><span class="line">    40, 8, 48, 16, 56, 24, 64, 32,</span><br><span class="line">    39, 7, 47, 15, 55, 23, 63, 31,</span><br><span class="line">    38, 6, 46, 14, 54, 22, 62, 30,</span><br><span class="line">    37, 5, 45, 13, 53, 21, 61, 29,</span><br><span class="line">    36, 4, 44, 12, 52, 20, 60, 28,</span><br><span class="line">    35, 3, 43, 11, 51, 19, 59, 27,</span><br><span class="line">    34, 2, 42, 10, 50, 18, 58, 26,</span><br><span class="line">    33, 1, 41,  9, 49, 17, 57, 25</span><br><span class="line">&#125;;</span><br><span class="line">int reIP_Substitution(const unsigned char *BitRL_Table, unsigned char *Bit_reIP_Table)</span><br><span class="line">&#123;</span><br><span class="line">    int ret = 0;</span><br><span class="line"> </span><br><span class="line">    for (int i = 0; i &lt; 64; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        Bit_reIP_Table[i] = BitRL_Table[reIP_Table[i] - 1];</span><br><span class="line">    &#125;</span><br><span class="line">    return ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-密钥的扩展和加密"><a href="#9-密钥的扩展和加密" class="headerlink" title="9.密钥的扩展和加密"></a><strong>9.密钥的扩展和加密</strong></h3><h4 id="PC-1置换："><a href="#PC-1置换：" class="headerlink" title="PC-1置换："></a><strong>PC-1置换</strong>：</h4><p>将64位密钥中的<strong>8、16、24、32、40、48、56、64</strong>位剔除作为校验位。</p>
+<p>其余的位进行置换表操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">const unsigned char PC_1_Table[56] =</span><br><span class="line">    &#123;57, 49, 41, 33, 25, 17, 9,  1,</span><br><span class="line">    58, 50, 42, 34, 26, 18, 10, 2,</span><br><span class="line">    59, 51, 43, 35, 27, 19, 11, 3,</span><br><span class="line">    60, 52, 44, 36, 63, 55, 47, 39,</span><br><span class="line">    31, 23, 15, 7,  62, 54, 46, 38,</span><br><span class="line">    30, 22, 14, 6,  61, 53, 45, 37,</span><br><span class="line">    29, 21, 13, 5,  28, 20, 12, 4</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">int PC_1_Substitution(const unsigned char *BitKey, unsigned char *BitKey_PC_1)</span><br><span class="line">&#123;</span><br><span class="line">    int ret = 0;</span><br><span class="line"> </span><br><span class="line">    for (int i = 0; i &lt; 56; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        BitKey_PC_1[i] = BitKey[PC_1_Table[i] - 1];</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    return ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后对56位数据进行分组，分成C、D组，采用上下分组，再进行16次变化，每次变化后会进行（PC-2置换）生成一次密钥用作<strong>每一轮的加密</strong></p>
+<p>每轮变化都进行<strong>整体左位移</strong>操作（并把前面超出范围的两位数据移动到数据的最后面），根据<strong>具体的轮数</strong>位移的位数也不同，其中<strong>1、2、9、16</strong>轮中，位移<strong>1位</strong>，其余轮位移<strong>2位</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">const unsigned char Bit_Round[16] =</span><br><span class="line">&#123;</span><br><span class="line">    1, 1, 2, 2,</span><br><span class="line">    2, 2, 2, 2,</span><br><span class="line">    1, 2, 2, 2,</span><br><span class="line">    2, 2, 2, 1</span><br><span class="line">&#125;;</span><br><span class="line">int BitRound_L(const unsigned char* SrcBitGroup, unsigned char* DesBitGroup, int nBit)</span><br><span class="line">&#123;</span><br><span class="line">    int ret = 0;</span><br><span class="line"> </span><br><span class="line">    memcpy(DesBitGroup,             &amp;SrcBitGroup[nBit], 28 - nBit);</span><br><span class="line">    memcpy(&amp;DesBitGroup[28 - nBit], SrcBitGroup,        nBit);</span><br><span class="line">    return ret;</span><br><span class="line">&#125;</span><br><span class="line">//将C、D两组进行轮转移位操作    左移</span><br><span class="line">BitRound_L(BitC_Table[i], BitC_Table[i + 1], Bit_Round[i]);</span><br><span class="line">BitRound_L(BitD_Table[i], BitD_Table[i + 1], Bit_Round[i]);</span><br><span class="line">密钥生成算法PC-2置换</span><br></pre></td></tr></table></figure>
+
+<h4 id="PC-2置换："><a href="#PC-2置换：" class="headerlink" title="PC-2置换："></a><strong>PC-2置换</strong>：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">const unsigned char PC_2_Table[48]= </span><br><span class="line">&#123; 14, 17, 11, 24, 1, 5, 3, 28, 15, 6, 21, 10, 23, </span><br><span class="line">  19, 12, 4, 26, 8, 16, 7, 27, 20, 13, 2, 41, 52, </span><br><span class="line">  31, 37, 47, 55, 30, 40, 51, 45, 33, 48, 44, 49, </span><br><span class="line">  39, 56, 34, 53, 46, 42, 50, 36, 29, 32&#125;; </span><br><span class="line">int PC_2_Substitution(const unsigned char *BitKey, unsigned char *SubKey) </span><br><span class="line">&#123;                    </span><br><span class="line">    int ret = 0; </span><br><span class="line">    for (int i = 0; i &lt; 48; i++)&#123; </span><br><span class="line">    SubKey[i] = BitKey[PC_2_Table[i] - 1]; </span><br><span class="line">    &#125; </span><br><span class="line">    return ret; </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<h2 id="Java代码实现："><a href="#Java代码实现：" class="headerlink" title="Java代码实现："></a><strong>Java代码实现：</strong></h2><p>根据模式的不同有很多实现方式，现展示一种方式,主要抓住特征private static final String ALGORITHM = “DES”;来对加密方式进行判断，标准的DES算法以字符串输出时很容易产生<strong>乱码</strong>，因此输出时需要将其转化为<strong>hex</strong>或者<strong>base64编码</strong>的形式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package abc; </span><br><span class="line">import javax.crypto.Cipher; </span><br><span class="line">import javax.crypto.SecretKey; </span><br><span class="line">import javax.crypto.SecretKeyFactory; </span><br><span class="line">import javax.crypto.spec.DESKeySpec; </span><br><span class="line">import java.util.Base64; </span><br><span class="line">public class DES &#123; </span><br><span class="line">public static void main(String[] args) throws Exception &#123; </span><br><span class="line">    DESKeySpec desKey=new DESKeySpec(&quot;12345678&quot;.getBytes()); </span><br><span class="line">    SecretKeyFactory key=SecretKeyFactory.getInstance(&quot;DES&quot;); </span><br><span class="line">    SecretKey secretKey=key.generateSecret(desKey); </span><br><span class="line">    Cipher cipher=Cipher.getInstance(&quot;DES/ECB/PKCS5Padding&quot;); </span><br><span class="line">    cipher.init(1, secretKey); </span><br><span class="line">    byte[] res=cipher.doFinal(&quot;a12345678&quot;.getBytes()); </span><br><span class="line">    System.out.println(Base64.getEncoder().encodeToString(res)); </span><br><span class="line">    &#125; </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/07/22/%E5%AF%B9%E7%A7%B0%E7%AE%97%E6%B3%95%EF%BC%88DES%E7%AF%87%EF%BC%89/" data-id="ckrer3wj0000054twgzoy6n1r" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/07/22/Dalvik%E6%8C%87%E4%BB%A4%E9%9B%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Dalvik指令集</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/07/22/%E5%AF%B9%E7%A7%B0%E7%AE%97%E6%B3%95%EF%BC%88DES%E7%AF%87%EF%BC%89/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/22/Dalvik%E6%8C%87%E4%BB%A4%E9%9B%86/">Dalvik指令集</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/22/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 L61q4_Cheng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
