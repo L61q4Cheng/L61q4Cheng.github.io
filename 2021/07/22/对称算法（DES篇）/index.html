@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="DES (Data Encryption Standard)算法是世界上最常用的加密算法。在很长时间内，许多人心目中“密码生成”与DES一直是个同义词。尽管最近有个叫Electronic Frontier Foundation的组织造了台价值22万的机器尝试破解DES加密的数据，DES和它的变种“三重数据加密算法”仍将在政府和银行中广泛应用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对称算法（DES篇）">
+<meta property="og:url" content="http://example.com/2021/07/22/%E5%AF%B9%E7%A7%B0%E7%AE%97%E6%B3%95%EF%BC%88DES%E7%AF%87%EF%BC%89/index.html">
+<meta property="og:site_name" content="Welcome to L61q4_Cheng&#39;Blog">
+<meta property="og:description" content="DES (Data Encryption Standard)算法是世界上最常用的加密算法。在很长时间内，许多人心目中“密码生成”与DES一直是个同义词。尽管最近有个叫Electronic Frontier Foundation的组织造了台价值22万的机器尝试破解DES加密的数据，DES和它的变种“三重数据加密算法”仍将在政府和银行中广泛应用。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-22T10:07:18.850Z">
+<meta property="article:modified_time" content="2021-08-08T08:14:27.885Z">
+<meta property="article:author" content="L61q4_Cheng">
+<meta property="article:tag" content="加密与解密">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2021/07/22/%E5%AF%B9%E7%A7%B0%E7%AE%97%E6%B3%95%EF%BC%88DES%E7%AF%87%EF%BC%89/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/07/22/%E5%AF%B9%E7%A7%B0%E7%AE%97%E6%B3%95%EF%BC%88DES%E7%AF%87%EF%BC%89/","path":"2021/07/22/对称算法（DES篇）/","title":"对称算法（DES篇）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>对称算法（DES篇） | Welcome to L61q4_Cheng'Blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Welcome to L61q4_Cheng'Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个逆向小白</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-主页"><a href="/" rel="section"><i class="home fa-fw"></i>主页</a></li>
+        <li class="menu-item menu-item-文章"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>文章</a></li>
+        <li class="menu-item menu-item-标签"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-关于我"><a href="/about/" rel="section"><i class="user fa-fw"></i>关于我</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E7%90%86%E6%A6%82%E8%BF%B0"><span class="nav-number">3.</span> <span class="nav-text">原理概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E5%8A%A0%E5%AF%86%E6%AD%A5%E9%AA%A4"><span class="nav-number">4.</span> <span class="nav-text">具体加密步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E7%BD%AE%E6%8D%A2IP%EF%BC%9A%EF%BC%88%E7%94%9F%E6%88%9016%E4%B8%AA%E5%AD%90%E5%AF%86%E9%92%A5%EF%BC%8C%E6%AF%8F%E4%B8%AA%E5%AF%86%E9%92%A5%E9%95%BF%E5%BA%A6%E4%B8%BA48-bit%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">1、置换IP：（生成16个子密钥，每个密钥长度为48 bit）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E5%88%86%E7%BB%84%EF%BC%88L%EF%BC%8CR%E7%BB%84%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">2、分组（L，R组）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E5%8F%B3%E5%88%86%E7%BB%84%EF%BC%88R%E7%BB%84%EF%BC%89%E7%94%B132%E4%BD%8D%E6%89%A9%E5%B1%95%E4%B8%BA48%E4%BD%8D"><span class="nav-number">4.3.</span> <span class="nav-text">3、右分组（R组）由32位扩展为48位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81%E5%B0%8648%E4%BD%8D%E5%BC%82%E6%88%96%E7%9A%84%E7%BB%93%E6%9E%9C%E8%BD%AC%E6%8D%A2%E4%B8%BA32%E4%BD%8D"><span class="nav-number">4.4.</span> <span class="nav-text">4、将48位异或的结果转换为32位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%E3%80%81p%E7%BD%AE%E6%8D%A2"><span class="nav-number">4.5.</span> <span class="nav-text">5、p置换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%E3%80%81%E5%B0%86%E8%BF%94%E5%9B%9E%E7%9A%84%E7%BB%93%E6%9E%9C%E5%92%8CL%E7%BB%84%E8%BF%9B%E8%A1%8C%E5%BC%82%E6%88%96%E6%93%8D%E4%BD%9C%EF%BC%8C%E4%BD%9C%E4%B8%BA%E6%96%B0%E7%9A%84R%E7%BB%84%EF%BC%8C%E5%B9%B6%E5%B0%86%E6%97%A7%E7%9A%84R%E7%BB%84%E8%B5%8B%E5%80%BC%E7%BB%99%E6%96%B0%E7%9A%84L%E7%BB%84"><span class="nav-number">4.6.</span> <span class="nav-text">6、将返回的结果和L组进行异或操作，作为新的R组，并将旧的R组赋值给新的L组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7%E3%80%81%E6%8C%89%E7%85%A73%E3%80%814%E3%80%815%E3%80%816%E6%AD%A5%E9%87%8D%E5%A4%8D16%E6%AC%A1"><span class="nav-number">4.7.</span> <span class="nav-text">7、按照3、4、5、6步重复16次</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8%E3%80%81%E9%80%86%E5%88%9D%E5%A7%8B%E5%80%BC%E7%BD%AE%E6%8D%A2"><span class="nav-number">4.8.</span> <span class="nav-text">8、逆初始值置换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-%E5%AF%86%E9%92%A5%E7%9A%84%E6%89%A9%E5%B1%95%E5%92%8C%E5%8A%A0%E5%AF%86"><span class="nav-number">4.9.</span> <span class="nav-text">9.密钥的扩展和加密</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PC-1%E7%BD%AE%E6%8D%A2%EF%BC%9A"><span class="nav-number">4.9.1.</span> <span class="nav-text">PC-1置换：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PC-2%E7%BD%AE%E6%8D%A2%EF%BC%9A"><span class="nav-number">4.9.2.</span> <span class="nav-text">PC-2置换：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">Java代码实现：</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="L61q4_Cheng"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">L61q4_Cheng</p>
+  <div class="site-description" itemprop="description">安卓逆向日常学习、分享</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/22/%E5%AF%B9%E7%A7%B0%E7%AE%97%E6%B3%95%EF%BC%88DES%E7%AF%87%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="L61q4_Cheng">
+      <meta itemprop="description" content="安卓逆向日常学习、分享">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Welcome to L61q4_Cheng'Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          对称算法（DES篇）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-7-22 18:07:18" itemprop="dateCreated datePublished" datetime="2021-07-22T18:07:18+08:00">2021-7-22</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><strong>DES</strong> (Data Encryption Standard)算法是世界上最常用的加密算法。在很长时间内，许多人心目中“密码生成”与DES一直是个同义词。尽管最近有个叫Electronic Frontier Foundation的组织造了台价值22万的机器尝试破解DES加密的数据，DES和它的变种“三重数据加密算法”仍将在政府和银行中广泛应用。</p>
+<span id="more"></span>
+
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a><strong>概念</strong></h2><p>DES全称为Data Encryption Standard，即数据加密标准。1997年数据加密标准DES正式公布，其分组长度为64比特，密钥长度为64比特，其中8比特为奇偶校验位，所以实际长度为56比特。</p>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>数据加密标准，速度较快，适用于加密大量数据的场合。</p>
+<h2 id="原理概述"><a href="#原理概述" class="headerlink" title="原理概述"></a>原理概述</h2><p>DES是一个<strong>分组加密算法</strong>，就是将明文分组进行加密，每次按顺序取明文一部分，一个典型的DES以64位为分组，加密解密用算法相同。它的密钥长度为56位，因为每组第8位是用来做奇偶校验，密钥可以是任意56位的数，保密性依赖于密钥。</p>
+<p>利用56+8奇偶校验位（第8,16,24,32,40,48,56,64）=64位的密钥对以64位为单位的块数据进行加解密。</p>
+<h2 id="具体加密步骤"><a href="#具体加密步骤" class="headerlink" title="具体加密步骤"></a>具体加密步骤</h2><p><strong>所需参数：</strong></p>
+<p>key：8个字节共64位的工作密钥</p>
+<p>data：8个字节共64位的需要被加密或被解密的数据</p>
+<p>mode：DES工作方式，加密或者解密</p>
+<h3 id="1、置换IP：（生成16个子密钥，每个密钥长度为48-bit）"><a href="#1、置换IP：（生成16个子密钥，每个密钥长度为48-bit）" class="headerlink" title="1、置换IP：（生成16个子密钥，每个密钥长度为48 bit）"></a><strong>1、置换IP：（生成16个子密钥，每个密钥长度为48 bit）</strong></h3><p>利用<strong>初始置换</strong>IP(Initial Permutation)对明文X进行换位处理，打乱原来的次序，得到一个乱序的64 bit 明文组。使用64位的密钥key将64位的明文输入块变为64位的密文输出块。</p>
+<p>注意：这里的数字表示的是原数据的位置，不是数据</p>
+<p>即将X中的58位数据放在转换后生成的X’表的第1位，X中的第50位放在X’的第2位，X中的42位放在第3位…X中的第7位放在X’的最后一位。</p>
+<p><strong>置换表如下：（纵向看）</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>58</td>
+<td>50</td>
+<td>42</td>
+<td>34</td>
+<td>26</td>
+<td>18</td>
+<td>10</td>
+<td>2</td>
+</tr>
+<tr>
+<td>1</td>
+<td>60</td>
+<td>52</td>
+<td>44</td>
+<td>36</td>
+<td>28</td>
+<td>20</td>
+<td>12</td>
+<td>4</td>
+</tr>
+<tr>
+<td>2</td>
+<td>62</td>
+<td>54</td>
+<td>46</td>
+<td>38</td>
+<td>30</td>
+<td>22</td>
+<td>14</td>
+<td>6</td>
+</tr>
+<tr>
+<td>3</td>
+<td>64</td>
+<td>56</td>
+<td>48</td>
+<td>40</td>
+<td>32</td>
+<td>24</td>
+<td>16</td>
+<td>8</td>
+</tr>
+<tr>
+<td>4</td>
+<td>57</td>
+<td>49</td>
+<td>41</td>
+<td>33</td>
+<td>25</td>
+<td>17</td>
+<td>9</td>
+<td>1</td>
+</tr>
+<tr>
+<td>5</td>
+<td>59</td>
+<td>51</td>
+<td>43</td>
+<td>35</td>
+<td>27</td>
+<td>19</td>
+<td>11</td>
+<td>3</td>
+</tr>
+<tr>
+<td>6</td>
+<td>61</td>
+<td>53</td>
+<td>45</td>
+<td>37</td>
+<td>29</td>
+<td>21</td>
+<td>13</td>
+<td>5</td>
+</tr>
+<tr>
+<td>7</td>
+<td>63</td>
+<td>55</td>
+<td>47</td>
+<td>39</td>
+<td>31</td>
+<td>23</td>
+<td>15</td>
+<td>7</td>
+</tr>
+</tbody></table>
+<p>代码实现（C语言）：</p>
+<pre><code>const unsigned char IP_Table[64] = 
+&#123; 58, 50, 42, 34, 26, 18, 10, 2, 60, 52,44, 
+  36, 28, 20, 12, 4, 62, 54, 46, 38, 30,22, 
+  14, 6, 64, 56, 48, 40, 32, 24, 16, 8,57, 
+  49, 41, 33, 25, 17, 9, 1, 59, 51, 43,35, 
+  27, 19, 11, 3, 61, 53, 45, 37, 29, 21,13, 
+  5, 63, 55, 47, 39, 31, 23, 15, 7 &#125;; 
+int IP_Substitution(const unsigned char* BitPlain, unsigned char* Bit_IP_Table)
+&#123; 
+    int ret = 0; 
+    for (int i = 0; i &lt; 64; i++) &#123; 
+    Bit_IP_Table[i] = BitPlain[IP_Table[i] - 1]; 
+    &#125; 
+  return ret; 
+&#125; 
+</code></pre>
+<h3 id="2、分组（L，R组）"><a href="#2、分组（L，R组）" class="headerlink" title="2、分组（L，R组）"></a><strong>2、分组（L，R组）</strong></h3><p>把输出块分为L0、R0两部分，每部分均为32位。0-3为L组，3-7为R组</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>58</td>
+<td>50</td>
+<td>42</td>
+<td>34</td>
+<td>26</td>
+<td>18</td>
+<td>10</td>
+<td>2</td>
+</tr>
+<tr>
+<td>1</td>
+<td>60</td>
+<td>52</td>
+<td>44</td>
+<td>36</td>
+<td>28</td>
+<td>20</td>
+<td>12</td>
+<td>4</td>
+</tr>
+<tr>
+<td>2</td>
+<td>62</td>
+<td>54</td>
+<td>46</td>
+<td>38</td>
+<td>30</td>
+<td>22</td>
+<td>14</td>
+<td>6</td>
+</tr>
+<tr>
+<td>3</td>
+<td>64</td>
+<td>56</td>
+<td>48</td>
+<td>40</td>
+<td>32</td>
+<td>24</td>
+<td>16</td>
+<td>8</td>
+</tr>
+<tr>
+<td>4</td>
+<td>57</td>
+<td>49</td>
+<td>41</td>
+<td>33</td>
+<td>25</td>
+<td>17</td>
+<td>9</td>
+<td>1</td>
+</tr>
+<tr>
+<td>5</td>
+<td>59</td>
+<td>51</td>
+<td>43</td>
+<td>35</td>
+<td>27</td>
+<td>19</td>
+<td>11</td>
+<td>3</td>
+</tr>
+<tr>
+<td>6</td>
+<td>61</td>
+<td>53</td>
+<td>45</td>
+<td>37</td>
+<td>29</td>
+<td>21</td>
+<td>13</td>
+<td>5</td>
+</tr>
+<tr>
+<td>7</td>
+<td>63</td>
+<td>55</td>
+<td>47</td>
+<td>39</td>
+<td>31</td>
+<td>23</td>
+<td>15</td>
+<td>7</td>
+</tr>
+</tbody></table>
+<p>代码实现（C语言）：</p>
+<pre><code>unsigned char Bit_IP_Table[64]; //初始置换后的明文表 
+unsigned char BitL_Table[17][32]; //L表Bit组 
+unsigned char BitR_Table[17][32]; //R表Bit组 
+
+memcpy(BitL_Table[0], Bit_IP_Table, 32); 
+memcpy(BitR_Table[0], &amp;Bit_IP_Table[32],32); 
+</code></pre>
+<h3 id="3、右分组（R组）由32位扩展为48位"><a href="#3、右分组（R组）由32位扩展为48位" class="headerlink" title="3、右分组（R组）由32位扩展为48位"></a><strong>3、右分组（R组）由32位扩展为48位</strong></h3><p>通过扩展置换变对R组进行扩展，原理和前面的置换表差不多，<strong>就是多了一些重复的映射</strong></p>
+<p>第0列、5列为拓展数据，1-4列为原始数据，</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>32</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+</tr>
+<tr>
+<td>1</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+</tr>
+<tr>
+<td>2</td>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+<td>12</td>
+<td>13</td>
+</tr>
+<tr>
+<td>3</td>
+<td>12</td>
+<td>13</td>
+<td>14</td>
+<td>15</td>
+<td>16</td>
+<td>17</td>
+</tr>
+<tr>
+<td>4</td>
+<td>16</td>
+<td>17</td>
+<td>18</td>
+<td>19</td>
+<td>20</td>
+<td>21</td>
+</tr>
+<tr>
+<td>5</td>
+<td>20</td>
+<td>21</td>
+<td>22</td>
+<td>23</td>
+<td>24</td>
+<td>25</td>
+</tr>
+<tr>
+<td>6</td>
+<td>24</td>
+<td>25</td>
+<td>26</td>
+<td>27</td>
+<td>28</td>
+<td>29</td>
+</tr>
+<tr>
+<td>7</td>
+<td>28</td>
+<td>29</td>
+<td>30</td>
+<td>31</td>
+<td>32</td>
+<td>1</td>
+</tr>
+</tbody></table>
+<p>代码实现（C语言）：</p>
+<pre><code>const unsigned char E_Table[48] = 
+&#123; 32, 1, 2, 3, 4, 5, 4, 5, 6, 7, 8, 9, 8, 9, 
+10, 11, 12, 13, 12, 13, 14, 15, 16, 17, 16, 
+17, 18, 19, 20, 21, 20, 21, 22, 23, 24, 25, 
+24, 25, 26, 27, 28, 29, 28, 29, 30, 31, 32, 1&#125;; 
+int E_Substitution(const unsigned char* BitR_Table, unsigned char* BitE_Table） 
+&#123; 
+    int ret = 0; 
+    for (int i = 0; i &lt; 48; i++) &#123; 
+        BitE_Table[i] = BitR_Table[E_Table[i] - 1]; 
+    &#125; 
+    return ret; 
+&#125; 
+#### 4.扩展的R组和48位密钥进行异或 
+int DES_XOR(const unsigned char* Bit1_Table, const unsigned char* Bit2_Table, unsigned char* Bit_Xor/*异或运算的结果*/, int nBit/*异或运算的位数*/) &#123; 
+    int ret = 0; 
+    for (int i = 0; i &lt; nBit; i++) &#123; 
+        Bit_Xor[i] = Bit1_Table[i] ^ Bit2_Table[i]; 
+    &#125; 
+    return ret; 
+&#125; 
+</code></pre>
+<h3 id="4、将48位异或的结果转换为32位"><a href="#4、将48位异或的结果转换为32位" class="headerlink" title="4、将48位异或的结果转换为32位"></a><strong>4、将48位异或的结果转换为32位</strong></h3><p>详细过程：</p>
+<p>先将48为分成<strong>8组</strong>，每组<strong>6位</strong>，在将6位数字经过变化转换为<strong>4位</strong></p>
+<p>**6-&gt;4操作:**例（一个6位的分组）</p>
+<p>100101</p>
+<p>将该分组的<strong>第一位和最后一位</strong>取出来，以二进制的形式表示，作为<strong>行索引</strong></p>
+<p>将该分组的<strong>第2到5位</strong>取出来，以二进制的形式表示，作为<strong>列索引</strong></p>
+<p>代码实现（C语言）：</p>
+<pre><code>const unsigned char S_Table[8][4][16] = &#123; 
+    //S1盒 
+    14, 4, 13, 1, 2, 15, 11, 8, 3, 10, 6, 12, 5, 9, 0, 7, 
+    0, 15, 7, 4, 14, 2, 13, 1, 10, 6, 12, 11, 9, 5, 3, 8, 
+    4, 1, 14, 8, 13, 6, 2, 11, 15, 12, 9, 7, 3, 10, 5, 0, 
+    15, 12, 8, 2, 4, 9, 1, 7, 5, 11, 3, 14, 10, 0, 6, 13, 
+    //S2盒 
+    15, 1, 8, 14, 6, 11, 3, 4, 9, 7, 2, 13, 12, 0, 5, 10,
+    3, 13, 4, 7, 15, 2, 8, 14, 12, 0, 1, 10, 6, 9, 11, 5, 
+    0, 14, 7, 11, 10, 4, 13, 1, 5, 8, 12, 6, 9, 3, 2, 15, 
+    13, 8, 10, 1, 3, 15, 4, 2, 11, 6, 7, 12, 0, 5, 14, 9, 
+    //S3盒 
+    10, 0, 9, 14, 6, 3, 15, 5, 1, 13, 12, 7, 11, 4, 2, 8, 
+    13, 7, 0, 9, 3, 4, 6, 10, 2, 8, 5, 14, 12, 11, 15, 1, 
+    13, 6, 4, 9, 8, 15, 3, 0, 11, 1, 2, 12, 5, 10, 14, 7, 
+    1, 10, 13, 0, 6, 9, 8, 7, 4, 15, 14, 3, 11, 5, 2, 12, 
+    //S4盒 
+    7, 13, 14, 3, 0, 6, 9, 10, 1, 2, 8, 5, 11, 12, 4, 15, 
+    13, 8, 11, 5, 6, 15, 0, 3, 4, 7, 2, 12, 1, 10, 14, 9, 
+    10, 6, 9, 0, 12, 11, 7, 13, 15, 1, 3, 14, 5, 2, 8, 4,
+     3, 15, 0, 6, 10, 1, 13, 8, 9, 4, 5, 11, 12, 7, 2, 14, 
+     //S5盒 
+     2, 12, 4, 1, 7, 10, 11, 6, 8, 5, 3, 15, 13, 0, 14, 9, 
+     14, 11, 2, 12, 4, 7, 13, 1, 5, 0, 15, 10, 3, 9, 8, 6, 
+     4, 2, 1, 11, 10, 13, 7, 8, 15, 9, 12, 5, 6, 3, 0, 14,
+      11, 8, 12, 7, 1, 14, 2, 13, 6, 15, 0, 9, 10, 4, 5, 3,
+     //S6盒 
+      12, 1, 10, 15, 9, 2, 6, 8, 0, 13, 3, 4, 14, 7, 5, 11, 
+      10, 15, 4, 2, 7, 12, 9, 5, 6, 1, 13, 14, 0, 11, 3, 8, 
+      9, 14, 15, 5, 2, 8, 12, 3, 7, 0, 4, 10, 1, 13, 11, 6, 
+      4, 3, 2, 12, 9, 5, 15, 10, 11, 14, 1, 7, 6, 0, 8, 13, 
+      //S7盒 
+      4, 11, 2, 14, 15, 0, 8, 13, 3, 12, 9, 7, 5, 10, 6, 1, 
+      13, 0, 11, 7, 4, 9, 1, 10, 14, 3, 5, 12, 2, 15, 8, 6,
+      1, 4, 11, 13, 12, 3, 7, 14, 10, 15, 6, 8, 0, 5, 9, 2,
+      6, 11, 13, 8, 1, 4, 10, 7, 9, 5, 0, 15, 14, 2, 3, 12,
+      //S8盒 
+      13, 2, 8, 4, 6, 15, 11, 1, 10, 9, 3, 14, 5, 0, 12, 7, 
+      1, 15, 13, 8, 10, 3, 7, 4, 12, 5, 6, 11, 0, 14, 9, 2, 
+      7, 11, 4, 1, 9, 12, 14, 2, 0, 6, 10, 13, 15, 3, 5, 8, 
+      2, 1, 14, 7, 4, 10, 8, 13, 15, 12, 9, 0, 3, 5, 6, 11 &#125;; 
+unsigned char Bit_Xor[8][6]; //存放异或运算的结果 
+unsigned char Bit_Integer[8][4]; //将整数变成Bit位 
+unsigned char Row; //S盒的行号 unsigned char Col; 
+//S盒的列号 
+unsigned char Integer; 
+//从S盒中取得的32位整数 
+for (int i = 0; i &lt; 8; i++) &#123; 
+//计算S盒的行号和列号 
+    Row = (Bit_Xor[i][0] &lt;&lt; 1) + Bit_Xor[i][5];
+     Col = (Bit_Xor[i][1] &lt;&lt; 3) + (Bit_Xor[i][2] &lt;&lt; 2) + (Bit_Xor[i][3] &lt;&lt; 1) + Bit_Xor[i][4]; 
+ //从S盒中取得整数 
+ Integer = S_Table[i][Row][Col]; 
+ //将取得的4Bit数转换成Bit组 
+for (int j = 0; j &lt; 4; j++) &#123; 
+     Bit_Integer[i][j] = Integer &gt;&gt; (3 - j) &amp; 1; 
+ &#125; 
+ &#125; 
+</code></pre>
+<h3 id="5、p置换"><a href="#5、p置换" class="headerlink" title="5、p置换"></a><strong>5、p置换</strong></h3><p>同最开始的初始置换，只是对数据进行了打乱操作</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>16</td>
+<td>7</td>
+<td>20</td>
+<td>21</td>
+<td>29</td>
+<td>12</td>
+<td>28</td>
+<td>17</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>15</td>
+<td>23</td>
+<td>26</td>
+<td>5</td>
+<td>18</td>
+<td>31</td>
+<td>10</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>8</td>
+<td>24</td>
+<td>14</td>
+<td>32</td>
+<td>27</td>
+<td>3</td>
+<td>9</td>
+</tr>
+<tr>
+<td>3</td>
+<td>19</td>
+<td>13</td>
+<td>30</td>
+<td>6</td>
+<td>22</td>
+<td>11</td>
+<td>4</td>
+<td>25</td>
+</tr>
+</tbody></table>
+<p>代码实现（C语言）：</p>
+<pre><code>const unsigned char P_Table[32] =
+&#123;
+    16, 7,  20, 21, 29, 12, 28, 17,
+    1,  15, 23, 26, 5,  18, 31, 10,
+    2,  8,  24, 14, 32, 27, 3,  9,
+    19, 13, 30, 6,  22, 11, 4,  25
+&#125;;
+int P_Substitution(const unsigned char *Bit_Integer, unsigned char* BitP_Table)
+&#123;
+    int ret = 0;
+    for (int i = 0; i &lt; 32; i++)
+    &#123;
+        BitP_Table[i] = Bit_Integer[P_Table[i] - 1];
+    &#125;
+    return ret;
+&#125;
+</code></pre>
+<h3 id="6、将返回的结果和L组进行异或操作，作为新的R组，并将旧的R组赋值给新的L组"><a href="#6、将返回的结果和L组进行异或操作，作为新的R组，并将旧的R组赋值给新的L组" class="headerlink" title="6、将返回的结果和L组进行异或操作，作为新的R组，并将旧的R组赋值给新的L组"></a>6、<strong>将返回的结果和L组进行异或操作，作为新的R组，并将旧的R组赋值给新的L组</strong></h3><p>代码实现（C语言）：</p>
+<pre><code>R[i+1] = L[i] ^ F(R[i], K[i]);
+L[i+1] = R[i];
+</code></pre>
+<h3 id="7、按照3、4、5、6步重复16次"><a href="#7、按照3、4、5、6步重复16次" class="headerlink" title="7、按照3、4、5、6步重复16次"></a><strong>7、按照3、4、5、6步重复16次</strong></h3><p>代码实现（C语言）：</p>
+<pre><code>for (int i = 0; i &lt; 16; i++)
+&#123;
+    //将R组和子密钥组进行F函数运算
+    DES_F_Function(BitR_Table[i], BitSubKey[i], Bit_F_Out);
+     //L组盒F函数的输出结果进行异或运算
+    DES_XOR(BitL_Table[i], Bit_F_Out, BitR_Table[i + 1], 32);
+     //Li+1 = Ri
+    memcpy(BitL_Table[i + 1], BitR_Table[i], 32);
+&#125; 
+//L[16]和R[16]进行交叉合并
+memcpy(BitRL_Table,         BitR_Table[16], 32);
+memcpy(&amp;BitRL_Table[32],    BitL_Table[16], 32);
+</code></pre>
+<h3 id="8、逆初始值置换"><a href="#8、逆初始值置换" class="headerlink" title="8、逆初始值置换"></a>8、<strong>逆初始值置换</strong></h3><p>对上述16步操作后的结果进行<strong>逆初始值置换</strong>操作,也是类似于初始置换表</p>
+<p>代码实现（C语言）：</p>
+<pre><code>const unsigned char reIP_Table[64] =
+&#123;
+    40, 8, 48, 16, 56, 24, 64, 32,
+    39, 7, 47, 15, 55, 23, 63, 31,
+    38, 6, 46, 14, 54, 22, 62, 30,
+    37, 5, 45, 13, 53, 21, 61, 29,
+    36, 4, 44, 12, 52, 20, 60, 28,
+    35, 3, 43, 11, 51, 19, 59, 27,
+    34, 2, 42, 10, 50, 18, 58, 26,
+    33, 1, 41,  9, 49, 17, 57, 25
+&#125;;
+int reIP_Substitution(const unsigned char *BitRL_Table, unsigned char *Bit_reIP_Table)
+&#123;
+    int ret = 0;
+ 
+    for (int i = 0; i &lt; 64; i++)
+    &#123;
+        Bit_reIP_Table[i] = BitRL_Table[reIP_Table[i] - 1];
+    &#125;
+    return ret;
+&#125;
+</code></pre>
+<h3 id="9-密钥的扩展和加密"><a href="#9-密钥的扩展和加密" class="headerlink" title="9.密钥的扩展和加密"></a><strong>9.密钥的扩展和加密</strong></h3><h4 id="PC-1置换："><a href="#PC-1置换：" class="headerlink" title="PC-1置换："></a><strong>PC-1置换</strong>：</h4><p>将64位密钥中的<strong>8、16、24、32、40、48、56、64</strong>位剔除作为校验位。</p>
+<p>其余的位进行置换表操作</p>
+<pre><code>const unsigned char PC_1_Table[56] =
+    &#123;57, 49, 41, 33, 25, 17, 9,  1,
+    58, 50, 42, 34, 26, 18, 10, 2,
+    59, 51, 43, 35, 27, 19, 11, 3,
+    60, 52, 44, 36, 63, 55, 47, 39,
+    31, 23, 15, 7,  62, 54, 46, 38,
+    30, 22, 14, 6,  61, 53, 45, 37,
+    29, 21, 13, 5,  28, 20, 12, 4
+&#125;;
+ 
+int PC_1_Substitution(const unsigned char *BitKey, unsigned char *BitKey_PC_1)
+&#123;
+    int ret = 0;
+ 
+    for (int i = 0; i &lt; 56; i++)
+    &#123;
+        BitKey_PC_1[i] = BitKey[PC_1_Table[i] - 1];
+    &#125;
+ 
+    return ret;
+&#125;
+</code></pre>
+<p>然后对56位数据进行分组，分成C、D组，采用上下分组，再进行16次变化，每次变化后会进行（PC-2置换）生成一次密钥用作<strong>每一轮的加密</strong></p>
+<p>每轮变化都进行<strong>整体左位移</strong>操作（并把前面超出范围的两位数据移动到数据的最后面），根据<strong>具体的轮数</strong>位移的位数也不同，其中<strong>1、2、9、16</strong>轮中，位移<strong>1位</strong>，其余轮位移<strong>2位</strong></p>
+<pre><code>const unsigned char Bit_Round[16] =
+&#123;
+    1, 1, 2, 2,
+    2, 2, 2, 2,
+    1, 2, 2, 2,
+    2, 2, 2, 1
+&#125;;
+int BitRound_L(const unsigned char* SrcBitGroup, unsigned char* DesBitGroup, int nBit)
+&#123;
+    int ret = 0;
+ 
+    memcpy(DesBitGroup,             &amp;SrcBitGroup[nBit], 28 - nBit);
+    memcpy(&amp;DesBitGroup[28 - nBit], SrcBitGroup,        nBit);
+    return ret;
+&#125;
+//将C、D两组进行轮转移位操作    左移
+BitRound_L(BitC_Table[i], BitC_Table[i + 1], Bit_Round[i]);
+BitRound_L(BitD_Table[i], BitD_Table[i + 1], Bit_Round[i]);
+密钥生成算法PC-2置换
+</code></pre>
+<h4 id="PC-2置换："><a href="#PC-2置换：" class="headerlink" title="PC-2置换："></a><strong>PC-2置换</strong>：</h4><pre><code>const unsigned char PC_2_Table[48]= 
+&#123; 14, 17, 11, 24, 1, 5, 3, 28, 15, 6, 21, 10, 23, 
+  19, 12, 4, 26, 8, 16, 7, 27, 20, 13, 2, 41, 52, 
+  31, 37, 47, 55, 30, 40, 51, 45, 33, 48, 44, 49, 
+  39, 56, 34, 53, 46, 42, 50, 36, 29, 32&#125;; 
+int PC_2_Substitution(const unsigned char *BitKey, unsigned char *SubKey) 
+&#123;                    
+    int ret = 0; 
+    for (int i = 0; i &lt; 48; i++)&#123; 
+    SubKey[i] = BitKey[PC_2_Table[i] - 1]; 
+    &#125; 
+    return ret; 
+&#125; 
+</code></pre>
+<h2 id="Java代码实现："><a href="#Java代码实现：" class="headerlink" title="Java代码实现："></a><strong>Java代码实现：</strong></h2><p>根据模式的不同有很多实现方式，现展示一种方式,主要抓住特征private static final String ALGORITHM = “DES”;来对加密方式进行判断，标准的DES算法以字符串输出时很容易产生<strong>乱码</strong>，因此输出时需要将其转化为<strong>hex</strong>或者<strong>base64编码</strong>的形式</p>
+<pre><code>package abc; 
+import javax.crypto.Cipher; 
+import javax.crypto.SecretKey; 
+import javax.crypto.SecretKeyFactory; 
+import javax.crypto.spec.DESKeySpec; 
+import java.util.Base64; 
+public class DES &#123; 
+public static void main(String[] args) throws Exception &#123; 
+    DESKeySpec desKey=new DESKeySpec(&quot;12345678&quot;.getBytes()); 
+    SecretKeyFactory key=SecretKeyFactory.getInstance(&quot;DES&quot;); 
+    SecretKey secretKey=key.generateSecret(desKey); 
+    Cipher cipher=Cipher.getInstance(&quot;DES/ECB/PKCS5Padding&quot;); 
+    cipher.init(1, secretKey); 
+    byte[] res=cipher.doFinal(&quot;a12345678&quot;.getBytes()); 
+    System.out.println(Base64.getEncoder().encodeToString(res)); 
+    &#125; 
+&#125; 
+</code></pre>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%8A%A0%E5%AF%86%E4%B8%8E%E8%A7%A3%E5%AF%86/" rel="tag"># 加密与解密</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/07/22/Dalvik%E6%8C%87%E4%BB%A4%E9%9B%86/" rel="prev" title="Dalvik指令集">
+                  <i class="fa fa-chevron-left"></i> Dalvik指令集
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/07/27/SHA-1/" rel="next" title="加密算法（SHA-1篇）">
+                  加密算法（SHA-1篇） <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC8zODU3Mi8xNTEwMA=="></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">L61q4_Cheng</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script src="/js/third-party/comments/livere.js"></script>
+
+</body>
+</html>

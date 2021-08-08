@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="Dalvik是Google公司自己设计的用于Android平台的虚拟机。Dalvik虚拟机是Google等厂商合作开发的Android移动设备平台的核心组成部分之一。它可以支持已转换为 .dex（即Dalvik Executable）格式的Java应用程序的运行，.dex格式是专为Dalvik设计的一种压缩格式，适合内存和处理器速度有限的系统。Dalvik 经过优化，允许在有限的内存中同时运行多个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dalvik指令集">
+<meta property="og:url" content="http://example.com/2021/07/22/Dalvik%E6%8C%87%E4%BB%A4%E9%9B%86/index.html">
+<meta property="og:site_name" content="Welcome to L61q4_Cheng&#39;Blog">
+<meta property="og:description" content="Dalvik是Google公司自己设计的用于Android平台的虚拟机。Dalvik虚拟机是Google等厂商合作开发的Android移动设备平台的核心组成部分之一。它可以支持已转换为 .dex（即Dalvik Executable）格式的Java应用程序的运行，.dex格式是专为Dalvik设计的一种压缩格式，适合内存和处理器速度有限的系统。Dalvik 经过优化，允许在有限的内存中同时运行多个">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-22T09:08:53.559Z">
+<meta property="article:modified_time" content="2021-08-08T08:13:33.022Z">
+<meta property="article:author" content="L61q4_Cheng">
+<meta property="article:tag" content="汇编语言">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2021/07/22/Dalvik%E6%8C%87%E4%BB%A4%E9%9B%86/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/07/22/Dalvik%E6%8C%87%E4%BB%A4%E9%9B%86/","path":"2021/07/22/Dalvik指令集/","title":"Dalvik指令集"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Dalvik指令集 | Welcome to L61q4_Cheng'Blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Welcome to L61q4_Cheng'Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个逆向小白</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-主页"><a href="/" rel="section"><i class="home fa-fw"></i>主页</a></li>
+        <li class="menu-item menu-item-文章"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>文章</a></li>
+        <li class="menu-item menu-item-标签"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-关于我"><a href="/about/" rel="section"><i class="user fa-fw"></i>关于我</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E7%A9%BA%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">1、空操作指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4-move"><span class="nav-number">2.</span> <span class="nav-text">2、数据操作指令 move</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E8%BF%94%E5%9B%9E%E6%8C%87%E4%BB%A4-return"><span class="nav-number">3.</span> <span class="nav-text">3、返回指令  return</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81%E6%95%B0%E6%8D%AE%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4-const"><span class="nav-number">4.</span> <span class="nav-text">4、数据定义指令 const</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%E3%80%81%E5%AE%9E%E4%BE%8B%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4"><span class="nav-number">5.</span> <span class="nav-text">5、实例操作指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%E3%80%81%E9%94%81%E6%8C%87%E4%BB%A4-monitor-%E5%A4%9A%E7%94%A8%E5%9C%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%A8%8B%E5%BA%8F%E4%B8%AD%E5%AF%B9%E5%90%8C%E4%B8%80%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">6.</span> <span class="nav-text">6、锁指令  monitor  (多用在多线程程序中对同一对象的操作)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7%E3%80%81%E6%95%B0%E7%BB%84%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4"><span class="nav-number">7.</span> <span class="nav-text">7、数组操作指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8%E3%80%81%E5%BC%82%E5%B8%B8%E6%8C%87%E4%BB%A4-%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8"><span class="nav-number">8.</span> <span class="nav-text">8、异常指令  抛出异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9%E3%80%81%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4-%E5%BD%93%E5%89%8D%E5%9C%B0%E5%9D%80%E8%B7%B3%E8%BD%AC%E5%88%B0%E6%8C%87%E5%AE%9A%E7%9A%84%E5%81%8F%E7%A7%BB%E9%87%8F%E3%80%82"><span class="nav-number">9.</span> <span class="nav-text">9、跳转指令   当前地址跳转到指定的偏移量。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%97%A0%E6%9D%A1%E4%BB%B6%E8%B7%B3%E8%BD%AC-goto"><span class="nav-number">9.1.</span> <span class="nav-text">1)  无条件跳转(goto)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%88%86%E6%94%AF%E8%B7%B3%E8%BD%AC%EF%BC%88switch%EF%BC%89"><span class="nav-number">9.2.</span> <span class="nav-text">2)  分支跳转（switch）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3%EF%BC%89%E6%9D%A1%E4%BB%B6%E8%B7%B3%E8%BD%AC-if"><span class="nav-number">9.3.</span> <span class="nav-text">3）条件跳转  (if)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#if-test%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%8C%87%E4%BB%A4%E6%9C%89%E4%BB%A5%E4%B8%8B%E5%87%A0%E6%9D%A1"><span class="nav-number">9.4.</span> <span class="nav-text">if- test类型的指令有以下几条:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11%E3%80%81%E5%AD%97%E6%AE%B5%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4-%E7%94%A8%E6%9D%A5%E5%AF%B9%E5%AF%B9%E8%B1%A1%E5%AE%9E%E4%BE%8B%E7%9A%84%E5%AD%97%E6%AE%B5%E8%BF%9B%E5%85%A5%E8%AF%BB%E5%86%99%E6%93%8D%E4%BD%9C"><span class="nav-number">10.</span> <span class="nav-text">11、字段操作指令   用来对对象实例的字段进入读写操作</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="L61q4_Cheng"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">L61q4_Cheng</p>
+  <div class="site-description" itemprop="description">安卓逆向日常学习、分享</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/22/Dalvik%E6%8C%87%E4%BB%A4%E9%9B%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="L61q4_Cheng">
+      <meta itemprop="description" content="安卓逆向日常学习、分享">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Welcome to L61q4_Cheng'Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Dalvik指令集
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-7-22 17:08:53" itemprop="dateCreated datePublished" datetime="2021-07-22T17:08:53+08:00">2021-7-22</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>Dalvik是Google公司自己设计的用于Android平台的虚拟机。Dalvik虚拟机是Google等厂商合作开发的Android移动设备平台的核心组成部分之一。它可以支持已转换为 .dex（即Dalvik Executable）格式的Java应用程序的运行，.dex格式是专为Dalvik设计的一种压缩格式，适合内存和处理器速度有限的系统。Dalvik 经过优化，允许在有限的内存中同时运行多个虚拟机的实例，并且每一个Dalvik 应用作为一个独立的Linux 进程执行。独立的进程可以防止在虚拟机崩溃的时候所有程序都被关闭。一段Dalvik汇编代码由一系列Dalvik指令组成，指令语法由指令的位描述与指令格式标识来决定。</p>
+<p>Dalvik虚拟机是基于寄存器架构的，数据的访问通过寄存器单间直接传递。对java的每个线程都有一个pc计数器和一个java栈。Pc计数器类似arm cpu中的PC寄存器和x86 cpu中的IP寄存器，不同的是，PC计数器只对当前方法有效。</p>
+<span id="more"></span>
+
+<table>
+<thead>
+<tr>
+<th>语    法</th>
+<th>含      义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>V</td>
+<td>void,只用于返回值类型</td>
+</tr>
+<tr>
+<td>Z</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>B</td>
+<td>byte</td>
+</tr>
+<tr>
+<td>S</td>
+<td>short</td>
+</tr>
+<tr>
+<td>C</td>
+<td>char</td>
+</tr>
+<tr>
+<td>I</td>
+<td>int</td>
+</tr>
+<tr>
+<td>J</td>
+<td>long</td>
+</tr>
+<tr>
+<td>F</td>
+<td>float</td>
+</tr>
+<tr>
+<td>D</td>
+<td>double</td>
+</tr>
+<tr>
+<td>L</td>
+<td>Java类类型</td>
+</tr>
+<tr>
+<td>[</td>
+<td>数组类型</td>
+</tr>
+</tbody></table>
+<h3 id="1、空操作指令"><a href="#1、空操作指令" class="headerlink" title="1、空操作指令"></a>1、空操作指令</h3><p>助记符为nop，值为00，通常用来做对齐代码，无实际操作。</p>
+<h3 id="2、数据操作指令-move"><a href="#2、数据操作指令-move" class="headerlink" title="2、数据操作指令 move"></a>2、数据操作指令 move</h3><h3 id="3、返回指令-return"><a href="#3、返回指令-return" class="headerlink" title="3、返回指令  return"></a>3、返回指令  return</h3><p>“return-void”表示函数从一个void方法返回。</p>
+<p>“return vAA表示函数返回一个32位非对象类型的值,回值寄存器为8位的寄存器vAA</p>
+<p>“return-wide vAA表示函数返回一个64位非对象类型的值。返回值为8位的寄存器对vAA</p>
+<p>“return object vAA”表示函数返回一个对象类型的值。返回值为8位的寄存器vAA</p>
+<h3 id="4、数据定义指令-const"><a href="#4、数据定义指令-const" class="headerlink" title="4、数据定义指令 const"></a>4、数据定义指令 const</h3><p>用来定义程序中用到的常量、字符串、类等数据。</p>
+<p>“const/high16   vAA,#+B000”将数值右边零扩展为32位后赋给寄存器vAA。</p>
+<p>“const-wide/16  vAA,#+BBBB”将数值符号扩展为64位后赋给寄存器对vAA.</p>
+<p>“const-wide/32  vAA,#+BBBBBBBB”将数值符号扩展为64位后赋给寄存器对vAA</p>
+<p>“const-wide   vAA,#+BBBBBBBBBBBBBBBB”将数值赋给寄存器对vAA</p>
+<p>“const–wide/high16  vAA,#+BB00000000将数值右边零扩展为64位后赋给寄存器对vAA</p>
+<p>“cost-string vAA, string@BBBBBBBB”通过字符串索引构造一个字符串并赋给寄存器vAA</p>
+<p>“const-string-/jumbo vAA, string@BBBBBBBB”通过字符串索引(较大)构造一个字符串并赋给寄存器vAA。</p>
+<p>“const-class- vAA,type@BBBB”通过类型索引获取一个类引用并赋给寄存器vAA</p>
+<p>“const-class-/jumbo vAAAA,type@BBBBBBBB”通过给定的类型索引获取一个类引用并赋给寄存器 VAAAA.这条指令占用两个字节,值为 OxOOff( Android 4.4.0中新增的指)</p>
+<h3 id="5、实例操作指令"><a href="#5、实例操作指令" class="headerlink" title="5、实例操作指令"></a>5、实例操作指令</h3><p>类型转换，检查，新建。</p>
+<p>“check-cast vAA,type@BBBB”将vAA寄存器中的对象引用转换成指定的类型,如果失败会抛出 ClassCastException异常。如果类型B指定的是基本类型,对于非基本类型的A来说,运行时始终会失败。</p>
+<p>”instance-of vA,vB,type@CCCC”判断vB寄存器中的对象引用是否可以转换成指定的类型,如果可以vA寄存器赋值为1,否则vA寄存器赋值为0。</p>
+<p>“new-instance VAA,type@BBBB”构造一个指定类型对象的新实例,并将对象引用赋值给vAA寄存器,类型符tpe指定的类型不能是数组类.</p>
+<p>“check-cast/jumbo VAAAA, type@BBBBBBBB”指令功能与“ check-cast vAA,type@BBBB”相同,只是寄存器值与指令的索引取值范围更大( Android4.0中新增的指令)</p>
+<p>“ instance-of/jumbo VAAAA, VBBBB,type@ CCCCCCCC”指令功能与“ instance-of vA ,vB ,type @cCCC”相同,只是寄存器值与指令的索引取值范围更大( Android40中新增的指令)。</p>
+<p>“new-instance/jumbo VAAA/,type@ BBBBBBBB”指令功能与“new- instance VAA,type@BBBB”相同,只是寄存器值与指令的索引取值范围更大( Android4.0中新增的指令)</p>
+<h3 id="6、锁指令-monitor-多用在多线程程序中对同一对象的操作"><a href="#6、锁指令-monitor-多用在多线程程序中对同一对象的操作" class="headerlink" title="6、锁指令  monitor  (多用在多线程程序中对同一对象的操作)"></a>6、锁指令  monitor  (多用在多线程程序中对同一对象的操作)</h3><p>“monitor-enter  vAA”为指定的对象获得锁。</p>
+<p>“monitor -exit vAA” 释放指定的对象的锁。</p>
+<h3 id="7、数组操作指令"><a href="#7、数组操作指令" class="headerlink" title="7、数组操作指令"></a>7、数组操作指令</h3><p>包括数组长度，新建数组，数组赋值，数组元素取值与赋值等操作。</p>
+<p>“array length vA,vB”获取给定vB寄存器中数组的长度并将值赋给vA寄存器，数组长度指的是数组的条目个数。</p>
+<p>“new- array vA,vB,type@CCCC”构造指定类型( (type@CCCC)与大小(vB)的数组并将值赋给vA寄存器.</p>
+<p>“ filled-new array{ vC,vD,vE,vF},type@BBBB构造指定类型( type@BBBB))与大小(vA)的数组填充数组内容。vA寄存器是隐含使用的，除了指定数组的大小外还指定了参数的个数，vC~vG是使用到的参数寄存器序列。</p>
+<p>“filled-new-array/range{vCCCC..vNNNN),type@BBBB指令功能与“ filled-new  array{vC,vD,vE, vfF,vG},type@BBBB”相同，只是参数寄存器使用range字节码后指定了取值范围，vC是第一个参数寄存器，N=A+C-1。</p>
+<p>“filled-array-data vAA,+ BBBBBBBB”用指定的数据来填充数组，vAA寄存器为数组引用，引用必须为基础类型的数组，在指令后面会紧跟一个数据表。</p>
+<p>“new- -array/jumbo vAAAA, VBBBB,type@CCCCCCCC指令功能与“new- array vA,vB,type @CCCC相同，只是寄存器值与指令的索引取值范围更大( Android4.0中新增的指令)</p>
+<p>“filled new-array/jumb{vCCCC..vNNNN),type@BBBBBBBB指令功能与 filled-new-array/range fvCCCC.nn)， type@BBBE”相同，只是索引取值范围更大( Android4.0中新增的指令)。</p>
+<p>“ arrayop vAA,vBB,vCC对vBB寄存器指定的数组元素进入取值与赋值。vCC寄存器指定数组元素索引，vAA寄存器用来存放读取的或需要设置的数组元素的值。读取元素使用aget类指令，元素赋值使用aput类指令，根据数组中存储的类型指令后面会紧跟不同的指令后，指令列表有aget aget-wide, aget-object, aget-boolean, aget-byte, aget-char aget-short, aput, aput-wide, aput-object, aput-boolean, aput-byte,aput-char,aput-short.</p>
+<h3 id="8、异常指令-抛出异常"><a href="#8、异常指令-抛出异常" class="headerlink" title="8、异常指令  抛出异常"></a>8、异常指令  抛出异常</h3><p>“throw vAA”抛出vAA寄存器中指定类型的异常。</p>
+<h3 id="9、跳转指令-当前地址跳转到指定的偏移量。"><a href="#9、跳转指令-当前地址跳转到指定的偏移量。" class="headerlink" title="9、跳转指令   当前地址跳转到指定的偏移量。"></a>9、跳转指令   当前地址跳转到指定的偏移量。</h3><h4 id="1-无条件跳转-goto"><a href="#1-无条件跳转-goto" class="headerlink" title="1)  无条件跳转(goto)"></a>1)  无条件跳转(goto)</h4><p>“goto +AA”无条件跳转到指定偏移处，偏移量AA不能为0.</p>
+<p>“goto/16 +AAAA”无条件跳转到指定偏移处，偏移量AAAA不能为0.</p>
+<p>“goto/32 +AAAAAAAA”无条件跳转到指定偏移处.</p>
+<h4 id="2-分支跳转（switch）"><a href="#2-分支跳转（switch）" class="headerlink" title="2)  分支跳转（switch）"></a>2)  分支跳转（switch）</h4><p>“ packed- switch vAA +BBBBBBBB”分支跳转指令。vAA寄存器为 switch分支中需要判断的值， BBBBBBBB脂向一个 packed-switch- payload格式的偏移表，表中的值是有规律递增的。</p>
+<p>“ sparse- switch VAA,+ BBBBBBBB”分支跳转指令。vAA寄存器为 switch分支中需要判断的值， BBBBBBBB指向一个 sparse-switch- payload格式的偏移表，表中的值是无规律的偏移量。</p>
+<h4 id="3）条件跳转-if"><a href="#3）条件跳转-if" class="headerlink" title="3）条件跳转  (if)"></a>3）条件跳转  (if)</h4><p>“if-eq”如果vA等于vB则跳转。Java语法表示为“if(vA==vB)</p>
+<p>“if-ne”如果v不等于vB则跳转   Java语法表示为“if(vA！=vB)</p>
+<p>“if-lt”如果vA小于vB则跳转      Java语法表示为“if(vA&lt;VB)”</p>
+<p>“if-ge”如果vA大于等于vB则跳转  Java语法表示为“if(vA&gt;=vB)</p>
+<p>“if-gt”如果vA大于vB则跳转。   Java语法表示为“if(vA&gt;VB)”</p>
+<p>“if-le”如果vA小于等于vB则跳转。Java法表示为“if(vA&lt;=vB)</p>
+<p>“if -testz vAA,+BBBB”条件跳转指令。拿AA寄存器与0比较,如果比较结果满足或值为0时就跳转到BBBB指定的偏移处。偏移量BBBB不能为0。</p>
+<h4 id="if-test类型的指令有以下几条"><a href="#if-test类型的指令有以下几条" class="headerlink" title="if- test类型的指令有以下几条:"></a><strong>if- test类型的指令有以下几条:</strong></h4><p>“ if-eqz如果vAA为0则跳转。Java语法表示为“if(!vAA)”</p>
+<p>“if-nez”如果vAA不为0则跳转。Java语法表示为“if(vAA)”</p>
+<p>“if-ltz”如果vAA小于0则跳转。Java语表示为“if(vAA&lt;0)”</p>
+<p>“if-gez”如果vAA大于等于0则跳转。Java语法表示为“if(vAA&gt;=0)</p>
+<p>“if-gtz如果vAA大于0则跳转。Java语法表示为“if(vAA&gt;0)</p>
+<p>“if-lez”如果vAA小于等于0则跳转。Java语法表示为“if(vAA&lt;=0)</p>
+<p>10、比较指令  对两个寄存器的值进行比较</p>
+<p>格式：compkind vAA,vBB,vCC</p>
+<p>注：vBB和vCC是两个需要比较的寄存器，并把比较的结果放到vAA寄存器中</p>
+<p>“cmpl-float”比较两个单精度浮点数。如果vBB寄存器大于vCC寄存器，则结果为-1,相等则结果为0,小于的话结果为1.</p>
+<p>“cmpg-float”比较两个单精度浮点数。如果vBB寄存器大于vCC寄存器，则结果为1,相等则结果为0,小于的话结果为-1。</p>
+<p>“cmpl-double”比较两个双精度浮点数。如vBB寄存器对大于vCC寄存器对，则结果为-1,相等则结果为0,小于的话结果为-1。</p>
+<p>“cmpg-double””比较两个双精度浮点数。如果vBB寄存器对大于vCC寄存器对，则结果为1,相等则结果为0,小于的话结果为-1。</p>
+<p>“cmp-long”比较两个长整型数。如果vBB寄存器大于vCC寄存器，则结果为1,相等则结果为0,小于的话结果为1。</p>
+<h3 id="11、字段操作指令-用来对对象实例的字段进入读写操作"><a href="#11、字段操作指令-用来对对象实例的字段进入读写操作" class="headerlink" title="11、字段操作指令   用来对对象实例的字段进入读写操作"></a>11、字段操作指令   用来对对象实例的字段进入读写操作</h3><p>1）普通字段指令前缀为i，静态字段的指令前缀为是s。例：iget 、iput</p>
+<p>2）根据访问字段类型不同，字段操作指令后面会紧跟字段类型的后缀。例i  get-byte读取实例字段的值的类型为字节类型、iput-short 设置实例字段的值类型为短整型。</p>
+<p>3）普通字段指令：iget、iget-wide、iget-object、iget-boolean、iget-byte、iget-char、iget-short、iput、iput-wide、iput-object、iput-boolean、iput-byte、iput-char、iput-short。</p>
+<p>4）静态字段操作指令：sget、sget-wide、sget-object、sget-boolean、sget-byte、sget-char、sget-short、sput、sput-wide、sput-object、sput-boolean、sput-byte、sput-char、sput-short。</p>
+<p>12、方法调用指令  负责调用类实例  invoke</p>
+<p>格式：“nvokek-ind{vC,vD,vE,vF,vG},meth@BBBB”、“invokekind/rangce{vCCCC..vNNNN},meth@B         BBB”两类,两类指令在作用上并无不同,只是后者在设置参数寄存器时使用了range来指定寄存器的范围。</p>
+<p>13、数据转换指令    将一种类型的数值转换成另一种类型。</p>
+<p>格式：unop,vA,vB   vB寄存器或vB寄存器对存放需要转换的数据，转换后的结果保存在vA寄存器或vA寄存器中。</p>
+<p>“neg-int”对整型数求补。 </p>
+<p>“not-int”对整形数求反。 </p>
+<p>“neg-long”对长整型数求补。</p>
+<p>“not-long”对长整型数求反。</p>
+<p>“neg-float”对单精度浮点数求补。 </p>
+<p>“neg-double”对双精度浮点型数求补。</p>
+<p>“int-to-long”将整型换为长整型。</p>
+<p>“int-to-float”将数转换为单精度浮点型 。</p>
+<p>“int.-to-double”将整型数转换为双精度浮点型 。</p>
+<p>“long-to-int”将长整型数转换为整型。</p>
+<p>“long-to-float”长型数转换为单精度浮点型。</p>
+<p>“long-to- double”将长型数转换为双精度浮点型。</p>
+<p>“float-to-int”将单精度点型数转换为整型。</p>
+<p>“float-o-long”将单精度浮点型数转换为长整型。</p>
+<p>“float-to-double将单精度浮点型数转换为双精度浮点型。</p>
+<p>“double-to-int”将双精度浮点型数转换为整型。</p>
+<p>“double-to-long”将双精度浮点型数转换为长型。 </p>
+<p>“double.-to-float”将双精度浮点型数转换为单精度浮点型 。</p>
+<p>“int-to-byte”将整型转换为字节型。</p>
+<p>“int-to-char”将整形转换为字符串。</p>
+<p>“int-to-short”将整型转换为短整型。</p>
+<p>14、数据运算指令</p>
+<p>包括算数运算指令和逻辑运算指令</p>
+<p>数据运算指令有如下四类</p>
+<p>1)binop vAA，vBB，vCC＂将vBB寄存器与vCC寄存器进行运算，结果保存到AA寄存器。</p>
+<p>2)binop/2 addr vA，vB”将vA寄存器与vB寄存器进行运算，结果保存到vA寄存器 。</p>
+<p>3)binp/lit6 vA，vB,#+CCCC”将vB寄存器与常量CCCC进行运算，结果保存到vA寄存器。</p>
+<p>4)binp/lit VAA， VBB,#+CC＂将vBB寄存器与常量CC进行运算，结果保存到vAA寄存器。</p>
+<p>后面3类指令比第1类指令分别多出了2addr、lit6、lit8等指令后缀。</p>
+<p><strong>四类指令中基础字节码相同的指令执行的运算操作是类似的。</strong>第1类指令中，根据数据的类型不同会在基础字码后面加上数据类型后缀，如-int或-long分别表示操作的数据类型为整型与长整型。</p>
+<p>第一类指令可归类如下</p>
+<p>“add-type”vBB寄存器与vCC寄存器值进行加法运算(vBB+vCC)。</p>
+<p>“sub-type”vBB寄存器与vCC寄存器值进行减法运算(vBB-vCC)。</p>
+<p>“mul-type”vBB寄存器与vCC寄存器值进行乘法运算( vBB x vCC) 。</p>
+<p>“div-type”vBB寄存器与vCC寄存器值进行除法运算(vBB/vCC)。</p>
+<p>“rem-type＂BB寄存器与vCC寄存器值进行模运算(vBB％vCC)。</p>
+<p>“and-type＂vBB寄存器与vCC寄存器值进行与运算( vBB AND vCC)。</p>
+<p>“ or-type＂BB寄存器与vCC寄存器值进行或运算( VBB OR VCC)。</p>
+<p>“xor-type＂vBB寄存器与CC寄存器值进行异或运算( VBB XOR VCC)。</p>
+<p>“shi-type＂vBB寄存器值(有符号数)左移vCC位(vBB＜＜vCC)。 </p>
+<p>“shr-type＂wB寄存器值(有符号数)右移vCC位(vBB＞＞CC)。</p>
+<p>“ ushr-type＂wBB寄存器值(无符号数)右移vCC位(vBB＞＞vCC)。</p>
+<p>其中基础字节码后面的-type可以是-int、-long,-float,-double。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" rel="tag"># 汇编语言</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/07/22/hello-world/" rel="prev" title="Hello World">
+                  <i class="fa fa-chevron-left"></i> Hello World
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/07/22/%E5%AF%B9%E7%A7%B0%E7%AE%97%E6%B3%95%EF%BC%88DES%E7%AF%87%EF%BC%89/" rel="next" title="对称算法（DES篇）">
+                  对称算法（DES篇） <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC8zODU3Mi8xNTEwMA=="></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">L61q4_Cheng</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script src="/js/third-party/comments/livere.js"></script>
+
+</body>
+</html>

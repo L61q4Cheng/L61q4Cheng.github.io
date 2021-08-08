@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="概述：SHA-1是一种数据加密算法，该算法的思想是接收一段明文，然后以一种不可逆的方式将它转换成一段（通常更小）密文，也可以简单的理解为取一串输入码（称为预映射或信息），并把它们转化为长度较短、位数固定的输出序列即散列值（也称为信息摘要或信息认证代码）的过程。  可以生成一个被称为信息摘要的160位（20字节）散列值，散列值通常的呈现形式位40个十六进制数。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="加密算法（SHA-1篇）">
+<meta property="og:url" content="http://example.com/2021/07/27/SHA-1/index.html">
+<meta property="og:site_name" content="Welcome to L61q4_Cheng&#39;Blog">
+<meta property="og:description" content="概述：SHA-1是一种数据加密算法，该算法的思想是接收一段明文，然后以一种不可逆的方式将它转换成一段（通常更小）密文，也可以简单的理解为取一串输入码（称为预映射或信息），并把它们转化为长度较短、位数固定的输出序列即散列值（也称为信息摘要或信息认证代码）的过程。  可以生成一个被称为信息摘要的160位（20字节）散列值，散列值通常的呈现形式位40个十六进制数。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-27T09:58:23.913Z">
+<meta property="article:modified_time" content="2021-08-08T08:14:20.108Z">
+<meta property="article:author" content="L61q4_Cheng">
+<meta property="article:tag" content="加密与解密">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2021/07/27/SHA-1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/07/27/SHA-1/","path":"2021/07/27/SHA-1/","title":"加密算法（SHA-1篇）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>加密算法（SHA-1篇） | Welcome to L61q4_Cheng'Blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Welcome to L61q4_Cheng'Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个逆向小白</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-主页"><a href="/" rel="section"><i class="home fa-fw"></i>主页</a></li>
+        <li class="menu-item menu-item-文章"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>文章</a></li>
+        <li class="menu-item menu-item-标签"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-关于我"><a href="/about/" rel="section"><i class="user fa-fw"></i>关于我</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">概述：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E6%96%87%E5%AD%97%E6%8F%8F%E8%BF%B0%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">简单文字描述：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">客户端：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%9A"><span class="nav-number">2.2.</span> <span class="nav-text">服务器：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">算法原理：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81%E5%B0%86%E6%B6%88%E6%81%AF%E6%91%98%E8%A6%81%E8%BD%AC%E6%8D%A2%E6%88%90%E4%BD%8D%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">3.1.</span> <span class="nav-text">1、将消息摘要转换成位字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81%E5%AF%B9%E8%BD%AC%E6%8D%A2%E5%90%8E%E7%9A%84%E4%BD%8D%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BF%9B%E8%A1%8C%E8%A1%A5%E4%BD%8D%E6%93%8D%E4%BD%9C"><span class="nav-number">3.2.</span> <span class="nav-text">2、对转换后的位字符串进行补位操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3%E3%80%81%E9%99%84%E5%8A%A0%E9%95%BF%E5%BA%A6%E5%80%BC"><span class="nav-number">3.2.1.</span> <span class="nav-text">3、附加长度值</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E5%AF%86%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">加密：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C%E8%AF%AD%E8%A8%80%EF%BC%9A"><span class="nav-number">4.1.</span> <span class="nav-text">C语言：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Java"><span class="nav-number">4.2.</span> <span class="nav-text">Java:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python"><span class="nav-number">4.3.</span> <span class="nav-text">python:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%AF%86%EF%BC%9A%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3"><span class="nav-number">5.</span> <span class="nav-text">解密：暴力破解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SHA%E5%8A%A0%E5%AF%86%E5%92%8C%E8%A7%A3%E5%AF%86%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3-amp-%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B%EF%BC%9A"><span class="nav-number">5.1.</span> <span class="nav-text">SHA加密和解密算法详解&amp;代码示例：</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="L61q4_Cheng"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">L61q4_Cheng</p>
+  <div class="site-description" itemprop="description">安卓逆向日常学习、分享</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/27/SHA-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="L61q4_Cheng">
+      <meta itemprop="description" content="安卓逆向日常学习、分享">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Welcome to L61q4_Cheng'Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          加密算法（SHA-1篇）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-7-27 17:58:23" itemprop="dateCreated datePublished" datetime="2021-07-27T17:58:23+08:00">2021-7-27</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="概述："><a href="#概述：" class="headerlink" title="概述："></a><strong>概述</strong>：</h3><p>SHA-1是一种<strong>数据加密算法</strong>，该算法的思想是接收一段明文，然后以一种<strong>不可逆</strong>的方式将它转换成一段（通常更小）密文，也可以简单的理解为取一串输入码（称为预映射或信息），并把它们转化为长度较短、位数固定的输出序列即散列值（也称为信息摘要或信息认证代码）的过程。 </p>
+<p>可以生成一个被称为信息摘要的160位（20字节）散列值，散列值通常的呈现形式位40个十六进制数。</p>
+<span id="more"></span>
+<p>该算法输入报文的长度不限，产生的输出是一个160位的报文摘要。输入是按512 位的分组进行处理的。SHA-1是<strong>不可逆的</strong>、防冲突，并具有良好的雪崩效应。</p>
+<p>数字签名的原理是将要传送的明文通过一种函数运算（Hash）转换成报文摘要（不同的明文对应不同的报文摘要），报文摘要加密后与明文一起传送给接受方，接受方将接受的明文产生新的报文摘要与发送方的发来报文摘要解密比较，比较结果一致表示明文未被改动，如果不一致表示明文已被篡改。</p>
+<h3 id="简单文字描述："><a href="#简单文字描述：" class="headerlink" title="简单文字描述："></a><strong>简单文字描述：</strong></h3><h4 id="客户端："><a href="#客户端：" class="headerlink" title="客户端："></a><strong>客户端：</strong></h4><p>在APP 与 后端服务器接口调用的时候，将需要传输的参数进行关键参数（如：String A,String B）进行SHA1加密，获取加密之后的摘要(C)；然后在接口调用的时候将参数原文（A,B） 和 加密的摘要（C） 一起传输给后台服务器；</p>
+<h4 id="服务器："><a href="#服务器：" class="headerlink" title="服务器："></a><strong>服务器：</strong></h4><p>后台接口接受相关参数，然后将（A,B） 在后台进行SHA1加密，获取加密摘要D,最后将D与C进行比较，如果C == D ，则 A和B 在传输过程中参数没有被窃取改变；如果 C != D，则说明A和B已经在传输过程中发生了改变，最好不要使用！</p>
+<p><strong>注</strong>：需要在前后端共同定义一个加密额外秘钥，在进行SHA1加密的过程中添加进去，这样即使在客户端拦截到我们需要传输的参数，进行SHA1 加密，但是由于其不知道 秘钥，所以进行SHA1加密出来的摘要肯定和后端用相关参数、秘钥计算出来的结果不同。</p>
+<p><strong>关键SHA-1加密代码简单举例：</strong></p>
+<pre><code> public static String createSignature(String... arr) &#123;
+        try &#123;
+            Arrays.sort(arr);            
+            StringBuilder content = new StringBuilder();
+            for (int i = 0; i &lt; arr.length; i++) &#123;
+                content.append(arr[i]);
+            &#125;
+            MessageDigest md = MessageDigest.getInstance(&quot;SHA-1&quot;);           
+            byte[] digest = md.digest(content.toString().getBytes());
+            return byteToStr(digest);
+        &#125; catch (Exception e) &#123;  
+        &#125;
+        return null;
+&#125;
+</code></pre>
+<h3 id="算法原理："><a href="#算法原理：" class="headerlink" title="算法原理："></a><strong>算法原理：</strong></h3><h4 id="1、将消息摘要转换成位字符串"><a href="#1、将消息摘要转换成位字符串" class="headerlink" title="1、将消息摘要转换成位字符串"></a><strong>1、将消息摘要转换成位字符串</strong></h4><p>因为在SHA-1算法中，<strong>它的输入必须为位</strong>，所以我们首先要将其转化为<strong>位字符串</strong>，我们以“abc”字符串来说明问题，因为’a’=97, ‘b’=98, ‘c’=99，所以将其转换为位串后为：01100001 01100010 01100011</p>
+<h4 id="2、对转换后的位字符串进行补位操作"><a href="#2、对转换后的位字符串进行补位操作" class="headerlink" title="2、对转换后的位字符串进行补位操作"></a><strong>2、对转换后的位字符串进行补位操作</strong></h4><p>SHA-1算法标准规定，必须对消息摘要进行<strong>补位操作</strong>，即将输入的数据进行填充，使得数据长度对512求余的结果为448，填充比特位的最高位补一个1，其余的位补0，如果在补位之前已经满足对512取模余数为448，也要进行补位，在其后补一位1即可。总之，补位是至少补一位，最多补512位，我们依然以“abc”为例，其补位过程如下：</p>
+<p>初始的信息摘要：01100001 01100010 01100011</p>
+<p>第一步补位：     01100001 01100010 01100011 1</p>
+<p>….. ……</p>
+<p>补位最后一位：  01100001 01100010 01100011 10…….0(后面补了423个0)</p>
+<p>而后我们将补位操作后的信息摘要转换为十六进制，如下所示：</p>
+<p>61626380 00000000 00000000 00000000</p>
+<p>00000000 00000000 00000000 00000000</p>
+<p>00000000 00000000 00000000 00000000</p>
+<p>00000000 00000000</p>
+<h5 id="3、附加长度值"><a href="#3、附加长度值" class="headerlink" title="3、附加长度值"></a><strong>3、附加长度值</strong></h5><p>在信息摘要后面附加64bit的信息，用来表示原始信息摘要的长度，在这步操作之后，信息报文便是512bit的倍数。通常来说用一个64位的数据表示原始消息的长度，如果消息长度不大于2^64，那么前32bit就为0，在进行附加长度值操作后，其“abc”数据报文即变成如下形式：</p>
+<p>61626380 00000000 00000000 00000000</p>
+<p>00000000 00000000 00000000 00000000</p>
+<p>00000000 00000000 00000000 00000000</p>
+<p>00000000 00000000 00000000 00000018</p>
+<p>因为“abc”占3个字节，即24位 ，换算为十六进制即为0x18。</p>
+<p><strong>4、初始化缓存</strong></p>
+<p>一个160位MD缓冲区用以保存中间和最终散列函数的结果。它可以表示为5个32位的寄存器(H0,H1,H2,H3,H4)。初始化为：</p>
+<pre><code>H0 = 0x67452301
+
+H1 = 0xEFCDAB89
+
+H2 = 0x98BADCFE
+
+H3 = 0x10325476
+
+H4 = 0xC3D2E1F0
+</code></pre>
+<p>如果大家对MD-5不陌生的话，会发现一个重要的现象，其前四个与MD-5一样，但不同之处为存储为big-endien format.</p>
+<p><strong>5、计算消息摘要</strong></p>
+<p>在计算报文之前我们还要做一些基本的工作，就是在我们计算过程中要用到的方法，或定义。</p>
+<p>(1)循环左移操作符Sn(x),x是一个字，也就是32bit大小的变量，n是一个整数且0&lt;=n&lt;=32。Sn(X) = (X&lt;&lt;n)OR(X&gt;&gt;32-n)</p>
+<p>(2)在程序中所要用到的常量，这一系列常量字k(0)、k(1)、…k(79)，将其以十六进制表示如下：</p>
+<pre><code>Kt = 0x5A827999  (0 &lt;= t &lt;= 19)
+
+Kt = 0x6ED9EBA1 (20 &lt;= t &lt;= 39)
+
+Kt = 0x8F1BBCDC (40 &lt;= t &lt;= 59)
+
+Kt = 0xCA62C1D6 (60 &lt;= t &lt;= 79)
+</code></pre>
+<p>(3)所要用到的一系列函数</p>
+<pre><code> Ft(b,c,d)  ((b&amp;c)|((~b)&amp;d))  (0 &lt;= t &lt;= 19)
+
+ Ft(b,c,d) (b^c^d)      (20 &lt;= t &lt;= 39)
+
+ Ft(b,c,d) ((b&amp;c)|(b&amp;d)|(c&amp;d))  (40 &lt;= t &lt;= 59)
+
+ Ft(b,c,d) (b^c^d)      (60 &lt;= t &lt;= 79)
+</code></pre>
+<p>(4)计算</p>
+<p>计算需要一个缓冲区，由5个32位的字组成，还需要一个80个32位字的缓冲区。第一个5个字的缓冲区被标识为A，B，C，D，E。80个字的缓冲区被标识为W0, W1,…, W79</p>
+<p>另外还需要一个一个字的TEMP缓冲区。</p>
+<p>为了产生消息摘要，在第4部分中定义的16个字的数据块M1, M2,…, Mn</p>
+<p>会依次进行处理，处理每个数据块Mi 包含80个步骤。</p>
+<p>现在开始处理M1, M2, … , Mn。</p>
+<p>为了处理 Mi,需要进行下面的步骤</p>
+<p>(1). 将 Mi 分成 16 个字 W0, W1, … , W15,  W0 是最左边的字</p>
+<p>(2). 对于 t = 16 到 79 令 Wt = S1(Wt-3 XOR Wt-8 XOR Wt- 14 XOR Wt-16).</p>
+<p>(3). 令 A = H0, B = H1, C = H2, D = H3, E = H4.</p>
+<p>(4) 对于 t = 0 到 79，执行下面的循环</p>
+<p>TEMP = S5(A) + ft(B,C,D) + E + Wt + Kt;</p>
+<p>E = D; D = C; C = S30(B); B = A; A = TEMP;</p>
+<p>(5) 令 H0 = H0 + A,H1 = H1 + B,H2 = H2 + C, H3 = H3 + D, H4 = H4 + E. </p>
+<p>在处理完所有的 Mn, 后，消息摘要是一个160位的字符串，以下面的顺序标识</p>
+<p>H0 H1 H2 H3 H4.</p>
+<p>对于SHA256,SHA384,SHA512。你也可以用相似的办法来计算消息摘要。对消息进行补位的算法完全是一样的。</p>
+<h3 id="加密："><a href="#加密：" class="headerlink" title="加密："></a><strong>加密：</strong></h3><h4 id="C语言："><a href="#C语言：" class="headerlink" title="C语言："></a><strong>C语言：</strong></h4><pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;openssl/sha.h&gt;
+ 
+int main()
+&#123;
+  int i;
+  unsigned char result[SHA_DIGEST_LENGTH];
+  const char *string = &quot;Encryption Code&quot;;
+  SHA1(string, strlen(string), result);
+  for(i = 0; i &lt; SHA_DIGEST_LENGTH; i++)
+    printf(&quot;%02x%c&quot;, result[i], i &lt; (SHA_DIGEST_LENGTH-1) ? &#39; &#39; : &#39;\n&#39;);
+  return EXIT_SUCCESS;
+&#125;
+</code></pre>
+<h4 id="Java"><a href="#Java" class="headerlink" title="Java:"></a>Java:</h4><pre><code>import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+ 
+public class Digester &#123;
+ 
+    public static void main(String[] args) &#123;
+        System.out.println(hexDigest(&quot;Encryption code&quot;, &quot;SHA-1&quot;));
+    &#125;
+    static String hexDigest(String str, String digestName) &#123;
+        try &#123;
+            MessageDigest md = MessageDigest.getInstance(digestName);
+            byte[] digest = md.digest(str.getBytes(StandardCharsets.UTF_8));
+            char[] hex = new char[digest.length * 2];
+            for (int i = 0; i &lt; digest.length; i++) &#123;
+                hex[2 * i] = &quot;0123456789abcdef&quot;.charAt((digest[i] &amp; 0xf0) &gt;&gt; 4);
+                hex[2 * i + 1] = &quot;0123456789abcdef&quot;.charAt(digest[i] &amp; 0x0f);
+            &#125;
+            return new String(hex);
+        &#125; catch (NoSuchAlgorithmException e) &#123;
+            throw new IllegalStateException(e);
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<pre><code>    public static String sha1(String data) throws NoSuchAlgorithmException &#123;
+        data += &quot;lyz&quot;;
+        MessageDigest md = MessageDigest.getInstance(&quot;SHA1&quot;);
+       byte[] b = data.getBytes();
+       md.update(b);
+        //获取密文  （完成摘要计算）
+        byte[] b2 = md.digest();
+        //获取计算的长度
+        int len = b2.length;
+        //16进制字符串
+        String str = &quot;0123456789abcdef&quot;;
+        //把字符串转为字符串数组
+        char[] ch = str.toCharArray();
+        //创建一个40位长度的字节数组
+        char[] chs = new char[len*2];
+        //循环20次
+        for(int i=0,k=0;i&lt;len;i++) &#123;
+            byte b3 = b2[i];//获取摘要计算后的字节数组中的每个字节
+            // &gt;&gt;&gt;:无符号右移  
+            // &amp;:按位与
+            //0xf:0-15的数字
+            chs[k++] = ch[b3 &gt;&gt;&gt; 4 &amp; 0xf];
+            chs[k++] = ch[b3 &amp; 0xf];
+        &#125;
+        //字符数组转为字符串
+        return new String(chs);
+    &#125;
+主函数：
+    public static void main(String[] args) throws NoSuchAlgorithmException &#123;
+        
+        String data = &quot;跳梁小豆tlxd666&quot;;
+        String result = sha1(data);
+        System.out.println(&quot;加密后：&quot;+result);
+&#125;  
+</code></pre>
+<h4 id="python"><a href="#python" class="headerlink" title="python:"></a>python:</h4><pre><code>import hashlib
+h = hashlib.sha1()
+h.update(bytes(&quot;Ars longa, vita brevis&quot;, encoding=&quot;ASCII&quot;))
+h.hexdigest()
+# &quot;e640d285242886eb96ab80cbf858389b3df52f43&quot;
+</code></pre>
+<h3 id="解密：暴力破解"><a href="#解密：暴力破解" class="headerlink" title="解密：暴力破解"></a><strong>解密：暴力破解</strong></h3><pre><code>package sha1;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.concurrent.Callable;
+import java.lang.Math;
+
+public  class Sha1 implements Callable &#123;
+
+    private int threadNumber;
+    Sha1(int threadNumber)&#123;
+        this.threadNumber = threadNumber ;
+    &#125;
+    @Override
+    public Object call() throws Exception &#123;
+        /*可能的字符*/
+        char [] encryptedText = (&quot;QWINqwin%(*=2468&quot;).toCharArray();
+        //char [] encryptedText = &quot;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890~!@#$%^&amp;*()[]|;&#39;,&lt;&gt;.?&quot;.toCharArray();
+        /*长度为5的密文字符串*/
+        String data = null;
+        /*根据输入的线程编号threadNumber，分配相应的任务*/
+        int [] temp = new int[8];
+        for (int i = 0; i&lt;temp.length ; i++) &#123;
+            int n = (int) Math.pow(2,i);
+            if((threadNumber &amp; n) &gt; 0)&#123;
+                temp[i] = 1;
+            &#125;
+            else &#123;
+                temp[i] = 0;
+            &#125;
+        &#125;
+        int length = encryptedText.length / 2;
+        /*8个字符的组合*/
+        for(int a = (length * temp[0]) ; a &lt; (length * (temp[0]+1)); a++)&#123;
+            for(int b = (length * temp[1]); b &lt; (length * (temp[1]+1)); b++)&#123;
+                for(int c = (length * temp[2]); c &lt; (length * (temp[2]+1)); c++)&#123;
+                    for(int d = (length * temp[3]); d &lt; (length * (temp[3]+1)); d++)&#123;
+                        for(int e = (length * temp[4]); e &lt; (length * (temp[4]+1)); e++)&#123;
+                            for(int f = (length * temp[5]); f &lt; (length * (temp[5]+1)); f++)&#123;
+                                for(int g = (length * temp[6]); g &lt; (length * (temp[6]+1)); g++)&#123;
+                                    for(int h = (length * temp[7]); h &lt; (length * (temp[7]+1)); h++)&#123;
+                                        /*获取不同的键盘字符组合*/
+                                        data = &quot;&quot;+ encryptedText[a] + encryptedText[b] + encryptedText[c] + encryptedText[d] + encryptedText[e] + encryptedText[f]+ encryptedText[g]+ encryptedText[h];
+                                        /*将字符加密*/
+                                        String result = sha1(data);
+                                        String decrypted = &quot;67ae1a64661ac8b4494666f58c4822408dd0a3e4&quot;;
+                                        //String decrypted = &quot;4b58475789e60dbf1a28d638b556a938134644c8&quot;;
+                                        /*如果字符加密后的sha1哈希值和所给的相等，即为找到了答案*/
+                                        if(decrypted.equals(result))&#123;
+                                            //System.out.println(&quot;4b58475789e60dbf1a28d638b556a938134644c8的sha1算法解密结果为： &quot;+data);
+                                            System.out.println(&quot;67ae1a64661ac8b4494666f58c4822408dd0a3e4的sha1算法解密结果为： &quot;+data);
+                                            return 10;
+                                        &#125;
+                                    &#125;
+                                &#125;
+                            &#125;
+                        &#125;
+                    &#125;
+                &#125;
+            &#125;
+        &#125;
+        return 0;
+    &#125;
+    
+    public static String sha1(String data) throws NoSuchAlgorithmException &#123;
+        //信息摘要器                                算法名称
+        MessageDigest md = MessageDigest.getInstance(&quot;SHA1&quot;);
+        //把字符串转为字节数组
+        byte[] b = data.getBytes();
+        //使用指定的字节来更新我们的摘要
+        md.update(b);
+        //获取密文  （完成摘要计算）
+        byte[] b2 = md.digest();
+        //获取计算的长度
+        int len = b2.length;
+        //16进制字符串
+        String str = &quot;0123456789abcdef&quot;;
+        //把字符串转为字符串数组
+        char[] ch = str.toCharArray();
+
+        //创建一个40位长度的字节数组
+        char[] chs = new char[len*2];
+        //循环20次
+        for(int i=0,k=0;i&lt;len;i++) &#123;
+            //获取摘要计算后的字节数组中的每个字节
+            byte b3 = b2[i];
+            // &gt;&gt;&gt;:无符号右移
+            // &amp;:按位与
+            //0xf:0-15的数字
+            chs[k++] = ch[b3 &gt;&gt;&gt; 4 &amp; 0xf];
+            chs[k++] = ch[b3 &amp; 0xf];
+        &#125;
+        //字符数组转为字符串
+        return new String(chs);
+    &#125;
+&#125;
+</code></pre>
+<h4 id="SHA加密和解密算法详解-amp-代码示例："><a href="#SHA加密和解密算法详解-amp-代码示例：" class="headerlink" title="SHA加密和解密算法详解&amp;代码示例："></a>SHA加密和解密算法详解&amp;代码示例：</h4><pre><code>import java.security.MessageDigest;
+public class SHAUtil &#123;
+    /***
+     * SHA加密 生成40位SHA码
+     */
+    public static String shaEncode(String data) throws Exception &#123;
+        MessageDigest sha = MessageDigest.getInstance(&quot;SHA&quot;);
+
+        byte[] byteArray = data.getBytes(&quot;UTF-8&quot;);
+
+        // md5Bytes的长度为20
+        byte[] md5Bytes = sha.digest(byteArray);
+
+        // 转换成16进制字符串
+        StringBuffer hexValue = new StringBuffer();
+        for (int i = 0; i &lt; md5Bytes.length; i++) &#123;
+            int val = ((int) md5Bytes[i]) &amp; 0xff;
+            if (val &lt; 16) &#123;
+                hexValue.append(&quot;0&quot;);
+            &#125;
+            hexValue.append(Integer.toHexString(val));
+        &#125;
+        return hexValue.toString();
+    &#125;
+
+    public static void main(String args[]) throws Exception &#123;
+        String str = new String(&quot;1A2B3C4D5E&quot;);
+        System.out.println(&quot;原始：&quot; + str);
+        System.out.println(&quot;SHA后：&quot; + shaEncode(str));
+    &#125;
+&#125;
+</code></pre>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%8A%A0%E5%AF%86%E4%B8%8E%E8%A7%A3%E5%AF%86/" rel="tag"># 加密与解密</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/07/22/%E5%AF%B9%E7%A7%B0%E7%AE%97%E6%B3%95%EF%BC%88DES%E7%AF%87%EF%BC%89/" rel="prev" title="对称算法（DES篇）">
+                  <i class="fa fa-chevron-left"></i> 对称算法（DES篇）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/08/05/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" rel="next" title="非对称加密算法">
+                  非对称加密算法 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC8zODU3Mi8xNTEwMA=="></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">L61q4_Cheng</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script src="/js/third-party/comments/livere.js"></script>
+
+</body>
+</html>
