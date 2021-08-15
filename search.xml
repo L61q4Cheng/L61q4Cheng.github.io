@@ -1,0 +1,1870 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Android各版本对应的SDK版本</title>
+    <url>/2021/08/15/Android%E5%90%84%E7%89%88%E6%9C%AC%E5%AF%B9%E5%BA%94%E7%9A%84SDK%E7%89%88%E6%9C%AC/</url>
+    <content><![CDATA[<h2 id="Android各版本对应的SDK版本"><a href="#Android各版本对应的SDK版本" class="headerlink" title="Android各版本对应的SDK版本"></a>Android各版本对应的SDK版本</h2><span id="more"></span>
+<table>
+<thead>
+<tr>
+<th>安卓版本</th>
+<th align="center">SDK版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Android 8.0</td>
+<td align="center">26</td>
+</tr>
+<tr>
+<td>Android 7.1</td>
+<td align="center">25</td>
+</tr>
+<tr>
+<td>Android 7.0</td>
+<td align="center">24</td>
+</tr>
+<tr>
+<td>Android 6.0</td>
+<td align="center">23</td>
+</tr>
+<tr>
+<td>Android 5.1</td>
+<td align="center">22</td>
+</tr>
+<tr>
+<td>Android 5.0</td>
+<td align="center">21</td>
+</tr>
+<tr>
+<td>Android 4.4</td>
+<td align="center">19</td>
+</tr>
+<tr>
+<td>Android 4.3</td>
+<td align="center">18</td>
+</tr>
+<tr>
+<td>Android 4.2, 4.2.2</td>
+<td align="center">17</td>
+</tr>
+<tr>
+<td>Android 4.1, 4.1.1</td>
+<td align="center">16</td>
+</tr>
+<tr>
+<td>Android 4.0.3, 4.0.4</td>
+<td align="center">15</td>
+</tr>
+<tr>
+<td>Android 4.0, 4.0.1, 4.0.2</td>
+<td align="center">14</td>
+</tr>
+<tr>
+<td>Android 3.2</td>
+<td align="center">13</td>
+</tr>
+<tr>
+<td>Android 3.1.x</td>
+<td align="center">12</td>
+</tr>
+<tr>
+<td>Android 3.0.x</td>
+<td align="center">11</td>
+</tr>
+<tr>
+<td>Android 2.3.4</td>
+<td align="center">10</td>
+</tr>
+<tr>
+<td>Android 2.3.3</td>
+<td align="center">10</td>
+</tr>
+<tr>
+<td>Android 2.3.2</td>
+<td align="center">9</td>
+</tr>
+<tr>
+<td>Android 2.3.1</td>
+<td align="center">9</td>
+</tr>
+<tr>
+<td>Android 2.3</td>
+<td align="center">9</td>
+</tr>
+<tr>
+<td>Android 2.2.x</td>
+<td align="center">8</td>
+</tr>
+<tr>
+<td>Android 2.1.x</td>
+<td align="center">7</td>
+</tr>
+<tr>
+<td>Android 2.0.1</td>
+<td align="center">6</td>
+</tr>
+<tr>
+<td>Android 2.0</td>
+<td align="center">5</td>
+</tr>
+<tr>
+<td>Android 1.6</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td>Android 1.5</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td>Android 1.1</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td>Android 1.0</td>
+<td align="center">1</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>Xposed框架</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Dalvik指令集</title>
+    <url>/2021/07/22/Dalvik%E6%8C%87%E4%BB%A4%E9%9B%86/</url>
+    <content><![CDATA[<p>Dalvik是Google公司自己设计的用于Android平台的虚拟机。Dalvik虚拟机是Google等厂商合作开发的Android移动设备平台的核心组成部分之一。它可以支持已转换为 .dex（即Dalvik Executable）格式的Java应用程序的运行，.dex格式是专为Dalvik设计的一种压缩格式，适合内存和处理器速度有限的系统。<span id="more"></span>Dalvik 经过优化，允许在有限的内存中同时运行多个虚拟机的实例，并且每一个Dalvik 应用作为一个独立的Linux 进程执行。独立的进程可以防止在虚拟机崩溃的时候所有程序都被关闭。一段Dalvik汇编代码由一系列Dalvik指令组成，指令语法由指令的位描述与指令格式标识来决定。</p>
+<p>Dalvik虚拟机是基于寄存器架构的，数据的访问通过寄存器单间直接传递。对java的每个线程都有一个pc计数器和一个java栈。Pc计数器类似arm cpu中的PC寄存器和x86 cpu中的IP寄存器，不同的是，PC计数器只对当前方法有效。</p>
+<table>
+<thead>
+<tr>
+<th>语    法</th>
+<th>含      义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>V</td>
+<td>void,只用于返回值类型</td>
+</tr>
+<tr>
+<td>Z</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>B</td>
+<td>byte</td>
+</tr>
+<tr>
+<td>S</td>
+<td>short</td>
+</tr>
+<tr>
+<td>C</td>
+<td>char</td>
+</tr>
+<tr>
+<td>I</td>
+<td>int</td>
+</tr>
+<tr>
+<td>J</td>
+<td>long</td>
+</tr>
+<tr>
+<td>F</td>
+<td>float</td>
+</tr>
+<tr>
+<td>D</td>
+<td>double</td>
+</tr>
+<tr>
+<td>L</td>
+<td>Java类类型</td>
+</tr>
+<tr>
+<td>[</td>
+<td>数组类型</td>
+</tr>
+</tbody></table>
+<h3 id="1、空操作指令"><a href="#1、空操作指令" class="headerlink" title="1、空操作指令"></a>1、空操作指令</h3><p>助记符为nop，值为00，通常用来做对齐代码，无实际操作。</p>
+<h3 id="2、数据操作指令-move"><a href="#2、数据操作指令-move" class="headerlink" title="2、数据操作指令 move"></a>2、数据操作指令 move</h3><h3 id="3、返回指令-return"><a href="#3、返回指令-return" class="headerlink" title="3、返回指令  return"></a>3、返回指令  return</h3><p>“return-void”表示函数从一个void方法返回。</p>
+<p>“return vAA表示函数返回一个32位非对象类型的值,回值寄存器为8位的寄存器vAA</p>
+<p>“return-wide vAA表示函数返回一个64位非对象类型的值。返回值为8位的寄存器对vAA</p>
+<p>“return object vAA”表示函数返回一个对象类型的值。返回值为8位的寄存器vAA</p>
+<h3 id="4、数据定义指令-const"><a href="#4、数据定义指令-const" class="headerlink" title="4、数据定义指令 const"></a>4、数据定义指令 const</h3><p>用来定义程序中用到的常量、字符串、类等数据。</p>
+<p>“const/high16   vAA,#+B000”将数值右边零扩展为32位后赋给寄存器vAA。</p>
+<p>“const-wide/16  vAA,#+BBBB”将数值符号扩展为64位后赋给寄存器对vAA.</p>
+<p>“const-wide/32  vAA,#+BBBBBBBB”将数值符号扩展为64位后赋给寄存器对vAA</p>
+<p>“const-wide   vAA,#+BBBBBBBBBBBBBBBB”将数值赋给寄存器对vAA</p>
+<p>“const–wide/high16  vAA,#+BB00000000将数值右边零扩展为64位后赋给寄存器对vAA</p>
+<p>“cost-string vAA, string@BBBBBBBB”通过字符串索引构造一个字符串并赋给寄存器vAA</p>
+<p>“const-string-/jumbo vAA, string@BBBBBBBB”通过字符串索引(较大)构造一个字符串并赋给寄存器vAA。</p>
+<p>“const-class- vAA,type@BBBB”通过类型索引获取一个类引用并赋给寄存器vAA</p>
+<p>“const-class-/jumbo vAAAA,type@BBBBBBBB”通过给定的类型索引获取一个类引用并赋给寄存器 VAAAA.这条指令占用两个字节,值为 OxOOff( Android 4.4.0中新增的指)</p>
+<h3 id="5、实例操作指令"><a href="#5、实例操作指令" class="headerlink" title="5、实例操作指令"></a>5、实例操作指令</h3><p>类型转换，检查，新建。</p>
+<p>“check-cast vAA,type@BBBB”将vAA寄存器中的对象引用转换成指定的类型,如果失败会抛出 ClassCastException异常。如果类型B指定的是基本类型,对于非基本类型的A来说,运行时始终会失败。</p>
+<p>”instance-of vA,vB,type@CCCC”判断vB寄存器中的对象引用是否可以转换成指定的类型,如果可以vA寄存器赋值为1,否则vA寄存器赋值为0。</p>
+<p>“new-instance VAA,type@BBBB”构造一个指定类型对象的新实例,并将对象引用赋值给vAA寄存器,类型符tpe指定的类型不能是数组类.</p>
+<p>“check-cast/jumbo VAAAA, type@BBBBBBBB”指令功能与“ check-cast vAA,type@BBBB”相同,只是寄存器值与指令的索引取值范围更大( Android4.0中新增的指令)</p>
+<p>“ instance-of/jumbo VAAAA, VBBBB,type@ CCCCCCCC”指令功能与“ instance-of vA ,vB ,type @cCCC”相同,只是寄存器值与指令的索引取值范围更大( Android40中新增的指令)。</p>
+<p>“new-instance/jumbo VAAA/,type@ BBBBBBBB”指令功能与“new- instance VAA,type@BBBB”相同,只是寄存器值与指令的索引取值范围更大( Android4.0中新增的指令)</p>
+<h3 id="6、锁指令-monitor-多用在多线程程序中对同一对象的操作"><a href="#6、锁指令-monitor-多用在多线程程序中对同一对象的操作" class="headerlink" title="6、锁指令  monitor  (多用在多线程程序中对同一对象的操作)"></a>6、锁指令  monitor  (多用在多线程程序中对同一对象的操作)</h3><p>“monitor-enter  vAA”为指定的对象获得锁。</p>
+<p>“monitor -exit vAA” 释放指定的对象的锁。</p>
+<h3 id="7、数组操作指令"><a href="#7、数组操作指令" class="headerlink" title="7、数组操作指令"></a>7、数组操作指令</h3><p>包括数组长度，新建数组，数组赋值，数组元素取值与赋值等操作。</p>
+<p>“array length vA,vB”获取给定vB寄存器中数组的长度并将值赋给vA寄存器，数组长度指的是数组的条目个数。</p>
+<p>“new- array vA,vB,type@CCCC”构造指定类型( (type@CCCC)与大小(vB)的数组并将值赋给vA寄存器.</p>
+<p>“ filled-new array{ vC,vD,vE,vF},type@BBBB构造指定类型( type@BBBB))与大小(vA)的数组填充数组内容。vA寄存器是隐含使用的，除了指定数组的大小外还指定了参数的个数，vC~vG是使用到的参数寄存器序列。</p>
+<p>“filled-new-array/range{vCCCC..vNNNN),type@BBBB指令功能与“ filled-new  array{vC,vD,vE, vfF,vG},type@BBBB”相同，只是参数寄存器使用range字节码后指定了取值范围，vC是第一个参数寄存器，N=A+C-1。</p>
+<p>“filled-array-data vAA,+ BBBBBBBB”用指定的数据来填充数组，vAA寄存器为数组引用，引用必须为基础类型的数组，在指令后面会紧跟一个数据表。</p>
+<p>“new- -array/jumbo vAAAA, VBBBB,type@CCCCCCCC指令功能与“new- array vA,vB,type @CCCC相同，只是寄存器值与指令的索引取值范围更大( Android4.0中新增的指令)</p>
+<p>“filled new-array/jumb{vCCCC..vNNNN),type@BBBBBBBB指令功能与 filled-new-array/range fvCCCC.nn)， type@BBBE”相同，只是索引取值范围更大( Android4.0中新增的指令)。</p>
+<p>“ arrayop vAA,vBB,vCC对vBB寄存器指定的数组元素进入取值与赋值。vCC寄存器指定数组元素索引，vAA寄存器用来存放读取的或需要设置的数组元素的值。读取元素使用aget类指令，元素赋值使用aput类指令，根据数组中存储的类型指令后面会紧跟不同的指令后，指令列表有aget aget-wide, aget-object, aget-boolean, aget-byte, aget-char aget-short, aput, aput-wide, aput-object, aput-boolean, aput-byte,aput-char,aput-short.</p>
+<h3 id="8、异常指令-抛出异常"><a href="#8、异常指令-抛出异常" class="headerlink" title="8、异常指令  抛出异常"></a>8、异常指令  抛出异常</h3><p>“throw vAA”抛出vAA寄存器中指定类型的异常。</p>
+<h3 id="9、跳转指令-当前地址跳转到指定的偏移量。"><a href="#9、跳转指令-当前地址跳转到指定的偏移量。" class="headerlink" title="9、跳转指令   当前地址跳转到指定的偏移量。"></a>9、跳转指令   当前地址跳转到指定的偏移量。</h3><h4 id="1-无条件跳转-goto"><a href="#1-无条件跳转-goto" class="headerlink" title="1)  无条件跳转(goto)"></a>1)  无条件跳转(goto)</h4><p>“goto +AA”无条件跳转到指定偏移处，偏移量AA不能为0.</p>
+<p>“goto/16 +AAAA”无条件跳转到指定偏移处，偏移量AAAA不能为0.</p>
+<p>“goto/32 +AAAAAAAA”无条件跳转到指定偏移处.</p>
+<h4 id="2-分支跳转（switch）"><a href="#2-分支跳转（switch）" class="headerlink" title="2)  分支跳转（switch）"></a>2)  分支跳转（switch）</h4><p>“ packed- switch vAA +BBBBBBBB”分支跳转指令。vAA寄存器为 switch分支中需要判断的值， BBBBBBBB脂向一个 packed-switch- payload格式的偏移表，表中的值是有规律递增的。</p>
+<p>“ sparse- switch VAA,+ BBBBBBBB”分支跳转指令。vAA寄存器为 switch分支中需要判断的值， BBBBBBBB指向一个 sparse-switch- payload格式的偏移表，表中的值是无规律的偏移量。</p>
+<h4 id="3）条件跳转-if"><a href="#3）条件跳转-if" class="headerlink" title="3）条件跳转  (if)"></a>3）条件跳转  (if)</h4><p>“if-eq”如果vA等于vB则跳转。Java语法表示为“if(vA==vB)</p>
+<p>“if-ne”如果v不等于vB则跳转   Java语法表示为“if(vA！=vB)</p>
+<p>“if-lt”如果vA小于vB则跳转      Java语法表示为“if(vA&lt;VB)”</p>
+<p>“if-ge”如果vA大于等于vB则跳转  Java语法表示为“if(vA&gt;=vB)</p>
+<p>“if-gt”如果vA大于vB则跳转。   Java语法表示为“if(vA&gt;VB)”</p>
+<p>“if-le”如果vA小于等于vB则跳转。Java法表示为“if(vA&lt;=vB)</p>
+<p>“if -testz vAA,+BBBB”条件跳转指令。拿AA寄存器与0比较,如果比较结果满足或值为0时就跳转到BBBB指定的偏移处。偏移量BBBB不能为0。</p>
+<h4 id="if-test类型的指令有以下几条"><a href="#if-test类型的指令有以下几条" class="headerlink" title="if- test类型的指令有以下几条:"></a><strong>if- test类型的指令有以下几条:</strong></h4><p>“ if-eqz如果vAA为0则跳转。Java语法表示为“if(!vAA)”</p>
+<p>“if-nez”如果vAA不为0则跳转。Java语法表示为“if(vAA)”</p>
+<p>“if-ltz”如果vAA小于0则跳转。Java语表示为“if(vAA&lt;0)”</p>
+<p>“if-gez”如果vAA大于等于0则跳转。Java语法表示为“if(vAA&gt;=0)</p>
+<p>“if-gtz如果vAA大于0则跳转。Java语法表示为“if(vAA&gt;0)</p>
+<p>“if-lez”如果vAA小于等于0则跳转。Java语法表示为“if(vAA&lt;=0)</p>
+<p>10、比较指令  对两个寄存器的值进行比较</p>
+<p>格式：compkind vAA,vBB,vCC</p>
+<p>注：vBB和vCC是两个需要比较的寄存器，并把比较的结果放到vAA寄存器中</p>
+<p>“cmpl-float”比较两个单精度浮点数。如果vBB寄存器大于vCC寄存器，则结果为-1,相等则结果为0,小于的话结果为1.</p>
+<p>“cmpg-float”比较两个单精度浮点数。如果vBB寄存器大于vCC寄存器，则结果为1,相等则结果为0,小于的话结果为-1。</p>
+<p>“cmpl-double”比较两个双精度浮点数。如vBB寄存器对大于vCC寄存器对，则结果为-1,相等则结果为0,小于的话结果为-1。</p>
+<p>“cmpg-double””比较两个双精度浮点数。如果vBB寄存器对大于vCC寄存器对，则结果为1,相等则结果为0,小于的话结果为-1。</p>
+<p>“cmp-long”比较两个长整型数。如果vBB寄存器大于vCC寄存器，则结果为1,相等则结果为0,小于的话结果为1。</p>
+<h3 id="11、字段操作指令-用来对对象实例的字段进入读写操作"><a href="#11、字段操作指令-用来对对象实例的字段进入读写操作" class="headerlink" title="11、字段操作指令   用来对对象实例的字段进入读写操作"></a>11、字段操作指令   用来对对象实例的字段进入读写操作</h3><p>1）普通字段指令前缀为i，静态字段的指令前缀为是s。例：iget 、iput</p>
+<p>2）根据访问字段类型不同，字段操作指令后面会紧跟字段类型的后缀。例i  get-byte读取实例字段的值的类型为字节类型、iput-short 设置实例字段的值类型为短整型。</p>
+<p>3）普通字段指令：iget、iget-wide、iget-object、iget-boolean、iget-byte、iget-char、iget-short、iput、iput-wide、iput-object、iput-boolean、iput-byte、iput-char、iput-short。</p>
+<p>4）静态字段操作指令：sget、sget-wide、sget-object、sget-boolean、sget-byte、sget-char、sget-short、sput、sput-wide、sput-object、sput-boolean、sput-byte、sput-char、sput-short。</p>
+<p>12、方法调用指令  负责调用类实例  invoke</p>
+<p>格式：“nvokek-ind{vC,vD,vE,vF,vG},meth@BBBB”、“invokekind/rangce{vCCCC..vNNNN},meth@B         BBB”两类,两类指令在作用上并无不同,只是后者在设置参数寄存器时使用了range来指定寄存器的范围。</p>
+<p>13、数据转换指令    将一种类型的数值转换成另一种类型。</p>
+<p>格式：unop,vA,vB   vB寄存器或vB寄存器对存放需要转换的数据，转换后的结果保存在vA寄存器或vA寄存器中。</p>
+<p>“neg-int”对整型数求补。 </p>
+<p>“not-int”对整形数求反。 </p>
+<p>“neg-long”对长整型数求补。</p>
+<p>“not-long”对长整型数求反。</p>
+<p>“neg-float”对单精度浮点数求补。 </p>
+<p>“neg-double”对双精度浮点型数求补。</p>
+<p>“int-to-long”将整型换为长整型。</p>
+<p>“int-to-float”将数转换为单精度浮点型 。</p>
+<p>“int.-to-double”将整型数转换为双精度浮点型 。</p>
+<p>“long-to-int”将长整型数转换为整型。</p>
+<p>“long-to-float”长型数转换为单精度浮点型。</p>
+<p>“long-to- double”将长型数转换为双精度浮点型。</p>
+<p>“float-to-int”将单精度点型数转换为整型。</p>
+<p>“float-o-long”将单精度浮点型数转换为长整型。</p>
+<p>“float-to-double将单精度浮点型数转换为双精度浮点型。</p>
+<p>“double-to-int”将双精度浮点型数转换为整型。</p>
+<p>“double-to-long”将双精度浮点型数转换为长型。 </p>
+<p>“double.-to-float”将双精度浮点型数转换为单精度浮点型 。</p>
+<p>“int-to-byte”将整型转换为字节型。</p>
+<p>“int-to-char”将整形转换为字符串。</p>
+<p>“int-to-short”将整型转换为短整型。</p>
+<p>14、数据运算指令</p>
+<p>包括算数运算指令和逻辑运算指令</p>
+<p>数据运算指令有如下四类</p>
+<p>1)binop vAA，vBB，vCC＂将vBB寄存器与vCC寄存器进行运算，结果保存到AA寄存器。</p>
+<p>2)binop/2 addr vA，vB”将vA寄存器与vB寄存器进行运算，结果保存到vA寄存器 。</p>
+<p>3)binp/lit6 vA，vB,#+CCCC”将vB寄存器与常量CCCC进行运算，结果保存到vA寄存器。</p>
+<p>4)binp/lit VAA， VBB,#+CC＂将vBB寄存器与常量CC进行运算，结果保存到vAA寄存器。</p>
+<p>后面3类指令比第1类指令分别多出了2addr、lit6、lit8等指令后缀。</p>
+<p><strong>四类指令中基础字节码相同的指令执行的运算操作是类似的。</strong>第1类指令中，根据数据的类型不同会在基础字码后面加上数据类型后缀，如-int或-long分别表示操作的数据类型为整型与长整型。</p>
+<p>第一类指令可归类如下</p>
+<p>“add-type”vBB寄存器与vCC寄存器值进行加法运算(vBB+vCC)。</p>
+<p>“sub-type”vBB寄存器与vCC寄存器值进行减法运算(vBB-vCC)。</p>
+<p>“mul-type”vBB寄存器与vCC寄存器值进行乘法运算( vBB x vCC) 。</p>
+<p>“div-type”vBB寄存器与vCC寄存器值进行除法运算(vBB/vCC)。</p>
+<p>“rem-type＂BB寄存器与vCC寄存器值进行模运算(vBB％vCC)。</p>
+<p>“and-type＂vBB寄存器与vCC寄存器值进行与运算( vBB AND vCC)。</p>
+<p>“ or-type＂BB寄存器与vCC寄存器值进行或运算( VBB OR VCC)。</p>
+<p>“xor-type＂vBB寄存器与CC寄存器值进行异或运算( VBB XOR VCC)。</p>
+<p>“shi-type＂vBB寄存器值(有符号数)左移vCC位(vBB＜＜vCC)。 </p>
+<p>“shr-type＂wB寄存器值(有符号数)右移vCC位(vBB＞＞CC)。</p>
+<p>“ ushr-type＂wBB寄存器值(无符号数)右移vCC位(vBB＞＞vCC)。</p>
+<p>其中基础字节码后面的-type可以是-int、-long,-float,-double。</p>
+]]></content>
+      <categories>
+        <category>汇编语言</category>
+      </categories>
+      <tags>
+        <tag>ARM汇编</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>加密算法（SHA-1篇）</title>
+    <url>/2021/07/27/SHA-1/</url>
+    <content><![CDATA[<h3 id="概述："><a href="#概述：" class="headerlink" title="概述："></a><strong>概述</strong>：</h3><p>SHA-1是一种<strong>数据加密算法</strong>，该算法的思想是接收一段明文，然后以一种<strong>不可逆</strong>的方式将它转换成一段（通常更小）密文，也可以简单的理解为取一串输入码（称为预映射或信息），并把它们转化为长度较短、位数固定的输出序列即散列值（也称为信息摘要或信息认证代码）的过程。 </p>
+<p>可以生成一个被称为信息摘要的160位（20字节）散列值，散列值通常的呈现形式位40个十六进制数。</p>
+<span id="more"></span>
+<p>该算法输入报文的长度不限，产生的输出是一个160位的报文摘要。输入是按512 位的分组进行处理的。SHA-1是<strong>不可逆的</strong>、防冲突，并具有良好的雪崩效应。</p>
+<p>数字签名的原理是将要传送的明文通过一种函数运算（Hash）转换成报文摘要（不同的明文对应不同的报文摘要），报文摘要加密后与明文一起传送给接受方，接受方将接受的明文产生新的报文摘要与发送方的发来报文摘要解密比较，比较结果一致表示明文未被改动，如果不一致表示明文已被篡改。</p>
+<h3 id="简单文字描述："><a href="#简单文字描述：" class="headerlink" title="简单文字描述："></a><strong>简单文字描述：</strong></h3><h4 id="客户端："><a href="#客户端：" class="headerlink" title="客户端："></a><strong>客户端：</strong></h4><p>在APP 与 后端服务器接口调用的时候，将需要传输的参数进行关键参数（如：String A,String B）进行SHA1加密，获取加密之后的摘要(C)；然后在接口调用的时候将参数原文（A,B） 和 加密的摘要（C） 一起传输给后台服务器；</p>
+<h4 id="服务器："><a href="#服务器：" class="headerlink" title="服务器："></a><strong>服务器：</strong></h4><p>后台接口接受相关参数，然后将（A,B） 在后台进行SHA1加密，获取加密摘要D,最后将D与C进行比较，如果C == D ，则 A和B 在传输过程中参数没有被窃取改变；如果 C != D，则说明A和B已经在传输过程中发生了改变，最好不要使用！</p>
+<p><strong>注</strong>：需要在前后端共同定义一个加密额外秘钥，在进行SHA1加密的过程中添加进去，这样即使在客户端拦截到我们需要传输的参数，进行SHA1 加密，但是由于其不知道 秘钥，所以进行SHA1加密出来的摘要肯定和后端用相关参数、秘钥计算出来的结果不同。</p>
+<p><strong>关键SHA-1加密代码简单举例：</strong></p>
+<pre><code> public static String createSignature(String... arr) &#123;
+        try &#123;
+            Arrays.sort(arr);            
+            StringBuilder content = new StringBuilder();
+            for (int i = 0; i &lt; arr.length; i++) &#123;
+                content.append(arr[i]);
+            &#125;
+            MessageDigest md = MessageDigest.getInstance(&quot;SHA-1&quot;);           
+            byte[] digest = md.digest(content.toString().getBytes());
+            return byteToStr(digest);
+        &#125; catch (Exception e) &#123;  
+        &#125;
+        return null;
+&#125;
+</code></pre>
+<h3 id="算法原理："><a href="#算法原理：" class="headerlink" title="算法原理："></a><strong>算法原理：</strong></h3><h4 id="1、将消息摘要转换成位字符串"><a href="#1、将消息摘要转换成位字符串" class="headerlink" title="1、将消息摘要转换成位字符串"></a><strong>1、将消息摘要转换成位字符串</strong></h4><p>因为在SHA-1算法中，<strong>它的输入必须为位</strong>，所以我们首先要将其转化为<strong>位字符串</strong>，我们以“abc”字符串来说明问题，因为’a’=97, ‘b’=98, ‘c’=99，所以将其转换为位串后为：01100001 01100010 01100011</p>
+<h4 id="2、对转换后的位字符串进行补位操作"><a href="#2、对转换后的位字符串进行补位操作" class="headerlink" title="2、对转换后的位字符串进行补位操作"></a><strong>2、对转换后的位字符串进行补位操作</strong></h4><p>SHA-1算法标准规定，必须对消息摘要进行<strong>补位操作</strong>，即将输入的数据进行填充，使得数据长度对512求余的结果为448，填充比特位的最高位补一个1，其余的位补0，如果在补位之前已经满足对512取模余数为448，也要进行补位，在其后补一位1即可。总之，补位是至少补一位，最多补512位，我们依然以“abc”为例，其补位过程如下：</p>
+<p>初始的信息摘要：01100001 01100010 01100011</p>
+<p>第一步补位：     01100001 01100010 01100011 1</p>
+<p>….. ……</p>
+<p>补位最后一位：  01100001 01100010 01100011 10…….0(后面补了423个0)</p>
+<p>而后我们将补位操作后的信息摘要转换为十六进制，如下所示：</p>
+<p>61626380 00000000 00000000 00000000</p>
+<p>00000000 00000000 00000000 00000000</p>
+<p>00000000 00000000 00000000 00000000</p>
+<p>00000000 00000000</p>
+<h5 id="3、附加长度值"><a href="#3、附加长度值" class="headerlink" title="3、附加长度值"></a><strong>3、附加长度值</strong></h5><p>在信息摘要后面附加64bit的信息，用来表示原始信息摘要的长度，在这步操作之后，信息报文便是512bit的倍数。通常来说用一个64位的数据表示原始消息的长度，如果消息长度不大于2^64，那么前32bit就为0，在进行附加长度值操作后，其“abc”数据报文即变成如下形式：</p>
+<p>61626380 00000000 00000000 00000000</p>
+<p>00000000 00000000 00000000 00000000</p>
+<p>00000000 00000000 00000000 00000000</p>
+<p>00000000 00000000 00000000 00000018</p>
+<p>因为“abc”占3个字节，即24位 ，换算为十六进制即为0x18。</p>
+<p><strong>4、初始化缓存</strong></p>
+<p>一个160位MD缓冲区用以保存中间和最终散列函数的结果。它可以表示为5个32位的寄存器(H0,H1,H2,H3,H4)。初始化为：</p>
+<pre><code>H0 = 0x67452301
+
+H1 = 0xEFCDAB89
+
+H2 = 0x98BADCFE
+
+H3 = 0x10325476
+
+H4 = 0xC3D2E1F0
+</code></pre>
+<p>如果大家对MD-5不陌生的话，会发现一个重要的现象，其前四个与MD-5一样，但不同之处为存储为big-endien format.</p>
+<p><strong>5、计算消息摘要</strong></p>
+<p>在计算报文之前我们还要做一些基本的工作，就是在我们计算过程中要用到的方法，或定义。</p>
+<p>(1)循环左移操作符Sn(x),x是一个字，也就是32bit大小的变量，n是一个整数且0&lt;=n&lt;=32。Sn(X) = (X&lt;&lt;n)OR(X&gt;&gt;32-n)</p>
+<p>(2)在程序中所要用到的常量，这一系列常量字k(0)、k(1)、…k(79)，将其以十六进制表示如下：</p>
+<pre><code>Kt = 0x5A827999  (0 &lt;= t &lt;= 19)
+
+Kt = 0x6ED9EBA1 (20 &lt;= t &lt;= 39)
+
+Kt = 0x8F1BBCDC (40 &lt;= t &lt;= 59)
+
+Kt = 0xCA62C1D6 (60 &lt;= t &lt;= 79)
+</code></pre>
+<p>(3)所要用到的一系列函数</p>
+<pre><code> Ft(b,c,d)  ((b&amp;c)|((~b)&amp;d))  (0 &lt;= t &lt;= 19)
+
+ Ft(b,c,d) (b^c^d)      (20 &lt;= t &lt;= 39)
+
+ Ft(b,c,d) ((b&amp;c)|(b&amp;d)|(c&amp;d))  (40 &lt;= t &lt;= 59)
+
+ Ft(b,c,d) (b^c^d)      (60 &lt;= t &lt;= 79)
+</code></pre>
+<p>(4)计算</p>
+<p>计算需要一个缓冲区，由5个32位的字组成，还需要一个80个32位字的缓冲区。第一个5个字的缓冲区被标识为A，B，C，D，E。80个字的缓冲区被标识为W0, W1,…, W79</p>
+<p>另外还需要一个一个字的TEMP缓冲区。</p>
+<p>为了产生消息摘要，在第4部分中定义的16个字的数据块M1, M2,…, Mn</p>
+<p>会依次进行处理，处理每个数据块Mi 包含80个步骤。</p>
+<p>现在开始处理M1, M2, … , Mn。</p>
+<p>为了处理 Mi,需要进行下面的步骤</p>
+<p>(1). 将 Mi 分成 16 个字 W0, W1, … , W15,  W0 是最左边的字</p>
+<p>(2). 对于 t = 16 到 79 令 Wt = S1(Wt-3 XOR Wt-8 XOR Wt- 14 XOR Wt-16).</p>
+<p>(3). 令 A = H0, B = H1, C = H2, D = H3, E = H4.</p>
+<p>(4) 对于 t = 0 到 79，执行下面的循环</p>
+<p>TEMP = S5(A) + ft(B,C,D) + E + Wt + Kt;</p>
+<p>E = D; D = C; C = S30(B); B = A; A = TEMP;</p>
+<p>(5) 令 H0 = H0 + A,H1 = H1 + B,H2 = H2 + C, H3 = H3 + D, H4 = H4 + E. </p>
+<p>在处理完所有的 Mn, 后，消息摘要是一个160位的字符串，以下面的顺序标识</p>
+<p>H0 H1 H2 H3 H4.</p>
+<p>对于SHA256,SHA384,SHA512。你也可以用相似的办法来计算消息摘要。对消息进行补位的算法完全是一样的。</p>
+<h3 id="加密："><a href="#加密：" class="headerlink" title="加密："></a><strong>加密：</strong></h3><h4 id="C语言："><a href="#C语言：" class="headerlink" title="C语言："></a><strong>C语言：</strong></h4><pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;openssl/sha.h&gt;
+ 
+int main()
+&#123;
+  int i;
+  unsigned char result[SHA_DIGEST_LENGTH];
+  const char *string = &quot;Encryption Code&quot;;
+  SHA1(string, strlen(string), result);
+  for(i = 0; i &lt; SHA_DIGEST_LENGTH; i++)
+    printf(&quot;%02x%c&quot;, result[i], i &lt; (SHA_DIGEST_LENGTH-1) ? &#39; &#39; : &#39;\n&#39;);
+  return EXIT_SUCCESS;
+&#125;
+</code></pre>
+<h4 id="Java"><a href="#Java" class="headerlink" title="Java:"></a>Java:</h4><pre><code>import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+ 
+public class Digester &#123;
+ 
+    public static void main(String[] args) &#123;
+        System.out.println(hexDigest(&quot;Encryption code&quot;, &quot;SHA-1&quot;));
+    &#125;
+    static String hexDigest(String str, String digestName) &#123;
+        try &#123;
+            MessageDigest md = MessageDigest.getInstance(digestName);
+            byte[] digest = md.digest(str.getBytes(StandardCharsets.UTF_8));
+            char[] hex = new char[digest.length * 2];
+            for (int i = 0; i &lt; digest.length; i++) &#123;
+                hex[2 * i] = &quot;0123456789abcdef&quot;.charAt((digest[i] &amp; 0xf0) &gt;&gt; 4);
+                hex[2 * i + 1] = &quot;0123456789abcdef&quot;.charAt(digest[i] &amp; 0x0f);
+            &#125;
+            return new String(hex);
+        &#125; catch (NoSuchAlgorithmException e) &#123;
+            throw new IllegalStateException(e);
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<pre><code>    public static String sha1(String data) throws NoSuchAlgorithmException &#123;
+        data += &quot;lyz&quot;;
+        MessageDigest md = MessageDigest.getInstance(&quot;SHA1&quot;);
+       byte[] b = data.getBytes();
+       md.update(b);
+        //获取密文  （完成摘要计算）
+        byte[] b2 = md.digest();
+        //获取计算的长度
+        int len = b2.length;
+        //16进制字符串
+        String str = &quot;0123456789abcdef&quot;;
+        //把字符串转为字符串数组
+        char[] ch = str.toCharArray();
+        //创建一个40位长度的字节数组
+        char[] chs = new char[len*2];
+        //循环20次
+        for(int i=0,k=0;i&lt;len;i++) &#123;
+            byte b3 = b2[i];//获取摘要计算后的字节数组中的每个字节
+            // &gt;&gt;&gt;:无符号右移  
+            // &amp;:按位与
+            //0xf:0-15的数字
+            chs[k++] = ch[b3 &gt;&gt;&gt; 4 &amp; 0xf];
+            chs[k++] = ch[b3 &amp; 0xf];
+        &#125;
+        //字符数组转为字符串
+        return new String(chs);
+    &#125;
+主函数：
+    public static void main(String[] args) throws NoSuchAlgorithmException &#123;
+        
+        String data = &quot;跳梁小豆tlxd666&quot;;
+        String result = sha1(data);
+        System.out.println(&quot;加密后：&quot;+result);
+&#125;  
+</code></pre>
+<h4 id="python"><a href="#python" class="headerlink" title="python:"></a>python:</h4><pre><code>import hashlib
+h = hashlib.sha1()
+h.update(bytes(&quot;Ars longa, vita brevis&quot;, encoding=&quot;ASCII&quot;))
+h.hexdigest()
+# &quot;e640d285242886eb96ab80cbf858389b3df52f43&quot;
+</code></pre>
+<h3 id="解密：暴力破解"><a href="#解密：暴力破解" class="headerlink" title="解密：暴力破解"></a><strong>解密：暴力破解</strong></h3><pre><code>package sha1;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.concurrent.Callable;
+import java.lang.Math;
+
+public  class Sha1 implements Callable &#123;
+
+    private int threadNumber;
+    Sha1(int threadNumber)&#123;
+        this.threadNumber = threadNumber ;
+    &#125;
+    @Override
+    public Object call() throws Exception &#123;
+        /*可能的字符*/
+        char [] encryptedText = (&quot;QWINqwin%(*=2468&quot;).toCharArray();
+        //char [] encryptedText = &quot;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890~!@#$%^&amp;*()[]|;&#39;,&lt;&gt;.?&quot;.toCharArray();
+        /*长度为5的密文字符串*/
+        String data = null;
+        /*根据输入的线程编号threadNumber，分配相应的任务*/
+        int [] temp = new int[8];
+        for (int i = 0; i&lt;temp.length ; i++) &#123;
+            int n = (int) Math.pow(2,i);
+            if((threadNumber &amp; n) &gt; 0)&#123;
+                temp[i] = 1;
+            &#125;
+            else &#123;
+                temp[i] = 0;
+            &#125;
+        &#125;
+        int length = encryptedText.length / 2;
+        /*8个字符的组合*/
+        for(int a = (length * temp[0]) ; a &lt; (length * (temp[0]+1)); a++)&#123;
+            for(int b = (length * temp[1]); b &lt; (length * (temp[1]+1)); b++)&#123;
+                for(int c = (length * temp[2]); c &lt; (length * (temp[2]+1)); c++)&#123;
+                    for(int d = (length * temp[3]); d &lt; (length * (temp[3]+1)); d++)&#123;
+                        for(int e = (length * temp[4]); e &lt; (length * (temp[4]+1)); e++)&#123;
+                            for(int f = (length * temp[5]); f &lt; (length * (temp[5]+1)); f++)&#123;
+                                for(int g = (length * temp[6]); g &lt; (length * (temp[6]+1)); g++)&#123;
+                                    for(int h = (length * temp[7]); h &lt; (length * (temp[7]+1)); h++)&#123;
+                                        /*获取不同的键盘字符组合*/
+                                        data = &quot;&quot;+ encryptedText[a] + encryptedText[b] + encryptedText[c] + encryptedText[d] + encryptedText[e] + encryptedText[f]+ encryptedText[g]+ encryptedText[h];
+                                        /*将字符加密*/
+                                        String result = sha1(data);
+                                        String decrypted = &quot;67ae1a64661ac8b4494666f58c4822408dd0a3e4&quot;;
+                                        //String decrypted = &quot;4b58475789e60dbf1a28d638b556a938134644c8&quot;;
+                                        /*如果字符加密后的sha1哈希值和所给的相等，即为找到了答案*/
+                                        if(decrypted.equals(result))&#123;
+                                            //System.out.println(&quot;4b58475789e60dbf1a28d638b556a938134644c8的sha1算法解密结果为： &quot;+data);
+                                            System.out.println(&quot;67ae1a64661ac8b4494666f58c4822408dd0a3e4的sha1算法解密结果为： &quot;+data);
+                                            return 10;
+                                        &#125;
+                                    &#125;
+                                &#125;
+                            &#125;
+                        &#125;
+                    &#125;
+                &#125;
+            &#125;
+        &#125;
+        return 0;
+    &#125;
+    
+    public static String sha1(String data) throws NoSuchAlgorithmException &#123;
+        //信息摘要器                                算法名称
+        MessageDigest md = MessageDigest.getInstance(&quot;SHA1&quot;);
+        //把字符串转为字节数组
+        byte[] b = data.getBytes();
+        //使用指定的字节来更新我们的摘要
+        md.update(b);
+        //获取密文  （完成摘要计算）
+        byte[] b2 = md.digest();
+        //获取计算的长度
+        int len = b2.length;
+        //16进制字符串
+        String str = &quot;0123456789abcdef&quot;;
+        //把字符串转为字符串数组
+        char[] ch = str.toCharArray();
+
+        //创建一个40位长度的字节数组
+        char[] chs = new char[len*2];
+        //循环20次
+        for(int i=0,k=0;i&lt;len;i++) &#123;
+            //获取摘要计算后的字节数组中的每个字节
+            byte b3 = b2[i];
+            // &gt;&gt;&gt;:无符号右移
+            // &amp;:按位与
+            //0xf:0-15的数字
+            chs[k++] = ch[b3 &gt;&gt;&gt; 4 &amp; 0xf];
+            chs[k++] = ch[b3 &amp; 0xf];
+        &#125;
+        //字符数组转为字符串
+        return new String(chs);
+    &#125;
+&#125;
+</code></pre>
+<h4 id="SHA加密和解密算法详解-amp-代码示例："><a href="#SHA加密和解密算法详解-amp-代码示例：" class="headerlink" title="SHA加密和解密算法详解&amp;代码示例："></a>SHA加密和解密算法详解&amp;代码示例：</h4><pre><code>import java.security.MessageDigest;
+public class SHAUtil &#123;
+    /***
+     * SHA加密 生成40位SHA码
+     */
+    public static String shaEncode(String data) throws Exception &#123;
+        MessageDigest sha = MessageDigest.getInstance(&quot;SHA&quot;);
+
+        byte[] byteArray = data.getBytes(&quot;UTF-8&quot;);
+
+        // md5Bytes的长度为20
+        byte[] md5Bytes = sha.digest(byteArray);
+
+        // 转换成16进制字符串
+        StringBuffer hexValue = new StringBuffer();
+        for (int i = 0; i &lt; md5Bytes.length; i++) &#123;
+            int val = ((int) md5Bytes[i]) &amp; 0xff;
+            if (val &lt; 16) &#123;
+                hexValue.append(&quot;0&quot;);
+            &#125;
+            hexValue.append(Integer.toHexString(val));
+        &#125;
+        return hexValue.toString();
+    &#125;
+
+    public static void main(String args[]) throws Exception &#123;
+        String str = new String(&quot;1A2B3C4D5E&quot;);
+        System.out.println(&quot;原始：&quot; + str);
+        System.out.println(&quot;SHA后：&quot; + shaEncode(str));
+    &#125;
+&#125;
+</code></pre>
+]]></content>
+      <categories>
+        <category>加密与解密</category>
+      </categories>
+      <tags>
+        <tag>散列算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>初识Xposed框架</title>
+    <url>/2021/08/15/%E5%88%9D%E8%AF%86Xposed%E6%A1%86%E6%9E%B6/</url>
+    <content><![CDATA[<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p><strong>Xposed</strong>（也被称作Xposed框架、XP框架、Xposed framework），是一个运行于Android操作系统的hook框架。其通过替换Android系统的关键文件，可以拦截几乎所有Java函数的调用，并允许通过Xposed模块中的自定义代码更改调用这些函数时的行为。因此，Xposed常被用来<strong>修改Android系统和应用程序的功能。</strong></p>
+<span id="more"></span>
+<p>简单来说，它允许你在不修改apk源码的情况下，通过编写自己的模块来改变apk的行为。采用了插件机制，模块能够适用不同版本的框架和rom。模块改变apk行为的操作发生在内存中，对源apk不进行任何修改。你只需要安装编写的模块并重启相应的设备即可。</p>
+<h3 id="组成部分"><a href="#组成部分" class="headerlink" title="组成部分"></a>组成部分</h3><p>xposed 主要由三个项目来组成的：</p>
+<ol>
+<li>Xposed的C++ 部分，主要是用来替换 /system/bin/app_process，并为XposedBridge 提供 JNI方法。</li>
+<li>XposedBridge：Xposed 提供的jar文件，app_process 启动过程中会加载该jar包，其他的 Modules 的开发都是基于 该jar包。</li>
+<li>XposedInstaller：Xposed的安装包，提供对基于Xposed框架的Modules的管理。</li>
+</ol>
+<p>xposed 目前已逐步支持 ART虚拟机，兼容 android 5.0 以上版本。</p>
+<h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><p>Xposed框架是以模块扩展方式来实现对系统部分功能的修改，这些模块都依赖于Xposed框架。用户可以在一些应用商店或其自带的下载库进行下载安装。在中国大陆，还有精简QQ，个性化微信界面等用途的模块。</p>
+<h3 id="目前存在的问题"><a href="#目前存在的问题" class="headerlink" title="目前存在的问题"></a>目前存在的问题</h3><p>部分专有软件（如微信、支付宝等）会检测Xposed框架的存在，并强迫用户卸载Xposed框架及相关组件，否则用户将无法继续使用其所提供的服务。但是这些问题可以使用相应的模块来解决，比如Xposed黑名单模块。</p>
+]]></content>
+      <categories>
+        <category>Xposed框架</category>
+      </categories>
+      <tags>
+        <tag>Xposed框架</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2021/07/22/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<span id="more"></span>
+
+
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;
+</code></pre>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server
+</code></pre>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate
+</code></pre>
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy
+</code></pre>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>对称算法（AES篇）</title>
+    <url>/2021/08/08/%E5%AF%B9%E7%A7%B0%E7%AE%97%E6%B3%95%EF%BC%88AES%E7%AF%87%EF%BC%89/</url>
+    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>高级加密标准（英语：Advanced Encryption Standard，缩写：AES），在密码学中又称Rijndael加密法，是美国联邦政府采用的一种区块加密标准。这个标准用来替代原先的DES，已经被多方分析且广为全世界所使用。经过五年的甄选流程，高级加密标准由美国国家标准</p>
+<span id="more"></span>与技术研究院（NIST）于2001年11月26日发布于FIPS PUB 197，并在2002年5月26日成为有效的标准。2006年，高级加密标准已然成为对称密钥加密中最流行的算法之一。
+
+<p>AES为最常见的对称加密算法(微信小程序加密传输就是用这个加密算法的)。对称加密算法也就是加密和解密用相同的密钥。具体的加密流程如下：</p>
+<pre><code>graph LR
+A(L61q4_Cheng)--&gt;B(公钥A)
+B--&gt;C(密文)
+C--&gt;D(私钥B)
+D--&gt;E(L61q4_Cheng)
+</code></pre>
+<hr>
+<h2 id="加密原理"><a href="#加密原理" class="headerlink" title="加密原理"></a>加密原理</h2><p>AES为分组加密法，把明文分成一组一组的，每组长度相等，每次加密一组数据，直到加密完整个明文，在AES标准规范中，分组长度只能是128位，AES是按照字节进行加密的，也就是说每个分组为16个字节（每个字节8位）。密钥的长度可以使用128位、192位或256位。这导致密钥长度不同，推荐加密的轮数也不同。</p>
+<table>
+<thead>
+<tr>
+<th>AES</th>
+<th>密钥长度（32位比特字)</th>
+<th>分组长度(32位比特字)</th>
+<th>加密轮数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AES-128</td>
+<td>4</td>
+<td>4</td>
+<td>10</td>
+</tr>
+<tr>
+<td>AES-192</td>
+<td>6</td>
+<td>4</td>
+<td>12</td>
+</tr>
+<tr>
+<td>AES-256</td>
+<td>8</td>
+<td>4</td>
+<td>14</td>
+</tr>
+</tbody></table>
+<p>这里实现的是AES-128，也就是密钥的长度为128位，加密轮数为10轮。上面说到，AES的加密公式为C = E(K,P)，在加密函数E中，会执行一个轮函数，并且执行10次这个轮函数，这个轮函数的前9次执行的操作是一样的，只有第10次有所不同。也就是说，一个明文分组会被加密10轮。AES的核心就是实现一轮中的所有操作。</p>
+<p>AES的处理单位是字节，128位的输入明文分组P和输入密钥K都被分成16个字节，分别记为P = P0 P1 … P15 和 K = K0 K1 …K15。如，明文分组为P=abcdefghijklmnop,其中的字符a对应P0，p对应P15。一般地，明文分组用字节为单位的正方形矩阵描述，称为状态矩阵。在算法的每一轮中，状态矩阵的内容不断发生变化，最后的结果作为密文输出。该矩阵中字节的排列顺序为从上到下、从左至右依次排列。明文经过AES加密后，已经面目全非。</p>
+<h2 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h2><p>AES算法可以归纳为四种操作处理，分别为<strong>密钥加法层、字节代换层、行位移层、列混淆层</strong></p>
+<p>标准的AES算法密钥和明文都是等长的，一共有128位，196位和256位三种长度，这里重点讲解128位的情况：</p>
+<h3 id="1、密钥加法层"><a href="#1、密钥加法层" class="headerlink" title="1、密钥加法层"></a>1、密钥加法层</h3><p>在密钥加法层中有两个输入的参数，分别是明文和子密钥k[0]，而且这两个输入都是128位的。k[0]实际上就等同于密钥k，只需要将两个输入的数据进行按字节异或操作就会得到运算的结果。</p>
+<p>代码如下（C语言）：</p>
+<pre><code>int AddRoundKey(unsigned char(*PlainArray)[4], unsigned char(*ExtendKeyArray)[44], unsigned int MinCol)
+&#123;
+    int ret = 0;
+ 
+    for (int i = 0; i &lt; 4; i++)
+    &#123;
+        for (int j = 0; j &lt; 4; j++)
+        &#123;
+            PlainArray[i][j] ^= ExtendKeyArray[i][MinCol + j];
+        &#125;
+    &#125;
+ 
+    return ret;
+&#125;
+</code></pre>
+<h3 id="2、字节代换层"><a href="#2、字节代换层" class="headerlink" title="2、字节代换层"></a>2、字节代换层</h3><p>字节代换层的主要功能是让数据通过S盒完成从一个字节到另一个字节的映射，S盒的计算方式和密钥中S盒计算方式相同。S盒是一个拥有256个字节元素的数组，逆S盒与S盒对应用于AES算法的解密，字节代换层将明文的每一个字节作为数组下标，对进行相关索引操作</p>
+<p>若将S盒作为一维数组处理，则只需要将每个字节作为索引下标进行索引</p>
+<p>若将S盒作为二维数组，则需要将每个字节的高4位作为第一个下标，第四位作为第二个下标来进行索引</p>
+<p>S盒形成过程：S盒是通过将输入的数据进行乘法逆元计算、然后将计算结果进行仿射映射得到的。</p>
+<p>状态矩阵中的元素按照下面的方式映射为一个新的字节：把该字节的高4位作为行值，低4位作为列值，取出S盒或者逆S盒中对应的行的元素作为输出。例如，加密时，输出的字节S1为0x12,则查S盒的第0x01行和0x02列，得到值0xc9,然后替换S1原有的0x12为0xc9。</p>
+<p>代码如下（C语言）：</p>
+<pre><code>//S盒
+const unsigned char S_Table[16][16] =
+&#123;
+    0x63, 0x7C, 0x77, 0x7B, 0xF2, 0x6B, 0x6F, 0xC5, 0x30, 0x01, 0x67, 0x2B, 0xFE, 0xD7, 0xAB, 0x76,
+    0xCA, 0x82, 0xC9, 0x7D, 0xFA, 0x59, 0x47, 0xF0, 0xAD, 0xD4, 0xA2, 0xAF, 0x9C, 0xA4, 0x72, 0xC0,
+    0xB7, 0xFD, 0x93, 0x26, 0x36, 0x3F, 0xF7, 0xCC, 0x34, 0xA5, 0xE5, 0xF1, 0x71, 0xD8, 0x31, 0x15,
+    0x04, 0xC7, 0x23, 0xC3, 0x18, 0x96, 0x05, 0x9A, 0x07, 0x12, 0x80, 0xE2, 0xEB, 0x27, 0xB2, 0x75,
+    0x09, 0x83, 0x2C, 0x1A, 0x1B, 0x6E, 0x5A, 0xA0, 0x52, 0x3B, 0xD6, 0xB3, 0x29, 0xE3, 0x2F, 0x84,
+    0x53, 0xD1, 0x00, 0xED, 0x20, 0xFC, 0xB1, 0x5B, 0x6A, 0xCB, 0xBE, 0x39, 0x4A, 0x4C, 0x58, 0xCF,
+    0xD0, 0xEF, 0xAA, 0xFB, 0x43, 0x4D, 0x33, 0x85, 0x45, 0xF9, 0x02, 0x7F, 0x50, 0x3C, 0x9F, 0xA8,
+    0x51, 0xA3, 0x40, 0x8F, 0x92, 0x9D, 0x38, 0xF5, 0xBC, 0xB6, 0xDA, 0x21, 0x10, 0xFF, 0xF3, 0xD2,
+    0xCD, 0x0C, 0x13, 0xEC, 0x5F, 0x97, 0x44, 0x17, 0xC4, 0xA7, 0x7E, 0x3D, 0x64, 0x5D, 0x19, 0x73,
+    0x60, 0x81, 0x4F, 0xDC, 0x22, 0x2A, 0x90, 0x88, 0x46, 0xEE, 0xB8, 0x14, 0xDE, 0x5E, 0x0B, 0xDB,
+    0xE0, 0x32, 0x3A, 0x0A, 0x49, 0x06, 0x24, 0x5C, 0xC2, 0xD3, 0xAC, 0x62, 0x91, 0x95, 0xE4, 0x79,
+    0xE7, 0xC8, 0x37, 0x6D, 0x8D, 0xD5, 0x4E, 0xA9, 0x6C, 0x56, 0xF4, 0xEA, 0x65, 0x7A, 0xAE, 0x08,
+    0xBA, 0x78, 0x25, 0x2E, 0x1C, 0xA6, 0xB4, 0xC6, 0xE8, 0xDD, 0x74, 0x1F, 0x4B, 0xBD, 0x8B, 0x8A,
+    0x70, 0x3E, 0xB5, 0x66, 0x48, 0x03, 0xF6, 0x0E, 0x61, 0x35, 0x57, 0xB9, 0x86, 0xC1, 0x1D, 0x9E,
+    0xE1, 0xF8, 0x98, 0x11, 0x69, 0xD9, 0x8E, 0x94, 0x9B, 0x1E, 0x87, 0xE9, 0xCE, 0x55, 0x28, 0xDF,
+    0x8C, 0xA1, 0x89, 0x0D, 0xBF, 0xE6, 0x42, 0x68, 0x41, 0x99, 0x2D, 0x0F, 0xB0, 0x54, 0xBB, 0x16
+&#125;;
+ 
+//字节代换
+int Plain_S_Substitution(unsigned char *PlainArray)
+&#123;
+    int ret = 0;
+ 
+    for (int i = 0; i &lt; 16; i++)
+    &#123;
+        PlainArray[i] = S_Table[PlainArray[i] &gt;&gt; 4][PlainArray[i] &amp; 0x0F];
+    &#125;
+ 
+    return ret;
+&#125;
+ 
+ 
+//逆S盒
+const unsigned char ReS_Table[16][16] =
+&#123;
+    0x52, 0x09, 0x6A, 0xD5, 0x30, 0x36, 0xA5, 0x38, 0xBF, 0x40, 0xA3, 0x9E, 0x81, 0xF3, 0xD7, 0xFB,
+    0x7C, 0xE3, 0x39, 0x82, 0x9B, 0x2F, 0xFF, 0x87, 0x34, 0x8E, 0x43, 0x44, 0xC4, 0xDE, 0xE9, 0xCB,
+    0x54, 0x7B, 0x94, 0x32, 0xA6, 0xC2, 0x23, 0x3D, 0xEE, 0x4C, 0x95, 0x0B, 0x42, 0xFA, 0xC3, 0x4E,
+    0x08, 0x2E, 0xA1, 0x66, 0x28, 0xD9, 0x24, 0xB2, 0x76, 0x5B, 0xA2, 0x49, 0x6D, 0x8B, 0xD1, 0x25,
+    0x72, 0xF8, 0xF6, 0x64, 0x86, 0x68, 0x98, 0x16, 0xD4, 0xA4, 0x5C, 0xCC, 0x5D, 0x65, 0xB6, 0x92,
+    0x6C, 0x70, 0x48, 0x50, 0xFD, 0xED, 0xB9, 0xDA, 0x5E, 0x15, 0x46, 0x57, 0xA7, 0x8D, 0x9D, 0x84,
+    0x90, 0xD8, 0xAB, 0x00, 0x8C, 0xBC, 0xD3, 0x0A, 0xF7, 0xE4, 0x58, 0x05, 0xB8, 0xB3, 0x45, 0x06,
+    0xD0, 0x2C, 0x1E, 0x8F, 0xCA, 0x3F, 0x0F, 0x02, 0xC1, 0xAF, 0xBD, 0x03, 0x01, 0x13, 0x8A, 0x6B,
+    0x3A, 0x91, 0x11, 0x41, 0x4F, 0x67, 0xDC, 0xEA, 0x97, 0xF2, 0xCF, 0xCE, 0xF0, 0xB4, 0xE6, 0x73,
+    0x96, 0xAC, 0x74, 0x22, 0xE7, 0xAD, 0x35, 0x85, 0xE2, 0xF9, 0x37, 0xE8, 0x1C, 0x75, 0xDF, 0x6E,
+    0x47, 0xF1, 0x1A, 0x71, 0x1D, 0x29, 0xC5, 0x89, 0x6F, 0xB7, 0x62, 0x0E, 0xAA, 0x18, 0xBE, 0x1B,
+    0xFC, 0x56, 0x3E, 0x4B, 0xC6, 0xD2, 0x79, 0x20, 0x9A, 0xDB, 0xC0, 0xFE, 0x78, 0xCD, 0x5A, 0xF4,
+    0x1F, 0xDD, 0xA8, 0x33, 0x88, 0x07, 0xC7, 0x31, 0xB1, 0x12, 0x10, 0x59, 0x27, 0x80, 0xEC, 0x5F,
+    0x60, 0x51, 0x7F, 0xA9, 0x19, 0xB5, 0x4A, 0x0D, 0x2D, 0xE5, 0x7A, 0x9F, 0x93, 0xC9, 0x9C, 0xEF,
+    0xA0, 0xE0, 0x3B, 0x4D, 0xAE, 0x2A, 0xF5, 0xB0, 0xC8, 0xEB, 0xBB, 0x3C, 0x83, 0x53, 0x99, 0x61,
+    0x17, 0x2B, 0x04, 0x7E, 0xBA, 0x77, 0xD6, 0x26, 0xE1, 0x69, 0x14, 0x63, 0x55, 0x21, 0x0C, 0x7D
+&#125;;
+//逆字节代换
+int Cipher_S_Substitution(unsigned char *CipherArray)
+&#123;
+    int ret = 0;
+ 
+    for (int i = 0; i &lt; 16; i++)
+    &#123;
+        CipherArray[i] = ReS_Table[CipherArray[i] &gt;&gt; 4][CipherArray[i] &amp; 0x0F];
+    &#125;
+ 
+    return ret;
+&#125;
+</code></pre>
+<h3 id="3、行位移层"><a href="#3、行位移层" class="headerlink" title="3、行位移层"></a>3、行位移层</h3><p>行位移操作最为简单，它是用来将输入数据作为一个4·4的字节矩阵进行处理的，然后将这个矩阵的字节进行位置上的置换。<br><strong>将第一行保持不变，第二行整体向左移1个字节，第三行整体向左位移2个字节，第四行整体左移3个字节</strong></p>
+<pre><code>int ShiftRows(unsigned int *PlainArray)
+&#123;
+    int ret = 0;
+ 
+    //第一行 不移位
+    //PlainArray[0] = PlainArray[0];
+ 
+    //第二行 左移8Bit
+    PlainArray[1] = (PlainArray[1] &gt;&gt; 8) | (PlainArray[1] &lt;&lt; 24);
+ 
+    //第三行 左移16Bit
+    PlainArray[2] = (PlainArray[2] &gt;&gt; 16) | (PlainArray[2] &lt;&lt; 16);
+ 
+    //第四行 左移24Bit
+    PlainArray[3] = (PlainArray[3] &gt;&gt; 24) | (PlainArray[3] &lt;&lt; 8);
+ 
+    return ret;
+&#125;
+</code></pre>
+<h3 id="4、列混淆层"><a href="#4、列混淆层" class="headerlink" title="4、列混淆层"></a>4、列混淆层</h3><p>列混淆子层是AES算法中最为复杂的部分，属于扩散层，列混淆操作是AES算法中主要的扩散元素，它混淆了输入矩阵的每一列，使输入的每个字节都会影响到4个输出字节。其中包含了矩阵乘法、伽罗瓦域内加法和乘法的相关知识。<br><strong>伽罗瓦域乘法：</strong></p>
+<pre><code>///
+//功能:   伽罗瓦域内的乘法运算  GF(128)
+//参数:   Num_L           输入的左参数
+//      Num_R           输入的右参数
+//返回值:计算结果
+char GaloisMultiplication(unsigned char Num_L, unsigned char Num_R)
+&#123;
+    //定义变量
+    unsigned char Result = 0;       //伽罗瓦域内乘法计算的结果
+ 
+    while (Num_L)
+    &#123;
+        //如果Num_L最低位是1就异或Num_R，相当于加上Num_R * 1
+        if (Num_L &amp; 0x01)
+        &#123;
+            Result ^= Num_R;
+        &#125;
+ 
+        //Num_L右移一位，相当于除以2
+        Num_L = Num_L &gt;&gt; 1;
+ 
+        //如果Num_R最高位为1
+        if (Num_R &amp; 0x80)
+        &#123;
+            //左移一位相当于乘二
+            Num_R = Num_R &lt;&lt; 1;     //注：这里会丢失最高位，但是不用担心
+ 
+            Num_R ^= 0x1B;  //计算伽罗瓦域内除法Num_R = Num_R / (x^8(刚好丢失最高位) + x^4 + x^3 + x^1 + 1)
+        &#125;
+        else
+        &#123;
+            //左移一位相当于乘二
+            Num_R = Num_R &lt;&lt; 1;
+        &#125;
+    &#125;
+    return Result;
+&#125;
+</code></pre>
+<p><strong>矩阵乘法：</strong></p>
+<pre><code>//列混淆左乘矩阵
+const unsigned char MixArray[4][4] =
+&#123;
+    0x02, 0x03, 0x01, 0x01,
+    0x01, 0x02, 0x03, 0x01,
+    0x01, 0x01, 0x02, 0x03,
+    0x03, 0x01, 0x01, 0x02
+&#125;;
+ 
+int MixColum(unsigned char(*PlainArray)[4])
+&#123;
+    int ret = 0;
+    //定义变量
+    unsigned char ArrayTemp[4][4];
+ 
+    //初始化变量
+    memcpy(ArrayTemp, PlainArray, 16);
+ 
+    //矩阵乘法 4*4
+    for (int i = 0; i &lt; 4; i++)
+    &#123;
+        for (int j = 0; j &lt; 4; j++)
+        &#123;
+            PlainArray[i][j] =
+                MixArray[i][0] * ArrayTemp[0][j] +
+                MixArray[i][1] * ArrayTemp[1][j] +
+                MixArray[i][2] * ArrayTemp[2][j] +
+                MixArray[i][3] * ArrayTemp[3][j];
+        &#125;
+    &#125;
+ 
+    return ret;
+&#125;
+</code></pre>
+<p><strong>整体列混淆代码：</strong></p>
+<pre><code>const unsigned char MixArray[4][4] =
+&#123;
+    0x02, 0x03, 0x01, 0x01,
+    0x01, 0x02, 0x03, 0x01,
+    0x01, 0x01, 0x02, 0x03,
+    0x03, 0x01, 0x01, 0x02
+&#125;;
+ 
+int MixColum(unsigned char(*PlainArray)[4])
+&#123;
+    int ret = 0;
+    //定义变量
+    unsigned char ArrayTemp[4][4];
+ 
+    //初始化变量
+    memcpy(ArrayTemp, PlainArray, 16);
+ 
+    //矩阵乘法 4*4
+    for (int i = 0; i &lt; 4; i++)
+    &#123;
+        for (int j = 0; j &lt; 4; j++)
+        &#123;
+            PlainArray[i][j] =
+                GaloisMultiplication(MixArray[i][0], ArrayTemp[0][j]) ^
+                GaloisMultiplication(MixArray[i][1], ArrayTemp[1][j]) ^
+                GaloisMultiplication(MixArray[i][2], ArrayTemp[2][j]) ^
+                GaloisMultiplication(MixArray[i][3], ArrayTemp[3][j]);
+        &#125;
+    &#125;
+    return ret;
+&#125;
+</code></pre>
+<h3 id="加密代码："><a href="#加密代码：" class="headerlink" title="加密代码："></a>加密代码：</h3><pre><code>package abc;
+import java.security.Key;
+import java.security.SecureRandom;
+ 
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import java.util.Base64;
+import java.util.Base64.Decoder;
+import java.util.Base64.Encoder;
+public class Aes2 &#123;
+ 
+    // optional value AES/DES/DESede
+    public static String DES = &quot;AES&quot;;
+    // optional value AES/DES/DESede
+    public static String CIPHER_ALGORITHM = &quot;AES&quot;;
+ 
+    public static Key getKey(String strKey) &#123;
+        try &#123;
+            if (strKey == null) &#123;
+                strKey = &quot;&quot;;
+            &#125;
+            KeyGenerator _generator = KeyGenerator.getInstance(&quot;AES&quot;);
+            SecureRandom secureRandom = SecureRandom.getInstance(&quot;SHA1PRNG&quot;);
+            secureRandom.setSeed(strKey.getBytes());
+            _generator.init(128, secureRandom);
+            return _generator.generateKey();
+        &#125; catch (Exception e) &#123;
+            throw new RuntimeException(&quot; 密钥出现异常 &quot;);
+        &#125;
+    &#125;
+    public static String decrypt(String message, String key) throws Exception &#123;
+        SecureRandom sr = new SecureRandom();
+        Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
+        Key secureKey = getKey(key);
+        cipher.init(Cipher.DECRYPT_MODE, secureKey, sr);
+        byte[] res = Base64.getDecoder().decode(message);
+        res = cipher.doFinal(res);
+        return new String(res);
+    &#125;
+ 
+    public static void main(String[] args) throws Exception &#123;
+        String message = &quot;123456&quot;;
+        String key = &quot;1234567890abcdef&quot;;
+        String encryptMsg = encrypt(message, key);
+        System.out.println(&quot;加密信息&quot;);
+        System.out.println(encryptMsg);
+ 
+        
+    &#125;
+ 
+&#125;
+</code></pre>
+<h2 id="解密"><a href="#解密" class="headerlink" title="解密"></a>解密</h2><pre><code>import java.security.Key;
+import java.security.SecureRandom;
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import java.util.Base64;
+import java.util.Base64.Decoder;
+import java.util.Base64.Encoder;
+public class Aes2 &#123;
+ 
+    // optional value AES/DES/DESede
+    public static String DES = &quot;AES&quot;;
+    // optional value AES/DES/DESede
+    public static String CIPHER_ALGORITHM = &quot;AES&quot;;
+ 
+    public static Key getKey(String strKey) &#123;
+        try &#123;
+            if (strKey == null) &#123;
+                strKey = &quot;&quot;;
+            &#125;
+            KeyGenerator _generator = KeyGenerator.getInstance(&quot;AES&quot;);
+            SecureRandom secureRandom = SecureRandom.getInstance(&quot;SHA1PRNG&quot;);
+            secureRandom.setSeed(strKey.getBytes());
+            _generator.init(128, secureRandom);
+            return _generator.generateKey();
+        &#125; catch (Exception e) &#123;
+            throw new RuntimeException(&quot; 密钥出现异常 &quot;);
+        &#125;
+    &#125;
+ 
+    public static String decrypt(String message, String key) throws Exception &#123;
+        SecureRandom sr = new SecureRandom();
+        Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
+        Key secureKey = getKey(key);
+        cipher.init(Cipher.DECRYPT_MODE, secureKey, sr);
+        byte[] res = Base64.getDecoder().decode(message);
+        res = cipher.doFinal(res);
+        return new String(res);
+    &#125;
+ 
+    public static void main(String[] args) throws Exception &#123;
+        String message = &quot;123456&quot;;
+        String key = &quot;1234567890abcdef&quot;;
+        String decryptedMsg = decrypt(encryptMsg, key);
+        System.out.println(&quot;解密信息&quot;);
+        System.out.println(decryptedMsg);
+    &#125;
+ 
+&#125;
+</code></pre>
+]]></content>
+      <categories>
+        <category>加密与解密</category>
+      </categories>
+      <tags>
+        <tag>对称加密算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>对称算法（DES篇）</title>
+    <url>/2021/07/22/%E5%AF%B9%E7%A7%B0%E7%AE%97%E6%B3%95%EF%BC%88DES%E7%AF%87%EF%BC%89/</url>
+    <content><![CDATA[<p><strong>DES</strong> (Data Encryption Standard)算法是世界上最常用的加密算法。在很长时间内，许多人心目中“密码生成”与DES一直是个同义词。尽管最近有个叫Electronic Frontier Foundation的组织造了台价值22万的机器尝试破解DES加密的数据，DES和它的变种“三重数据加密算法”仍将在政府和银行中广泛应用。</p>
+<span id="more"></span>
+
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a><strong>概念</strong></h2><p>DES全称为Data Encryption Standard，即数据加密标准。1997年数据加密标准DES正式公布，其分组长度为64比特，密钥长度为64比特，其中8比特为奇偶校验位，所以实际长度为56比特。</p>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>数据加密标准，速度较快，适用于加密大量数据的场合。</p>
+<h2 id="原理概述"><a href="#原理概述" class="headerlink" title="原理概述"></a>原理概述</h2><p>DES是一个<strong>分组加密算法</strong>，就是将明文分组进行加密，每次按顺序取明文一部分，一个典型的DES以64位为分组，加密解密用算法相同。它的密钥长度为56位，因为每组第8位是用来做奇偶校验，密钥可以是任意56位的数，保密性依赖于密钥。</p>
+<p>利用56+8奇偶校验位（第8,16,24,32,40,48,56,64）=64位的密钥对以64位为单位的块数据进行加解密。</p>
+<h2 id="具体加密步骤"><a href="#具体加密步骤" class="headerlink" title="具体加密步骤"></a>具体加密步骤</h2><p><strong>所需参数：</strong></p>
+<p>key：8个字节共64位的工作密钥</p>
+<p>data：8个字节共64位的需要被加密或被解密的数据</p>
+<p>mode：DES工作方式，加密或者解密</p>
+<h3 id="1、置换IP：（生成16个子密钥，每个密钥长度为48-bit）"><a href="#1、置换IP：（生成16个子密钥，每个密钥长度为48-bit）" class="headerlink" title="1、置换IP：（生成16个子密钥，每个密钥长度为48 bit）"></a><strong>1、置换IP：（生成16个子密钥，每个密钥长度为48 bit）</strong></h3><p>利用<strong>初始置换</strong>IP(Initial Permutation)对明文X进行换位处理，打乱原来的次序，得到一个乱序的64 bit 明文组。使用64位的密钥key将64位的明文输入块变为64位的密文输出块。</p>
+<p>注意：这里的数字表示的是原数据的位置，不是数据</p>
+<p>即将X中的58位数据放在转换后生成的X’表的第1位，X中的第50位放在X’的第2位，X中的42位放在第3位…X中的第7位放在X’的最后一位。</p>
+<p><strong>置换表如下：（纵向看）</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>58</td>
+<td>50</td>
+<td>42</td>
+<td>34</td>
+<td>26</td>
+<td>18</td>
+<td>10</td>
+<td>2</td>
+</tr>
+<tr>
+<td>1</td>
+<td>60</td>
+<td>52</td>
+<td>44</td>
+<td>36</td>
+<td>28</td>
+<td>20</td>
+<td>12</td>
+<td>4</td>
+</tr>
+<tr>
+<td>2</td>
+<td>62</td>
+<td>54</td>
+<td>46</td>
+<td>38</td>
+<td>30</td>
+<td>22</td>
+<td>14</td>
+<td>6</td>
+</tr>
+<tr>
+<td>3</td>
+<td>64</td>
+<td>56</td>
+<td>48</td>
+<td>40</td>
+<td>32</td>
+<td>24</td>
+<td>16</td>
+<td>8</td>
+</tr>
+<tr>
+<td>4</td>
+<td>57</td>
+<td>49</td>
+<td>41</td>
+<td>33</td>
+<td>25</td>
+<td>17</td>
+<td>9</td>
+<td>1</td>
+</tr>
+<tr>
+<td>5</td>
+<td>59</td>
+<td>51</td>
+<td>43</td>
+<td>35</td>
+<td>27</td>
+<td>19</td>
+<td>11</td>
+<td>3</td>
+</tr>
+<tr>
+<td>6</td>
+<td>61</td>
+<td>53</td>
+<td>45</td>
+<td>37</td>
+<td>29</td>
+<td>21</td>
+<td>13</td>
+<td>5</td>
+</tr>
+<tr>
+<td>7</td>
+<td>63</td>
+<td>55</td>
+<td>47</td>
+<td>39</td>
+<td>31</td>
+<td>23</td>
+<td>15</td>
+<td>7</td>
+</tr>
+</tbody></table>
+<p>代码实现（C语言）：</p>
+<pre><code>const unsigned char IP_Table[64] = 
+&#123; 58, 50, 42, 34, 26, 18, 10, 2, 60, 52,44, 
+  36, 28, 20, 12, 4, 62, 54, 46, 38, 30,22, 
+  14, 6, 64, 56, 48, 40, 32, 24, 16, 8,57, 
+  49, 41, 33, 25, 17, 9, 1, 59, 51, 43,35, 
+  27, 19, 11, 3, 61, 53, 45, 37, 29, 21,13, 
+  5, 63, 55, 47, 39, 31, 23, 15, 7 &#125;; 
+int IP_Substitution(const unsigned char* BitPlain, unsigned char* Bit_IP_Table)
+&#123; 
+    int ret = 0; 
+    for (int i = 0; i &lt; 64; i++) &#123; 
+    Bit_IP_Table[i] = BitPlain[IP_Table[i] - 1]; 
+    &#125; 
+  return ret; 
+&#125; 
+</code></pre>
+<h3 id="2、分组（L，R组）"><a href="#2、分组（L，R组）" class="headerlink" title="2、分组（L，R组）"></a><strong>2、分组（L，R组）</strong></h3><p>把输出块分为L0、R0两部分，每部分均为32位。0-3为L组，3-7为R组</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>58</td>
+<td>50</td>
+<td>42</td>
+<td>34</td>
+<td>26</td>
+<td>18</td>
+<td>10</td>
+<td>2</td>
+</tr>
+<tr>
+<td>1</td>
+<td>60</td>
+<td>52</td>
+<td>44</td>
+<td>36</td>
+<td>28</td>
+<td>20</td>
+<td>12</td>
+<td>4</td>
+</tr>
+<tr>
+<td>2</td>
+<td>62</td>
+<td>54</td>
+<td>46</td>
+<td>38</td>
+<td>30</td>
+<td>22</td>
+<td>14</td>
+<td>6</td>
+</tr>
+<tr>
+<td>3</td>
+<td>64</td>
+<td>56</td>
+<td>48</td>
+<td>40</td>
+<td>32</td>
+<td>24</td>
+<td>16</td>
+<td>8</td>
+</tr>
+<tr>
+<td>4</td>
+<td>57</td>
+<td>49</td>
+<td>41</td>
+<td>33</td>
+<td>25</td>
+<td>17</td>
+<td>9</td>
+<td>1</td>
+</tr>
+<tr>
+<td>5</td>
+<td>59</td>
+<td>51</td>
+<td>43</td>
+<td>35</td>
+<td>27</td>
+<td>19</td>
+<td>11</td>
+<td>3</td>
+</tr>
+<tr>
+<td>6</td>
+<td>61</td>
+<td>53</td>
+<td>45</td>
+<td>37</td>
+<td>29</td>
+<td>21</td>
+<td>13</td>
+<td>5</td>
+</tr>
+<tr>
+<td>7</td>
+<td>63</td>
+<td>55</td>
+<td>47</td>
+<td>39</td>
+<td>31</td>
+<td>23</td>
+<td>15</td>
+<td>7</td>
+</tr>
+</tbody></table>
+<p>代码实现（C语言）：</p>
+<pre><code>unsigned char Bit_IP_Table[64]; //初始置换后的明文表 
+unsigned char BitL_Table[17][32]; //L表Bit组 
+unsigned char BitR_Table[17][32]; //R表Bit组 
+
+memcpy(BitL_Table[0], Bit_IP_Table, 32); 
+memcpy(BitR_Table[0], &amp;Bit_IP_Table[32],32); 
+</code></pre>
+<h3 id="3、右分组（R组）由32位扩展为48位"><a href="#3、右分组（R组）由32位扩展为48位" class="headerlink" title="3、右分组（R组）由32位扩展为48位"></a><strong>3、右分组（R组）由32位扩展为48位</strong></h3><p>通过扩展置换变对R组进行扩展，原理和前面的置换表差不多，<strong>就是多了一些重复的映射</strong></p>
+<p>第0列、5列为拓展数据，1-4列为原始数据，</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>32</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+</tr>
+<tr>
+<td>1</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+</tr>
+<tr>
+<td>2</td>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+<td>12</td>
+<td>13</td>
+</tr>
+<tr>
+<td>3</td>
+<td>12</td>
+<td>13</td>
+<td>14</td>
+<td>15</td>
+<td>16</td>
+<td>17</td>
+</tr>
+<tr>
+<td>4</td>
+<td>16</td>
+<td>17</td>
+<td>18</td>
+<td>19</td>
+<td>20</td>
+<td>21</td>
+</tr>
+<tr>
+<td>5</td>
+<td>20</td>
+<td>21</td>
+<td>22</td>
+<td>23</td>
+<td>24</td>
+<td>25</td>
+</tr>
+<tr>
+<td>6</td>
+<td>24</td>
+<td>25</td>
+<td>26</td>
+<td>27</td>
+<td>28</td>
+<td>29</td>
+</tr>
+<tr>
+<td>7</td>
+<td>28</td>
+<td>29</td>
+<td>30</td>
+<td>31</td>
+<td>32</td>
+<td>1</td>
+</tr>
+</tbody></table>
+<p>代码实现（C语言）：</p>
+<pre><code>const unsigned char E_Table[48] = 
+&#123; 32, 1, 2, 3, 4, 5, 4, 5, 6, 7, 8, 9, 8, 9, 
+10, 11, 12, 13, 12, 13, 14, 15, 16, 17, 16, 
+17, 18, 19, 20, 21, 20, 21, 22, 23, 24, 25, 
+24, 25, 26, 27, 28, 29, 28, 29, 30, 31, 32, 1&#125;; 
+int E_Substitution(const unsigned char* BitR_Table, unsigned char* BitE_Table） 
+&#123; 
+    int ret = 0; 
+    for (int i = 0; i &lt; 48; i++) &#123; 
+        BitE_Table[i] = BitR_Table[E_Table[i] - 1]; 
+    &#125; 
+    return ret; 
+&#125; 
+#### 4.扩展的R组和48位密钥进行异或 
+int DES_XOR(const unsigned char* Bit1_Table, const unsigned char* Bit2_Table, unsigned char* Bit_Xor/*异或运算的结果*/, int nBit/*异或运算的位数*/) &#123; 
+    int ret = 0; 
+    for (int i = 0; i &lt; nBit; i++) &#123; 
+        Bit_Xor[i] = Bit1_Table[i] ^ Bit2_Table[i]; 
+    &#125; 
+    return ret; 
+&#125; 
+</code></pre>
+<h3 id="4、将48位异或的结果转换为32位"><a href="#4、将48位异或的结果转换为32位" class="headerlink" title="4、将48位异或的结果转换为32位"></a><strong>4、将48位异或的结果转换为32位</strong></h3><p>详细过程：</p>
+<p>先将48为分成<strong>8组</strong>，每组<strong>6位</strong>，在将6位数字经过变化转换为<strong>4位</strong></p>
+<p>**6-&gt;4操作:**例（一个6位的分组）</p>
+<p>100101</p>
+<p>将该分组的<strong>第一位和最后一位</strong>取出来，以二进制的形式表示，作为<strong>行索引</strong></p>
+<p>将该分组的<strong>第2到5位</strong>取出来，以二进制的形式表示，作为<strong>列索引</strong></p>
+<p>代码实现（C语言）：</p>
+<pre><code>const unsigned char S_Table[8][4][16] = &#123; 
+    //S1盒 
+    14, 4, 13, 1, 2, 15, 11, 8, 3, 10, 6, 12, 5, 9, 0, 7, 
+    0, 15, 7, 4, 14, 2, 13, 1, 10, 6, 12, 11, 9, 5, 3, 8, 
+    4, 1, 14, 8, 13, 6, 2, 11, 15, 12, 9, 7, 3, 10, 5, 0, 
+    15, 12, 8, 2, 4, 9, 1, 7, 5, 11, 3, 14, 10, 0, 6, 13, 
+    //S2盒 
+    15, 1, 8, 14, 6, 11, 3, 4, 9, 7, 2, 13, 12, 0, 5, 10,
+    3, 13, 4, 7, 15, 2, 8, 14, 12, 0, 1, 10, 6, 9, 11, 5, 
+    0, 14, 7, 11, 10, 4, 13, 1, 5, 8, 12, 6, 9, 3, 2, 15, 
+    13, 8, 10, 1, 3, 15, 4, 2, 11, 6, 7, 12, 0, 5, 14, 9, 
+    //S3盒 
+    10, 0, 9, 14, 6, 3, 15, 5, 1, 13, 12, 7, 11, 4, 2, 8, 
+    13, 7, 0, 9, 3, 4, 6, 10, 2, 8, 5, 14, 12, 11, 15, 1, 
+    13, 6, 4, 9, 8, 15, 3, 0, 11, 1, 2, 12, 5, 10, 14, 7, 
+    1, 10, 13, 0, 6, 9, 8, 7, 4, 15, 14, 3, 11, 5, 2, 12, 
+    //S4盒 
+    7, 13, 14, 3, 0, 6, 9, 10, 1, 2, 8, 5, 11, 12, 4, 15, 
+    13, 8, 11, 5, 6, 15, 0, 3, 4, 7, 2, 12, 1, 10, 14, 9, 
+    10, 6, 9, 0, 12, 11, 7, 13, 15, 1, 3, 14, 5, 2, 8, 4,
+     3, 15, 0, 6, 10, 1, 13, 8, 9, 4, 5, 11, 12, 7, 2, 14, 
+     //S5盒 
+     2, 12, 4, 1, 7, 10, 11, 6, 8, 5, 3, 15, 13, 0, 14, 9, 
+     14, 11, 2, 12, 4, 7, 13, 1, 5, 0, 15, 10, 3, 9, 8, 6, 
+     4, 2, 1, 11, 10, 13, 7, 8, 15, 9, 12, 5, 6, 3, 0, 14,
+      11, 8, 12, 7, 1, 14, 2, 13, 6, 15, 0, 9, 10, 4, 5, 3,
+     //S6盒 
+      12, 1, 10, 15, 9, 2, 6, 8, 0, 13, 3, 4, 14, 7, 5, 11, 
+      10, 15, 4, 2, 7, 12, 9, 5, 6, 1, 13, 14, 0, 11, 3, 8, 
+      9, 14, 15, 5, 2, 8, 12, 3, 7, 0, 4, 10, 1, 13, 11, 6, 
+      4, 3, 2, 12, 9, 5, 15, 10, 11, 14, 1, 7, 6, 0, 8, 13, 
+      //S7盒 
+      4, 11, 2, 14, 15, 0, 8, 13, 3, 12, 9, 7, 5, 10, 6, 1, 
+      13, 0, 11, 7, 4, 9, 1, 10, 14, 3, 5, 12, 2, 15, 8, 6,
+      1, 4, 11, 13, 12, 3, 7, 14, 10, 15, 6, 8, 0, 5, 9, 2,
+      6, 11, 13, 8, 1, 4, 10, 7, 9, 5, 0, 15, 14, 2, 3, 12,
+      //S8盒 
+      13, 2, 8, 4, 6, 15, 11, 1, 10, 9, 3, 14, 5, 0, 12, 7, 
+      1, 15, 13, 8, 10, 3, 7, 4, 12, 5, 6, 11, 0, 14, 9, 2, 
+      7, 11, 4, 1, 9, 12, 14, 2, 0, 6, 10, 13, 15, 3, 5, 8, 
+      2, 1, 14, 7, 4, 10, 8, 13, 15, 12, 9, 0, 3, 5, 6, 11 &#125;; 
+unsigned char Bit_Xor[8][6]; //存放异或运算的结果 
+unsigned char Bit_Integer[8][4]; //将整数变成Bit位 
+unsigned char Row; //S盒的行号 unsigned char Col; 
+//S盒的列号 
+unsigned char Integer; 
+//从S盒中取得的32位整数 
+for (int i = 0; i &lt; 8; i++) &#123; 
+//计算S盒的行号和列号 
+    Row = (Bit_Xor[i][0] &lt;&lt; 1) + Bit_Xor[i][5];
+     Col = (Bit_Xor[i][1] &lt;&lt; 3) + (Bit_Xor[i][2] &lt;&lt; 2) + (Bit_Xor[i][3] &lt;&lt; 1) + Bit_Xor[i][4]; 
+ //从S盒中取得整数 
+ Integer = S_Table[i][Row][Col]; 
+ //将取得的4Bit数转换成Bit组 
+for (int j = 0; j &lt; 4; j++) &#123; 
+     Bit_Integer[i][j] = Integer &gt;&gt; (3 - j) &amp; 1; 
+ &#125; 
+ &#125; 
+</code></pre>
+<h3 id="5、p置换"><a href="#5、p置换" class="headerlink" title="5、p置换"></a><strong>5、p置换</strong></h3><p>同最开始的初始置换，只是对数据进行了打乱操作</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>16</td>
+<td>7</td>
+<td>20</td>
+<td>21</td>
+<td>29</td>
+<td>12</td>
+<td>28</td>
+<td>17</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>15</td>
+<td>23</td>
+<td>26</td>
+<td>5</td>
+<td>18</td>
+<td>31</td>
+<td>10</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>8</td>
+<td>24</td>
+<td>14</td>
+<td>32</td>
+<td>27</td>
+<td>3</td>
+<td>9</td>
+</tr>
+<tr>
+<td>3</td>
+<td>19</td>
+<td>13</td>
+<td>30</td>
+<td>6</td>
+<td>22</td>
+<td>11</td>
+<td>4</td>
+<td>25</td>
+</tr>
+</tbody></table>
+<p>代码实现（C语言）：</p>
+<pre><code>const unsigned char P_Table[32] =
+&#123;
+    16, 7,  20, 21, 29, 12, 28, 17,
+    1,  15, 23, 26, 5,  18, 31, 10,
+    2,  8,  24, 14, 32, 27, 3,  9,
+    19, 13, 30, 6,  22, 11, 4,  25
+&#125;;
+int P_Substitution(const unsigned char *Bit_Integer, unsigned char* BitP_Table)
+&#123;
+    int ret = 0;
+    for (int i = 0; i &lt; 32; i++)
+    &#123;
+        BitP_Table[i] = Bit_Integer[P_Table[i] - 1];
+    &#125;
+    return ret;
+&#125;
+</code></pre>
+<h3 id="6、将返回的结果和L组进行异或操作，作为新的R组，并将旧的R组赋值给新的L组"><a href="#6、将返回的结果和L组进行异或操作，作为新的R组，并将旧的R组赋值给新的L组" class="headerlink" title="6、将返回的结果和L组进行异或操作，作为新的R组，并将旧的R组赋值给新的L组"></a>6、<strong>将返回的结果和L组进行异或操作，作为新的R组，并将旧的R组赋值给新的L组</strong></h3><p>代码实现（C语言）：</p>
+<pre><code>R[i+1] = L[i] ^ F(R[i], K[i]);
+L[i+1] = R[i];
+</code></pre>
+<h3 id="7、按照3、4、5、6步重复16次"><a href="#7、按照3、4、5、6步重复16次" class="headerlink" title="7、按照3、4、5、6步重复16次"></a><strong>7、按照3、4、5、6步重复16次</strong></h3><p>代码实现（C语言）：</p>
+<pre><code>for (int i = 0; i &lt; 16; i++)
+&#123;
+    //将R组和子密钥组进行F函数运算
+    DES_F_Function(BitR_Table[i], BitSubKey[i], Bit_F_Out);
+     //L组盒F函数的输出结果进行异或运算
+    DES_XOR(BitL_Table[i], Bit_F_Out, BitR_Table[i + 1], 32);
+     //Li+1 = Ri
+    memcpy(BitL_Table[i + 1], BitR_Table[i], 32);
+&#125; 
+//L[16]和R[16]进行交叉合并
+memcpy(BitRL_Table,         BitR_Table[16], 32);
+memcpy(&amp;BitRL_Table[32],    BitL_Table[16], 32);
+</code></pre>
+<h3 id="8、逆初始值置换"><a href="#8、逆初始值置换" class="headerlink" title="8、逆初始值置换"></a>8、<strong>逆初始值置换</strong></h3><p>对上述16步操作后的结果进行<strong>逆初始值置换</strong>操作,也是类似于初始置换表</p>
+<p>代码实现（C语言）：</p>
+<pre><code>const unsigned char reIP_Table[64] =
+&#123;
+    40, 8, 48, 16, 56, 24, 64, 32,
+    39, 7, 47, 15, 55, 23, 63, 31,
+    38, 6, 46, 14, 54, 22, 62, 30,
+    37, 5, 45, 13, 53, 21, 61, 29,
+    36, 4, 44, 12, 52, 20, 60, 28,
+    35, 3, 43, 11, 51, 19, 59, 27,
+    34, 2, 42, 10, 50, 18, 58, 26,
+    33, 1, 41,  9, 49, 17, 57, 25
+&#125;;
+int reIP_Substitution(const unsigned char *BitRL_Table, unsigned char *Bit_reIP_Table)
+&#123;
+    int ret = 0;
+ 
+    for (int i = 0; i &lt; 64; i++)
+    &#123;
+        Bit_reIP_Table[i] = BitRL_Table[reIP_Table[i] - 1];
+    &#125;
+    return ret;
+&#125;
+</code></pre>
+<h3 id="9-密钥的扩展和加密"><a href="#9-密钥的扩展和加密" class="headerlink" title="9.密钥的扩展和加密"></a><strong>9.密钥的扩展和加密</strong></h3><h4 id="PC-1置换："><a href="#PC-1置换：" class="headerlink" title="PC-1置换："></a><strong>PC-1置换</strong>：</h4><p>将64位密钥中的<strong>8、16、24、32、40、48、56、64</strong>位剔除作为校验位。</p>
+<p>其余的位进行置换表操作</p>
+<pre><code>const unsigned char PC_1_Table[56] =
+    &#123;57, 49, 41, 33, 25, 17, 9,  1,
+    58, 50, 42, 34, 26, 18, 10, 2,
+    59, 51, 43, 35, 27, 19, 11, 3,
+    60, 52, 44, 36, 63, 55, 47, 39,
+    31, 23, 15, 7,  62, 54, 46, 38,
+    30, 22, 14, 6,  61, 53, 45, 37,
+    29, 21, 13, 5,  28, 20, 12, 4
+&#125;;
+ 
+int PC_1_Substitution(const unsigned char *BitKey, unsigned char *BitKey_PC_1)
+&#123;
+    int ret = 0;
+ 
+    for (int i = 0; i &lt; 56; i++)
+    &#123;
+        BitKey_PC_1[i] = BitKey[PC_1_Table[i] - 1];
+    &#125;
+ 
+    return ret;
+&#125;
+</code></pre>
+<p>然后对56位数据进行分组，分成C、D组，采用上下分组，再进行16次变化，每次变化后会进行（PC-2置换）生成一次密钥用作<strong>每一轮的加密</strong></p>
+<p>每轮变化都进行<strong>整体左位移</strong>操作（并把前面超出范围的两位数据移动到数据的最后面），根据<strong>具体的轮数</strong>位移的位数也不同，其中<strong>1、2、9、16</strong>轮中，位移<strong>1位</strong>，其余轮位移<strong>2位</strong></p>
+<pre><code>const unsigned char Bit_Round[16] =
+&#123;
+    1, 1, 2, 2,
+    2, 2, 2, 2,
+    1, 2, 2, 2,
+    2, 2, 2, 1
+&#125;;
+int BitRound_L(const unsigned char* SrcBitGroup, unsigned char* DesBitGroup, int nBit)
+&#123;
+    int ret = 0;
+ 
+    memcpy(DesBitGroup,             &amp;SrcBitGroup[nBit], 28 - nBit);
+    memcpy(&amp;DesBitGroup[28 - nBit], SrcBitGroup,        nBit);
+    return ret;
+&#125;
+//将C、D两组进行轮转移位操作    左移
+BitRound_L(BitC_Table[i], BitC_Table[i + 1], Bit_Round[i]);
+BitRound_L(BitD_Table[i], BitD_Table[i + 1], Bit_Round[i]);
+密钥生成算法PC-2置换
+</code></pre>
+<h4 id="PC-2置换："><a href="#PC-2置换：" class="headerlink" title="PC-2置换："></a><strong>PC-2置换</strong>：</h4><pre><code>const unsigned char PC_2_Table[48]= 
+&#123; 14, 17, 11, 24, 1, 5, 3, 28, 15, 6, 21, 10, 23, 
+  19, 12, 4, 26, 8, 16, 7, 27, 20, 13, 2, 41, 52, 
+  31, 37, 47, 55, 30, 40, 51, 45, 33, 48, 44, 49, 
+  39, 56, 34, 53, 46, 42, 50, 36, 29, 32&#125;; 
+int PC_2_Substitution(const unsigned char *BitKey, unsigned char *SubKey) 
+&#123;                    
+    int ret = 0; 
+    for (int i = 0; i &lt; 48; i++)&#123; 
+    SubKey[i] = BitKey[PC_2_Table[i] - 1]; 
+    &#125; 
+    return ret; 
+&#125; 
+</code></pre>
+<h2 id="Java代码实现："><a href="#Java代码实现：" class="headerlink" title="Java代码实现："></a><strong>Java代码实现：</strong></h2><p>根据模式的不同有很多实现方式，现展示一种方式,主要抓住特征private static final String ALGORITHM = “DES”;来对加密方式进行判断，标准的DES算法以字符串输出时很容易产生<strong>乱码</strong>，因此输出时需要将其转化为<strong>hex</strong>或者<strong>base64编码</strong>的形式</p>
+<pre><code>package abc; 
+import javax.crypto.Cipher; 
+import javax.crypto.SecretKey; 
+import javax.crypto.SecretKeyFactory; 
+import javax.crypto.spec.DESKeySpec; 
+import java.util.Base64; 
+public class DES &#123; 
+public static void main(String[] args) throws Exception &#123; 
+    DESKeySpec desKey=new DESKeySpec(&quot;12345678&quot;.getBytes()); 
+    SecretKeyFactory key=SecretKeyFactory.getInstance(&quot;DES&quot;); 
+    SecretKey secretKey=key.generateSecret(desKey); 
+    Cipher cipher=Cipher.getInstance(&quot;DES/ECB/PKCS5Padding&quot;); 
+    cipher.init(1, secretKey); 
+    byte[] res=cipher.doFinal(&quot;a12345678&quot;.getBytes()); 
+    System.out.println(Base64.getEncoder().encodeToString(res)); 
+    &#125; 
+&#125; 
+</code></pre>
+]]></content>
+      <categories>
+        <category>加密与解密</category>
+      </categories>
+      <tags>
+        <tag>对称加密算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>非对称算法（RSA篇）</title>
+    <url>/2021/08/05/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E7%AE%97%E6%B3%95%EF%BC%88RSA%E7%AF%87%EF%BC%89/</url>
+    <content><![CDATA[<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>RSA加密算法是一种非对称加密算法，在RSA算法中，加密密钥（即公开密钥）PK是公开信息，而解密密钥（即秘密密钥）SK是需要保密的。加密算法E和解密算法D也都是公开的。对极大整数做因数分解的难度决定了RSA算法的可靠性。</p>
+<span id="more"></span>
+<h3 id="加密原理"><a href="#加密原理" class="headerlink" title="加密原理"></a>加密原理</h3><h4 id="一、生成公钥和私钥"><a href="#一、生成公钥和私钥" class="headerlink" title="一、生成公钥和私钥"></a>一、生成公钥和私钥</h4><ol>
+<li><p>随机生成两个素数P、Q。</p>
+</li>
+<li><p>将P、Q两个素数相乘得到一个数N。</p>
+</li>
+<li><p>计算N的欧拉函数M，M=(P-1)*(Q-1)。</p>
+</li>
+<li><p>选择一个整数E使其与M互质。</p>
+</li>
+<li><p>给定一个整数D，使得(E*D)%M=1。</p>
+</li>
+<li><p>得到N、E、D三个数，其中（N、E）作为公钥，（N、D）作为私钥（公钥和私钥可以互换）。</p>
+<h4 id="二、生成密文"><a href="#二、生成密文" class="headerlink" title="二、生成密文"></a>二、生成密文</h4><p>使用公钥（N、E）对data进行加密。<br>加密过程：</p>
+<pre><code class="math">data^E mod N = [data]
+</code></pre>
+<h4 id="三、密文解密"><a href="#三、密文解密" class="headerlink" title="三、密文解密"></a>三、密文解密</h4><p>使用私钥（N、D）对密文进行解密。<br>解密过程：</p>
+<pre><code class="math">[data]^D mod N = data
+</code></pre>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><h4 id="java"><a href="#java" class="headerlink" title="java"></a>java</h4><pre><code>public class RSA &#123;
+ private int N;  // 和公钥E一起分发出去
+ private int E; // E是公钥，随机选取（必须和T互质）
+ private int D; // D是密钥（D和E可以互换）
+ public RSA() &#123;
+     createKey();
+ &#125;
+ // 产生密钥
+ private void createKey() &#123;
+     // 产生两个随机的素数
+     int p=61,q=53;
+     // 计算N和T
+     N = p*q;
+     int t = (p-1)*(q-1);
+     // 选择E（和T互质就行）
+     E = 17;
+     // 计算D
+     int[] r = new int[2];
+     Gcd.extendGcd(E, t, r); // 调用扩充欧几里得算法计算D
+     D = r[0];
+     // 调整d（d为正数）
+     while(D &lt; 0) D +=t;
+ &#125;
+
+ /**
+  * 利用公钥对密文m加密
+  * @param m 必须是整数，且m必须小于N
+  * @return c=pow(m,E)%N
+  */
+ public int encrypt(int m) &#123; // 注意，这里很容易溢出（虽然此算法已经极度简化了）
+     BigInteger bm = BigInteger.valueOf(m);
+     return bm.pow(E).mod(BigInteger.valueOf(N)).intValue();
+ &#125;
+
+ /**
+  * 利用密钥对明文c解密
+  * @param c
+  * @return m1=pow(c, D)%N
+  */
+ public int decrypt(int c) &#123; // 同样考虑溢出情况
+     BigInteger bc = BigInteger.valueOf(c);
+     return bc.pow(D).mod(BigInteger.valueOf(N)).intValue();
+ &#125;
+ public int getPublicKey() &#123;
+     return E;
+ &#125;
+ public void setPublicKey(int E) &#123;
+     this.E = E;
+ &#125;
+ public int getN() &#123;
+     return N;
+ &#125;
+ public void setN(int N) &#123;
+     this.N = N;
+ &#125;
+ public static void main(String[] args) &#123;
+     RSA rsa = new RSA();
+     System.out.println(&quot;公钥：E=&quot;+rsa.getPublicKey()+&quot;,N=&quot;+rsa.getN()); // 打印公钥
+     int m = 65; // 明文
+     System.out.println(&quot;密文：&quot;+m);
+     int c = rsa.encrypt(m); // 对明文m加密，得到密文c
+     System.out.println(&quot;明文：&quot;+c);
+     int m1 = rsa.decrypt(c); // 对密文c解密，得到明文m1
+     System.out.println(&quot;解密出来的密文：&quot;+m1);
+ &#125;
+&#125;
+</code></pre>
+<h4 id="python"><a href="#python" class="headerlink" title="python"></a>python</h4><p>```python<br>def isPrime(number):<br> import math<br> i = 2<br> sqrtnum = (int)(math.sqrt(number))<br> for i in range(2, sqrtnum + 1):</p>
+<pre><code> if number % i == 0:
+     return False
+ i = i + 1
+</code></pre>
+<p> return True<br>def is_ET_Prime(ee, tt):<br> while tt != 0:</p>
+<pre><code> a = ee
+ ee = tt
+ tt = a % tt
+</code></pre>
+<p> if ee == 1:</p>
+<pre><code> return True
+</code></pre>
+<p> else:</p>
+<pre><code> return False
+</code></pre>
+<p>def get_publickey(k, t):<br> d = 0<br> while ((d * k) % t != 1):</p>
+<pre><code> d += 1
+</code></pre>
+<p> return d<br>def encryption(plain, d, n):<br> re = (plain ** d) % n</p>
+<p> return re</p>
+</li>
+</ol>
+<p>if <strong>name</strong> == “<strong>main</strong>“:<br>    print<br>    “~” * 70<br>    Flag = False<br>    while True:<br>        p = int(input(“please input a prime p:”))<br>        q = int(input(“please input a prime q:”))</p>
+<pre><code>    if (isPrime(p) and isPrime(q)):
+        break
+    else:
+        print
+        &quot;p or q is not prime!&quot;
+        continue
+print
+&quot;p=&quot;, p, &quot;q=&quot;, q
+n = q * p
+t = (q - 1) * (p - 1)
+print(&quot;n=&quot;, n, &quot;t=&quot;, t)
+print(&quot;~&quot; * 70)
+Flag == False
+while Flag == False:
+    e = int(input(&quot;please input a private key:&quot;))
+    Flag = is_ET_Prime(e, t)
+    if Flag == False:
+        print(&quot;e is not prime with the t!&quot;)
+print(&quot;the private key e=&quot;, e)
+d = get_publickey(e, t)
+print(&quot;the public key d=&quot;, d)
+plain = int(ord(input(&quot;please input the plain you want to entrypted:&quot;)))
+encry = encryption(plain, d, n)
+print(&quot;plain&quot;, plain, &quot;is encrypted as&quot;, encry)
+#print(encry)
+plain1 = encryption(encry, e, n)
+print(&quot;encrypt&quot;, encry, &quot;is decrypted as&quot;, plain1)
+</code></pre>
+<pre><code>
+</code></pre>
+]]></content>
+      <categories>
+        <category>加密与解密</category>
+      </categories>
+      <tags>
+        <tag>非对称加密算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>非对称加密算法</title>
+    <url>/2021/08/05/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<h3 id="概括"><a href="#概括" class="headerlink" title="概括"></a>概括</h3><p>非对称加密算法需要<strong>两个密钥</strong>：公开密钥（publickey:简称公钥）和私有密钥（privatekey:简称私钥）。公钥与私钥是一对，如果用公钥对数据进行加密，只有用对应的私钥才能解密。因为加密和解密使用<span id="more"></span>的是两个不同的密钥，所以这种算法叫作非对称加密算法。 </p>
+<h3 id="基本过程"><a href="#基本过程" class="headerlink" title="基本过程"></a>基本过程</h3><p>甲方生成一对密钥并将公钥公开，需要向甲方发送信息的其他角色(乙方)使用该密钥(甲方的公钥)对机密信息进行加密后再发送给甲方；甲方再用自己私钥对加密后的信息进行解密。甲方想要回复乙方时正好相反，使用乙方的公钥对数据进行加密，同理，乙方使用自己的私钥来进行解密。</p>
+<pre><code>graph LR
+A(L61q4_Cheng)--&gt;B(公钥A)
+B--&gt;C(密文)
+C--&gt;D(私钥B)
+D--&gt;E(L61q4_Cheng)
+</code></pre>
+<p>注：私钥B中包含公钥A</p>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><p>算法强度复杂、安全性依赖于算法与密钥但是由于其算法复杂，而使得加密解密速度没有对称加密解密的速度快。对称密码体制中只有一种密钥，并且是非公开的，如果要解密就得让对方知道密钥。所以保证其安全性就是保证密钥的安全，而非对称密钥体制有两种密钥，其中一个是公开的，这样就可以不需要像对称密码那样传输对方的密钥了。</p>
+<p>1、使用公钥加密，使用私钥解密。</p>
+<p>2、公钥是公开的，私钥是保密的（私钥包含公钥信息）。</p>
+<p>3、密钥不能随便写，由特定函数生成。</p>
+<p>4、加密处理安全，但性能差，单次加密长度有限。</p>
+<blockquote>
+<p>pkcslpadding 明文最大字节数为密钥字节数-11，明文与密钥等长。<br>NoPadding 明文最大字节数为密钥字节数，明文与密钥等长。</p>
+</blockquote>
+<p>5、可用于数据交换，也可用于数据校验。</p>
+<p>注：私钥格式有两种，Java中密钥格式为PKCS#8，其他为PKCS#1。</p>
+<p>使用PKCS#8，私钥开头为</p>
+<blockquote>
+<p>—-BEGIN  PRIVATE KEY—</p>
+</blockquote>
+<p>使用PKCS#1，私钥格式为</p>
+<blockquote>
+<p>—-BEGIN RSA PRIVATE KEY—</p>
+</blockquote>
+<h3 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h3><p>非对称加密体系不要求通信双方事先传递密钥或有任何约定就能完成保密通信，并且密钥管理方便，可实现防止假冒和抵赖，因此，更适合网络通信中的保密通信要求。</p>
+<h3 id="主要算法"><a href="#主要算法" class="headerlink" title="主要算法"></a>主要算法</h3><p>RSA、Elgamal、背包算法、Rabin、D-H、ECC (椭圆曲线加密算法)。使用最广泛的是 RSA 算法，Elgamal 是另一种常用的非对称加密算法。</p>
+<h3 id="两种加密算法结合的套路"><a href="#两种加密算法结合的套路" class="headerlink" title="两种加密算法结合的套路"></a>两种加密算法结合的套路</h3><p>1、随机生成密钥，用作对称加密算法（AES/DES/3DES）的加密数据。</p>
+<p>2、RSA对密钥进行加密，提交加密后的密钥和加密后的数据给服务器。</p>
+]]></content>
+      <categories>
+        <category>加密与解密</category>
+      </categories>
+      <tags>
+        <tag>非对称加密算法</tag>
+      </tags>
+  </entry>
+</search>

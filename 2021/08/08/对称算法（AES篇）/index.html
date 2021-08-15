@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 <meta name="description" content="概述高级加密标准（英语：Advanced Encryption Standard，缩写：AES），在密码学中又称Rijndael加密法，是美国联邦政府采用的一种区块加密标准。这个标准用来替代原先的DES，已经被多方分析且广为全世界所使用。经过五年的甄选流程，高级加密标准由美国国家标准">
 <meta property="og:type" content="article">
 <meta property="og:title" content="对称算法（AES篇）">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="概述高级加密标准（英语：Advanced Encryption Standard，缩写：AES），在密码学中又称Rijndael加密法，是美国联邦政府采用的一种区块加密标准。这个标准用来替代原先的DES，已经被多方分析且广为全世界所使用。经过五年的甄选流程，高级加密标准由美国国家标准">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-08-08T08:25:55.721Z">
-<meta property="article:modified_time" content="2021-08-08T08:45:39.882Z">
+<meta property="article:modified_time" content="2021-08-15T08:25:02.965Z">
 <meta property="article:author" content="L61q4_Cheng">
 <meta property="article:tag" content="对称加密算法">
 <meta name="twitter:card" content="summary">
@@ -78,6 +78,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -91,11 +92,37 @@
         <li class="menu-item menu-item-标签"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a></li>
         <li class="menu-item menu-item-关于我"><a href="/about/" rel="section"><i class="user fa-fw"></i>关于我</a></li>
         <li class="menu-item menu-item-分类"><a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
         
@@ -137,18 +164,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -305,7 +332,7 @@ D--&gt;E(L61q4_Cheng)
 <h3 id="2、字节代换层"><a href="#2、字节代换层" class="headerlink" title="2、字节代换层"></a>2、字节代换层</h3><p>字节代换层的主要功能是让数据通过S盒完成从一个字节到另一个字节的映射，S盒的计算方式和密钥中S盒计算方式相同。S盒是一个拥有256个字节元素的数组，逆S盒与S盒对应用于AES算法的解密，字节代换层将明文的每一个字节作为数组下标，对进行相关索引操作</p>
 <p>若将S盒作为一维数组处理，则只需要将每个字节作为索引下标进行索引</p>
 <p>若将S盒作为二维数组，则需要将每个字节的高4位作为第一个下标，第四位作为第二个下标来进行索引</p>
-<p>S盒形成过程：S盒是通过将输入的数据进行乘法逆元计算、然后将计算结果进行仿射映射得到的。<br>行/列| 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | A | B | C | D |E | F<br>—|—|—|—|—|—|—|—|—|—|—|—|—|—|—|—<br>0|0x63|    0x7c|    0x77|    0x7b|    0xf2|    0x6f|    0xc5|    0x30|    0x01|    0x67|    0x2b|    0xfe|    0xd7|    0xab|    0x76<br>1|0xca|    0x82|    0xc9|    0x7d|    0xfa|    0x59|    0x47|    0xf0|    0xad    |0xd4|    0xa2|    0xaf|    0x9c|    0xa4|    0x72|    0xc0|<br>2|0xb7| 0xfd|   0x93|   0x26|   0x36|0x3f|0xf7|0xcc|0x34|0xa5|0xe5|0xf1|0x71|0xd8|0x31|0x15<br>3|0x04|0xc7|0x23    |0xc3    |0x18    |0x96|0x05|0x9a|0x07    |0x12|0x80|0xe2    |0xeb    |0x27    |0xb2|0x75<br>4|0x09|    0x83|    0x2c|    0x1a|    0x1b|    0x6e|    0x5a|    0xa0|    0x52|    0x3b|    0xd6|    0xb3|    0x29|    0xe3|    0x2f|    0x84|<br>5|0x53|    0xd1|    0x00|    0xed|    0x20|    0xfc|    0xb1|    0x5b|    0x6a|    0xcb|    0xbe|    0x39|    0x4a|    0x4c|    0x58|    0xcf<br>6|0xd0|    0xef|    0xaa|    0xfb|    0x43|    0x4d|    0x33|    0x85|    0x45|    0xf9|    0x02|    0x7f|    0x50|    0x3c|    0x9f|    0xa8<br>7|0x51|    0xa3|    0x40|    0x8f|    0x92|    0x9d|    0x38|    0xf5|    0xbc|    0xb6|    0xda|    0x21|    0x10|    0xff|    0xf3|    0xd2|<br>8|0xcd|    0x0c|    0x13|    0xec|    0x5f|    0x97|    0x44|    0x17|    0xc4|    0xa7|    0x7e|    0x3d|    0x64|    0x5d|    0x19|    0x73|<br>9|0x60|    0x81|    0x4f|    0xdc|    0x22|    0x2a|    0x90|    0x88|    0x46|    0xee|    0xb8|    0x14|    0xde|    0x5e|    0x0b|    0xdb|<br>A|0xe0|    0x32|    0x3a|    0x0a|    0x49|    0x06|    0x24|    0x5c|    0xc2|    0xd3|    0xac|    0x62|    0x91|    0x95|    0xe4|    0x79|<br>B|0xe7|    0xc8|    0x37|    0x6d|    0x8d|    0xd5|    0x4e|    0xa9|    0x6c|    0x56|    0xf4|    0xea|    0x65|    0x7a|    0xae|    0x08|<br>c|0xba|    0x78|    0x25|    0x2e|    0x1c|    0xa6|    0xb4|    0xc6|    0xe8|    0xdd|    0x74|    0x1f|    0x4b|    0xbd|    0x8b|    0x8a|<br>D|0x70|    0x3e|    0xb5|    0x66|    0x48|    0x03|    0xf6|    0x0e|    0x61|    0x35|    0x57|    0xb9|    0x86|    0xc1|    0x1d|    0x9e|<br>E|0xe1|    0xf8|    0x98|    0x11|    0x69|    0xd9|    0x8e|    0x94|    0x9b|    0x1e|    0x87|    0xe9|    0xce|    0x55|    0x28|    0xdf|<br>F|0x8c|    0xa1|    0x89|    0x0d|    0xbf|    0xe6|    0x42|    0x68|    0x41|    0x99|    0x2d|    0x0f|    0xb0|    0x54|    0xbb|    0x16|</p>
+<p>S盒形成过程：S盒是通过将输入的数据进行乘法逆元计算、然后将计算结果进行仿射映射得到的。</p>
 <p>状态矩阵中的元素按照下面的方式映射为一个新的字节：把该字节的高4位作为行值，低4位作为列值，取出S盒或者逆S盒中对应的行的元素作为输出。例如，加密时，输出的字节S1为0x12,则查S盒的第0x01行和0x02列，得到值0xc9,然后替换S1原有的0x12为0xc9。</p>
 <p>代码如下（C语言）：</p>
 <pre><code>//S盒
@@ -625,6 +652,9 @@ public class Aes2 &#123;
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2021/08/15/%E5%88%9D%E8%AF%86Xposed%E6%A1%86%E6%9E%B6/" rel="next" title="初识Xposed框架">
+                  初识Xposed框架 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
@@ -681,6 +711,7 @@ public class Aes2 &#123;
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
+<script src="/js/third-party/search/local-search.js"></script>
 
 
 
