@@ -1763,59 +1763,72 @@ public static void main(String[] args) throws Exception &#123;
  &#125;
 &#125;
 </code></pre>
-<h4 id="python"><a href="#python" class="headerlink" title="python"></a>python</h4><p>```python<br>def isPrime(number):<br> import math<br> i = 2<br> sqrtnum = (int)(math.sqrt(number))<br> for i in range(2, sqrtnum + 1):</p>
-<pre><code> if number % i == 0:
-     return False
- i = i + 1
-</code></pre>
-<p> return True<br>def is_ET_Prime(ee, tt):<br> while tt != 0:</p>
-<pre><code> a = ee
- ee = tt
- tt = a % tt
-</code></pre>
-<p> if ee == 1:</p>
-<pre><code> return True
-</code></pre>
-<p> else:</p>
-<pre><code> return False
-</code></pre>
-<p>def get_publickey(k, t):<br> d = 0<br> while ((d * k) % t != 1):</p>
-<pre><code> d += 1
-</code></pre>
-<p> return d<br>def encryption(plain, d, n):<br> re = (plain ** d) % n</p>
-<p> return re</p>
-</li>
+<h4 id="代码实现（python）"><a href="#代码实现（python）" class="headerlink" title="代码实现（python）"></a>代码实现（python）</h4></li>
 </ol>
-<p>if <strong>name</strong> == “<strong>main</strong>“:<br>    print<br>    “~” * 70<br>    Flag = False<br>    while True:<br>        p = int(input(“please input a prime p:”))<br>        q = int(input(“please input a prime q:”))</p>
-<pre><code>    if (isPrime(p) and isPrime(q)):
-        break
+<pre><code class="python">def isPrime(number):
+    import math
+    i = 2
+    sqrtnum = (int)(math.sqrt(number))
+    for i in range(2, sqrtnum + 1):
+        if number % i == 0:
+            return False
+        i = i + 1
+    return True
+
+def is_ET_Prime(ee, tt):
+    while tt != 0:
+        a = ee
+        ee = tt
+        tt = a % tt
+    if ee == 1:
+        return True
     else:
-        print
-        &quot;p or q is not prime!&quot;
-        continue
-print
-&quot;p=&quot;, p, &quot;q=&quot;, q
-n = q * p
-t = (q - 1) * (p - 1)
-print(&quot;n=&quot;, n, &quot;t=&quot;, t)
-print(&quot;~&quot; * 70)
-Flag == False
-while Flag == False:
-    e = int(input(&quot;please input a private key:&quot;))
-    Flag = is_ET_Prime(e, t)
-    if Flag == False:
-        print(&quot;e is not prime with the t!&quot;)
-print(&quot;the private key e=&quot;, e)
-d = get_publickey(e, t)
-print(&quot;the public key d=&quot;, d)
-plain = int(ord(input(&quot;please input the plain you want to entrypted:&quot;)))
-encry = encryption(plain, d, n)
-print(&quot;plain&quot;, plain, &quot;is encrypted as&quot;, encry)
-#print(encry)
-plain1 = encryption(encry, e, n)
-print(&quot;encrypt&quot;, encry, &quot;is decrypted as&quot;, plain1)
-</code></pre>
-<pre><code>
+        return False
+def get_publickey(k, t):
+    d = 0
+    while ((d * k) % t != 1):
+        d += 1
+    return d
+def encryption(plain, d, n):
+    re = (plain ** d) % n
+
+    return re
+
+if __name__ == &quot;__main__&quot;:
+    print
+    &quot;~&quot; * 70
+    Flag = False
+    while True:
+        p = int(input(&quot;please input a prime p:&quot;))
+        q = int(input(&quot;please input a prime q:&quot;))
+
+        if (isPrime(p) and isPrime(q)):
+            break
+        else:
+            print
+            &quot;p or q is not prime!&quot;
+            continue
+    print
+    &quot;p=&quot;, p, &quot;q=&quot;, q
+    n = q * p
+    t = (q - 1) * (p - 1)
+    print(&quot;n=&quot;, n, &quot;t=&quot;, t)
+    print(&quot;~&quot; * 70)
+    Flag == False
+    while Flag == False:
+        e = int(input(&quot;please input a private key:&quot;))
+        Flag = is_ET_Prime(e, t)
+        if Flag == False:
+            print(&quot;e is not prime with the t!&quot;)
+    print(&quot;the private key e=&quot;, e)
+    d = get_publickey(e, t)
+    print(&quot;the public key d=&quot;, d)
+    plain = int(ord(input(&quot;please input the plain you want to entrypted:&quot;)))
+    encry = encryption(plain, d, n)
+    print(&quot;plain&quot;, plain, &quot;is encrypted as&quot;, encry)
+    #print(encry)
+    plain1 = encryption(encry, e, n)
+    print(&quot;encrypt&quot;, encry, &quot;is decrypted as&quot;, plain1)
 </code></pre>
 ]]></content>
       <categories>
