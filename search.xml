@@ -1881,4 +1881,39 @@ D--&gt;E(L61q4_Cheng)
         <tag>非对称加密算法</tag>
       </tags>
   </entry>
+  <entry>
+    <title>解决安卓模拟器安装Xposed框架问题Could not load available ZIP files.Pull down to try again</title>
+    <url>/2021/08/15/%E8%A7%A3%E5%86%B3%E5%AE%89%E5%8D%93%E6%A8%A1%E6%8B%9F%E5%99%A8%E5%AE%89%E8%A3%85Xposed%E6%A1%86%E6%9E%B6%E9%97%AE%E9%A2%98Could%20not%20load%20available%20ZIP%20files.Pull%20down%20to%20try%20again/</url>
+    <content><![CDATA[<p>将Xposed Installer安装在模拟器上显示如下界面：</p>
+<span id="more"></span>
+<p><img src="https://i.loli.net/2021/08/16/58Fv1nTKyrAl3mI.png" alt="QQ截图20210815172904.png"></p>
+<h3 id="具体步骤："><a href="#具体步骤：" class="headerlink" title="具体步骤："></a>具体步骤：</h3><h4 id="1、下载Xposed"><a href="#1、下载Xposed" class="headerlink" title="1、下载Xposed"></a>1、下载Xposed</h4><p>下载自己安卓版本对应的SDK，下载链接 <a href="https://dl-xda.xposed.info/framework/">https://dl-xda.xposed.info/framework/</a></p>
+<p>（注：对应的SDK版本参考：<a href="https://l61q4cheng.github.io/2021/08/15/Android%E5%90%84%E7%89%88%E6%9C%AC%E5%AF%B9%E5%BA%94%E7%9A%84SDK%E7%89%88%E6%9C%AC/#more%EF%BC%89">https://l61q4cheng.github.io/2021/08/15/Android%E5%90%84%E7%89%88%E6%9C%AC%E5%AF%B9%E5%BA%94%E7%9A%84SDK%E7%89%88%E6%9C%AC/#more）</a></p>
+<p>注：sdk版本下载错误会影响安装结果，笔者这里下载SDK22，该模拟器为x86，因此下载x86版本。</p>
+<h4 id="2、下载script-txt"><a href="#2、下载script-txt" class="headerlink" title="2、下载script.txt"></a>2、下载script.txt</h4><p>下载链接：<a href="https://forum.xda-developers.com/attachments/script-txt.4489568/">https://forum.xda-developers.com/attachments/script-txt.4489568/</a></p>
+<p>下载之后将后缀名改为script.sh。</p>
+<h4 id="3、创建xposed文件夹"><a href="#3、创建xposed文件夹" class="headerlink" title="3、创建xposed文件夹"></a>3、创建xposed文件夹</h4><p>创建文件名为xposed的文件夹，将第一步下载的Xposed压缩包中的system文件和script.sh文件放在该文件夹中。如图：</p>
+<p><img src="https://i.loli.net/2021/08/16/iea5Y2Xd3syl7GI.png" alt="QQ截图20210815174814.png"></p>
+<h4 id="4、执行安装命令"><a href="#4、执行安装命令" class="headerlink" title="4、执行安装命令"></a>4、执行安装命令</h4><p>在模拟器安装目录下，地址栏输入cmd操作如下命令。</p>
+<p>第一步    adb devices     #查看是否检测到正在运行的运行模拟器</p>
+<p>第二步    adb remount</p>
+<p>第三步    adb push xposed文件夹路径 /system</p>
+<p><img src="https://i.loli.net/2021/08/16/Vq9sTytR1H8v24h.png" alt="QQ截图20210815175953.png"></p>
+<p>第四步    adb shell</p>
+<p>第五步    su</p>
+<p>第六步    cd /system</p>
+<p>第七步    mount -o remount -w /system</p>
+<p>第八步    sh script.sh<br><img src="https://i.loli.net/2021/08/16/JTkN56lZwS7Khfu.png" alt="QQ截图20210815180344.png"></p>
+<h4 id="5、激活成功"><a href="#5、激活成功" class="headerlink" title="5、激活成功"></a>5、激活成功</h4><p>重启服务器，重新打开Xposed Installer</p>
+<p><img src="https://i.loli.net/2021/08/16/8T2gKozdeF1BPGM.png" alt="QQ截图20210815180724.png"></p>
+]]></content>
+      <categories>
+        <category>Xposed框架</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+        <tag>Xposed框架</tag>
+        <tag>模拟器</tag>
+      </tags>
+  </entry>
 </search>
