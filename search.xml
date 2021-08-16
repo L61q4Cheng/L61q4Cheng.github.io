@@ -1888,7 +1888,7 @@ D--&gt;E(L61q4_Cheng)
 <span id="more"></span>
 <p><img src="https://i.loli.net/2021/08/16/58Fv1nTKyrAl3mI.png" alt="QQ截图20210815172904.png"></p>
 <h3 id="具体步骤："><a href="#具体步骤：" class="headerlink" title="具体步骤："></a>具体步骤：</h3><h4 id="1、下载Xposed"><a href="#1、下载Xposed" class="headerlink" title="1、下载Xposed"></a>1、下载Xposed</h4><p>下载自己安卓版本对应的SDK，下载链接 <a href="https://dl-xda.xposed.info/framework/">https://dl-xda.xposed.info/framework/</a></p>
-<p>（注：对应的SDK版本参考：<a href="https://l61q4cheng.github.io/2021/08/15/Android%E5%90%84%E7%89%88%E6%9C%AC%E5%AF%B9%E5%BA%94%E7%9A%84SDK%E7%89%88%E6%9C%AC/#more%EF%BC%89">https://l61q4cheng.github.io/2021/08/15/Android%E5%90%84%E7%89%88%E6%9C%AC%E5%AF%B9%E5%BA%94%E7%9A%84SDK%E7%89%88%E6%9C%AC/#more）</a></p>
+<p>(注：对应的SDK版本参考：<br><a href="https://l61q4cheng.github.io/2021/08/15/Android%E5%90%84%E7%89%88%E6%9C%AC%E5%AF%B9%E5%BA%94%E7%9A%84SDK%E7%89%88%E6%9C%AC/#more">https://l61q4cheng.github.io/2021/08/15/Android%E5%90%84%E7%89%88%E6%9C%AC%E5%AF%B9%E5%BA%94%E7%9A%84SDK%E7%89%88%E6%9C%AC/#more</a>)</p>
 <p>注：sdk版本下载错误会影响安装结果，笔者这里下载SDK22，该模拟器为x86，因此下载x86版本。</p>
 <h4 id="2、下载script-txt"><a href="#2、下载script-txt" class="headerlink" title="2、下载script.txt"></a>2、下载script.txt</h4><p>下载链接：<a href="https://forum.xda-developers.com/attachments/script-txt.4489568/">https://forum.xda-developers.com/attachments/script-txt.4489568/</a></p>
 <p>下载之后将后缀名改为script.sh。</p>
