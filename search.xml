@@ -1916,4 +1916,55 @@ D--&gt;E(L61q4_Cheng)
         <tag>模拟器</tag>
       </tags>
   </entry>
+  <entry>
+    <title>编写Xposed框架初体验</title>
+    <url>/2021/08/31/%E7%BC%96%E5%86%99Xposed%E6%A1%86%E6%9E%B6%E5%88%9D%E4%BD%93%E9%AA%8C/</url>
+    <content><![CDATA[<h3 id="编写Xposed框架初体验"><a href="#编写Xposed框架初体验" class="headerlink" title="编写Xposed框架初体验"></a>编写Xposed框架初体验</h3><span id="more"></span>
+<h4 id="具体步骤："><a href="#具体步骤：" class="headerlink" title="具体步骤："></a>具体步骤：</h4><ol>
+<li>修改配置文件，添加xposed插件相关数据。在AndroidManifest.xml中添加以下代码：</li>
+</ol>
+<pre><code class="java">        &lt;!--添加标识--&gt;
+        &lt;meta-data
+            android:name=&quot;xposedmodule&quot;
+            android:value=&quot;true&quot;/&gt;
+        &lt;!--载入HOOK模块之后显示的信息--&gt;
+        &lt;meta-data
+            android:name=&quot;xposeddescription&quot;
+            android:value=&quot;Xposed框架初体验&quot;/&gt;
+        &lt;!--规定jar包的版本信息--&gt;
+        &lt;meta-data
+            android:name=&quot;xposedminversion&quot;
+            android:value=&quot;54&quot;/&gt;
+</code></pre>
+<p>2、新建lib文件夹，将Xposed框架提供的jar包放到此文件夹中。具体流程：右击app-&gt;new-&gt;Directory-&gt;输入lib-&gt;将jar包复制到此文件夹中-&gt;右击文件夹-&gt;Add as Library-&gt;在build.gradle中将implementation改为compileOnly files。</p>
+<p>3、新建一个类Xposedhook实现IXposedHookLoadPackage接口。</p>
+<pre><code class="java">import android.util.Log;
+import de.robv.android.xposed.IXposedHookLoadPackage;
+import de.robv.android.xposed.XposedBridge;
+import de.robv.android.xposed.callbacks.XC_LoadPackage;
+public class Xposedhook implements IXposedHookLoadPackage &#123;
+    //Xposed插件入口点
+    @Override
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam Param) throws Throwable &#123;
+        XposedBridge.log(&quot;cly hook start-------&gt;当前启动的程序是：&quot;+Param.processName);
+
+        Log.d(&quot;L61q4_Cheng&quot;, &quot;hook Start......&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>4、在Main/assets中新建一个文本文件xposed_init,并在其中添加新建的类，包名加类名，</p>
+<blockquote>
+<p>com.example.xposed_new3.Xposedhook</p>
+</blockquote>
+<p><img src="https://i.loli.net/2021/09/02/V7Ed16pDAlcXawL.png" alt="QQ截图20210831173424.png"></p>
+<p>5、编译成apk并运行，在xposed Installer中查看日志。</p>
+<p><img src="https://i.loli.net/2021/09/02/L2JmEZDSCeIMGAT.png" alt="QQ截图20210831174541.png"></p>
+]]></content>
+      <categories>
+        <category>Xposed框架</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+      </tags>
+  </entry>
 </search>
