@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="Xposed是基于java层的hook框架，在不修改apk源码的情况下，编写自己的模块来改变apk的行为。以下总结了常见的Xposed的hook方法：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Xposed——hook方法学习">
+<meta property="og:url" content="http://example.com/2021/08/31/Xposed%20%E2%80%94hook%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/index.html">
+<meta property="og:site_name" content="Welcome to L61q4_Cheng&#39;Blog">
+<meta property="og:description" content="Xposed是基于java层的hook框架，在不修改apk源码的情况下，编写自己的模块来改变apk的行为。以下总结了常见的Xposed的hook方法：">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/09/02/Uk2MhKwNJPtTLSa.png">
+<meta property="article:published_time" content="2021-08-31T12:06:59.150Z">
+<meta property="article:modified_time" content="2021-09-05T06:59:20.048Z">
+<meta property="article:author" content="L61q4_Cheng">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="Xposed框架">
+<meta property="article:tag" content="hook">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/09/02/Uk2MhKwNJPtTLSa.png">
+
+
+<link rel="canonical" href="http://example.com/2021/08/31/Xposed%20%E2%80%94hook%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/08/31/Xposed%20%E2%80%94hook%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/","path":"2021/08/31/Xposed —hook方法介绍/","title":"Xposed——hook方法学习"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Xposed——hook方法学习 | Welcome to L61q4_Cheng'Blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Welcome to L61q4_Cheng'Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个逆向小白</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-主页"><a href="/" rel="section"><i class="home fa-fw"></i>主页</a></li>
+        <li class="menu-item menu-item-文章"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>文章</a></li>
+        <li class="menu-item menu-item-标签"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-关于我"><a href="/about/" rel="section"><i class="user fa-fw"></i>关于我</a></li>
+        <li class="menu-item menu-item-分类"><a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#hook%E6%99%AE%E9%80%9A%E6%96%B9%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">hook普通方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#XC-MethodHook%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3"><span class="nav-number">1.1.</span> <span class="nav-text">XC_MethodHook方法详解</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hook%E5%8C%BF%E5%90%8D%E5%86%85%E9%83%A8%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text">hook匿名内部类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Xposed%E2%80%94java-%E5%8F%8D%E5%B0%84"><span class="nav-number">3.</span> <span class="nav-text">Xposed—java 反射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hook%E4%B8%BB%E5%8A%A8%E8%B0%83%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">hook主动调用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#XposedHelpers%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3"><span class="nav-number">4.1.</span> <span class="nav-text">XposedHelpers方法详解</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Xposed%E2%80%94hook%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F"><span class="nav-number">5.</span> <span class="nav-text">Xposed—hook静态变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Xposed%E2%80%94hook%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="nav-number">6.</span> <span class="nav-text">Xposed—hook构造方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Java%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="nav-number">6.1.</span> <span class="nav-text">Java构造方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hook%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="nav-number">6.2.</span> <span class="nav-text">hook构造方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#findAndHookConstructor%E8%AF%A6%E8%A7%A3"><span class="nav-number">6.3.</span> <span class="nav-text">findAndHookConstructor详解</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Xposed%E2%80%94hook%E6%89%80%E6%9C%89%E5%87%BD%E6%95%B0%E9%81%8D%E5%8E%86%E6%89%80%E6%9C%89%E7%B1%BB"><span class="nav-number">7.</span> <span class="nav-text">Xposed—hook所有函数遍历所有类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87hook%E4%B8%BB%E5%8A%A8%E8%B0%83%E7%94%A8%E8%8E%B7%E5%8F%96%E7%9B%B8%E5%85%B3%E6%95%B0%E6%8D%AE"><span class="nav-number">8.</span> <span class="nav-text">通过hook主动调用获取相关数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%B1%BB"><span class="nav-number">8.1.</span> <span class="nav-text">获取类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E7%B1%BB%E8%BF%9B%E8%A1%8C%E6%93%8D%E4%BD%9C-%E8%8E%B7%E5%8F%96%E5%AD%97%E6%AE%B5"><span class="nav-number">8.2.</span> <span class="nav-text">对类进行操作(获取字段)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%B1%BB%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E6%96%B9%E6%B3%95"><span class="nav-number">8.3.</span> <span class="nav-text">获取类中的所有方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E4%B8%BB%E5%8A%A8%E8%B0%83%E7%94%A8%E8%8E%B7%E5%8F%96%E6%99%AE%E9%80%9A%E6%96%B9%E6%B3%95"><span class="nav-number">8.4.</span> <span class="nav-text">通过主动调用获取普通方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E4%B8%BB%E5%8A%A8%E8%B0%83%E7%94%A8%E8%8E%B7%E5%8F%96%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="nav-number">8.5.</span> <span class="nav-text">通过主动调用获取静态方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E4%B8%BB%E5%8A%A8%E8%B0%83%E7%94%A8%E8%8E%B7%E5%8F%96%E6%99%AE%E9%80%9A%E5%AD%97%E6%AE%B5%EF%BC%88%E4%B8%8D%E6%98%AF%E6%96%B9%E6%B3%95%E4%B8%AD%E7%9A%84%E7%89%B9%E5%AE%9A%E5%AD%97%E6%AE%B5%EF%BC%89"><span class="nav-number">8.6.</span> <span class="nav-text">通过主动调用获取普通字段（不是方法中的特定字段）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E9%9D%99%E6%80%81%E5%AD%97%E6%AE%B5"><span class="nav-number">8.7.</span> <span class="nav-text">获取静态字段</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Xposed%E2%80%94hook%E6%9B%BF%E6%8D%A2%E5%87%BD%E6%95%B0"><span class="nav-number">9.</span> <span class="nav-text">Xposed—hook替换函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Xposed%E2%80%94hook%E5%A4%9ADEX"><span class="nav-number">10.</span> <span class="nav-text">Xposed—hook多DEX</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="L61q4_Cheng"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">L61q4_Cheng</p>
+  <div class="site-description" itemprop="description">安卓逆向日常学习、分享</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/31/Xposed%20%E2%80%94hook%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="L61q4_Cheng">
+      <meta itemprop="description" content="安卓逆向日常学习、分享">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Welcome to L61q4_Cheng'Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Xposed——hook方法学习
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-8-31 20:06:59" itemprop="dateCreated datePublished" datetime="2021-08-31T20:06:59+08:00">2021-8-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Xposed%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">Xposed框架</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>Xposed是基于java层的hook框架，在不修改apk源码的情况下，编写自己的模块来改变apk的行为。以下总结了常见的Xposed的hook方法：</p>
+<span id="more"></span>
+<h3 id="hook普通方法"><a href="#hook普通方法" class="headerlink" title="hook普通方法"></a>hook普通方法</h3><p>创建一个类继承IXposedHookLoadPackage，修改 handleLoadPackage方法，首先要判断是否为特定的包。</p>
+<pre><code class="java">public void handleLoadPackage(XC_LoadPackage.LoadPackageParam Param) throws Throwable &#123;
+    if(Param.packageName.equals(&quot;com.example.xposed_new3&quot;))&#123;......&#125;
+&#125;
+</code></pre>
+<p>hook普通方法调用的函数都是<strong>XposedHelpers.findAndHookMethod</strong></p>
+<pre><code class="java">XposedHelpers.findAndHookMethod(
+className(包名+类名),
+Param.classLoader(固定参数),
+methodName(被hook的函数名)
+**.class(函数的参数),
+new XC_MethodHook()&#123;&#125;
+)
+</code></pre>
+<h4 id="XC-MethodHook方法详解"><a href="#XC-MethodHook方法详解" class="headerlink" title="XC_MethodHook方法详解"></a>XC_MethodHook方法详解</h4><p><img src="https://i.loli.net/2021/09/02/Uk2MhKwNJPtTLSa.png" alt="QQ截图20210901190645.png"></p>
+<p>hook普通方法的主要作用是打印各种参数信息，或者修改某些参数使其直接通过程序。</p>
+<h3 id="hook匿名内部类"><a href="#hook匿名内部类" class="headerlink" title="hook匿名内部类"></a>hook匿名内部类</h3><p>匿名内部类一般为普通方法，所以仍然用findAndHookMethod的hook方法。</p>
+<p>注：匿名内部类辨别方法：在smali代码中一个类为一个文件，且匿名内部类后缀会加上”$”符号，在工程管理器中直接找出相关类。</p>
+<blockquote>
+<p>Lcom/example/xposed_new4/MainActivity$1</p>
+</blockquote>
+<pre><code class="java">@Override
+public void handleLoadPackage(XC_LoadPackage.LoadPackageParam loadPackageParam) throws Throwable &#123;
+    if(loadPackageParam.packageName.equals(&quot;com.example.xposed_new4&quot;))&#123;
+        XposedHelpers.findAndHookMethod(
+        &quot;com.example.xposed_new4.MainActivity$1&quot;,
+        loadPackageParam.classLoader,
+        &quot;onClick&quot;,
+        View.class,
+        new XC_MethodHook() &#123;
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable &#123;
+                super.beforeHookedMethod(param);
+                View v=(View)param.args[0];
+                XposedBridge.log(&quot;view:&quot;+v.getId());
+            &#125;
+         &#125;);
+     &#125;
+&#125;
+</code></pre>
+<p>在findAndHookMethod方法中的包名类名参数使用smali代码中的包名加类名，其余操作与普通方法hook相同。</p>
+<h3 id="Xposed—java-反射"><a href="#Xposed—java-反射" class="headerlink" title="Xposed—java 反射"></a>Xposed—java 反射</h3><p> java反射主要作用为突破修饰符的限制，如获取私有方法和私有字段。</p>
+<p>以hook某一私有控件为例</p>
+<pre><code class="java">//获取类
+Class&lt;?&gt; clazz=param.thisObject.getClass();
+//获取字段
+Field field=clazz.getDeclaredField(&quot;Text&quot;);
+//设置可见
+field.setAccessible(true);
+
+EditText ed_sn= (EditText) field.get(param.thisObject);//把类中的控件参数传给ed_sn
+XposedBridge.log(&quot;输入结果为：&quot;+ed_sn.getText().toString().trim());
+//修改编辑框
+ed_sn.setText(&quot;L61q4_cheng&quot;);
+</code></pre>
+<p>hook某一私有方法</p>
+<pre><code class="java">//获取方法
+Method method=clazz.getDeclaredMethod(&quot;MethodName&quot;,new Class[]&#123;.class,.class...&#125;);
+//显示可见
+method.setAccessible(true);
+//调用方法
+返回值=method.invoke(param.thisObject,new Object()&#123;...&#125;);//调用函数的参数
+</code></pre>
+<h3 id="hook主动调用"><a href="#hook主动调用" class="headerlink" title="hook主动调用"></a>hook主动调用</h3><p>主动调用，直接调用apk中的函数来实现hook操作，方便对数据进行直接操作。主动调用函数为XposedHelpers。该方法一般用于获取某一数据来通过某一入口，而不是直接修改方法的返回值。Xposed通过主动调用可以直接使用Android项目中某些方法，使其可以有更强大的功能。</p>
+<h4 id="XposedHelpers方法详解"><a href="#XposedHelpers方法详解" class="headerlink" title="XposedHelpers方法详解"></a>XposedHelpers方法详解</h4><pre><code class="java">XposedHelpers.callMethod();//调用普通方法
+XposedHelpers.callStaticMethod();//调用静态方法
+</code></pre>
+<pre><code class="java">XposedHelpers.callMethod(
+    param.getClass(),//固定句式
+    &quot;methodName&quot;//需要主动调用的方法名
+    new Object[]&#123;...,...&#125;,//大括号中为调用函数中的参数，
+)
+</code></pre>
+<p>在调用方法之前，可将程序中对参数的操作直接复制过来，例如加密操作，格式操作。</p>
+<p>如果该方法有返回值且需要获取，可将该方法直接用在某一变量上，例如：</p>
+<pre><code class="java">String str=(String)XposedHelpers.callMethod(
+    param.getClass(),
+    &quot;methodName&quot;
+    new Object[]&#123;...,...&#125;,
+)
+param.args[1]=str.toString();
+</code></pre>
+<h3 id="Xposed—hook静态变量"><a href="#Xposed—hook静态变量" class="headerlink" title="Xposed—hook静态变量"></a>Xposed—hook静态变量</h3><p>实例变量在每一份实例出来的类中都有不同的值，先有对象才有实例变量，因此在没有对象之前是不能hook修改实例变量。在内存中静态变量不会改变。因此可以在对象之前hook。</p>
+<p>故hook静态变量不需要获取类对象，直接修改类中私有静态变量。hook的方法有XposedHelpers，以变量类型Int为例。</p>
+<pre><code class="java">final Class&lt;?&gt; clazz= XposedHelpers.findClass(
+            &quot;com.example.xposed_new5.MainActivity&quot;,
+            loadPackageParam.classLoader);//方便起见提前赋给clazz
+XposedHelper.setStaticIntField(clazz,&quot;变量名&quot;,value(修改的值));
+</code></pre>
+<pre><code class="java">XposedHelpers.setStaticObjectField();//修改字符串
+</code></pre>
+<p>注：不同变量类型使用不同方法。</p>
+<pre><code class="java">final Class&lt;?&gt;clazz=XposedHelpers.findClass(
+        &quot;com.example.xposed_new5.MainActivity&quot;,
+        loadPackageParam.classLoader);        
+XposedHelpers.setStaticIntField(clazz,&quot;staticInt&quot;,99);
+</code></pre>
+<h3 id="Xposed—hook构造方法"><a href="#Xposed—hook构造方法" class="headerlink" title="Xposed—hook构造方法"></a>Xposed—hook构造方法</h3><h4 id="Java构造方法"><a href="#Java构造方法" class="headerlink" title="Java构造方法"></a>Java构造方法</h4><p>与类同名，通过关键字new调用，每个类至少有一个或一个以上的构造方法（如果没有定义构造方法，系统会自动定义一个无参数的构造方法）。构造方法可以无参、一个或多个参数，且构造方法没有返回值。例如：</p>
+<pre><code class="java">MainActivity()&#123;
+&#125;
+MainActivity(int a,int b)&#123;
+&#125;
+MainActivity(String str)&#123;
+&#125;
+</code></pre>
+<h4 id="hook构造方法"><a href="#hook构造方法" class="headerlink" title="hook构造方法"></a>hook构造方法</h4><p>hook构造方法不需要添加方法名，采用的hook方法为XposedHelpers.findAndHookConstructor。</p>
+<p>此时不能hook实例变量，因为对象还没有产生。</p>
+<h4 id="findAndHookConstructor详解"><a href="#findAndHookConstructor详解" class="headerlink" title="findAndHookConstructor详解"></a>findAndHookConstructor详解</h4><pre><code class="java">final Class&lt;?&gt; clazz=XposedHelpers.findClass(
+&quot;com.example.xposed_new6.MainActivity&quot;,//包名加类名
+loadPackageParam.classLoader);//固定格式
+XposedHelpers.findAndHookConstructor(
+clazz,//可以提前定义，也可以直接在这里写出来
+int.class,//构造方法的参数
+String.class,//无参数也可以不写
+new XC_MethodHook()&#123;
+//和普通方法写法一样
+@Override
+protected void beforeHookedMethod(MethodHookParam param) throws Throwable &#123;
+        XposedBridge.log(&quot;Haha, HookDemo constructed was hooked&quot; );
+        &#125;
+@Override
+protected void afterHookedMethod(MethodHookParam param) throws Throwable &#123;
+        super.afterHookedMethod(param);
+        &#125;        
+&#125;);
+</code></pre>
+<h3 id="Xposed—hook所有函数遍历所有类"><a href="#Xposed—hook所有函数遍历所有类" class="headerlink" title="Xposed—hook所有函数遍历所有类"></a>Xposed—hook所有函数遍历所有类</h3><p>对于动态dex文件可以采用这种方法来hook。</p>
+<pre><code class="java"> XposedHelpers.findAndHookMethod(
+        ClassLoader.class,
+        &quot;isok&quot;,
+        String.class,
+        new XC_MethodHook() &#123;
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable &#123;
+                     super.afterHookedMethod(param);
+                     Class&lt;?&gt; clazz=(Class&lt;?&gt;) loadPackageParam.getResult();
+                     XposedBridge.log(&quot;Clazz：&quot;+clazz.getName());
+                     &#125;
+         &#125;
+&#125;);
+</code></pre>
+<h3 id="通过hook主动调用获取相关数据"><a href="#通过hook主动调用获取相关数据" class="headerlink" title="通过hook主动调用获取相关数据"></a>通过hook主动调用获取相关数据</h3><h4 id="获取类"><a href="#获取类" class="headerlink" title="获取类"></a>获取类</h4><pre><code class="java">Class&lt;?&gt; clazz=param.thisObject.getClass();
+</code></pre>
+<h4 id="对类进行操作-获取字段"><a href="#对类进行操作-获取字段" class="headerlink" title="对类进行操作(获取字段)"></a>对类进行操作(获取字段)</h4><pre><code class="java">Field[] fields=clazz.getDeclaredFields();
+for(Field field:fields)&#123;
+     XposedBridge.log(&quot;字段名称：&quot;+field.getName());
+&#125;
+</code></pre>
+<h4 id="获取类中的所有方法"><a href="#获取类中的所有方法" class="headerlink" title="获取类中的所有方法"></a>获取类中的所有方法</h4><pre><code class="java">Method[] methods=clazz.getDeclaredMethods();
+for(Method method:methods)
+&#123;
+      XposedBridge.log(&quot;方法名称：&quot;+method.getName());
+&#125;
+</code></pre>
+<h4 id="通过主动调用获取普通方法"><a href="#通过主动调用获取普通方法" class="headerlink" title="通过主动调用获取普通方法"></a>通过主动调用获取普通方法</h4><pre><code class="java">XposedHelpers.callMethod(loadPackageParam.getClass(),&quot;methodName&quot;,new Object()&#123;...&#125;);
+</code></pre>
+<h4 id="通过主动调用获取静态方法"><a href="#通过主动调用获取静态方法" class="headerlink" title="通过主动调用获取静态方法"></a>通过主动调用获取静态方法</h4><pre><code class="java">Class&lt;?&gt; clazz1=XposedHelpers.findClass(
+    &quot;com.example.xposed_new7.MainActivity&quot;,
+    loadPackageParam.classLoader);
+XposedHelpers.callStaticMethod(clazz1,&quot;methodName&quot;,new Object()&#123;...&#125;);
+</code></pre>
+<h4 id="通过主动调用获取普通字段（不是方法中的特定字段）"><a href="#通过主动调用获取普通字段（不是方法中的特定字段）" class="headerlink" title="通过主动调用获取普通字段（不是方法中的特定字段）"></a>通过主动调用获取普通字段（不是方法中的特定字段）</h4><pre><code class="java">XposedHelpers.getBooleanField(loadPackageParam.getClass(),&quot;fieldName&quot;);
+</code></pre>
+<h4 id="获取静态字段"><a href="#获取静态字段" class="headerlink" title="获取静态字段"></a>获取静态字段</h4><pre><code class="java">Class&lt;?&gt; clazz2=XposedHelpers.findClass(
+    &quot;com.example.xposed_new7.MainActivity&quot;,
+    loadPackageParam.classLoader);
+XposedHelpers.getStaticBooleanField(clazz2,&quot;fieldName&quot;);
+</code></pre>
+<h3 id="Xposed—hook替换函数"><a href="#Xposed—hook替换函数" class="headerlink" title="Xposed—hook替换函数"></a>Xposed—hook替换函数</h3><pre><code class="java">if(loadPackageParam.packageName.equals(&quot;com.example.xposed_new8&quot;))&#123;
+            Class&lt;?&gt; clazz=XposedHelpers.findClass(&quot;com.example.xposed_new8.MainActivity&quot;,loadPackageParam.classLoader);
+            XposedHelpers.findAndHookMethod(
+                    &quot;com.example.xposed_new8.MainActivity&quot;,
+                    loadPackageParam.classLoader,
+                    &quot;ButtonTest1&quot;,
+                    new XC_MethodReplacement() &#123;
+                        @Override
+                        protected Object replaceHookedMethod(MethodHookParam methodHookParam) throws Throwable &#123;
+                            XposedBridge.log(&quot;方法替换成功&quot;);
+                            XposedHelpers.callMethod(clazz,&quot;ButtonTest2&quot;);//主动调用ButtonTest2
+                            return null;
+                        &#125;
+                    &#125;
+            );
+        &#125;
+</code></pre>
+<h3 id="Xposed—hook多DEX"><a href="#Xposed—hook多DEX" class="headerlink" title="Xposed—hook多DEX"></a>Xposed—hook多DEX</h3><p>在多dex文件时，有些类hook不到，采用attach方法来解决。</p>
+<pre><code class="java">XposedHelpers.findAndHookMethod(
+        Application.class,
+        &quot;attach&quot;,
+        Context.class,
+        new XC_MethodHook() &#123;
+                 @Override
+                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable &#123;
+                 super.beforeHookedMethod(param);
+                 Context context= (Context) param.args[0];
+                 ClassLoader loader=context.getClassLoader();
+                 XposedHelpers.findAndHookMethod(
+                         &quot;com.example.xposed_new8.MainActivity&quot;,
+                         loader,
+                         &quot;ButtonTest1&quot;,
+                         new XC_MethodHook() &#123;
+                                 @Override
+                                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable &#123;
+                                            super.beforeHookedMethod(param);
+                              &#125;
+                         &#125;
+                );
+           &#125;
+       &#125;
+);
+</code></pre>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Android/" rel="tag"># Android</a>
+              <a href="/tags/Xposed%E6%A1%86%E6%9E%B6/" rel="tag"># Xposed框架</a>
+              <a href="/tags/hook/" rel="tag"># hook</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/08/31/%E7%BC%96%E5%86%99Xposed%E6%A1%86%E6%9E%B6%E5%88%9D%E4%BD%93%E9%AA%8C/" rel="prev" title="编写Xposed框架初体验">
+                  <i class="fa fa-chevron-left"></i> 编写Xposed框架初体验
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC8zODU3Mi8xNTEwMA=="></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">L61q4_Cheng</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script src="/js/third-party/comments/livere.js"></script>
+
+</body>
+</html>

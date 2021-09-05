@@ -1919,8 +1919,8 @@ D--&gt;E(L61q4_Cheng)
   <entry>
     <title>编写Xposed框架初体验</title>
     <url>/2021/08/31/%E7%BC%96%E5%86%99Xposed%E6%A1%86%E6%9E%B6%E5%88%9D%E4%BD%93%E9%AA%8C/</url>
-    <content><![CDATA[<h3 id="编写Xposed框架初体验"><a href="#编写Xposed框架初体验" class="headerlink" title="编写Xposed框架初体验"></a>编写Xposed框架初体验</h3><span id="more"></span>
-<h4 id="具体步骤："><a href="#具体步骤：" class="headerlink" title="具体步骤："></a>具体步骤：</h4><ol>
+    <content><![CDATA[<h4 id="具体步骤："><a href="#具体步骤：" class="headerlink" title="具体步骤："></a>具体步骤：</h4><span id="more"></span>
+<ol>
 <li>修改配置文件，添加xposed插件相关数据。在AndroidManifest.xml中添加以下代码：</li>
 </ol>
 <pre><code class="java">        &lt;!--添加标识--&gt;
@@ -1965,6 +1965,232 @@ public class Xposedhook implements IXposedHookLoadPackage &#123;
       </categories>
       <tags>
         <tag>Android</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Xposed——hook方法学习</title>
+    <url>/2021/08/31/Xposed%20%E2%80%94hook%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/</url>
+    <content><![CDATA[<p>Xposed是基于java层的hook框架，在不修改apk源码的情况下，编写自己的模块来改变apk的行为。以下总结了常见的Xposed的hook方法：</p>
+<span id="more"></span>
+<h3 id="hook普通方法"><a href="#hook普通方法" class="headerlink" title="hook普通方法"></a>hook普通方法</h3><p>创建一个类继承IXposedHookLoadPackage，修改 handleLoadPackage方法，首先要判断是否为特定的包。</p>
+<pre><code class="java">public void handleLoadPackage(XC_LoadPackage.LoadPackageParam Param) throws Throwable &#123;
+    if(Param.packageName.equals(&quot;com.example.xposed_new3&quot;))&#123;......&#125;
+&#125;
+</code></pre>
+<p>hook普通方法调用的函数都是<strong>XposedHelpers.findAndHookMethod</strong></p>
+<pre><code class="java">XposedHelpers.findAndHookMethod(
+className(包名+类名),
+Param.classLoader(固定参数),
+methodName(被hook的函数名)
+**.class(函数的参数),
+new XC_MethodHook()&#123;&#125;
+)
+</code></pre>
+<h4 id="XC-MethodHook方法详解"><a href="#XC-MethodHook方法详解" class="headerlink" title="XC_MethodHook方法详解"></a>XC_MethodHook方法详解</h4><p><img src="https://i.loli.net/2021/09/02/Uk2MhKwNJPtTLSa.png" alt="QQ截图20210901190645.png"></p>
+<p>hook普通方法的主要作用是打印各种参数信息，或者修改某些参数使其直接通过程序。</p>
+<h3 id="hook匿名内部类"><a href="#hook匿名内部类" class="headerlink" title="hook匿名内部类"></a>hook匿名内部类</h3><p>匿名内部类一般为普通方法，所以仍然用findAndHookMethod的hook方法。</p>
+<p>注：匿名内部类辨别方法：在smali代码中一个类为一个文件，且匿名内部类后缀会加上”$”符号，在工程管理器中直接找出相关类。</p>
+<blockquote>
+<p>Lcom/example/xposed_new4/MainActivity$1</p>
+</blockquote>
+<pre><code class="java">@Override
+public void handleLoadPackage(XC_LoadPackage.LoadPackageParam loadPackageParam) throws Throwable &#123;
+    if(loadPackageParam.packageName.equals(&quot;com.example.xposed_new4&quot;))&#123;
+        XposedHelpers.findAndHookMethod(
+        &quot;com.example.xposed_new4.MainActivity$1&quot;,
+        loadPackageParam.classLoader,
+        &quot;onClick&quot;,
+        View.class,
+        new XC_MethodHook() &#123;
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable &#123;
+                super.beforeHookedMethod(param);
+                View v=(View)param.args[0];
+                XposedBridge.log(&quot;view:&quot;+v.getId());
+            &#125;
+         &#125;);
+     &#125;
+&#125;
+</code></pre>
+<p>在findAndHookMethod方法中的包名类名参数使用smali代码中的包名加类名，其余操作与普通方法hook相同。</p>
+<h3 id="Xposed—java-反射"><a href="#Xposed—java-反射" class="headerlink" title="Xposed—java 反射"></a>Xposed—java 反射</h3><p> java反射主要作用为突破修饰符的限制，如获取私有方法和私有字段。</p>
+<p>以hook某一私有控件为例</p>
+<pre><code class="java">//获取类
+Class&lt;?&gt; clazz=param.thisObject.getClass();
+//获取字段
+Field field=clazz.getDeclaredField(&quot;Text&quot;);
+//设置可见
+field.setAccessible(true);
+
+EditText ed_sn= (EditText) field.get(param.thisObject);//把类中的控件参数传给ed_sn
+XposedBridge.log(&quot;输入结果为：&quot;+ed_sn.getText().toString().trim());
+//修改编辑框
+ed_sn.setText(&quot;L61q4_cheng&quot;);
+</code></pre>
+<p>hook某一私有方法</p>
+<pre><code class="java">//获取方法
+Method method=clazz.getDeclaredMethod(&quot;MethodName&quot;,new Class[]&#123;.class,.class...&#125;);
+//显示可见
+method.setAccessible(true);
+//调用方法
+返回值=method.invoke(param.thisObject,new Object()&#123;...&#125;);//调用函数的参数
+</code></pre>
+<h3 id="hook主动调用"><a href="#hook主动调用" class="headerlink" title="hook主动调用"></a>hook主动调用</h3><p>主动调用，直接调用apk中的函数来实现hook操作，方便对数据进行直接操作。主动调用函数为XposedHelpers。该方法一般用于获取某一数据来通过某一入口，而不是直接修改方法的返回值。Xposed通过主动调用可以直接使用Android项目中某些方法，使其可以有更强大的功能。</p>
+<h4 id="XposedHelpers方法详解"><a href="#XposedHelpers方法详解" class="headerlink" title="XposedHelpers方法详解"></a>XposedHelpers方法详解</h4><pre><code class="java">XposedHelpers.callMethod();//调用普通方法
+XposedHelpers.callStaticMethod();//调用静态方法
+</code></pre>
+<pre><code class="java">XposedHelpers.callMethod(
+    param.getClass(),//固定句式
+    &quot;methodName&quot;//需要主动调用的方法名
+    new Object[]&#123;...,...&#125;,//大括号中为调用函数中的参数，
+)
+</code></pre>
+<p>在调用方法之前，可将程序中对参数的操作直接复制过来，例如加密操作，格式操作。</p>
+<p>如果该方法有返回值且需要获取，可将该方法直接用在某一变量上，例如：</p>
+<pre><code class="java">String str=(String)XposedHelpers.callMethod(
+    param.getClass(),
+    &quot;methodName&quot;
+    new Object[]&#123;...,...&#125;,
+)
+param.args[1]=str.toString();
+</code></pre>
+<h3 id="Xposed—hook静态变量"><a href="#Xposed—hook静态变量" class="headerlink" title="Xposed—hook静态变量"></a>Xposed—hook静态变量</h3><p>实例变量在每一份实例出来的类中都有不同的值，先有对象才有实例变量，因此在没有对象之前是不能hook修改实例变量。在内存中静态变量不会改变。因此可以在对象之前hook。</p>
+<p>故hook静态变量不需要获取类对象，直接修改类中私有静态变量。hook的方法有XposedHelpers，以变量类型Int为例。</p>
+<pre><code class="java">final Class&lt;?&gt; clazz= XposedHelpers.findClass(
+            &quot;com.example.xposed_new5.MainActivity&quot;,
+            loadPackageParam.classLoader);//方便起见提前赋给clazz
+XposedHelper.setStaticIntField(clazz,&quot;变量名&quot;,value(修改的值));
+</code></pre>
+<pre><code class="java">XposedHelpers.setStaticObjectField();//修改字符串
+</code></pre>
+<p>注：不同变量类型使用不同方法。</p>
+<pre><code class="java">final Class&lt;?&gt;clazz=XposedHelpers.findClass(
+        &quot;com.example.xposed_new5.MainActivity&quot;,
+        loadPackageParam.classLoader);        
+XposedHelpers.setStaticIntField(clazz,&quot;staticInt&quot;,99);
+</code></pre>
+<h3 id="Xposed—hook构造方法"><a href="#Xposed—hook构造方法" class="headerlink" title="Xposed—hook构造方法"></a>Xposed—hook构造方法</h3><h4 id="Java构造方法"><a href="#Java构造方法" class="headerlink" title="Java构造方法"></a>Java构造方法</h4><p>与类同名，通过关键字new调用，每个类至少有一个或一个以上的构造方法（如果没有定义构造方法，系统会自动定义一个无参数的构造方法）。构造方法可以无参、一个或多个参数，且构造方法没有返回值。例如：</p>
+<pre><code class="java">MainActivity()&#123;
+&#125;
+MainActivity(int a,int b)&#123;
+&#125;
+MainActivity(String str)&#123;
+&#125;
+</code></pre>
+<h4 id="hook构造方法"><a href="#hook构造方法" class="headerlink" title="hook构造方法"></a>hook构造方法</h4><p>hook构造方法不需要添加方法名，采用的hook方法为XposedHelpers.findAndHookConstructor。</p>
+<p>此时不能hook实例变量，因为对象还没有产生。</p>
+<h4 id="findAndHookConstructor详解"><a href="#findAndHookConstructor详解" class="headerlink" title="findAndHookConstructor详解"></a>findAndHookConstructor详解</h4><pre><code class="java">final Class&lt;?&gt; clazz=XposedHelpers.findClass(
+&quot;com.example.xposed_new6.MainActivity&quot;,//包名加类名
+loadPackageParam.classLoader);//固定格式
+XposedHelpers.findAndHookConstructor(
+clazz,//可以提前定义，也可以直接在这里写出来
+int.class,//构造方法的参数
+String.class,//无参数也可以不写
+new XC_MethodHook()&#123;
+//和普通方法写法一样
+@Override
+protected void beforeHookedMethod(MethodHookParam param) throws Throwable &#123;
+        XposedBridge.log(&quot;Haha, HookDemo constructed was hooked&quot; );
+        &#125;
+@Override
+protected void afterHookedMethod(MethodHookParam param) throws Throwable &#123;
+        super.afterHookedMethod(param);
+        &#125;        
+&#125;);
+</code></pre>
+<h3 id="Xposed—hook所有函数遍历所有类"><a href="#Xposed—hook所有函数遍历所有类" class="headerlink" title="Xposed—hook所有函数遍历所有类"></a>Xposed—hook所有函数遍历所有类</h3><p>对于动态dex文件可以采用这种方法来hook。</p>
+<pre><code class="java"> XposedHelpers.findAndHookMethod(
+        ClassLoader.class,
+        &quot;isok&quot;,
+        String.class,
+        new XC_MethodHook() &#123;
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable &#123;
+                     super.afterHookedMethod(param);
+                     Class&lt;?&gt; clazz=(Class&lt;?&gt;) loadPackageParam.getResult();
+                     XposedBridge.log(&quot;Clazz：&quot;+clazz.getName());
+                     &#125;
+         &#125;
+&#125;);
+</code></pre>
+<h3 id="通过hook主动调用获取相关数据"><a href="#通过hook主动调用获取相关数据" class="headerlink" title="通过hook主动调用获取相关数据"></a>通过hook主动调用获取相关数据</h3><h4 id="获取类"><a href="#获取类" class="headerlink" title="获取类"></a>获取类</h4><pre><code class="java">Class&lt;?&gt; clazz=param.thisObject.getClass();
+</code></pre>
+<h4 id="对类进行操作-获取字段"><a href="#对类进行操作-获取字段" class="headerlink" title="对类进行操作(获取字段)"></a>对类进行操作(获取字段)</h4><pre><code class="java">Field[] fields=clazz.getDeclaredFields();
+for(Field field:fields)&#123;
+     XposedBridge.log(&quot;字段名称：&quot;+field.getName());
+&#125;
+</code></pre>
+<h4 id="获取类中的所有方法"><a href="#获取类中的所有方法" class="headerlink" title="获取类中的所有方法"></a>获取类中的所有方法</h4><pre><code class="java">Method[] methods=clazz.getDeclaredMethods();
+for(Method method:methods)
+&#123;
+      XposedBridge.log(&quot;方法名称：&quot;+method.getName());
+&#125;
+</code></pre>
+<h4 id="通过主动调用获取普通方法"><a href="#通过主动调用获取普通方法" class="headerlink" title="通过主动调用获取普通方法"></a>通过主动调用获取普通方法</h4><pre><code class="java">XposedHelpers.callMethod(loadPackageParam.getClass(),&quot;methodName&quot;,new Object()&#123;...&#125;);
+</code></pre>
+<h4 id="通过主动调用获取静态方法"><a href="#通过主动调用获取静态方法" class="headerlink" title="通过主动调用获取静态方法"></a>通过主动调用获取静态方法</h4><pre><code class="java">Class&lt;?&gt; clazz1=XposedHelpers.findClass(
+    &quot;com.example.xposed_new7.MainActivity&quot;,
+    loadPackageParam.classLoader);
+XposedHelpers.callStaticMethod(clazz1,&quot;methodName&quot;,new Object()&#123;...&#125;);
+</code></pre>
+<h4 id="通过主动调用获取普通字段（不是方法中的特定字段）"><a href="#通过主动调用获取普通字段（不是方法中的特定字段）" class="headerlink" title="通过主动调用获取普通字段（不是方法中的特定字段）"></a>通过主动调用获取普通字段（不是方法中的特定字段）</h4><pre><code class="java">XposedHelpers.getBooleanField(loadPackageParam.getClass(),&quot;fieldName&quot;);
+</code></pre>
+<h4 id="获取静态字段"><a href="#获取静态字段" class="headerlink" title="获取静态字段"></a>获取静态字段</h4><pre><code class="java">Class&lt;?&gt; clazz2=XposedHelpers.findClass(
+    &quot;com.example.xposed_new7.MainActivity&quot;,
+    loadPackageParam.classLoader);
+XposedHelpers.getStaticBooleanField(clazz2,&quot;fieldName&quot;);
+</code></pre>
+<h3 id="Xposed—hook替换函数"><a href="#Xposed—hook替换函数" class="headerlink" title="Xposed—hook替换函数"></a>Xposed—hook替换函数</h3><pre><code class="java">if(loadPackageParam.packageName.equals(&quot;com.example.xposed_new8&quot;))&#123;
+            Class&lt;?&gt; clazz=XposedHelpers.findClass(&quot;com.example.xposed_new8.MainActivity&quot;,loadPackageParam.classLoader);
+            XposedHelpers.findAndHookMethod(
+                    &quot;com.example.xposed_new8.MainActivity&quot;,
+                    loadPackageParam.classLoader,
+                    &quot;ButtonTest1&quot;,
+                    new XC_MethodReplacement() &#123;
+                        @Override
+                        protected Object replaceHookedMethod(MethodHookParam methodHookParam) throws Throwable &#123;
+                            XposedBridge.log(&quot;方法替换成功&quot;);
+                            XposedHelpers.callMethod(clazz,&quot;ButtonTest2&quot;);//主动调用ButtonTest2
+                            return null;
+                        &#125;
+                    &#125;
+            );
+        &#125;
+</code></pre>
+<h3 id="Xposed—hook多DEX"><a href="#Xposed—hook多DEX" class="headerlink" title="Xposed—hook多DEX"></a>Xposed—hook多DEX</h3><p>在多dex文件时，有些类hook不到，采用attach方法来解决。</p>
+<pre><code class="java">XposedHelpers.findAndHookMethod(
+        Application.class,
+        &quot;attach&quot;,
+        Context.class,
+        new XC_MethodHook() &#123;
+                 @Override
+                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable &#123;
+                 super.beforeHookedMethod(param);
+                 Context context= (Context) param.args[0];
+                 ClassLoader loader=context.getClassLoader();
+                 XposedHelpers.findAndHookMethod(
+                         &quot;com.example.xposed_new8.MainActivity&quot;,
+                         loader,
+                         &quot;ButtonTest1&quot;,
+                         new XC_MethodHook() &#123;
+                                 @Override
+                                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable &#123;
+                                            super.beforeHookedMethod(param);
+                              &#125;
+                         &#125;
+                );
+           &#125;
+       &#125;
+);
+</code></pre>
+]]></content>
+      <categories>
+        <category>Xposed框架</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+        <tag>Xposed框架</tag>
+        <tag>hook</tag>
       </tags>
   </entry>
 </search>
