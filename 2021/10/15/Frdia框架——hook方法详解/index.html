@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="Frdia框架——hook方法详解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Frida——Java层hook方法">
+<meta property="og:url" content="http://example.com/2021/10/15/Frdia%E6%A1%86%E6%9E%B6%E2%80%94%E2%80%94hook%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="Welcome to L61q4_Cheng&#39;Blog">
+<meta property="og:description" content="Frdia框架——hook方法详解">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-10-15T11:22:42.863Z">
+<meta property="article:modified_time" content="2021-11-25T09:05:28.512Z">
+<meta property="article:author" content="L61q4_Cheng">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="hook">
+<meta property="article:tag" content="Frida框架">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2021/10/15/Frdia%E6%A1%86%E6%9E%B6%E2%80%94%E2%80%94hook%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/10/15/Frdia%E6%A1%86%E6%9E%B6%E2%80%94%E2%80%94hook%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/","path":"2021/10/15/Frdia框架——hook方法详解/","title":"Frida——Java层hook方法"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Frida——Java层hook方法 | Welcome to L61q4_Cheng'Blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Welcome to L61q4_Cheng'Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个逆向小白</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-主页"><a href="/" rel="section"><i class="home fa-fw"></i>主页</a></li>
+        <li class="menu-item menu-item-文章"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>文章</a></li>
+        <li class="menu-item menu-item-标签"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-关于我"><a href="/about/" rel="section"><i class="user fa-fw"></i>关于我</a></li>
+        <li class="menu-item menu-item-分类"><a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Frdia%E6%A1%86%E6%9E%B6%E2%80%94%E2%80%94hook%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3"><span class="nav-number">1.</span> <span class="nav-text">Frdia框架——hook方法详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Hook%E6%99%AE%E9%80%9A%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">Hook普通方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hook%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">hook构造方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hook%E9%87%8D%E8%BD%BD%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">hook重载方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#hook%E6%96%B9%E6%B3%95%E7%9A%84%E6%89%80%E6%9C%89%E9%87%8D%E8%BD%BD"><span class="nav-number">1.3.1.</span> <span class="nav-text">hook方法的所有重载</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hook%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%82%E6%95%B0"><span class="nav-number">1.4.</span> <span class="nav-text">hook自定义参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%8F%82%E6%95%B0%E5%B1%9E%E6%80%A7%E7%9A%84%E4%BF%AE%E6%94%B9"><span class="nav-number">1.5.</span> <span class="nav-text">对象参数属性的修改</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#java%E5%8F%8D%E5%B0%84%EF%BC%88%E5%AF%B9%E5%8F%82%E6%95%B0%E5%B1%9E%E6%80%A7%E7%9A%84%E4%BF%AE%E6%94%B9%EF%BC%89"><span class="nav-number">1.6.</span> <span class="nav-text">java反射（对参数属性的修改）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hook%E5%86%85%E9%83%A8%E7%B1%BB"><span class="nav-number">1.7.</span> <span class="nav-text">hook内部类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hook%E5%8C%BF%E5%90%8D%E7%B1%BB"><span class="nav-number">1.8.</span> <span class="nav-text">hook匿名类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9E%9A%E4%B8%BE%E6%89%80%E6%9C%89%E7%9A%84%E7%B1%BB%E5%92%8C%E7%B1%BB%E7%9A%84%E6%89%80%E6%9C%89%E6%96%B9%E6%B3%95%E3%80%82"><span class="nav-number">1.9.</span> <span class="nav-text">枚举所有的类和类的所有方法。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Java%E5%B1%82%E6%89%93%E5%8D%B0%E5%87%BD%E6%95%B0%E5%A0%86%E6%A0%88%E5%AE%9A%E4%BD%8D%E5%85%B3%E9%94%AE%E4%BB%A3%E7%A0%81"><span class="nav-number">1.10.</span> <span class="nav-text">Java层打印函数堆栈定位关键代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#frida%E6%B3%A8%E5%85%A5%E5%A4%9Adex%E6%96%87%E4%BB%B6"><span class="nav-number">1.11.</span> <span class="nav-text">frida注入多dex文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Frida-server%E7%AB%AF%E5%8F%A3%E5%90%AF%E5%8A%A8%E4%B8%8E%E9%9D%9E%E6%A0%87%E5%87%86%E7%AB%AF%E5%8F%A3%E5%90%AF%E5%8A%A8"><span class="nav-number">1.12.</span> <span class="nav-text">Frida-server端口启动与非标准端口启动</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="L61q4_Cheng"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">L61q4_Cheng</p>
+  <div class="site-description" itemprop="description">安卓逆向日常学习、分享</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/15/Frdia%E6%A1%86%E6%9E%B6%E2%80%94%E2%80%94hook%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="L61q4_Cheng">
+      <meta itemprop="description" content="安卓逆向日常学习、分享">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Welcome to L61q4_Cheng'Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Frida——Java层hook方法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-15 19:22:42" itemprop="dateCreated datePublished" datetime="2021-10-15T19:22:42+08:00">2021-10-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Frida%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">Frida框架</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="Frdia框架——hook方法详解"><a href="#Frdia框架——hook方法详解" class="headerlink" title="Frdia框架——hook方法详解"></a>Frdia框架——hook方法详解</h3><span id="more"></span>
+<h4 id="Hook普通方法"><a href="#Hook普通方法" class="headerlink" title="Hook普通方法"></a>Hook普通方法</h4><p>普通方法包含静态方法、公开方法、私有方法。</p>
+<pre><code class="javascript">Java.perform(function()&#123;
+    var MainActivity=Java.use(&#39;com.example.frida_new1.MainActivity&#39;);//完整包名（注意大小写）
+    MainActivity.getCalc.implementation=function(a,b)&#123;
+        send(&#39;Hook start....&#39;);
+        send(arguments[0]);
+        send(b);//两种打印参数的方式
+        var num=this.getCalc(a,b); 
+        send(num);
+        return num;
+    &#125;
+   &#125;);
+</code></pre>
+<p>详解：arguments[n]在js中相当于类数组对象，在function(a,b)中参数既可以用a、b来表示，也可以用arguments来表示。虽然function指代getCalc方法，但仍然可以在function中调用包中的其他函数，只是在function中可以对getCalc的方法进行参数调整和改变。</p>
+<h4 id="hook构造方法"><a href="#hook构造方法" class="headerlink" title="hook构造方法"></a>hook构造方法</h4><p>大致方法和普通方法相同。因为构造方法与报名相同，所以不需要Util.Util这种写法（我试过直接用构造方法名，直接报错了。。。）构造方法有特有的表示方法：</p>
+<pre><code>类名.$init //这里的$init就表示构造方法。
+</code></pre>
+<p>具体代码：</p>
+<pre><code class="javascript">Java.perform(function()&#123;
+        var money=Java.use(&#39;com.example.frida_new1.Money&#39;);
+        money.$init.implementation=function(a,b)&#123;
+            send(&#39;hook到Money构造函数&#39;);
+            send(arguments[0]);
+            send(b);
+            return this.$init(10000,&quot;美元&quot;);//用this.方法名来表示需要调用的方法（直接用不明确，会报错）
+        &#125;
+    &#125;);
+</code></pre>
+<p>修改函数时，注意参数类型。</p>
+<h4 id="hook重载方法"><a href="#hook重载方法" class="headerlink" title="hook重载方法"></a>hook重载方法</h4><p>和普通方法不同的区别是在寻找方法时使用：</p>
+<pre><code>Utils.cz.overload(&quot;int&quot;).implementation=function(参数)
+</code></pre>
+<p>详解：cz为重载方法名，overload为注明此方法为重载方法并在括号中标明所要hook的重载方法中的参数，并传入。例如:需要hook的重载方法有一个int参数：overload(“int”)即可。但是String类型有点特殊，需要写为overload(“java.lang.String”)因为overload中需要标明的实际是类型所处的全路径。</p>
+<pre><code class="javascript">Java.perform(function()&#123;
+        var Utils=Java.use(&#39;com.example.frida_new1.Utils&#39;);
+        Utils.cz.overload(&quot;int&quot;,&quot;java.lang.String&quot;).implementation=function(a,b)&#123;
+            send(&#39;hook成功！&#39;);
+            send(arguments[0]);
+            send(b);
+            return this.cz();
+        &#125;
+    &#125;);
+</code></pre>
+<h5 id="hook方法的所有重载"><a href="#hook方法的所有重载" class="headerlink" title="hook方法的所有重载"></a>hook方法的所有重载</h5><p>获取一方法的所有重载方法，只需utils.test.overloads，其余操作和正常重载方法相同。</p>
+<pre><code class="js">Java.perform(function()&#123;
+        var utils=Java.use(&#39;com.example.frida_new1.Utils&#39;);
+        console.log(utils.test.overloads.length);//获取重载方法的个数
+        for(var i=0;i&lt;utils.test.overloads.length;i++)&#123;
+            utils.test.overloads[i].implementation=function()&#123;
+                console.log(arguments);//arguments是一个储存所有重载方法的参数
+                return this.test.apply(this,arguments);//只用apply将不同的重载方法返回对应的参数
+                //如果apply中参数有arguments，则直接返回。
+                //如果apply中只有this一个参数，则循环重载方法的个数次。
+            &#125;
+        &#125;
+   &#125;);
+</code></pre>
+<p>如果只想修改无参的重载方法，只需加上一个判断：</p>
+<pre><code class="js">if(arguments.length==0)&#123;
+     return &quot;hook到没有参数的重载方法&quot;;
+&#125;
+</code></pre>
+<h4 id="hook自定义参数"><a href="#hook自定义参数" class="headerlink" title="hook自定义参数"></a>hook自定义参数</h4><p>自定义参数类型时，对于对象参数可以直接调用对象中的方法。如果需要更改参数时，需要重新实例化一个对象来返回：</p>
+<pre><code class="javascript">var 变量名=对象类名.$new(构造参数) 如：var mon =money.$new(123456,&quot;港币&quot;);
+</code></pre>
+<p>注意如果是重载方法中参数为某一对象，在overload中需要标明对象类 的全路径。例如：</p>
+<pre><code class="javascript">Utils.method.overload(&quot;com.example.frida_new1.Money&quot;).implementation=function(参数)
+</code></pre>
+<pre><code class="javascript">Java.perform(function()&#123;
+        var Utils=Java.use(&#39;com.example.frida_new1.Utils&#39;);
+        var money=Java.use(&#39;com.example.frida_new1.Money&#39;);
+        Utils.test.implementation=function(a)&#123;
+            send(&#39;hook到对象参数&#39;);
+            send(a.getInfo());
+            var mon =money.$new(123456,&quot;港币&quot;);
+            send(mon.getInfo());
+            return mon.getInfo();//这里返回值可更改为this.test(mon)，要注意返回值的参数类型！！
+        &#125;
+&#125;);
+</code></pre>
+<h4 id="对象参数属性的修改"><a href="#对象参数属性的修改" class="headerlink" title="对象参数属性的修改"></a>对象参数属性的修改</h4><p>在获取某一实例对象的属性时不能直接通过”类名.变量名”的方法来直接获取。需要表示为“类名.变量名.value”</p>
+<pre><code class="javascript">Java.perform(function()&#123;
+        var Utils=Java.use(&#39;com.example.frida_new1.Utils&#39;);
+        var money=Java.use(&#39;com.example.frida_new1.Money&#39;);
+        Utils.test.overload(&quot;com.example.frida_new1.Money&quot;).implementation=function(a)&#123;
+            send(&#39;hook到对象参数&#39;);
+            var mon =money.$new(123456,&quot;港币&quot;);
+            send(mon.getInfo());
+            mon.name.value=&quot;英镑&quot;;
+            send(mon.name.value);
+            return mon.getInfo();
+        &#125;
+    &#125;);
+</code></pre>
+<h4 id="java反射（对参数属性的修改）"><a href="#java反射（对参数属性的修改）" class="headerlink" title="java反射（对参数属性的修改）"></a>java反射（对参数属性的修改）</h4><p>使用反射的主要作用是可以让其他语言去调用java语言。基本思想：先找类，再找方法，再调用方法。</p>
+<pre><code class="javascript">Java.perform(function()&#123;
+        var Utils=Java.use(&#39;com.example.frida_new1.Utils&#39;);
+        var money=Java.use(&#39;com.example.frida_new1.Money&#39;);
+        var clazz=Java.use(&#39;java.lang.Class&#39;);//定义一个类的构造器
+        Utils.test.overload(&quot;com.example.frida_new1.Money&quot;).implementation=function(a)&#123;
+            var mon =money.$new(123456,&quot;港币&quot;);
+            send(mon.getInfo());
+            var num=Java.cast(mon.getClass(),clazz).getDeclaredField(&#39;num&#39;);
+            //cast中第一个参数是getClass获取类id，（对象所处的类）
+            //getDeclaredField(&#39;&#39;)用来获取字段id,参数为变量名
+            var name=Java.cast(mon.getClass(),clazz).getDeclaredField(&#39;name&#39;);
+            name.setAccessible(true);
+            num.setAccessible(true);//设置属性，不修改app会崩溃
+            var Value=num.get(mon);//获取类传到该变量中
+            console.log(Value);
+            //这里直接使用send()无法成功打印
+            var v1=name.get(mon);
+            console.log(v1);
+            //send(Value);这里直接用send无法输出
+            num.setInt(mon,5000);
+            name.set(mon,&quot;英镑&quot;);//修改变量使用set...()方法：setInt(),set()
+            send(mon.getInfo());
+            return mon.getInfo();
+        &#125;
+&#125;);
+</code></pre>
+<p>注：hook onCreat方法时应该在结尾继续执行该方法，因为onCreat在程序中是一直执行的。在末尾加上 this.onCreat()</p>
+<h4 id="hook内部类"><a href="#hook内部类" class="headerlink" title="hook内部类"></a>hook内部类</h4><p>内部类：在一个类中定义一个新的类。和直接引用不同的是需要在声明类的时候在主类和内部类中加“$”符号。其余写法完全相同。</p>
+<pre><code class="javascript"> Java.perform(function()&#123;
+        var intheclass=Java.use(&#39;com.example.frida_new1.Utils$intheclass&#39;);
+        console.log(intheclass);
+        intheclass.$init.implementation=function(a,b)&#123;
+            send(&#39;Hook start....&#39;);
+            send(a);
+            send(b);
+            b=6666
+            a=&quot;iu&quot;
+            send(&quot;修改后：&quot;+a+&quot; &quot;+b);
+            return this.$init(a,b);
+        &#125;
+   &#125;);
+</code></pre>
+<h4 id="hook匿名类"><a href="#hook匿名类" class="headerlink" title="hook匿名类"></a>hook匿名类</h4><p>匿名类：一个类中包含另一个类，且不需要任何类名直接实例化（没有类名）。主要用于创建一个对象来执行特定的任务，是代码更加简洁。一般匿名类只用一次。首先在smali代码中找到匿名类名（带有$）,其余代码与普通方法类似</p>
+<h4 id="枚举所有的类和类的所有方法。"><a href="#枚举所有的类和类的所有方法。" class="headerlink" title="枚举所有的类和类的所有方法。"></a>枚举所有的类和类的所有方法。</h4><p>枚举所有的类在js中有一个固定的函数：enumerateLoadedClasses，具体使用方法如下：</p>
+<pre><code class="js">Java.perform(function()&#123;
+    //这样枚举会列举出该模拟器中正在运行的所有进程
+        Java.enumerateLoadedClasses(&#123;//枚举加载所有的类
+            onMatch:function(name,handle)&#123;//输出
+                console.log(name);
+            &#125;,
+            onComplete:function()&#123;//枚举结束之后调用，该函数只会调用一次
+            &#125;
+        &#125;);
+    &#125;);
+</code></pre>
+<p>如果在onMatch中进行选择，指定包中的类，则会筛选输出指定类名。</p>
+<pre><code class="js">Java.perform(function()&#123;
+        Java.enumerateLoadedClasses(&#123;//枚举加载所有的类
+            onMatch:function(name,handle)&#123;//输出
+                if(name.indexOf(&quot;com.example.frida_new1&quot;)!=-1)&#123;
+                    console.log(name);
+                    var clazz =Java.use(name);
+                    console.log(clazz);
+                    var methods=clazz.class.getDeclaredMethods();
+                    for(var i=0;i&lt;methods.length;i++)&#123;
+                        console.log(methods[i]);
+                    &#125;
+                &#125;
+            &#125;,
+            onComplete:function()&#123;//枚举结束之后调用，该函数只会调用一次
+            
+            &#125;
+        &#125;);
+    &#125;);
+&quot;&quot;&quot;
+</code></pre>
+<p>枚举所有的方法使用clazz.class.getDeclaredMethods()；</p>
+<pre><code class="javascript">var clazz =Java.use(name);
+console.log(clazz);
+var methods=clazz.class.getDeclaredMethods();
+for(var i=0;i&lt;methods.length;i++)&#123;
+       console.log(methods[i]);
+&#125;
+</code></pre>
+<h4 id="Java层打印函数堆栈定位关键代码"><a href="#Java层打印函数堆栈定位关键代码" class="headerlink" title="Java层打印函数堆栈定位关键代码"></a>Java层打印函数堆栈定位关键代码</h4><p>在xposed中打印函数堆栈一般使用：</p>
+<pre><code class="java">log.d(&quot;TAG&quot;,&quot;MSG&quot;,new Trowable());
+</code></pre>
+<p>在frida中一般不使用，而使用Log.getStackTranceString()方法。（该方法也可以打印信息）。</p>
+<p> java.cast()：强制类型转换。                                                                                                                                                  </p>
+<p>java.openClassFile()；    //注入dex文件                                                                                                                                                  </p>
+<p> java.registerClass()    //在Frida中注册一个类写进app，很少用到。                                                                               </p>
+<p>java.array();//构造任意类型的数组。</p>
+<h4 id="frida注入多dex文件"><a href="#frida注入多dex文件" class="headerlink" title="frida注入多dex文件"></a>frida注入多dex文件</h4><p>当hook比较复杂时（需要大量使用java函数，想为app添加大量函数），很多函数不方便引入js中使用，就需要正向的java函数来注入到frida中，此时引入注入dex文件这一方法，方便hook。<strong>首先需要获取dex文件</strong>，建议直接将所需要的函数在另一个app中实现，打包成apk分离出dex文件即可（分离出dex文件后需要把他放在adnroid的缓存区：“adb push 文件路径 、data/local/tmp/xxx.dex）。再使用openClassFile函数来打开这个文件。获取到这个包后可以直接调用包中 的函数。相当于正向调用。</p>
+<pre><code class="js">Java.perform(function()&#123;
+        Java.openClassFile(&quot;/data/local/tmp/fridadex.dex&quot;).load();
+        var frida=Java.use(&quot;简单实现函数的打包的apk的包名&quot;);//dex中的函数所在类名
+        var main=Java.use(&quot;com.example.frida_new1.Money&quot;);//开始hook
+        main.fridadex.implementation=function(a,b)&#123;
+            var cal=frida.xxx(a,b);
+            send(cal);
+            return cal;
+        &#125;
+    &#125;);
+</code></pre>
+<h4 id="Frida-server端口启动与非标准端口启动"><a href="#Frida-server端口启动与非标准端口启动" class="headerlink" title="Frida-server端口启动与非标准端口启动"></a>Frida-server端口启动与非标准端口启动</h4><p>启动Frida-server一般采用默认端口：</p>
+<pre><code>adb forward tcp:27042 tcp:27042
+adb forward tcp:27043 tcp:24043
+</code></pre>
+<p>为了防止被检测，会使用非标准端口：                                                                                                    </p>
+<p> 1、启动frida-server时使用”./data/local/tmp/frida-server -l 127.0.0.1:9999 “                                            </p>
+<p> 2、转发端口时”adb forward tcp:9999”                                                                                                         </p>
+<p> 3、在frida中修改为：</p>
+<pre><code class="python">process = frida.get_device_manager().add_remote_device(&#39;127.0.0.1:9999&#39;).attch(&#39;Frida_new1&#39;)
+</code></pre>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Android/" rel="tag"># Android</a>
+              <a href="/tags/hook/" rel="tag"># hook</a>
+              <a href="/tags/Frida%E6%A1%86%E6%9E%B6/" rel="tag"># Frida框架</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/08/31/Xposed%20%E2%80%94hook%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/" rel="prev" title="Xposed——hook方法学习">
+                  <i class="fa fa-chevron-left"></i> Xposed——hook方法学习
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC8zODU3Mi8xNTEwMA=="></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">L61q4_Cheng</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script src="/js/third-party/comments/livere.js"></script>
+
+</body>
+</html>

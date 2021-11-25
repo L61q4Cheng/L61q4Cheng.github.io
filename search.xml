@@ -1679,94 +1679,90 @@ public static void main(String[] args) throws Exception &#123;
     <url>/2021/08/05/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E7%AE%97%E6%B3%95%EF%BC%88RSA%E7%AF%87%EF%BC%89/</url>
     <content><![CDATA[<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>RSA加密算法是一种非对称加密算法，在RSA算法中，加密密钥（即公开密钥）PK是公开信息，而解密密钥（即秘密密钥）SK是需要保密的。加密算法E和解密算法D也都是公开的。对极大整数做因数分解的难度决定了RSA算法的可靠性。</p>
 <span id="more"></span>
+
 <h3 id="加密原理"><a href="#加密原理" class="headerlink" title="加密原理"></a>加密原理</h3><h4 id="一、生成公钥和私钥"><a href="#一、生成公钥和私钥" class="headerlink" title="一、生成公钥和私钥"></a>一、生成公钥和私钥</h4><ol>
-<li><p>随机生成两个素数P、Q。</p>
-</li>
-<li><p>将P、Q两个素数相乘得到一个数N。</p>
-</li>
-<li><p>计算N的欧拉函数M，M=(P-1)*(Q-1)。</p>
-</li>
-<li><p>选择一个整数E使其与M互质。</p>
-</li>
-<li><p>给定一个整数D，使得(E*D)%M=1。</p>
-</li>
-<li><p>得到N、E、D三个数，其中（N、E）作为公钥，（N、D）作为私钥（公钥和私钥可以互换）。</p>
-<h4 id="二、生成密文"><a href="#二、生成密文" class="headerlink" title="二、生成密文"></a>二、生成密文</h4><p>使用公钥（N、E）对data进行加密。<br>加密过程：</p>
+<li>随机生成两个素数P、Q。</li>
+<li>将P、Q两个素数相乘得到一个数N。</li>
+<li>计算N的欧拉函数M，M=(P-1)*(Q-1)。</li>
+<li>选择一个整数E使其与M互质。</li>
+<li>给定一个整数D，使得(E*D)%M=1。</li>
+<li>得到N、E、D三个数，其中（N、E）作为公钥，（N、D）作为私钥（公钥和私钥可以互换）。<h4 id="二、生成密文"><a href="#二、生成密文" class="headerlink" title="二、生成密文"></a>二、生成密文</h4>使用公钥（N、E）对data进行加密。<br>加密过程：<strong>这里的E相当于公钥</strong></li>
+</ol>
 <pre><code class="math">data^E mod N = [data]
 </code></pre>
-<h4 id="三、密文解密"><a href="#三、密文解密" class="headerlink" title="三、密文解密"></a>三、密文解密</h4><p>使用私钥（N、D）对密文进行解密。<br>解密过程：</p>
+<h4 id="三、密文解密"><a href="#三、密文解密" class="headerlink" title="三、密文解密"></a>三、密文解密</h4><p>使用私钥（N、D）对密文进行解密。<br>解密过程：<strong>这里的D相当于密钥</strong></p>
 <pre><code class="math">[data]^D mod N = data
 </code></pre>
+<h3 id="欧拉定理"><a href="#欧拉定理" class="headerlink" title="欧拉定理"></a>欧拉定理</h3><p><img src="D:\Desktop\QQ截图20211008135924.png" alt="QQ截图20211008135924"></p>
+<p>注：欧拉函数f(n)表示在小于或等于n的正整数中，有多少个与n互质的数</p>
 <h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><h4 id="java"><a href="#java" class="headerlink" title="java"></a>java</h4><pre><code>public class RSA &#123;
- private int N;  // 和公钥E一起分发出去
- private int E; // E是公钥，随机选取（必须和T互质）
- private int D; // D是密钥（D和E可以互换）
- public RSA() &#123;
-     createKey();
- &#125;
- // 产生密钥
- private void createKey() &#123;
-     // 产生两个随机的素数
-     int p=61,q=53;
-     // 计算N和T
-     N = p*q;
-     int t = (p-1)*(q-1);
-     // 选择E（和T互质就行）
-     E = 17;
-     // 计算D
-     int[] r = new int[2];
-     Gcd.extendGcd(E, t, r); // 调用扩充欧几里得算法计算D
-     D = r[0];
-     // 调整d（d为正数）
-     while(D &lt; 0) D +=t;
- &#125;
+    private int N;  // 和公钥E一起分发出去
+    private int E; // E是公钥，随机选取（必须和T互质）
+    private int D; // D是密钥（D和E可以互换）
+    public RSA() &#123;
+        createKey();
+    &#125;
+    // 产生密钥
+    private void createKey() &#123;
+        // 产生两个随机的素数
+        int p=61,q=53;
+        // 计算N和T
+        N = p*q;
+        int t = (p-1)*(q-1);
+        // 选择E（和T互质就行）
+        E = 17;
+        // 计算D
+        int[] r = new int[2];
+        Gcd.extendGcd(E, t, r); // 调用扩充欧几里得算法计算D
+        D = r[0];
+        // 调整d（d为正数）
+        while(D &lt; 0) D +=t;
+    &#125;
 
- /**
-  * 利用公钥对密文m加密
-  * @param m 必须是整数，且m必须小于N
-  * @return c=pow(m,E)%N
-  */
- public int encrypt(int m) &#123; // 注意，这里很容易溢出（虽然此算法已经极度简化了）
-     BigInteger bm = BigInteger.valueOf(m);
-     return bm.pow(E).mod(BigInteger.valueOf(N)).intValue();
- &#125;
+    /**
+     * 利用公钥对密文m加密
+     * @param m 必须是整数，且m必须小于N
+     * @return c=pow(m,E)%N
+     */
+    public int encrypt(int m) &#123; // 注意，这里很容易溢出（虽然此算法已经极度简化了）
+        BigInteger bm = BigInteger.valueOf(m);
+        return bm.pow(E).mod(BigInteger.valueOf(N)).intValue();
+    &#125;
 
- /**
-  * 利用密钥对明文c解密
-  * @param c
-  * @return m1=pow(c, D)%N
-  */
- public int decrypt(int c) &#123; // 同样考虑溢出情况
-     BigInteger bc = BigInteger.valueOf(c);
-     return bc.pow(D).mod(BigInteger.valueOf(N)).intValue();
- &#125;
- public int getPublicKey() &#123;
-     return E;
- &#125;
- public void setPublicKey(int E) &#123;
-     this.E = E;
- &#125;
- public int getN() &#123;
-     return N;
- &#125;
- public void setN(int N) &#123;
-     this.N = N;
- &#125;
- public static void main(String[] args) &#123;
-     RSA rsa = new RSA();
-     System.out.println(&quot;公钥：E=&quot;+rsa.getPublicKey()+&quot;,N=&quot;+rsa.getN()); // 打印公钥
-     int m = 65; // 明文
-     System.out.println(&quot;密文：&quot;+m);
-     int c = rsa.encrypt(m); // 对明文m加密，得到密文c
-     System.out.println(&quot;明文：&quot;+c);
-     int m1 = rsa.decrypt(c); // 对密文c解密，得到明文m1
-     System.out.println(&quot;解密出来的密文：&quot;+m1);
- &#125;
+    /**
+     * 利用密钥对明文c解密
+     * @param c
+     * @return m1=pow(c, D)%N
+     */
+    public int decrypt(int c) &#123; // 同样考虑溢出情况
+        BigInteger bc = BigInteger.valueOf(c);
+        return bc.pow(D).mod(BigInteger.valueOf(N)).intValue();
+    &#125;
+    public int getPublicKey() &#123;
+        return E;
+    &#125;
+    public void setPublicKey(int E) &#123;
+        this.E = E;
+    &#125;
+    public int getN() &#123;
+        return N;
+    &#125;
+    public void setN(int N) &#123;
+        this.N = N;
+    &#125;
+    public static void main(String[] args) &#123;
+        RSA rsa = new RSA();
+        System.out.println(&quot;公钥：E=&quot;+rsa.getPublicKey()+&quot;,N=&quot;+rsa.getN()); // 打印公钥
+        int m = 65; // 明文
+        System.out.println(&quot;密文：&quot;+m);
+        int c = rsa.encrypt(m); // 对明文m加密，得到密文c
+        System.out.println(&quot;明文：&quot;+c);
+        int m1 = rsa.decrypt(c); // 对密文c解密，得到明文m1
+        System.out.println(&quot;解密出来的密文：&quot;+m1);
+    &#125;
 &#125;
 </code></pre>
-<h4 id="代码实现（python）"><a href="#代码实现（python）" class="headerlink" title="代码实现（python）"></a>代码实现（python）</h4></li>
-</ol>
-<pre><code class="python">def isPrime(number):
+<h4 id="代码实现（python）"><a href="#代码实现（python）" class="headerlink" title="代码实现（python）"></a>代码实现（python）</h4><pre><code class="python">def isPrime(number):
     import math
     i = 2
     sqrtnum = (int)(math.sqrt(number))
@@ -1972,6 +1968,7 @@ public class Xposedhook implements IXposedHookLoadPackage &#123;
     <url>/2021/08/31/Xposed%20%E2%80%94hook%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/</url>
     <content><![CDATA[<p>Xposed是基于java层的hook框架，在不修改apk源码的情况下，编写自己的模块来改变apk的行为。以下总结了常见的Xposed的hook方法：</p>
 <span id="more"></span>
+
 <h3 id="hook普通方法"><a href="#hook普通方法" class="headerlink" title="hook普通方法"></a>hook普通方法</h3><p>创建一个类继承IXposedHookLoadPackage，修改 handleLoadPackage方法，首先要判断是否为特定的包。</p>
 <pre><code class="java">public void handleLoadPackage(XC_LoadPackage.LoadPackageParam Param) throws Throwable &#123;
     if(Param.packageName.equals(&quot;com.example.xposed_new3&quot;))&#123;......&#125;
@@ -2141,23 +2138,25 @@ XposedHelpers.callStaticMethod(clazz1,&quot;methodName&quot;,new Object()&#123;.
 XposedHelpers.getStaticBooleanField(clazz2,&quot;fieldName&quot;);
 </code></pre>
 <h3 id="Xposed—hook替换函数"><a href="#Xposed—hook替换函数" class="headerlink" title="Xposed—hook替换函数"></a>Xposed—hook替换函数</h3><pre><code class="java">if(loadPackageParam.packageName.equals(&quot;com.example.xposed_new8&quot;))&#123;
-            Class&lt;?&gt; clazz=XposedHelpers.findClass(&quot;com.example.xposed_new8.MainActivity&quot;,loadPackageParam.classLoader);
+            Class&lt;?&gt;clazz=XposedHelpers.findClass(
+                &quot;com.example.xposed_new8.MainActivity&quot;,
+                loadPackageParam.classLoader);
             XposedHelpers.findAndHookMethod(
                     &quot;com.example.xposed_new8.MainActivity&quot;,
                     loadPackageParam.classLoader,
                     &quot;ButtonTest1&quot;,
                     new XC_MethodReplacement() &#123;
-                        @Override
-                        protected Object replaceHookedMethod(MethodHookParam methodHookParam) throws Throwable &#123;
+                    @Override
+                    protected Object replaceHookedMethod(MethodHookParam methodHookParam) throws Throwable &#123;
                             XposedBridge.log(&quot;方法替换成功&quot;);
                             XposedHelpers.callMethod(clazz,&quot;ButtonTest2&quot;);//主动调用ButtonTest2
                             return null;
                         &#125;
                     &#125;
             );
-        &#125;
+&#125;
 </code></pre>
-<h3 id="Xposed—hook多DEX"><a href="#Xposed—hook多DEX" class="headerlink" title="Xposed—hook多DEX"></a>Xposed—hook多DEX</h3><p>在多dex文件时，有些类hook不到，采用attach方法来解决。</p>
+<h3 id="Xposed—hook多DEX"><a href="#Xposed—hook多DEX" class="headerlink" title="*Xposed—hook多DEX"></a>*Xposed—hook多DEX</h3><p>在一个apk中有多个dex文件时，在apk打包的时候优先加载主dex文件，会优先有些类hook不到，采用attach方法来解决。</p>
 <pre><code class="java">XposedHelpers.findAndHookMethod(
         Application.class,
         &quot;attach&quot;,
@@ -2191,6 +2190,229 @@ XposedHelpers.getStaticBooleanField(clazz2,&quot;fieldName&quot;);
         <tag>Android</tag>
         <tag>Xposed框架</tag>
         <tag>hook</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Frida——Java层hook方法</title>
+    <url>/2021/10/15/Frdia%E6%A1%86%E6%9E%B6%E2%80%94%E2%80%94hook%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[<h3 id="Frdia框架——hook方法详解"><a href="#Frdia框架——hook方法详解" class="headerlink" title="Frdia框架——hook方法详解"></a>Frdia框架——hook方法详解</h3><span id="more"></span>
+<h4 id="Hook普通方法"><a href="#Hook普通方法" class="headerlink" title="Hook普通方法"></a>Hook普通方法</h4><p>普通方法包含静态方法、公开方法、私有方法。</p>
+<pre><code class="javascript">Java.perform(function()&#123;
+    var MainActivity=Java.use(&#39;com.example.frida_new1.MainActivity&#39;);//完整包名（注意大小写）
+    MainActivity.getCalc.implementation=function(a,b)&#123;
+        send(&#39;Hook start....&#39;);
+        send(arguments[0]);
+        send(b);//两种打印参数的方式
+        var num=this.getCalc(a,b); 
+        send(num);
+        return num;
+    &#125;
+   &#125;);
+</code></pre>
+<p>详解：arguments[n]在js中相当于类数组对象，在function(a,b)中参数既可以用a、b来表示，也可以用arguments来表示。虽然function指代getCalc方法，但仍然可以在function中调用包中的其他函数，只是在function中可以对getCalc的方法进行参数调整和改变。</p>
+<h4 id="hook构造方法"><a href="#hook构造方法" class="headerlink" title="hook构造方法"></a>hook构造方法</h4><p>大致方法和普通方法相同。因为构造方法与报名相同，所以不需要Util.Util这种写法（我试过直接用构造方法名，直接报错了。。。）构造方法有特有的表示方法：</p>
+<pre><code>类名.$init //这里的$init就表示构造方法。
+</code></pre>
+<p>具体代码：</p>
+<pre><code class="javascript">Java.perform(function()&#123;
+        var money=Java.use(&#39;com.example.frida_new1.Money&#39;);
+        money.$init.implementation=function(a,b)&#123;
+            send(&#39;hook到Money构造函数&#39;);
+            send(arguments[0]);
+            send(b);
+            return this.$init(10000,&quot;美元&quot;);//用this.方法名来表示需要调用的方法（直接用不明确，会报错）
+        &#125;
+    &#125;);
+</code></pre>
+<p>修改函数时，注意参数类型。</p>
+<h4 id="hook重载方法"><a href="#hook重载方法" class="headerlink" title="hook重载方法"></a>hook重载方法</h4><p>和普通方法不同的区别是在寻找方法时使用：</p>
+<pre><code>Utils.cz.overload(&quot;int&quot;).implementation=function(参数)
+</code></pre>
+<p>详解：cz为重载方法名，overload为注明此方法为重载方法并在括号中标明所要hook的重载方法中的参数，并传入。例如:需要hook的重载方法有一个int参数：overload(“int”)即可。但是String类型有点特殊，需要写为overload(“java.lang.String”)因为overload中需要标明的实际是类型所处的全路径。</p>
+<pre><code class="javascript">Java.perform(function()&#123;
+        var Utils=Java.use(&#39;com.example.frida_new1.Utils&#39;);
+        Utils.cz.overload(&quot;int&quot;,&quot;java.lang.String&quot;).implementation=function(a,b)&#123;
+            send(&#39;hook成功！&#39;);
+            send(arguments[0]);
+            send(b);
+            return this.cz();
+        &#125;
+    &#125;);
+</code></pre>
+<h5 id="hook方法的所有重载"><a href="#hook方法的所有重载" class="headerlink" title="hook方法的所有重载"></a>hook方法的所有重载</h5><p>获取一方法的所有重载方法，只需utils.test.overloads，其余操作和正常重载方法相同。</p>
+<pre><code class="js">Java.perform(function()&#123;
+        var utils=Java.use(&#39;com.example.frida_new1.Utils&#39;);
+        console.log(utils.test.overloads.length);//获取重载方法的个数
+        for(var i=0;i&lt;utils.test.overloads.length;i++)&#123;
+            utils.test.overloads[i].implementation=function()&#123;
+                console.log(arguments);//arguments是一个储存所有重载方法的参数
+                return this.test.apply(this,arguments);//只用apply将不同的重载方法返回对应的参数
+                //如果apply中参数有arguments，则直接返回。
+                //如果apply中只有this一个参数，则循环重载方法的个数次。
+            &#125;
+        &#125;
+   &#125;);
+</code></pre>
+<p>如果只想修改无参的重载方法，只需加上一个判断：</p>
+<pre><code class="js">if(arguments.length==0)&#123;
+     return &quot;hook到没有参数的重载方法&quot;;
+&#125;
+</code></pre>
+<h4 id="hook自定义参数"><a href="#hook自定义参数" class="headerlink" title="hook自定义参数"></a>hook自定义参数</h4><p>自定义参数类型时，对于对象参数可以直接调用对象中的方法。如果需要更改参数时，需要重新实例化一个对象来返回：</p>
+<pre><code class="javascript">var 变量名=对象类名.$new(构造参数) 如：var mon =money.$new(123456,&quot;港币&quot;);
+</code></pre>
+<p>注意如果是重载方法中参数为某一对象，在overload中需要标明对象类 的全路径。例如：</p>
+<pre><code class="javascript">Utils.method.overload(&quot;com.example.frida_new1.Money&quot;).implementation=function(参数)
+</code></pre>
+<pre><code class="javascript">Java.perform(function()&#123;
+        var Utils=Java.use(&#39;com.example.frida_new1.Utils&#39;);
+        var money=Java.use(&#39;com.example.frida_new1.Money&#39;);
+        Utils.test.implementation=function(a)&#123;
+            send(&#39;hook到对象参数&#39;);
+            send(a.getInfo());
+            var mon =money.$new(123456,&quot;港币&quot;);
+            send(mon.getInfo());
+            return mon.getInfo();//这里返回值可更改为this.test(mon)，要注意返回值的参数类型！！
+        &#125;
+&#125;);
+</code></pre>
+<h4 id="对象参数属性的修改"><a href="#对象参数属性的修改" class="headerlink" title="对象参数属性的修改"></a>对象参数属性的修改</h4><p>在获取某一实例对象的属性时不能直接通过”类名.变量名”的方法来直接获取。需要表示为“类名.变量名.value”</p>
+<pre><code class="javascript">Java.perform(function()&#123;
+        var Utils=Java.use(&#39;com.example.frida_new1.Utils&#39;);
+        var money=Java.use(&#39;com.example.frida_new1.Money&#39;);
+        Utils.test.overload(&quot;com.example.frida_new1.Money&quot;).implementation=function(a)&#123;
+            send(&#39;hook到对象参数&#39;);
+            var mon =money.$new(123456,&quot;港币&quot;);
+            send(mon.getInfo());
+            mon.name.value=&quot;英镑&quot;;
+            send(mon.name.value);
+            return mon.getInfo();
+        &#125;
+    &#125;);
+</code></pre>
+<h4 id="java反射（对参数属性的修改）"><a href="#java反射（对参数属性的修改）" class="headerlink" title="java反射（对参数属性的修改）"></a>java反射（对参数属性的修改）</h4><p>使用反射的主要作用是可以让其他语言去调用java语言。基本思想：先找类，再找方法，再调用方法。</p>
+<pre><code class="javascript">Java.perform(function()&#123;
+        var Utils=Java.use(&#39;com.example.frida_new1.Utils&#39;);
+        var money=Java.use(&#39;com.example.frida_new1.Money&#39;);
+        var clazz=Java.use(&#39;java.lang.Class&#39;);//定义一个类的构造器
+        Utils.test.overload(&quot;com.example.frida_new1.Money&quot;).implementation=function(a)&#123;
+            var mon =money.$new(123456,&quot;港币&quot;);
+            send(mon.getInfo());
+            var num=Java.cast(mon.getClass(),clazz).getDeclaredField(&#39;num&#39;);
+            //cast中第一个参数是getClass获取类id，（对象所处的类）
+            //getDeclaredField(&#39;&#39;)用来获取字段id,参数为变量名
+            var name=Java.cast(mon.getClass(),clazz).getDeclaredField(&#39;name&#39;);
+            name.setAccessible(true);
+            num.setAccessible(true);//设置属性，不修改app会崩溃
+            var Value=num.get(mon);//获取类传到该变量中
+            console.log(Value);
+            //这里直接使用send()无法成功打印
+            var v1=name.get(mon);
+            console.log(v1);
+            //send(Value);这里直接用send无法输出
+            num.setInt(mon,5000);
+            name.set(mon,&quot;英镑&quot;);//修改变量使用set...()方法：setInt(),set()
+            send(mon.getInfo());
+            return mon.getInfo();
+        &#125;
+&#125;);
+</code></pre>
+<p>注：hook onCreat方法时应该在结尾继续执行该方法，因为onCreat在程序中是一直执行的。在末尾加上 this.onCreat()</p>
+<h4 id="hook内部类"><a href="#hook内部类" class="headerlink" title="hook内部类"></a>hook内部类</h4><p>内部类：在一个类中定义一个新的类。和直接引用不同的是需要在声明类的时候在主类和内部类中加“$”符号。其余写法完全相同。</p>
+<pre><code class="javascript"> Java.perform(function()&#123;
+        var intheclass=Java.use(&#39;com.example.frida_new1.Utils$intheclass&#39;);
+        console.log(intheclass);
+        intheclass.$init.implementation=function(a,b)&#123;
+            send(&#39;Hook start....&#39;);
+            send(a);
+            send(b);
+            b=6666
+            a=&quot;iu&quot;
+            send(&quot;修改后：&quot;+a+&quot; &quot;+b);
+            return this.$init(a,b);
+        &#125;
+   &#125;);
+</code></pre>
+<h4 id="hook匿名类"><a href="#hook匿名类" class="headerlink" title="hook匿名类"></a>hook匿名类</h4><p>匿名类：一个类中包含另一个类，且不需要任何类名直接实例化（没有类名）。主要用于创建一个对象来执行特定的任务，是代码更加简洁。一般匿名类只用一次。首先在smali代码中找到匿名类名（带有$）,其余代码与普通方法类似</p>
+<h4 id="枚举所有的类和类的所有方法。"><a href="#枚举所有的类和类的所有方法。" class="headerlink" title="枚举所有的类和类的所有方法。"></a>枚举所有的类和类的所有方法。</h4><p>枚举所有的类在js中有一个固定的函数：enumerateLoadedClasses，具体使用方法如下：</p>
+<pre><code class="js">Java.perform(function()&#123;
+    //这样枚举会列举出该模拟器中正在运行的所有进程
+        Java.enumerateLoadedClasses(&#123;//枚举加载所有的类
+            onMatch:function(name,handle)&#123;//输出
+                console.log(name);
+            &#125;,
+            onComplete:function()&#123;//枚举结束之后调用，该函数只会调用一次
+            &#125;
+        &#125;);
+    &#125;);
+</code></pre>
+<p>如果在onMatch中进行选择，指定包中的类，则会筛选输出指定类名。</p>
+<pre><code class="js">Java.perform(function()&#123;
+        Java.enumerateLoadedClasses(&#123;//枚举加载所有的类
+            onMatch:function(name,handle)&#123;//输出
+                if(name.indexOf(&quot;com.example.frida_new1&quot;)!=-1)&#123;
+                    console.log(name);
+                    var clazz =Java.use(name);
+                    console.log(clazz);
+                    var methods=clazz.class.getDeclaredMethods();
+                    for(var i=0;i&lt;methods.length;i++)&#123;
+                        console.log(methods[i]);
+                    &#125;
+                &#125;
+            &#125;,
+            onComplete:function()&#123;//枚举结束之后调用，该函数只会调用一次
+            
+            &#125;
+        &#125;);
+    &#125;);
+&quot;&quot;&quot;
+</code></pre>
+<p>枚举所有的方法使用clazz.class.getDeclaredMethods()；</p>
+<pre><code class="javascript">var clazz =Java.use(name);
+console.log(clazz);
+var methods=clazz.class.getDeclaredMethods();
+for(var i=0;i&lt;methods.length;i++)&#123;
+       console.log(methods[i]);
+&#125;
+</code></pre>
+<h4 id="Java层打印函数堆栈定位关键代码"><a href="#Java层打印函数堆栈定位关键代码" class="headerlink" title="Java层打印函数堆栈定位关键代码"></a>Java层打印函数堆栈定位关键代码</h4><p>在xposed中打印函数堆栈一般使用：</p>
+<pre><code class="java">log.d(&quot;TAG&quot;,&quot;MSG&quot;,new Trowable());
+</code></pre>
+<p>在frida中一般不使用，而使用Log.getStackTranceString()方法。（该方法也可以打印信息）。</p>
+<p> java.cast()：强制类型转换。                                                                                                                                                  </p>
+<p>java.openClassFile()；    //注入dex文件                                                                                                                                                  </p>
+<p> java.registerClass()    //在Frida中注册一个类写进app，很少用到。                                                                               </p>
+<p>java.array();//构造任意类型的数组。</p>
+<h4 id="frida注入多dex文件"><a href="#frida注入多dex文件" class="headerlink" title="frida注入多dex文件"></a>frida注入多dex文件</h4><p>当hook比较复杂时（需要大量使用java函数，想为app添加大量函数），很多函数不方便引入js中使用，就需要正向的java函数来注入到frida中，此时引入注入dex文件这一方法，方便hook。<strong>首先需要获取dex文件</strong>，建议直接将所需要的函数在另一个app中实现，打包成apk分离出dex文件即可（分离出dex文件后需要把他放在adnroid的缓存区：“adb push 文件路径 、data/local/tmp/xxx.dex）。再使用openClassFile函数来打开这个文件。获取到这个包后可以直接调用包中 的函数。相当于正向调用。</p>
+<pre><code class="js">Java.perform(function()&#123;
+        Java.openClassFile(&quot;/data/local/tmp/fridadex.dex&quot;).load();
+        var frida=Java.use(&quot;简单实现函数的打包的apk的包名&quot;);//dex中的函数所在类名
+        var main=Java.use(&quot;com.example.frida_new1.Money&quot;);//开始hook
+        main.fridadex.implementation=function(a,b)&#123;
+            var cal=frida.xxx(a,b);
+            send(cal);
+            return cal;
+        &#125;
+    &#125;);
+</code></pre>
+<h4 id="Frida-server端口启动与非标准端口启动"><a href="#Frida-server端口启动与非标准端口启动" class="headerlink" title="Frida-server端口启动与非标准端口启动"></a>Frida-server端口启动与非标准端口启动</h4><p>启动Frida-server一般采用默认端口：</p>
+<pre><code>adb forward tcp:27042 tcp:27042
+adb forward tcp:27043 tcp:24043
+</code></pre>
+<p>为了防止被检测，会使用非标准端口：                                                                                                    </p>
+<p> 1、启动frida-server时使用”./data/local/tmp/frida-server -l 127.0.0.1:9999 “                                            </p>
+<p> 2、转发端口时”adb forward tcp:9999”                                                                                                         </p>
+<p> 3、在frida中修改为：</p>
+<pre><code class="python">process = frida.get_device_manager().add_remote_device(&#39;127.0.0.1:9999&#39;).attch(&#39;Frida_new1&#39;)
+</code></pre>
+]]></content>
+      <categories>
+        <category>Frida框架</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+        <tag>hook</tag>
+        <tag>Frida框架</tag>
       </tags>
   </entry>
 </search>
