@@ -2415,4 +2415,85 @@ adb forward tcp:27043 tcp:24043
         <tag>Frida框架</tag>
       </tags>
   </entry>
+  <entry>
+    <title>初识Frida框架</title>
+    <url>/2021/09/09/%E5%88%9D%E8%AF%86Frida%E6%A1%86%E6%9E%B6/</url>
+    <content><![CDATA[<h2 id="初识Frida框架"><a href="#初识Frida框架" class="headerlink" title="初识Frida框架"></a>初识Frida框架</h2><span id="more"></span>
+
+<p>Frida是一款基于Python + JavaScript 的hook框架，本质是一种动态插桩技术。可以用于Android、Windows、iOS等各大平台，其执行脚本基于Python或者Node.js写成，而注入代码用JavaScript写成。相比于Xposed更加便捷，环境安装简单，使用方便。</p>
+<h3 id="Frida安装"><a href="#Frida安装" class="headerlink" title="Frida安装"></a>Frida安装</h3><p>1、安装Python（这里不做介绍）。</p>
+<p>2、安装frida、frida-tools(两个版本必须一致，我这里都为15.1.2)</p>
+<pre><code>pip install pipfrida 
+pip install frida-tools
+</code></pre>
+<p>安装之后可以检查版本是否一致。</p>
+<p><img src="https://s2.loli.net/2022/01/21/sZ46KVfCmnMktuj.png" alt="QQ截图20211011210105.png"></p>
+<p>2、连接模拟器，安装frida-server。</p>
+<p><a href="https://github.com/frida/frida/releases">frida-server下载链接</a>，找到对应的版本，手机是arm64，模拟器是x86，下载之后解压，将文件改名为fs。</p>
+<p>连接模拟器，adb devices 显示不到打开的模拟器时手动连接。如下：</p>
+<pre><code>夜神模拟器：adb connect 127.0.0.1:62001
+逍遥安卓模拟器：adb connect 127.0.0.1:21503
+天天模拟器：adb connect 127.0.0.1:6555
+海马玩模拟器：adb connect 127.0.0.1:53001
+网易MUMU模拟器：adb connect 127.0.0.1:7555 MacOS:adb connect 127.0.0.1:5555
+genymotion模拟器：adb connect 127.0.0.1:5555
+谷歌原生模拟器：adb connect &lt;设备的IP地址&gt;：5555
+</code></pre>
+<p>连接之后进行如下操作：</p>
+<pre><code>1、adb push fs文件所在地址/fa /data/local/tmp
+2、adb shell
+3、su
+4、cd /data/local/tmp
+5、chmod 777 fs
+6、./fs
+(如果此时光标在下一行闪，说明frida运行成功)
+</code></pre>
+<p><img src="https://s2.loli.net/2022/01/21/IVaptHr3NfkxTZj.png" alt="QQ截图20211011212732.png"></p>
+<p>3、、验证是否安装成功</p>
+<p>不要关闭此页面，另外打开一个cmd窗口，执行以下指令：frida-ps -U，如果该模拟器中运行的所有进程都显示出来，说明frida安装成功。</p>
+<h3 id="Frida初体验"><a href="#Frida初体验" class="headerlink" title="Frida初体验"></a>Frida初体验</h3><p>frida框架最大的优势就是操作简单，相比于Xposed来说不需要另生成一个项目来运行，只需要编写一个插件直接再命令框执行即可。Frida的编写可以用js、python、js+python三种方法来写。初学者建议使用js+python方式来写，只需要编写相应的js代码，python文件基本固定。</p>
+<p>在使用插件进行hook时，首先应该转发端口。具体操作如下：</p>
+<p><img src="https://s2.loli.net/2022/01/21/cQ2DnkFjBvYu9ao.png" alt="QQ截图20211011214700.png"></p>
+<p>脚本样例：</p>
+<pre><code>import frida
+import sys
+
+def on_message(message,data): 
+    print(message)
+
+jscode = &quot;&quot;&quot;
+Java.perform(function()&#123;
+    var MainActivity=Java.use(&#39;com.example.frida_new1.MainActivity&#39;);
+    MainActivity.getCale.implementation=function()&#123;
+        send(&#39;Hook start....&#39;);
+        return &#39;hook成功!!!&#39;
+    &#125;
+   &#125;);
+&quot;&quot;&quot;
+process = frida.get_remote_device().attach(&#39;Frida_new1&#39;)//这里踩了很多坑，attach里面抓包并不是完整包名，而是文件名
+script = process.create_script(jscode)
+script.on(&#39;message&#39;, on_message)
+script.load()
+sys.stdin.read()
+</code></pre>
+<p>这里有两种方法运行该插件：</p>
+<p>1、打开python所在的目录，打开cmd页面执行</p>
+<pre><code>python test.py
+</code></pre>
+<p>2、在NotePad++等高级记事本中，直接运行。建议将如下命令保存以便后面可以直接使用该文件运行。</p>
+<pre><code>cmd /k python &quot;D:\Desktop\test.py&quot; &amp; ECHO &amp; PAUSE &amp; EXIT//双引号中表示脚本的路径
+</code></pre>
+<p>运行之后点击按钮(这里hook 的是Button事件的显示方法)</p>
+<p><img src="https://s2.loli.net/2022/01/21/v8ab6grsUD7IqiO.png" alt="QQ截图20211011214839.png"></p>
+<p>Hook 成功。</p>
+]]></content>
+      <categories>
+        <category>Frida框架</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+        <tag>hook</tag>
+        <tag>Frida框架</tag>
+      </tags>
+  </entry>
 </search>
