@@ -624,26 +624,307 @@ public class SHAUtil &#123;
       </tags>
   </entry>
   <entry>
-    <title>初识Xposed框架</title>
-    <url>/2021/08/15/%E5%88%9D%E8%AF%86Xposed%E6%A1%86%E6%9E%B6/</url>
-    <content><![CDATA[<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p><strong>Xposed</strong>（也被称作Xposed框架、XP框架、Xposed framework），是一个运行于Android操作系统的hook框架。其通过替换Android系统的关键文件，可以拦截几乎所有Java函数的调用，并允许通过Xposed模块中的自定义代码更改调用这些函数时的行为。因此，Xposed常被用来<strong>修改Android系统和应用程序的功能。</strong></p>
-<span id="more"></span>
-<p>简单来说，它允许你在不修改apk源码的情况下，通过编写自己的模块来改变apk的行为。采用了插件机制，模块能够适用不同版本的框架和rom。模块改变apk行为的操作发生在内存中，对源apk不进行任何修改。你只需要安装编写的模块并重启相应的设备即可。</p>
-<h3 id="组成部分"><a href="#组成部分" class="headerlink" title="组成部分"></a>组成部分</h3><p>xposed 主要由三个项目来组成的：</p>
-<ol>
-<li>Xposed的C++ 部分，主要是用来替换 /system/bin/app_process，并为XposedBridge 提供 JNI方法。</li>
-<li>XposedBridge：Xposed 提供的jar文件，app_process 启动过程中会加载该jar包，其他的 Modules 的开发都是基于 该jar包。</li>
-<li>XposedInstaller：Xposed的安装包，提供对基于Xposed框架的Modules的管理。</li>
-</ol>
-<p>xposed 目前已逐步支持 ART虚拟机，兼容 android 5.0 以上版本。</p>
-<h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><p>Xposed框架是以模块扩展方式来实现对系统部分功能的修改，这些模块都依赖于Xposed框架。用户可以在一些应用商店或其自带的下载库进行下载安装。在中国大陆，还有精简QQ，个性化微信界面等用途的模块。</p>
-<h3 id="目前存在的问题"><a href="#目前存在的问题" class="headerlink" title="目前存在的问题"></a>目前存在的问题</h3><p>部分专有软件（如微信、支付宝等）会检测Xposed框架的存在，并强迫用户卸载Xposed框架及相关组件，否则用户将无法继续使用其所提供的服务。但是这些问题可以使用相应的模块来解决，比如Xposed黑名单模块。</p>
+    <title>Frida——Java层hook方法</title>
+    <url>/2021/10/15/Frdia%E6%A1%86%E6%9E%B6%E2%80%94%E2%80%94hook%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[<h3 id="Frdia框架——hook方法详解"><a href="#Frdia框架——hook方法详解" class="headerlink" title="Frdia框架——hook方法详解"></a>Frdia框架——hook方法详解</h3><span id="more"></span>
+<h4 id="Hook普通方法"><a href="#Hook普通方法" class="headerlink" title="Hook普通方法"></a>Hook普通方法</h4><p>普通方法包含静态方法、公开方法、私有方法。</p>
+<pre><code class="javascript">Java.perform(function()&#123;
+    var MainActivity=Java.use(&#39;com.example.frida_new1.MainActivity&#39;);//完整包名（注意大小写）
+    MainActivity.getCalc.implementation=function(a,b)&#123;
+        send(&#39;Hook start....&#39;);
+        send(arguments[0]);
+        send(b);//两种打印参数的方式
+        var num=this.getCalc(a,b); 
+        send(num);
+        return num;
+    &#125;
+   &#125;);
+</code></pre>
+<p>详解：arguments[n]在js中相当于类数组对象，在function(a,b)中参数既可以用a、b来表示，也可以用arguments来表示。虽然function指代getCalc方法，但仍然可以在function中调用包中的其他函数，只是在function中可以对getCalc的方法进行参数调整和改变。</p>
+<h4 id="hook构造方法"><a href="#hook构造方法" class="headerlink" title="hook构造方法"></a>hook构造方法</h4><p>大致方法和普通方法相同。因为构造方法与报名相同，所以不需要Util.Util这种写法（我试过直接用构造方法名，直接报错了。。。）构造方法有特有的表示方法：</p>
+<pre><code>类名.$init //这里的$init就表示构造方法。
+</code></pre>
+<p>具体代码：</p>
+<pre><code class="javascript">Java.perform(function()&#123;
+        var money=Java.use(&#39;com.example.frida_new1.Money&#39;);
+        money.$init.implementation=function(a,b)&#123;
+            send(&#39;hook到Money构造函数&#39;);
+            send(arguments[0]);
+            send(b);
+            return this.$init(10000,&quot;美元&quot;);//用this.方法名来表示需要调用的方法（直接用不明确，会报错）
+        &#125;
+    &#125;);
+</code></pre>
+<p>修改函数时，注意参数类型。</p>
+<h4 id="hook重载方法"><a href="#hook重载方法" class="headerlink" title="hook重载方法"></a>hook重载方法</h4><p>和普通方法不同的区别是在寻找方法时使用：</p>
+<pre><code>Utils.cz.overload(&quot;int&quot;).implementation=function(参数)
+</code></pre>
+<p>详解：cz为重载方法名，overload为注明此方法为重载方法并在括号中标明所要hook的重载方法中的参数，并传入。例如:需要hook的重载方法有一个int参数：overload(“int”)即可。但是String类型有点特殊，需要写为overload(“java.lang.String”)因为overload中需要标明的实际是类型所处的全路径。</p>
+<pre><code class="javascript">Java.perform(function()&#123;
+        var Utils=Java.use(&#39;com.example.frida_new1.Utils&#39;);
+        Utils.cz.overload(&quot;int&quot;,&quot;java.lang.String&quot;).implementation=function(a,b)&#123;
+            send(&#39;hook成功！&#39;);
+            send(arguments[0]);
+            send(b);
+            return this.cz();
+        &#125;
+    &#125;);
+</code></pre>
+<h5 id="hook方法的所有重载"><a href="#hook方法的所有重载" class="headerlink" title="hook方法的所有重载"></a>hook方法的所有重载</h5><p>获取一方法的所有重载方法，只需utils.test.overloads，其余操作和正常重载方法相同。</p>
+<pre><code class="js">Java.perform(function()&#123;
+        var utils=Java.use(&#39;com.example.frida_new1.Utils&#39;);
+        console.log(utils.test.overloads.length);//获取重载方法的个数
+        for(var i=0;i&lt;utils.test.overloads.length;i++)&#123;
+            utils.test.overloads[i].implementation=function()&#123;
+                console.log(arguments);//arguments是一个储存所有重载方法的参数
+                return this.test.apply(this,arguments);//只用apply将不同的重载方法返回对应的参数
+                //如果apply中参数有arguments，则直接返回。
+                //如果apply中只有this一个参数，则循环重载方法的个数次。
+            &#125;
+        &#125;
+   &#125;);
+</code></pre>
+<p>如果只想修改无参的重载方法，只需加上一个判断：</p>
+<pre><code class="js">if(arguments.length==0)&#123;
+     return &quot;hook到没有参数的重载方法&quot;;
+&#125;
+</code></pre>
+<h4 id="hook自定义参数"><a href="#hook自定义参数" class="headerlink" title="hook自定义参数"></a>hook自定义参数</h4><p>自定义参数类型时，对于对象参数可以直接调用对象中的方法。如果需要更改参数时，需要重新实例化一个对象来返回：</p>
+<pre><code class="javascript">var 变量名=对象类名.$new(构造参数) 如：var mon =money.$new(123456,&quot;港币&quot;);
+</code></pre>
+<p>注意如果是重载方法中参数为某一对象，在overload中需要标明对象类 的全路径。例如：</p>
+<pre><code class="javascript">Utils.method.overload(&quot;com.example.frida_new1.Money&quot;).implementation=function(参数)
+</code></pre>
+<pre><code class="javascript">Java.perform(function()&#123;
+        var Utils=Java.use(&#39;com.example.frida_new1.Utils&#39;);
+        var money=Java.use(&#39;com.example.frida_new1.Money&#39;);
+        Utils.test.implementation=function(a)&#123;
+            send(&#39;hook到对象参数&#39;);
+            send(a.getInfo());
+            var mon =money.$new(123456,&quot;港币&quot;);
+            send(mon.getInfo());
+            return mon.getInfo();//这里返回值可更改为this.test(mon)，要注意返回值的参数类型！！
+        &#125;
+&#125;);
+</code></pre>
+<h4 id="对象参数属性的修改"><a href="#对象参数属性的修改" class="headerlink" title="对象参数属性的修改"></a>对象参数属性的修改</h4><p>在获取某一实例对象的属性时不能直接通过”类名.变量名”的方法来直接获取。需要表示为“类名.变量名.value”</p>
+<pre><code class="javascript">Java.perform(function()&#123;
+        var Utils=Java.use(&#39;com.example.frida_new1.Utils&#39;);
+        var money=Java.use(&#39;com.example.frida_new1.Money&#39;);
+        Utils.test.overload(&quot;com.example.frida_new1.Money&quot;).implementation=function(a)&#123;
+            send(&#39;hook到对象参数&#39;);
+            var mon =money.$new(123456,&quot;港币&quot;);
+            send(mon.getInfo());
+            mon.name.value=&quot;英镑&quot;;
+            send(mon.name.value);
+            return mon.getInfo();
+        &#125;
+    &#125;);
+</code></pre>
+<h4 id="java反射（对参数属性的修改）"><a href="#java反射（对参数属性的修改）" class="headerlink" title="java反射（对参数属性的修改）"></a>java反射（对参数属性的修改）</h4><p>使用反射的主要作用是可以让其他语言去调用java语言。基本思想：先找类，再找方法，再调用方法。</p>
+<pre><code class="javascript">Java.perform(function()&#123;
+        var Utils=Java.use(&#39;com.example.frida_new1.Utils&#39;);
+        var money=Java.use(&#39;com.example.frida_new1.Money&#39;);
+        var clazz=Java.use(&#39;java.lang.Class&#39;);//定义一个类的构造器
+        Utils.test.overload(&quot;com.example.frida_new1.Money&quot;).implementation=function(a)&#123;
+            var mon =money.$new(123456,&quot;港币&quot;);
+            send(mon.getInfo());
+            var num=Java.cast(mon.getClass(),clazz).getDeclaredField(&#39;num&#39;);
+            //cast中第一个参数是getClass获取类id，（对象所处的类）
+            //getDeclaredField(&#39;&#39;)用来获取字段id,参数为变量名
+            var name=Java.cast(mon.getClass(),clazz).getDeclaredField(&#39;name&#39;);
+            name.setAccessible(true);
+            num.setAccessible(true);//设置属性，不修改app会崩溃
+            var Value=num.get(mon);//获取类传到该变量中
+            console.log(Value);
+            //这里直接使用send()无法成功打印
+            var v1=name.get(mon);
+            console.log(v1);
+            //send(Value);这里直接用send无法输出
+            num.setInt(mon,5000);
+            name.set(mon,&quot;英镑&quot;);//修改变量使用set...()方法：setInt(),set()
+            send(mon.getInfo());
+            return mon.getInfo();
+        &#125;
+&#125;);
+</code></pre>
+<p>注：hook onCreat方法时应该在结尾继续执行该方法，因为onCreat在程序中是一直执行的。在末尾加上 this.onCreat()</p>
+<h4 id="hook内部类"><a href="#hook内部类" class="headerlink" title="hook内部类"></a>hook内部类</h4><p>内部类：在一个类中定义一个新的类。和直接引用不同的是需要在声明类的时候在主类和内部类中加“$”符号。其余写法完全相同。</p>
+<pre><code class="javascript"> Java.perform(function()&#123;
+        var intheclass=Java.use(&#39;com.example.frida_new1.Utils$intheclass&#39;);
+        console.log(intheclass);
+        intheclass.$init.implementation=function(a,b)&#123;
+            send(&#39;Hook start....&#39;);
+            send(a);
+            send(b);
+            b=6666
+            a=&quot;iu&quot;
+            send(&quot;修改后：&quot;+a+&quot; &quot;+b);
+            return this.$init(a,b);
+        &#125;
+   &#125;);
+</code></pre>
+<h4 id="hook匿名类"><a href="#hook匿名类" class="headerlink" title="hook匿名类"></a>hook匿名类</h4><p>匿名类：一个类中包含另一个类，且不需要任何类名直接实例化（没有类名）。主要用于创建一个对象来执行特定的任务，是代码更加简洁。一般匿名类只用一次。首先在smali代码中找到匿名类名（带有$）,其余代码与普通方法类似</p>
+<h4 id="枚举所有的类和类的所有方法。"><a href="#枚举所有的类和类的所有方法。" class="headerlink" title="枚举所有的类和类的所有方法。"></a>枚举所有的类和类的所有方法。</h4><p>枚举所有的类在js中有一个固定的函数：enumerateLoadedClasses，具体使用方法如下：</p>
+<pre><code class="js">Java.perform(function()&#123;
+    //这样枚举会列举出该模拟器中正在运行的所有进程
+        Java.enumerateLoadedClasses(&#123;//枚举加载所有的类
+            onMatch:function(name,handle)&#123;//输出
+                console.log(name);
+            &#125;,
+            onComplete:function()&#123;//枚举结束之后调用，该函数只会调用一次
+            &#125;
+        &#125;);
+    &#125;);
+</code></pre>
+<p>如果在onMatch中进行选择，指定包中的类，则会筛选输出指定类名。</p>
+<pre><code class="js">Java.perform(function()&#123;
+        Java.enumerateLoadedClasses(&#123;//枚举加载所有的类
+            onMatch:function(name,handle)&#123;//输出
+                if(name.indexOf(&quot;com.example.frida_new1&quot;)!=-1)&#123;
+                    console.log(name);
+                    var clazz =Java.use(name);
+                    console.log(clazz);
+                    var methods=clazz.class.getDeclaredMethods();
+                    for(var i=0;i&lt;methods.length;i++)&#123;
+                        console.log(methods[i]);
+                    &#125;
+                &#125;
+            &#125;,
+            onComplete:function()&#123;//枚举结束之后调用，该函数只会调用一次
+            
+            &#125;
+        &#125;);
+    &#125;);
+&quot;&quot;&quot;
+</code></pre>
+<p>枚举所有的方法使用clazz.class.getDeclaredMethods()；</p>
+<pre><code class="javascript">var clazz =Java.use(name);
+console.log(clazz);
+var methods=clazz.class.getDeclaredMethods();
+for(var i=0;i&lt;methods.length;i++)&#123;
+       console.log(methods[i]);
+&#125;
+</code></pre>
+<h4 id="Java层打印函数堆栈定位关键代码"><a href="#Java层打印函数堆栈定位关键代码" class="headerlink" title="Java层打印函数堆栈定位关键代码"></a>Java层打印函数堆栈定位关键代码</h4><p>在xposed中打印函数堆栈一般使用：</p>
+<pre><code class="java">log.d(&quot;TAG&quot;,&quot;MSG&quot;,new Trowable());
+</code></pre>
+<p>在frida中一般不使用，而使用Log.getStackTranceString()方法。（该方法也可以打印信息）。</p>
+<p> java.cast()：强制类型转换。                                                                                                                                                  </p>
+<p>java.openClassFile()；    //注入dex文件                                                                                                                                                  </p>
+<p> java.registerClass()    //在Frida中注册一个类写进app，很少用到。                                                                               </p>
+<p>java.array();//构造任意类型的数组。</p>
+<h4 id="frida注入多dex文件"><a href="#frida注入多dex文件" class="headerlink" title="frida注入多dex文件"></a>frida注入多dex文件</h4><p>当hook比较复杂时（需要大量使用java函数，想为app添加大量函数），很多函数不方便引入js中使用，就需要正向的java函数来注入到frida中，此时引入注入dex文件这一方法，方便hook。<strong>首先需要获取dex文件</strong>，建议直接将所需要的函数在另一个app中实现，打包成apk分离出dex文件即可（分离出dex文件后需要把他放在adnroid的缓存区：“adb push 文件路径 、data/local/tmp/xxx.dex）。再使用openClassFile函数来打开这个文件。获取到这个包后可以直接调用包中 的函数。相当于正向调用。</p>
+<pre><code class="js">Java.perform(function()&#123;
+        Java.openClassFile(&quot;/data/local/tmp/fridadex.dex&quot;).load();
+        var frida=Java.use(&quot;简单实现函数的打包的apk的包名&quot;);//dex中的函数所在类名
+        var main=Java.use(&quot;com.example.frida_new1.Money&quot;);//开始hook
+        main.fridadex.implementation=function(a,b)&#123;
+            var cal=frida.xxx(a,b);
+            send(cal);
+            return cal;
+        &#125;
+    &#125;);
+</code></pre>
+<h4 id="Frida-server端口启动与非标准端口启动"><a href="#Frida-server端口启动与非标准端口启动" class="headerlink" title="Frida-server端口启动与非标准端口启动"></a>Frida-server端口启动与非标准端口启动</h4><p>启动Frida-server一般采用默认端口：</p>
+<pre><code>adb forward tcp:27042 tcp:27042
+adb forward tcp:27043 tcp:24043
+</code></pre>
+<p>为了防止被检测，会使用非标准端口：                                                                                                    </p>
+<p> 1、启动frida-server时使用”./data/local/tmp/frida-server -l 127.0.0.1:9999 “                                            </p>
+<p> 2、转发端口时”adb forward tcp:9999”                                                                                                         </p>
+<p> 3、在frida中修改为：</p>
+<pre><code class="python">process = frida.get_device_manager().add_remote_device(&#39;127.0.0.1:9999&#39;).attch(&#39;Frida_new1&#39;)
+</code></pre>
 ]]></content>
       <categories>
-        <category>Xposed框架</category>
+        <category>Frida框架</category>
       </categories>
       <tags>
-        <tag>Xposed框架</tag>
+        <tag>Android</tag>
+        <tag>Frida框架</tag>
+        <tag>hook</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>初识Frida框架</title>
+    <url>/2021/09/09/%E5%88%9D%E8%AF%86Frida%E6%A1%86%E6%9E%B6/</url>
+    <content><![CDATA[<h2 id="初识Frida框架"><a href="#初识Frida框架" class="headerlink" title="初识Frida框架"></a>初识Frida框架</h2><span id="more"></span>
+
+<p>Frida是一款基于Python + JavaScript 的hook框架，本质是一种动态插桩技术。可以用于Android、Windows、iOS等各大平台，其执行脚本基于Python或者Node.js写成，而注入代码用JavaScript写成。相比于Xposed更加便捷，环境安装简单，使用方便。</p>
+<h3 id="Frida安装"><a href="#Frida安装" class="headerlink" title="Frida安装"></a>Frida安装</h3><p>1、安装Python（这里不做介绍）。</p>
+<p>2、安装frida、frida-tools(两个版本必须一致，我这里都为15.1.2)</p>
+<pre><code>pip install pipfrida 
+pip install frida-tools
+</code></pre>
+<p>安装之后可以检查版本是否一致。</p>
+<p><img src="https://s2.loli.net/2022/01/21/sZ46KVfCmnMktuj.png" alt="QQ截图20211011210105.png"></p>
+<p>2、连接模拟器，安装frida-server。</p>
+<p><a href="https://github.com/frida/frida/releases">frida-server下载链接</a>，找到对应的版本，手机是arm64，模拟器是x86，下载之后解压，将文件改名为fs。</p>
+<p>连接模拟器，adb devices 显示不到打开的模拟器时手动连接。如下：</p>
+<pre><code>夜神模拟器：adb connect 127.0.0.1:62001
+逍遥安卓模拟器：adb connect 127.0.0.1:21503
+天天模拟器：adb connect 127.0.0.1:6555
+海马玩模拟器：adb connect 127.0.0.1:53001
+网易MUMU模拟器：adb connect 127.0.0.1:7555 MacOS:adb connect 127.0.0.1:5555
+genymotion模拟器：adb connect 127.0.0.1:5555
+谷歌原生模拟器：adb connect &lt;设备的IP地址&gt;：5555
+</code></pre>
+<p>连接之后进行如下操作：</p>
+<pre><code>1、adb push fs文件所在地址/fa /data/local/tmp
+2、adb shell
+3、su
+4、cd /data/local/tmp
+5、chmod 777 fs
+6、./fs
+(如果此时光标在下一行闪，说明frida运行成功)
+</code></pre>
+<p><img src="https://s2.loli.net/2022/01/21/IVaptHr3NfkxTZj.png" alt="QQ截图20211011212732.png"></p>
+<p>3、、验证是否安装成功</p>
+<p>不要关闭此页面，另外打开一个cmd窗口，执行以下指令：frida-ps -U，如果该模拟器中运行的所有进程都显示出来，说明frida安装成功。</p>
+<h3 id="Frida初体验"><a href="#Frida初体验" class="headerlink" title="Frida初体验"></a>Frida初体验</h3><p>frida框架最大的优势就是操作简单，相比于Xposed来说不需要另生成一个项目来运行，只需要编写一个插件直接再命令框执行即可。Frida的编写可以用js、python、js+python三种方法来写。初学者建议使用js+python方式来写，只需要编写相应的js代码，python文件基本固定。</p>
+<p>在使用插件进行hook时，首先应该转发端口。具体操作如下：</p>
+<p><img src="https://s2.loli.net/2022/01/21/cQ2DnkFjBvYu9ao.png" alt="QQ截图20211011214700.png"></p>
+<p>脚本样例：</p>
+<pre><code>import frida
+import sys
+
+def on_message(message,data): 
+    print(message)
+
+jscode = &quot;&quot;&quot;
+Java.perform(function()&#123;
+    var MainActivity=Java.use(&#39;com.example.frida_new1.MainActivity&#39;);
+    MainActivity.getCale.implementation=function()&#123;
+        send(&#39;Hook start....&#39;);
+        return &#39;hook成功!!!&#39;
+    &#125;
+   &#125;);
+&quot;&quot;&quot;
+process = frida.get_remote_device().attach(&#39;Frida_new1&#39;)//这里踩了很多坑，attach里面抓包并不是完整包名，而是文件名
+script = process.create_script(jscode)
+script.on(&#39;message&#39;, on_message)
+script.load()
+sys.stdin.read()
+</code></pre>
+<p>这里有两种方法运行该插件：</p>
+<p>1、打开python所在的目录，打开cmd页面执行</p>
+<pre><code>python test.py
+</code></pre>
+<p>2、在NotePad++等高级记事本中，直接运行。建议将如下命令保存以便后面可以直接使用该文件运行。</p>
+<pre><code>cmd /k python &quot;D:\Desktop\test.py&quot; &amp; ECHO &amp; PAUSE &amp; EXIT//双引号中表示脚本的路径
+</code></pre>
+<p>运行之后点击按钮(这里hook 的是Button事件的显示方法)</p>
+<p><img src="https://s2.loli.net/2022/01/21/v8ab6grsUD7IqiO.png" alt="QQ截图20211011214839.png"></p>
+<p>Hook 成功。</p>
+]]></content>
+      <categories>
+        <category>Frida框架</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+        <tag>Frida框架</tag>
+        <tag>hook</tag>
       </tags>
   </entry>
   <entry>
@@ -666,6 +947,258 @@ public class SHAUtil &#123;
 </code></pre>
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>Xposed——hook方法学习</title>
+    <url>/2021/08/31/Xposed%20%E2%80%94hook%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/</url>
+    <content><![CDATA[<p>Xposed是基于java层的hook框架，在不修改apk源码的情况下，编写自己的模块来改变apk的行为。以下总结了常见的Xposed的hook方法：</p>
+<span id="more"></span>
+
+<h3 id="hook普通方法"><a href="#hook普通方法" class="headerlink" title="hook普通方法"></a>hook普通方法</h3><p>创建一个类继承IXposedHookLoadPackage，修改 handleLoadPackage方法，首先要判断是否为特定的包。</p>
+<pre><code class="java">public void handleLoadPackage(XC_LoadPackage.LoadPackageParam Param) throws Throwable &#123;
+    if(Param.packageName.equals(&quot;com.example.xposed_new3&quot;))&#123;......&#125;
+&#125;
+</code></pre>
+<p>hook普通方法调用的函数都是<strong>XposedHelpers.findAndHookMethod</strong></p>
+<pre><code class="java">XposedHelpers.findAndHookMethod(
+className(包名+类名),
+Param.classLoader(固定参数),
+methodName(被hook的函数名)
+**.class(函数的参数),
+new XC_MethodHook()&#123;&#125;
+)
+</code></pre>
+<h4 id="XC-MethodHook方法详解"><a href="#XC-MethodHook方法详解" class="headerlink" title="XC_MethodHook方法详解"></a>XC_MethodHook方法详解</h4><p><img src="https://i.loli.net/2021/09/02/Uk2MhKwNJPtTLSa.png" alt="QQ截图20210901190645.png"></p>
+<p>hook普通方法的主要作用是打印各种参数信息，或者修改某些参数使其直接通过程序。</p>
+<h3 id="hook匿名内部类"><a href="#hook匿名内部类" class="headerlink" title="hook匿名内部类"></a>hook匿名内部类</h3><p>匿名内部类一般为普通方法，所以仍然用findAndHookMethod的hook方法。</p>
+<p>注：匿名内部类辨别方法：在smali代码中一个类为一个文件，且匿名内部类后缀会加上”$”符号，在工程管理器中直接找出相关类。</p>
+<blockquote>
+<p>Lcom/example/xposed_new4/MainActivity$1</p>
+</blockquote>
+<pre><code class="java">@Override
+public void handleLoadPackage(XC_LoadPackage.LoadPackageParam loadPackageParam) throws Throwable &#123;
+    if(loadPackageParam.packageName.equals(&quot;com.example.xposed_new4&quot;))&#123;
+        XposedHelpers.findAndHookMethod(
+        &quot;com.example.xposed_new4.MainActivity$1&quot;,
+        loadPackageParam.classLoader,
+        &quot;onClick&quot;,
+        View.class,
+        new XC_MethodHook() &#123;
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable &#123;
+                super.beforeHookedMethod(param);
+                View v=(View)param.args[0];
+                XposedBridge.log(&quot;view:&quot;+v.getId());
+            &#125;
+         &#125;);
+     &#125;
+&#125;
+</code></pre>
+<p>在findAndHookMethod方法中的包名类名参数使用smali代码中的包名加类名，其余操作与普通方法hook相同。</p>
+<h3 id="Xposed—java-反射"><a href="#Xposed—java-反射" class="headerlink" title="Xposed—java 反射"></a>Xposed—java 反射</h3><p> java反射主要作用为突破修饰符的限制，如获取私有方法和私有字段。</p>
+<p>以hook某一私有控件为例</p>
+<pre><code class="java">//获取类
+Class&lt;?&gt; clazz=param.thisObject.getClass();
+//获取字段
+Field field=clazz.getDeclaredField(&quot;Text&quot;);
+//设置可见
+field.setAccessible(true);
+
+EditText ed_sn= (EditText) field.get(param.thisObject);//把类中的控件参数传给ed_sn
+XposedBridge.log(&quot;输入结果为：&quot;+ed_sn.getText().toString().trim());
+//修改编辑框
+ed_sn.setText(&quot;L61q4_cheng&quot;);
+</code></pre>
+<p>hook某一私有方法</p>
+<pre><code class="java">//获取方法
+Method method=clazz.getDeclaredMethod(&quot;MethodName&quot;,new Class[]&#123;.class,.class...&#125;);
+//显示可见
+method.setAccessible(true);
+//调用方法
+返回值=method.invoke(param.thisObject,new Object()&#123;...&#125;);//调用函数的参数
+</code></pre>
+<h3 id="hook主动调用"><a href="#hook主动调用" class="headerlink" title="hook主动调用"></a>hook主动调用</h3><p>主动调用，直接调用apk中的函数来实现hook操作，方便对数据进行直接操作。主动调用函数为XposedHelpers。该方法一般用于获取某一数据来通过某一入口，而不是直接修改方法的返回值。Xposed通过主动调用可以直接使用Android项目中某些方法，使其可以有更强大的功能。</p>
+<h4 id="XposedHelpers方法详解"><a href="#XposedHelpers方法详解" class="headerlink" title="XposedHelpers方法详解"></a>XposedHelpers方法详解</h4><pre><code class="java">XposedHelpers.callMethod();//调用普通方法
+XposedHelpers.callStaticMethod();//调用静态方法
+</code></pre>
+<pre><code class="java">XposedHelpers.callMethod(
+    param.getClass(),//固定句式
+    &quot;methodName&quot;//需要主动调用的方法名
+    new Object[]&#123;...,...&#125;,//大括号中为调用函数中的参数，
+)
+</code></pre>
+<p>在调用方法之前，可将程序中对参数的操作直接复制过来，例如加密操作，格式操作。</p>
+<p>如果该方法有返回值且需要获取，可将该方法直接用在某一变量上，例如：</p>
+<pre><code class="java">String str=(String)XposedHelpers.callMethod(
+    param.getClass(),
+    &quot;methodName&quot;
+    new Object[]&#123;...,...&#125;,
+)
+param.args[1]=str.toString();
+</code></pre>
+<h3 id="Xposed—hook静态变量"><a href="#Xposed—hook静态变量" class="headerlink" title="Xposed—hook静态变量"></a>Xposed—hook静态变量</h3><p>实例变量在每一份实例出来的类中都有不同的值，先有对象才有实例变量，因此在没有对象之前是不能hook修改实例变量。在内存中静态变量不会改变。因此可以在对象之前hook。</p>
+<p>故hook静态变量不需要获取类对象，直接修改类中私有静态变量。hook的方法有XposedHelpers，以变量类型Int为例。</p>
+<pre><code class="java">final Class&lt;?&gt; clazz= XposedHelpers.findClass(
+            &quot;com.example.xposed_new5.MainActivity&quot;,
+            loadPackageParam.classLoader);//方便起见提前赋给clazz
+XposedHelper.setStaticIntField(clazz,&quot;变量名&quot;,value(修改的值));
+</code></pre>
+<pre><code class="java">XposedHelpers.setStaticObjectField();//修改字符串
+</code></pre>
+<p>注：不同变量类型使用不同方法。</p>
+<pre><code class="java">final Class&lt;?&gt;clazz=XposedHelpers.findClass(
+        &quot;com.example.xposed_new5.MainActivity&quot;,
+        loadPackageParam.classLoader);        
+XposedHelpers.setStaticIntField(clazz,&quot;staticInt&quot;,99);
+</code></pre>
+<h3 id="Xposed—hook构造方法"><a href="#Xposed—hook构造方法" class="headerlink" title="Xposed—hook构造方法"></a>Xposed—hook构造方法</h3><h4 id="Java构造方法"><a href="#Java构造方法" class="headerlink" title="Java构造方法"></a>Java构造方法</h4><p>与类同名，通过关键字new调用，每个类至少有一个或一个以上的构造方法（如果没有定义构造方法，系统会自动定义一个无参数的构造方法）。构造方法可以无参、一个或多个参数，且构造方法没有返回值。例如：</p>
+<pre><code class="java">MainActivity()&#123;
+&#125;
+MainActivity(int a,int b)&#123;
+&#125;
+MainActivity(String str)&#123;
+&#125;
+</code></pre>
+<h4 id="hook构造方法"><a href="#hook构造方法" class="headerlink" title="hook构造方法"></a>hook构造方法</h4><p>hook构造方法不需要添加方法名，采用的hook方法为XposedHelpers.findAndHookConstructor。</p>
+<p>此时不能hook实例变量，因为对象还没有产生。</p>
+<h4 id="findAndHookConstructor详解"><a href="#findAndHookConstructor详解" class="headerlink" title="findAndHookConstructor详解"></a>findAndHookConstructor详解</h4><pre><code class="java">final Class&lt;?&gt; clazz=XposedHelpers.findClass(
+&quot;com.example.xposed_new6.MainActivity&quot;,//包名加类名
+loadPackageParam.classLoader);//固定格式
+XposedHelpers.findAndHookConstructor(
+clazz,//可以提前定义，也可以直接在这里写出来
+int.class,//构造方法的参数
+String.class,//无参数也可以不写
+new XC_MethodHook()&#123;
+//和普通方法写法一样
+@Override
+protected void beforeHookedMethod(MethodHookParam param) throws Throwable &#123;
+        XposedBridge.log(&quot;Haha, HookDemo constructed was hooked&quot; );
+        &#125;
+@Override
+protected void afterHookedMethod(MethodHookParam param) throws Throwable &#123;
+        super.afterHookedMethod(param);
+        &#125;        
+&#125;);
+</code></pre>
+<h3 id="Xposed—hook所有函数遍历所有类"><a href="#Xposed—hook所有函数遍历所有类" class="headerlink" title="Xposed—hook所有函数遍历所有类"></a>Xposed—hook所有函数遍历所有类</h3><p>对于动态dex文件可以采用这种方法来hook。</p>
+<pre><code class="java"> XposedHelpers.findAndHookMethod(
+        ClassLoader.class,
+        &quot;isok&quot;,
+        String.class,
+        new XC_MethodHook() &#123;
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable &#123;
+                     super.afterHookedMethod(param);
+                     Class&lt;?&gt; clazz=(Class&lt;?&gt;) loadPackageParam.getResult();
+                     XposedBridge.log(&quot;Clazz：&quot;+clazz.getName());
+                     &#125;
+         &#125;
+&#125;);
+</code></pre>
+<h3 id="通过hook主动调用获取相关数据"><a href="#通过hook主动调用获取相关数据" class="headerlink" title="通过hook主动调用获取相关数据"></a>通过hook主动调用获取相关数据</h3><h4 id="获取类"><a href="#获取类" class="headerlink" title="获取类"></a>获取类</h4><pre><code class="java">Class&lt;?&gt; clazz=param.thisObject.getClass();
+</code></pre>
+<h4 id="对类进行操作-获取字段"><a href="#对类进行操作-获取字段" class="headerlink" title="对类进行操作(获取字段)"></a>对类进行操作(获取字段)</h4><pre><code class="java">Field[] fields=clazz.getDeclaredFields();
+for(Field field:fields)&#123;
+     XposedBridge.log(&quot;字段名称：&quot;+field.getName());
+&#125;
+</code></pre>
+<h4 id="获取类中的所有方法"><a href="#获取类中的所有方法" class="headerlink" title="获取类中的所有方法"></a>获取类中的所有方法</h4><pre><code class="java">Method[] methods=clazz.getDeclaredMethods();
+for(Method method:methods)
+&#123;
+      XposedBridge.log(&quot;方法名称：&quot;+method.getName());
+&#125;
+</code></pre>
+<h4 id="通过主动调用获取普通方法"><a href="#通过主动调用获取普通方法" class="headerlink" title="通过主动调用获取普通方法"></a>通过主动调用获取普通方法</h4><pre><code class="java">XposedHelpers.callMethod(loadPackageParam.getClass(),&quot;methodName&quot;,new Object()&#123;...&#125;);
+</code></pre>
+<h4 id="通过主动调用获取静态方法"><a href="#通过主动调用获取静态方法" class="headerlink" title="通过主动调用获取静态方法"></a>通过主动调用获取静态方法</h4><pre><code class="java">Class&lt;?&gt; clazz1=XposedHelpers.findClass(
+    &quot;com.example.xposed_new7.MainActivity&quot;,
+    loadPackageParam.classLoader);
+XposedHelpers.callStaticMethod(clazz1,&quot;methodName&quot;,new Object()&#123;...&#125;);
+</code></pre>
+<h4 id="通过主动调用获取普通字段（不是方法中的特定字段）"><a href="#通过主动调用获取普通字段（不是方法中的特定字段）" class="headerlink" title="通过主动调用获取普通字段（不是方法中的特定字段）"></a>通过主动调用获取普通字段（不是方法中的特定字段）</h4><pre><code class="java">XposedHelpers.getBooleanField(loadPackageParam.getClass(),&quot;fieldName&quot;);
+</code></pre>
+<h4 id="获取静态字段"><a href="#获取静态字段" class="headerlink" title="获取静态字段"></a>获取静态字段</h4><pre><code class="java">Class&lt;?&gt; clazz2=XposedHelpers.findClass(
+    &quot;com.example.xposed_new7.MainActivity&quot;,
+    loadPackageParam.classLoader);
+XposedHelpers.getStaticBooleanField(clazz2,&quot;fieldName&quot;);
+</code></pre>
+<h3 id="Xposed—hook替换函数"><a href="#Xposed—hook替换函数" class="headerlink" title="Xposed—hook替换函数"></a>Xposed—hook替换函数</h3><pre><code class="java">if(loadPackageParam.packageName.equals(&quot;com.example.xposed_new8&quot;))&#123;
+            Class&lt;?&gt;clazz=XposedHelpers.findClass(
+                &quot;com.example.xposed_new8.MainActivity&quot;,
+                loadPackageParam.classLoader);
+            XposedHelpers.findAndHookMethod(
+                    &quot;com.example.xposed_new8.MainActivity&quot;,
+                    loadPackageParam.classLoader,
+                    &quot;ButtonTest1&quot;,
+                    new XC_MethodReplacement() &#123;
+                    @Override
+                    protected Object replaceHookedMethod(MethodHookParam methodHookParam) throws Throwable &#123;
+                            XposedBridge.log(&quot;方法替换成功&quot;);
+                            XposedHelpers.callMethod(clazz,&quot;ButtonTest2&quot;);//主动调用ButtonTest2
+                            return null;
+                        &#125;
+                    &#125;
+            );
+&#125;
+</code></pre>
+<h3 id="Xposed—hook多DEX"><a href="#Xposed—hook多DEX" class="headerlink" title="*Xposed—hook多DEX"></a>*Xposed—hook多DEX</h3><p>在一个apk中有多个dex文件时，在apk打包的时候优先加载主dex文件，会优先有些类hook不到，采用attach方法来解决。</p>
+<pre><code class="java">XposedHelpers.findAndHookMethod(
+        Application.class,
+        &quot;attach&quot;,
+        Context.class,
+        new XC_MethodHook() &#123;
+                 @Override
+                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable &#123;
+                 super.beforeHookedMethod(param);
+                 Context context= (Context) param.args[0];
+                 ClassLoader loader=context.getClassLoader();
+                 XposedHelpers.findAndHookMethod(
+                         &quot;com.example.xposed_new8.MainActivity&quot;,
+                         loader,
+                         &quot;ButtonTest1&quot;,
+                         new XC_MethodHook() &#123;
+                                 @Override
+                                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable &#123;
+                                            super.beforeHookedMethod(param);
+                              &#125;
+                         &#125;
+                );
+           &#125;
+       &#125;
+);
+</code></pre>
+]]></content>
+      <categories>
+        <category>Xposed框架</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+        <tag>hook</tag>
+        <tag>Xposed框架</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>初识Xposed框架</title>
+    <url>/2021/08/15/%E5%88%9D%E8%AF%86Xposed%E6%A1%86%E6%9E%B6/</url>
+    <content><![CDATA[<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p><strong>Xposed</strong>（也被称作Xposed框架、XP框架、Xposed framework），是一个运行于Android操作系统的hook框架。其通过替换Android系统的关键文件，可以拦截几乎所有Java函数的调用，并允许通过Xposed模块中的自定义代码更改调用这些函数时的行为。因此，Xposed常被用来<strong>修改Android系统和应用程序的功能。</strong></p>
+<span id="more"></span>
+<p>简单来说，它允许你在不修改apk源码的情况下，通过编写自己的模块来改变apk的行为。采用了插件机制，模块能够适用不同版本的框架和rom。模块改变apk行为的操作发生在内存中，对源apk不进行任何修改。你只需要安装编写的模块并重启相应的设备即可。</p>
+<h3 id="组成部分"><a href="#组成部分" class="headerlink" title="组成部分"></a>组成部分</h3><p>xposed 主要由三个项目来组成的：</p>
+<ol>
+<li>Xposed的C++ 部分，主要是用来替换 /system/bin/app_process，并为XposedBridge 提供 JNI方法。</li>
+<li>XposedBridge：Xposed 提供的jar文件，app_process 启动过程中会加载该jar包，其他的 Modules 的开发都是基于 该jar包。</li>
+<li>XposedInstaller：Xposed的安装包，提供对基于Xposed框架的Modules的管理。</li>
+</ol>
+<p>xposed 目前已逐步支持 ART虚拟机，兼容 android 5.0 以上版本。</p>
+<h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><p>Xposed框架是以模块扩展方式来实现对系统部分功能的修改，这些模块都依赖于Xposed框架。用户可以在一些应用商店或其自带的下载库进行下载安装。在中国大陆，还有精简QQ，个性化微信界面等用途的模块。</p>
+<h3 id="目前存在的问题"><a href="#目前存在的问题" class="headerlink" title="目前存在的问题"></a>目前存在的问题</h3><p>部分专有软件（如微信、支付宝等）会检测Xposed框架的存在，并强迫用户卸载Xposed框架及相关组件，否则用户将无法继续使用其所提供的服务。但是这些问题可以使用相应的模块来解决，比如Xposed黑名单模块。</p>
+]]></content>
+      <categories>
+        <category>Xposed框架</category>
+      </categories>
+      <tags>
+        <tag>Xposed框架</tag>
+      </tags>
   </entry>
   <entry>
     <title>对称算法（AES篇）</title>
@@ -1675,6 +2208,134 @@ public static void main(String[] args) throws Exception &#123;
       </tags>
   </entry>
   <entry>
+    <title>编写Xposed框架初体验</title>
+    <url>/2021/08/31/%E7%BC%96%E5%86%99Xposed%E6%A1%86%E6%9E%B6%E5%88%9D%E4%BD%93%E9%AA%8C/</url>
+    <content><![CDATA[<h4 id="具体步骤："><a href="#具体步骤：" class="headerlink" title="具体步骤："></a>具体步骤：</h4><span id="more"></span>
+<ol>
+<li>修改配置文件，添加xposed插件相关数据。在AndroidManifest.xml中添加以下代码：</li>
+</ol>
+<pre><code class="java">        &lt;!--添加标识--&gt;
+        &lt;meta-data
+            android:name=&quot;xposedmodule&quot;
+            android:value=&quot;true&quot;/&gt;
+        &lt;!--载入HOOK模块之后显示的信息--&gt;
+        &lt;meta-data
+            android:name=&quot;xposeddescription&quot;
+            android:value=&quot;Xposed框架初体验&quot;/&gt;
+        &lt;!--规定jar包的版本信息--&gt;
+        &lt;meta-data
+            android:name=&quot;xposedminversion&quot;
+            android:value=&quot;54&quot;/&gt;
+</code></pre>
+<p>2、新建lib文件夹，将Xposed框架提供的jar包放到此文件夹中。具体流程：右击app-&gt;new-&gt;Directory-&gt;输入lib-&gt;将jar包复制到此文件夹中-&gt;右击文件夹-&gt;Add as Library-&gt;在build.gradle中将implementation改为compileOnly files。</p>
+<p>3、新建一个类Xposedhook实现IXposedHookLoadPackage接口。</p>
+<pre><code class="java">import android.util.Log;
+import de.robv.android.xposed.IXposedHookLoadPackage;
+import de.robv.android.xposed.XposedBridge;
+import de.robv.android.xposed.callbacks.XC_LoadPackage;
+public class Xposedhook implements IXposedHookLoadPackage &#123;
+    //Xposed插件入口点
+    @Override
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam Param) throws Throwable &#123;
+        XposedBridge.log(&quot;cly hook start-------&gt;当前启动的程序是：&quot;+Param.processName);
+
+        Log.d(&quot;L61q4_Cheng&quot;, &quot;hook Start......&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>4、在Main/assets中新建一个文本文件xposed_init,并在其中添加新建的类，包名加类名，</p>
+<blockquote>
+<p>com.example.xposed_new3.Xposedhook</p>
+</blockquote>
+<p><img src="https://i.loli.net/2021/09/02/V7Ed16pDAlcXawL.png" alt="QQ截图20210831173424.png"></p>
+<p>5、编译成apk并运行，在xposed Installer中查看日志。</p>
+<p><img src="https://i.loli.net/2021/09/02/L2JmEZDSCeIMGAT.png" alt="QQ截图20210831174541.png"></p>
+]]></content>
+      <categories>
+        <category>Xposed框架</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>解决安卓模拟器安装Xposed框架问题Could not load available ZIP files.Pull down to try again</title>
+    <url>/2021/08/15/%E8%A7%A3%E5%86%B3%E5%AE%89%E5%8D%93%E6%A8%A1%E6%8B%9F%E5%99%A8%E5%AE%89%E8%A3%85Xposed%E6%A1%86%E6%9E%B6%E9%97%AE%E9%A2%98Could%20not%20load%20available%20ZIP%20files.Pull%20down%20to%20try%20again/</url>
+    <content><![CDATA[<p>将Xposed Installer安装在模拟器上显示如下界面：</p>
+<span id="more"></span>
+<p><img src="https://i.loli.net/2021/08/16/58Fv1nTKyrAl3mI.png" alt="QQ截图20210815172904.png"></p>
+<h3 id="具体步骤："><a href="#具体步骤：" class="headerlink" title="具体步骤："></a>具体步骤：</h3><h4 id="1、下载Xposed"><a href="#1、下载Xposed" class="headerlink" title="1、下载Xposed"></a>1、下载Xposed</h4><p>下载自己安卓版本对应的SDK，下载链接 <a href="https://dl-xda.xposed.info/framework/">https://dl-xda.xposed.info/framework/</a></p>
+<p>(注：对应的SDK版本参考：<br><a href="https://l61q4cheng.github.io/2021/08/15/Android%E5%90%84%E7%89%88%E6%9C%AC%E5%AF%B9%E5%BA%94%E7%9A%84SDK%E7%89%88%E6%9C%AC/#more">https://l61q4cheng.github.io/2021/08/15/Android%E5%90%84%E7%89%88%E6%9C%AC%E5%AF%B9%E5%BA%94%E7%9A%84SDK%E7%89%88%E6%9C%AC/#more</a>)</p>
+<p>注：sdk版本下载错误会影响安装结果，笔者这里下载SDK22，该模拟器为x86，因此下载x86版本。</p>
+<h4 id="2、下载script-txt"><a href="#2、下载script-txt" class="headerlink" title="2、下载script.txt"></a>2、下载script.txt</h4><p>下载链接：<a href="https://forum.xda-developers.com/attachments/script-txt.4489568/">https://forum.xda-developers.com/attachments/script-txt.4489568/</a></p>
+<p>下载之后将后缀名改为script.sh。</p>
+<h4 id="3、创建xposed文件夹"><a href="#3、创建xposed文件夹" class="headerlink" title="3、创建xposed文件夹"></a>3、创建xposed文件夹</h4><p>创建文件名为xposed的文件夹，将第一步下载的Xposed压缩包中的system文件和script.sh文件放在该文件夹中。如图：</p>
+<p><img src="https://i.loli.net/2021/08/16/iea5Y2Xd3syl7GI.png" alt="QQ截图20210815174814.png"></p>
+<h4 id="4、执行安装命令"><a href="#4、执行安装命令" class="headerlink" title="4、执行安装命令"></a>4、执行安装命令</h4><p>在模拟器安装目录下，地址栏输入cmd操作如下命令。</p>
+<p>第一步    adb devices     #查看是否检测到正在运行的运行模拟器</p>
+<p>第二步    adb remount</p>
+<p>第三步    adb push xposed文件夹路径 /system</p>
+<p><img src="https://i.loli.net/2021/08/16/Vq9sTytR1H8v24h.png" alt="QQ截图20210815175953.png"></p>
+<p>第四步    adb shell</p>
+<p>第五步    su</p>
+<p>第六步    cd /system</p>
+<p>第七步    mount -o remount -w /system</p>
+<p>第八步    sh script.sh<br><img src="https://i.loli.net/2021/08/16/JTkN56lZwS7Khfu.png" alt="QQ截图20210815180344.png"></p>
+<h4 id="5、激活成功"><a href="#5、激活成功" class="headerlink" title="5、激活成功"></a>5、激活成功</h4><p>重启服务器，重新打开Xposed Installer</p>
+<p><img src="https://i.loli.net/2021/08/16/8T2gKozdeF1BPGM.png" alt="QQ截图20210815180724.png"></p>
+]]></content>
+      <categories>
+        <category>Xposed框架</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+        <tag>Xposed框架</tag>
+        <tag>模拟器</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>非对称加密算法</title>
+    <url>/2021/08/05/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<h3 id="概括"><a href="#概括" class="headerlink" title="概括"></a>概括</h3><p>非对称加密算法需要<strong>两个密钥</strong>：公开密钥（publickey:简称公钥）和私有密钥（privatekey:简称私钥）。公钥与私钥是一对，如果用公钥对数据进行加密，只有用对应的私钥才能解密。因为加密和解密使用<span id="more"></span>的是两个不同的密钥，所以这种算法叫作非对称加密算法。 </p>
+<h3 id="基本过程"><a href="#基本过程" class="headerlink" title="基本过程"></a>基本过程</h3><p>甲方生成一对密钥并将公钥公开，需要向甲方发送信息的其他角色(乙方)使用该密钥(甲方的公钥)对机密信息进行加密后再发送给甲方；甲方再用自己私钥对加密后的信息进行解密。甲方想要回复乙方时正好相反，使用乙方的公钥对数据进行加密，同理，乙方使用自己的私钥来进行解密。</p>
+<pre><code>graph LR
+A(L61q4_Cheng)--&gt;B(公钥A)
+B--&gt;C(密文)
+C--&gt;D(私钥B)
+D--&gt;E(L61q4_Cheng)
+</code></pre>
+<p>注：私钥B中包含公钥A</p>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><p>算法强度复杂、安全性依赖于算法与密钥但是由于其算法复杂，而使得加密解密速度没有对称加密解密的速度快。对称密码体制中只有一种密钥，并且是非公开的，如果要解密就得让对方知道密钥。所以保证其安全性就是保证密钥的安全，而非对称密钥体制有两种密钥，其中一个是公开的，这样就可以不需要像对称密码那样传输对方的密钥了。</p>
+<p>1、使用公钥加密，使用私钥解密。</p>
+<p>2、公钥是公开的，私钥是保密的（私钥包含公钥信息）。</p>
+<p>3、密钥不能随便写，由特定函数生成。</p>
+<p>4、加密处理安全，但性能差，单次加密长度有限。</p>
+<blockquote>
+<p>pkcslpadding 明文最大字节数为密钥字节数-11，明文与密钥等长。<br>NoPadding 明文最大字节数为密钥字节数，明文与密钥等长。</p>
+</blockquote>
+<p>5、可用于数据交换，也可用于数据校验。</p>
+<p>注：私钥格式有两种，Java中密钥格式为PKCS#8，其他为PKCS#1。</p>
+<p>使用PKCS#8，私钥开头为</p>
+<blockquote>
+<p>—-BEGIN  PRIVATE KEY—</p>
+</blockquote>
+<p>使用PKCS#1，私钥格式为</p>
+<blockquote>
+<p>—-BEGIN RSA PRIVATE KEY—</p>
+</blockquote>
+<h3 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h3><p>非对称加密体系不要求通信双方事先传递密钥或有任何约定就能完成保密通信，并且密钥管理方便，可实现防止假冒和抵赖，因此，更适合网络通信中的保密通信要求。</p>
+<h3 id="主要算法"><a href="#主要算法" class="headerlink" title="主要算法"></a>主要算法</h3><p>RSA、Elgamal、背包算法、Rabin、D-H、ECC (椭圆曲线加密算法)。使用最广泛的是 RSA 算法，Elgamal 是另一种常用的非对称加密算法。</p>
+<h3 id="两种加密算法结合的套路"><a href="#两种加密算法结合的套路" class="headerlink" title="两种加密算法结合的套路"></a>两种加密算法结合的套路</h3><p>1、随机生成密钥，用作对称加密算法（AES/DES/3DES）的加密数据。</p>
+<p>2、RSA对密钥进行加密，提交加密后的密钥和加密后的数据给服务器。</p>
+]]></content>
+      <categories>
+        <category>加密与解密</category>
+      </categories>
+      <tags>
+        <tag>非对称加密算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>非对称算法（RSA篇）</title>
     <url>/2021/08/05/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E7%AE%97%E6%B3%95%EF%BC%88RSA%E7%AF%87%EF%BC%89/</url>
     <content><![CDATA[<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>RSA加密算法是一种非对称加密算法，在RSA算法中，加密密钥（即公开密钥）PK是公开信息，而解密密钥（即秘密密钥）SK是需要保密的。加密算法E和解密算法D也都是公开的。对极大整数做因数分解的难度决定了RSA算法的可靠性。</p>
@@ -1833,667 +2494,6 @@ if __name__ == &quot;__main__&quot;:
       </categories>
       <tags>
         <tag>非对称加密算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>非对称加密算法</title>
-    <url>/2021/08/05/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<h3 id="概括"><a href="#概括" class="headerlink" title="概括"></a>概括</h3><p>非对称加密算法需要<strong>两个密钥</strong>：公开密钥（publickey:简称公钥）和私有密钥（privatekey:简称私钥）。公钥与私钥是一对，如果用公钥对数据进行加密，只有用对应的私钥才能解密。因为加密和解密使用<span id="more"></span>的是两个不同的密钥，所以这种算法叫作非对称加密算法。 </p>
-<h3 id="基本过程"><a href="#基本过程" class="headerlink" title="基本过程"></a>基本过程</h3><p>甲方生成一对密钥并将公钥公开，需要向甲方发送信息的其他角色(乙方)使用该密钥(甲方的公钥)对机密信息进行加密后再发送给甲方；甲方再用自己私钥对加密后的信息进行解密。甲方想要回复乙方时正好相反，使用乙方的公钥对数据进行加密，同理，乙方使用自己的私钥来进行解密。</p>
-<pre><code>graph LR
-A(L61q4_Cheng)--&gt;B(公钥A)
-B--&gt;C(密文)
-C--&gt;D(私钥B)
-D--&gt;E(L61q4_Cheng)
-</code></pre>
-<p>注：私钥B中包含公钥A</p>
-<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><p>算法强度复杂、安全性依赖于算法与密钥但是由于其算法复杂，而使得加密解密速度没有对称加密解密的速度快。对称密码体制中只有一种密钥，并且是非公开的，如果要解密就得让对方知道密钥。所以保证其安全性就是保证密钥的安全，而非对称密钥体制有两种密钥，其中一个是公开的，这样就可以不需要像对称密码那样传输对方的密钥了。</p>
-<p>1、使用公钥加密，使用私钥解密。</p>
-<p>2、公钥是公开的，私钥是保密的（私钥包含公钥信息）。</p>
-<p>3、密钥不能随便写，由特定函数生成。</p>
-<p>4、加密处理安全，但性能差，单次加密长度有限。</p>
-<blockquote>
-<p>pkcslpadding 明文最大字节数为密钥字节数-11，明文与密钥等长。<br>NoPadding 明文最大字节数为密钥字节数，明文与密钥等长。</p>
-</blockquote>
-<p>5、可用于数据交换，也可用于数据校验。</p>
-<p>注：私钥格式有两种，Java中密钥格式为PKCS#8，其他为PKCS#1。</p>
-<p>使用PKCS#8，私钥开头为</p>
-<blockquote>
-<p>—-BEGIN  PRIVATE KEY—</p>
-</blockquote>
-<p>使用PKCS#1，私钥格式为</p>
-<blockquote>
-<p>—-BEGIN RSA PRIVATE KEY—</p>
-</blockquote>
-<h3 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h3><p>非对称加密体系不要求通信双方事先传递密钥或有任何约定就能完成保密通信，并且密钥管理方便，可实现防止假冒和抵赖，因此，更适合网络通信中的保密通信要求。</p>
-<h3 id="主要算法"><a href="#主要算法" class="headerlink" title="主要算法"></a>主要算法</h3><p>RSA、Elgamal、背包算法、Rabin、D-H、ECC (椭圆曲线加密算法)。使用最广泛的是 RSA 算法，Elgamal 是另一种常用的非对称加密算法。</p>
-<h3 id="两种加密算法结合的套路"><a href="#两种加密算法结合的套路" class="headerlink" title="两种加密算法结合的套路"></a>两种加密算法结合的套路</h3><p>1、随机生成密钥，用作对称加密算法（AES/DES/3DES）的加密数据。</p>
-<p>2、RSA对密钥进行加密，提交加密后的密钥和加密后的数据给服务器。</p>
-]]></content>
-      <categories>
-        <category>加密与解密</category>
-      </categories>
-      <tags>
-        <tag>非对称加密算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>解决安卓模拟器安装Xposed框架问题Could not load available ZIP files.Pull down to try again</title>
-    <url>/2021/08/15/%E8%A7%A3%E5%86%B3%E5%AE%89%E5%8D%93%E6%A8%A1%E6%8B%9F%E5%99%A8%E5%AE%89%E8%A3%85Xposed%E6%A1%86%E6%9E%B6%E9%97%AE%E9%A2%98Could%20not%20load%20available%20ZIP%20files.Pull%20down%20to%20try%20again/</url>
-    <content><![CDATA[<p>将Xposed Installer安装在模拟器上显示如下界面：</p>
-<span id="more"></span>
-<p><img src="https://i.loli.net/2021/08/16/58Fv1nTKyrAl3mI.png" alt="QQ截图20210815172904.png"></p>
-<h3 id="具体步骤："><a href="#具体步骤：" class="headerlink" title="具体步骤："></a>具体步骤：</h3><h4 id="1、下载Xposed"><a href="#1、下载Xposed" class="headerlink" title="1、下载Xposed"></a>1、下载Xposed</h4><p>下载自己安卓版本对应的SDK，下载链接 <a href="https://dl-xda.xposed.info/framework/">https://dl-xda.xposed.info/framework/</a></p>
-<p>(注：对应的SDK版本参考：<br><a href="https://l61q4cheng.github.io/2021/08/15/Android%E5%90%84%E7%89%88%E6%9C%AC%E5%AF%B9%E5%BA%94%E7%9A%84SDK%E7%89%88%E6%9C%AC/#more">https://l61q4cheng.github.io/2021/08/15/Android%E5%90%84%E7%89%88%E6%9C%AC%E5%AF%B9%E5%BA%94%E7%9A%84SDK%E7%89%88%E6%9C%AC/#more</a>)</p>
-<p>注：sdk版本下载错误会影响安装结果，笔者这里下载SDK22，该模拟器为x86，因此下载x86版本。</p>
-<h4 id="2、下载script-txt"><a href="#2、下载script-txt" class="headerlink" title="2、下载script.txt"></a>2、下载script.txt</h4><p>下载链接：<a href="https://forum.xda-developers.com/attachments/script-txt.4489568/">https://forum.xda-developers.com/attachments/script-txt.4489568/</a></p>
-<p>下载之后将后缀名改为script.sh。</p>
-<h4 id="3、创建xposed文件夹"><a href="#3、创建xposed文件夹" class="headerlink" title="3、创建xposed文件夹"></a>3、创建xposed文件夹</h4><p>创建文件名为xposed的文件夹，将第一步下载的Xposed压缩包中的system文件和script.sh文件放在该文件夹中。如图：</p>
-<p><img src="https://i.loli.net/2021/08/16/iea5Y2Xd3syl7GI.png" alt="QQ截图20210815174814.png"></p>
-<h4 id="4、执行安装命令"><a href="#4、执行安装命令" class="headerlink" title="4、执行安装命令"></a>4、执行安装命令</h4><p>在模拟器安装目录下，地址栏输入cmd操作如下命令。</p>
-<p>第一步    adb devices     #查看是否检测到正在运行的运行模拟器</p>
-<p>第二步    adb remount</p>
-<p>第三步    adb push xposed文件夹路径 /system</p>
-<p><img src="https://i.loli.net/2021/08/16/Vq9sTytR1H8v24h.png" alt="QQ截图20210815175953.png"></p>
-<p>第四步    adb shell</p>
-<p>第五步    su</p>
-<p>第六步    cd /system</p>
-<p>第七步    mount -o remount -w /system</p>
-<p>第八步    sh script.sh<br><img src="https://i.loli.net/2021/08/16/JTkN56lZwS7Khfu.png" alt="QQ截图20210815180344.png"></p>
-<h4 id="5、激活成功"><a href="#5、激活成功" class="headerlink" title="5、激活成功"></a>5、激活成功</h4><p>重启服务器，重新打开Xposed Installer</p>
-<p><img src="https://i.loli.net/2021/08/16/8T2gKozdeF1BPGM.png" alt="QQ截图20210815180724.png"></p>
-]]></content>
-      <categories>
-        <category>Xposed框架</category>
-      </categories>
-      <tags>
-        <tag>Android</tag>
-        <tag>Xposed框架</tag>
-        <tag>模拟器</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>编写Xposed框架初体验</title>
-    <url>/2021/08/31/%E7%BC%96%E5%86%99Xposed%E6%A1%86%E6%9E%B6%E5%88%9D%E4%BD%93%E9%AA%8C/</url>
-    <content><![CDATA[<h4 id="具体步骤："><a href="#具体步骤：" class="headerlink" title="具体步骤："></a>具体步骤：</h4><span id="more"></span>
-<ol>
-<li>修改配置文件，添加xposed插件相关数据。在AndroidManifest.xml中添加以下代码：</li>
-</ol>
-<pre><code class="java">        &lt;!--添加标识--&gt;
-        &lt;meta-data
-            android:name=&quot;xposedmodule&quot;
-            android:value=&quot;true&quot;/&gt;
-        &lt;!--载入HOOK模块之后显示的信息--&gt;
-        &lt;meta-data
-            android:name=&quot;xposeddescription&quot;
-            android:value=&quot;Xposed框架初体验&quot;/&gt;
-        &lt;!--规定jar包的版本信息--&gt;
-        &lt;meta-data
-            android:name=&quot;xposedminversion&quot;
-            android:value=&quot;54&quot;/&gt;
-</code></pre>
-<p>2、新建lib文件夹，将Xposed框架提供的jar包放到此文件夹中。具体流程：右击app-&gt;new-&gt;Directory-&gt;输入lib-&gt;将jar包复制到此文件夹中-&gt;右击文件夹-&gt;Add as Library-&gt;在build.gradle中将implementation改为compileOnly files。</p>
-<p>3、新建一个类Xposedhook实现IXposedHookLoadPackage接口。</p>
-<pre><code class="java">import android.util.Log;
-import de.robv.android.xposed.IXposedHookLoadPackage;
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.callbacks.XC_LoadPackage;
-public class Xposedhook implements IXposedHookLoadPackage &#123;
-    //Xposed插件入口点
-    @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam Param) throws Throwable &#123;
-        XposedBridge.log(&quot;cly hook start-------&gt;当前启动的程序是：&quot;+Param.processName);
-
-        Log.d(&quot;L61q4_Cheng&quot;, &quot;hook Start......&quot;);
-    &#125;
-&#125;
-</code></pre>
-<p>4、在Main/assets中新建一个文本文件xposed_init,并在其中添加新建的类，包名加类名，</p>
-<blockquote>
-<p>com.example.xposed_new3.Xposedhook</p>
-</blockquote>
-<p><img src="https://i.loli.net/2021/09/02/V7Ed16pDAlcXawL.png" alt="QQ截图20210831173424.png"></p>
-<p>5、编译成apk并运行，在xposed Installer中查看日志。</p>
-<p><img src="https://i.loli.net/2021/09/02/L2JmEZDSCeIMGAT.png" alt="QQ截图20210831174541.png"></p>
-]]></content>
-      <categories>
-        <category>Xposed框架</category>
-      </categories>
-      <tags>
-        <tag>Android</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Xposed——hook方法学习</title>
-    <url>/2021/08/31/Xposed%20%E2%80%94hook%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/</url>
-    <content><![CDATA[<p>Xposed是基于java层的hook框架，在不修改apk源码的情况下，编写自己的模块来改变apk的行为。以下总结了常见的Xposed的hook方法：</p>
-<span id="more"></span>
-
-<h3 id="hook普通方法"><a href="#hook普通方法" class="headerlink" title="hook普通方法"></a>hook普通方法</h3><p>创建一个类继承IXposedHookLoadPackage，修改 handleLoadPackage方法，首先要判断是否为特定的包。</p>
-<pre><code class="java">public void handleLoadPackage(XC_LoadPackage.LoadPackageParam Param) throws Throwable &#123;
-    if(Param.packageName.equals(&quot;com.example.xposed_new3&quot;))&#123;......&#125;
-&#125;
-</code></pre>
-<p>hook普通方法调用的函数都是<strong>XposedHelpers.findAndHookMethod</strong></p>
-<pre><code class="java">XposedHelpers.findAndHookMethod(
-className(包名+类名),
-Param.classLoader(固定参数),
-methodName(被hook的函数名)
-**.class(函数的参数),
-new XC_MethodHook()&#123;&#125;
-)
-</code></pre>
-<h4 id="XC-MethodHook方法详解"><a href="#XC-MethodHook方法详解" class="headerlink" title="XC_MethodHook方法详解"></a>XC_MethodHook方法详解</h4><p><img src="https://i.loli.net/2021/09/02/Uk2MhKwNJPtTLSa.png" alt="QQ截图20210901190645.png"></p>
-<p>hook普通方法的主要作用是打印各种参数信息，或者修改某些参数使其直接通过程序。</p>
-<h3 id="hook匿名内部类"><a href="#hook匿名内部类" class="headerlink" title="hook匿名内部类"></a>hook匿名内部类</h3><p>匿名内部类一般为普通方法，所以仍然用findAndHookMethod的hook方法。</p>
-<p>注：匿名内部类辨别方法：在smali代码中一个类为一个文件，且匿名内部类后缀会加上”$”符号，在工程管理器中直接找出相关类。</p>
-<blockquote>
-<p>Lcom/example/xposed_new4/MainActivity$1</p>
-</blockquote>
-<pre><code class="java">@Override
-public void handleLoadPackage(XC_LoadPackage.LoadPackageParam loadPackageParam) throws Throwable &#123;
-    if(loadPackageParam.packageName.equals(&quot;com.example.xposed_new4&quot;))&#123;
-        XposedHelpers.findAndHookMethod(
-        &quot;com.example.xposed_new4.MainActivity$1&quot;,
-        loadPackageParam.classLoader,
-        &quot;onClick&quot;,
-        View.class,
-        new XC_MethodHook() &#123;
-            @Override
-            protected void beforeHookedMethod(MethodHookParam param) throws Throwable &#123;
-                super.beforeHookedMethod(param);
-                View v=(View)param.args[0];
-                XposedBridge.log(&quot;view:&quot;+v.getId());
-            &#125;
-         &#125;);
-     &#125;
-&#125;
-</code></pre>
-<p>在findAndHookMethod方法中的包名类名参数使用smali代码中的包名加类名，其余操作与普通方法hook相同。</p>
-<h3 id="Xposed—java-反射"><a href="#Xposed—java-反射" class="headerlink" title="Xposed—java 反射"></a>Xposed—java 反射</h3><p> java反射主要作用为突破修饰符的限制，如获取私有方法和私有字段。</p>
-<p>以hook某一私有控件为例</p>
-<pre><code class="java">//获取类
-Class&lt;?&gt; clazz=param.thisObject.getClass();
-//获取字段
-Field field=clazz.getDeclaredField(&quot;Text&quot;);
-//设置可见
-field.setAccessible(true);
-
-EditText ed_sn= (EditText) field.get(param.thisObject);//把类中的控件参数传给ed_sn
-XposedBridge.log(&quot;输入结果为：&quot;+ed_sn.getText().toString().trim());
-//修改编辑框
-ed_sn.setText(&quot;L61q4_cheng&quot;);
-</code></pre>
-<p>hook某一私有方法</p>
-<pre><code class="java">//获取方法
-Method method=clazz.getDeclaredMethod(&quot;MethodName&quot;,new Class[]&#123;.class,.class...&#125;);
-//显示可见
-method.setAccessible(true);
-//调用方法
-返回值=method.invoke(param.thisObject,new Object()&#123;...&#125;);//调用函数的参数
-</code></pre>
-<h3 id="hook主动调用"><a href="#hook主动调用" class="headerlink" title="hook主动调用"></a>hook主动调用</h3><p>主动调用，直接调用apk中的函数来实现hook操作，方便对数据进行直接操作。主动调用函数为XposedHelpers。该方法一般用于获取某一数据来通过某一入口，而不是直接修改方法的返回值。Xposed通过主动调用可以直接使用Android项目中某些方法，使其可以有更强大的功能。</p>
-<h4 id="XposedHelpers方法详解"><a href="#XposedHelpers方法详解" class="headerlink" title="XposedHelpers方法详解"></a>XposedHelpers方法详解</h4><pre><code class="java">XposedHelpers.callMethod();//调用普通方法
-XposedHelpers.callStaticMethod();//调用静态方法
-</code></pre>
-<pre><code class="java">XposedHelpers.callMethod(
-    param.getClass(),//固定句式
-    &quot;methodName&quot;//需要主动调用的方法名
-    new Object[]&#123;...,...&#125;,//大括号中为调用函数中的参数，
-)
-</code></pre>
-<p>在调用方法之前，可将程序中对参数的操作直接复制过来，例如加密操作，格式操作。</p>
-<p>如果该方法有返回值且需要获取，可将该方法直接用在某一变量上，例如：</p>
-<pre><code class="java">String str=(String)XposedHelpers.callMethod(
-    param.getClass(),
-    &quot;methodName&quot;
-    new Object[]&#123;...,...&#125;,
-)
-param.args[1]=str.toString();
-</code></pre>
-<h3 id="Xposed—hook静态变量"><a href="#Xposed—hook静态变量" class="headerlink" title="Xposed—hook静态变量"></a>Xposed—hook静态变量</h3><p>实例变量在每一份实例出来的类中都有不同的值，先有对象才有实例变量，因此在没有对象之前是不能hook修改实例变量。在内存中静态变量不会改变。因此可以在对象之前hook。</p>
-<p>故hook静态变量不需要获取类对象，直接修改类中私有静态变量。hook的方法有XposedHelpers，以变量类型Int为例。</p>
-<pre><code class="java">final Class&lt;?&gt; clazz= XposedHelpers.findClass(
-            &quot;com.example.xposed_new5.MainActivity&quot;,
-            loadPackageParam.classLoader);//方便起见提前赋给clazz
-XposedHelper.setStaticIntField(clazz,&quot;变量名&quot;,value(修改的值));
-</code></pre>
-<pre><code class="java">XposedHelpers.setStaticObjectField();//修改字符串
-</code></pre>
-<p>注：不同变量类型使用不同方法。</p>
-<pre><code class="java">final Class&lt;?&gt;clazz=XposedHelpers.findClass(
-        &quot;com.example.xposed_new5.MainActivity&quot;,
-        loadPackageParam.classLoader);        
-XposedHelpers.setStaticIntField(clazz,&quot;staticInt&quot;,99);
-</code></pre>
-<h3 id="Xposed—hook构造方法"><a href="#Xposed—hook构造方法" class="headerlink" title="Xposed—hook构造方法"></a>Xposed—hook构造方法</h3><h4 id="Java构造方法"><a href="#Java构造方法" class="headerlink" title="Java构造方法"></a>Java构造方法</h4><p>与类同名，通过关键字new调用，每个类至少有一个或一个以上的构造方法（如果没有定义构造方法，系统会自动定义一个无参数的构造方法）。构造方法可以无参、一个或多个参数，且构造方法没有返回值。例如：</p>
-<pre><code class="java">MainActivity()&#123;
-&#125;
-MainActivity(int a,int b)&#123;
-&#125;
-MainActivity(String str)&#123;
-&#125;
-</code></pre>
-<h4 id="hook构造方法"><a href="#hook构造方法" class="headerlink" title="hook构造方法"></a>hook构造方法</h4><p>hook构造方法不需要添加方法名，采用的hook方法为XposedHelpers.findAndHookConstructor。</p>
-<p>此时不能hook实例变量，因为对象还没有产生。</p>
-<h4 id="findAndHookConstructor详解"><a href="#findAndHookConstructor详解" class="headerlink" title="findAndHookConstructor详解"></a>findAndHookConstructor详解</h4><pre><code class="java">final Class&lt;?&gt; clazz=XposedHelpers.findClass(
-&quot;com.example.xposed_new6.MainActivity&quot;,//包名加类名
-loadPackageParam.classLoader);//固定格式
-XposedHelpers.findAndHookConstructor(
-clazz,//可以提前定义，也可以直接在这里写出来
-int.class,//构造方法的参数
-String.class,//无参数也可以不写
-new XC_MethodHook()&#123;
-//和普通方法写法一样
-@Override
-protected void beforeHookedMethod(MethodHookParam param) throws Throwable &#123;
-        XposedBridge.log(&quot;Haha, HookDemo constructed was hooked&quot; );
-        &#125;
-@Override
-protected void afterHookedMethod(MethodHookParam param) throws Throwable &#123;
-        super.afterHookedMethod(param);
-        &#125;        
-&#125;);
-</code></pre>
-<h3 id="Xposed—hook所有函数遍历所有类"><a href="#Xposed—hook所有函数遍历所有类" class="headerlink" title="Xposed—hook所有函数遍历所有类"></a>Xposed—hook所有函数遍历所有类</h3><p>对于动态dex文件可以采用这种方法来hook。</p>
-<pre><code class="java"> XposedHelpers.findAndHookMethod(
-        ClassLoader.class,
-        &quot;isok&quot;,
-        String.class,
-        new XC_MethodHook() &#123;
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable &#123;
-                     super.afterHookedMethod(param);
-                     Class&lt;?&gt; clazz=(Class&lt;?&gt;) loadPackageParam.getResult();
-                     XposedBridge.log(&quot;Clazz：&quot;+clazz.getName());
-                     &#125;
-         &#125;
-&#125;);
-</code></pre>
-<h3 id="通过hook主动调用获取相关数据"><a href="#通过hook主动调用获取相关数据" class="headerlink" title="通过hook主动调用获取相关数据"></a>通过hook主动调用获取相关数据</h3><h4 id="获取类"><a href="#获取类" class="headerlink" title="获取类"></a>获取类</h4><pre><code class="java">Class&lt;?&gt; clazz=param.thisObject.getClass();
-</code></pre>
-<h4 id="对类进行操作-获取字段"><a href="#对类进行操作-获取字段" class="headerlink" title="对类进行操作(获取字段)"></a>对类进行操作(获取字段)</h4><pre><code class="java">Field[] fields=clazz.getDeclaredFields();
-for(Field field:fields)&#123;
-     XposedBridge.log(&quot;字段名称：&quot;+field.getName());
-&#125;
-</code></pre>
-<h4 id="获取类中的所有方法"><a href="#获取类中的所有方法" class="headerlink" title="获取类中的所有方法"></a>获取类中的所有方法</h4><pre><code class="java">Method[] methods=clazz.getDeclaredMethods();
-for(Method method:methods)
-&#123;
-      XposedBridge.log(&quot;方法名称：&quot;+method.getName());
-&#125;
-</code></pre>
-<h4 id="通过主动调用获取普通方法"><a href="#通过主动调用获取普通方法" class="headerlink" title="通过主动调用获取普通方法"></a>通过主动调用获取普通方法</h4><pre><code class="java">XposedHelpers.callMethod(loadPackageParam.getClass(),&quot;methodName&quot;,new Object()&#123;...&#125;);
-</code></pre>
-<h4 id="通过主动调用获取静态方法"><a href="#通过主动调用获取静态方法" class="headerlink" title="通过主动调用获取静态方法"></a>通过主动调用获取静态方法</h4><pre><code class="java">Class&lt;?&gt; clazz1=XposedHelpers.findClass(
-    &quot;com.example.xposed_new7.MainActivity&quot;,
-    loadPackageParam.classLoader);
-XposedHelpers.callStaticMethod(clazz1,&quot;methodName&quot;,new Object()&#123;...&#125;);
-</code></pre>
-<h4 id="通过主动调用获取普通字段（不是方法中的特定字段）"><a href="#通过主动调用获取普通字段（不是方法中的特定字段）" class="headerlink" title="通过主动调用获取普通字段（不是方法中的特定字段）"></a>通过主动调用获取普通字段（不是方法中的特定字段）</h4><pre><code class="java">XposedHelpers.getBooleanField(loadPackageParam.getClass(),&quot;fieldName&quot;);
-</code></pre>
-<h4 id="获取静态字段"><a href="#获取静态字段" class="headerlink" title="获取静态字段"></a>获取静态字段</h4><pre><code class="java">Class&lt;?&gt; clazz2=XposedHelpers.findClass(
-    &quot;com.example.xposed_new7.MainActivity&quot;,
-    loadPackageParam.classLoader);
-XposedHelpers.getStaticBooleanField(clazz2,&quot;fieldName&quot;);
-</code></pre>
-<h3 id="Xposed—hook替换函数"><a href="#Xposed—hook替换函数" class="headerlink" title="Xposed—hook替换函数"></a>Xposed—hook替换函数</h3><pre><code class="java">if(loadPackageParam.packageName.equals(&quot;com.example.xposed_new8&quot;))&#123;
-            Class&lt;?&gt;clazz=XposedHelpers.findClass(
-                &quot;com.example.xposed_new8.MainActivity&quot;,
-                loadPackageParam.classLoader);
-            XposedHelpers.findAndHookMethod(
-                    &quot;com.example.xposed_new8.MainActivity&quot;,
-                    loadPackageParam.classLoader,
-                    &quot;ButtonTest1&quot;,
-                    new XC_MethodReplacement() &#123;
-                    @Override
-                    protected Object replaceHookedMethod(MethodHookParam methodHookParam) throws Throwable &#123;
-                            XposedBridge.log(&quot;方法替换成功&quot;);
-                            XposedHelpers.callMethod(clazz,&quot;ButtonTest2&quot;);//主动调用ButtonTest2
-                            return null;
-                        &#125;
-                    &#125;
-            );
-&#125;
-</code></pre>
-<h3 id="Xposed—hook多DEX"><a href="#Xposed—hook多DEX" class="headerlink" title="*Xposed—hook多DEX"></a>*Xposed—hook多DEX</h3><p>在一个apk中有多个dex文件时，在apk打包的时候优先加载主dex文件，会优先有些类hook不到，采用attach方法来解决。</p>
-<pre><code class="java">XposedHelpers.findAndHookMethod(
-        Application.class,
-        &quot;attach&quot;,
-        Context.class,
-        new XC_MethodHook() &#123;
-                 @Override
-                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable &#123;
-                 super.beforeHookedMethod(param);
-                 Context context= (Context) param.args[0];
-                 ClassLoader loader=context.getClassLoader();
-                 XposedHelpers.findAndHookMethod(
-                         &quot;com.example.xposed_new8.MainActivity&quot;,
-                         loader,
-                         &quot;ButtonTest1&quot;,
-                         new XC_MethodHook() &#123;
-                                 @Override
-                                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable &#123;
-                                            super.beforeHookedMethod(param);
-                              &#125;
-                         &#125;
-                );
-           &#125;
-       &#125;
-);
-</code></pre>
-]]></content>
-      <categories>
-        <category>Xposed框架</category>
-      </categories>
-      <tags>
-        <tag>Android</tag>
-        <tag>Xposed框架</tag>
-        <tag>hook</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Frida——Java层hook方法</title>
-    <url>/2021/10/15/Frdia%E6%A1%86%E6%9E%B6%E2%80%94%E2%80%94hook%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/</url>
-    <content><![CDATA[<h3 id="Frdia框架——hook方法详解"><a href="#Frdia框架——hook方法详解" class="headerlink" title="Frdia框架——hook方法详解"></a>Frdia框架——hook方法详解</h3><span id="more"></span>
-<h4 id="Hook普通方法"><a href="#Hook普通方法" class="headerlink" title="Hook普通方法"></a>Hook普通方法</h4><p>普通方法包含静态方法、公开方法、私有方法。</p>
-<pre><code class="javascript">Java.perform(function()&#123;
-    var MainActivity=Java.use(&#39;com.example.frida_new1.MainActivity&#39;);//完整包名（注意大小写）
-    MainActivity.getCalc.implementation=function(a,b)&#123;
-        send(&#39;Hook start....&#39;);
-        send(arguments[0]);
-        send(b);//两种打印参数的方式
-        var num=this.getCalc(a,b); 
-        send(num);
-        return num;
-    &#125;
-   &#125;);
-</code></pre>
-<p>详解：arguments[n]在js中相当于类数组对象，在function(a,b)中参数既可以用a、b来表示，也可以用arguments来表示。虽然function指代getCalc方法，但仍然可以在function中调用包中的其他函数，只是在function中可以对getCalc的方法进行参数调整和改变。</p>
-<h4 id="hook构造方法"><a href="#hook构造方法" class="headerlink" title="hook构造方法"></a>hook构造方法</h4><p>大致方法和普通方法相同。因为构造方法与报名相同，所以不需要Util.Util这种写法（我试过直接用构造方法名，直接报错了。。。）构造方法有特有的表示方法：</p>
-<pre><code>类名.$init //这里的$init就表示构造方法。
-</code></pre>
-<p>具体代码：</p>
-<pre><code class="javascript">Java.perform(function()&#123;
-        var money=Java.use(&#39;com.example.frida_new1.Money&#39;);
-        money.$init.implementation=function(a,b)&#123;
-            send(&#39;hook到Money构造函数&#39;);
-            send(arguments[0]);
-            send(b);
-            return this.$init(10000,&quot;美元&quot;);//用this.方法名来表示需要调用的方法（直接用不明确，会报错）
-        &#125;
-    &#125;);
-</code></pre>
-<p>修改函数时，注意参数类型。</p>
-<h4 id="hook重载方法"><a href="#hook重载方法" class="headerlink" title="hook重载方法"></a>hook重载方法</h4><p>和普通方法不同的区别是在寻找方法时使用：</p>
-<pre><code>Utils.cz.overload(&quot;int&quot;).implementation=function(参数)
-</code></pre>
-<p>详解：cz为重载方法名，overload为注明此方法为重载方法并在括号中标明所要hook的重载方法中的参数，并传入。例如:需要hook的重载方法有一个int参数：overload(“int”)即可。但是String类型有点特殊，需要写为overload(“java.lang.String”)因为overload中需要标明的实际是类型所处的全路径。</p>
-<pre><code class="javascript">Java.perform(function()&#123;
-        var Utils=Java.use(&#39;com.example.frida_new1.Utils&#39;);
-        Utils.cz.overload(&quot;int&quot;,&quot;java.lang.String&quot;).implementation=function(a,b)&#123;
-            send(&#39;hook成功！&#39;);
-            send(arguments[0]);
-            send(b);
-            return this.cz();
-        &#125;
-    &#125;);
-</code></pre>
-<h5 id="hook方法的所有重载"><a href="#hook方法的所有重载" class="headerlink" title="hook方法的所有重载"></a>hook方法的所有重载</h5><p>获取一方法的所有重载方法，只需utils.test.overloads，其余操作和正常重载方法相同。</p>
-<pre><code class="js">Java.perform(function()&#123;
-        var utils=Java.use(&#39;com.example.frida_new1.Utils&#39;);
-        console.log(utils.test.overloads.length);//获取重载方法的个数
-        for(var i=0;i&lt;utils.test.overloads.length;i++)&#123;
-            utils.test.overloads[i].implementation=function()&#123;
-                console.log(arguments);//arguments是一个储存所有重载方法的参数
-                return this.test.apply(this,arguments);//只用apply将不同的重载方法返回对应的参数
-                //如果apply中参数有arguments，则直接返回。
-                //如果apply中只有this一个参数，则循环重载方法的个数次。
-            &#125;
-        &#125;
-   &#125;);
-</code></pre>
-<p>如果只想修改无参的重载方法，只需加上一个判断：</p>
-<pre><code class="js">if(arguments.length==0)&#123;
-     return &quot;hook到没有参数的重载方法&quot;;
-&#125;
-</code></pre>
-<h4 id="hook自定义参数"><a href="#hook自定义参数" class="headerlink" title="hook自定义参数"></a>hook自定义参数</h4><p>自定义参数类型时，对于对象参数可以直接调用对象中的方法。如果需要更改参数时，需要重新实例化一个对象来返回：</p>
-<pre><code class="javascript">var 变量名=对象类名.$new(构造参数) 如：var mon =money.$new(123456,&quot;港币&quot;);
-</code></pre>
-<p>注意如果是重载方法中参数为某一对象，在overload中需要标明对象类 的全路径。例如：</p>
-<pre><code class="javascript">Utils.method.overload(&quot;com.example.frida_new1.Money&quot;).implementation=function(参数)
-</code></pre>
-<pre><code class="javascript">Java.perform(function()&#123;
-        var Utils=Java.use(&#39;com.example.frida_new1.Utils&#39;);
-        var money=Java.use(&#39;com.example.frida_new1.Money&#39;);
-        Utils.test.implementation=function(a)&#123;
-            send(&#39;hook到对象参数&#39;);
-            send(a.getInfo());
-            var mon =money.$new(123456,&quot;港币&quot;);
-            send(mon.getInfo());
-            return mon.getInfo();//这里返回值可更改为this.test(mon)，要注意返回值的参数类型！！
-        &#125;
-&#125;);
-</code></pre>
-<h4 id="对象参数属性的修改"><a href="#对象参数属性的修改" class="headerlink" title="对象参数属性的修改"></a>对象参数属性的修改</h4><p>在获取某一实例对象的属性时不能直接通过”类名.变量名”的方法来直接获取。需要表示为“类名.变量名.value”</p>
-<pre><code class="javascript">Java.perform(function()&#123;
-        var Utils=Java.use(&#39;com.example.frida_new1.Utils&#39;);
-        var money=Java.use(&#39;com.example.frida_new1.Money&#39;);
-        Utils.test.overload(&quot;com.example.frida_new1.Money&quot;).implementation=function(a)&#123;
-            send(&#39;hook到对象参数&#39;);
-            var mon =money.$new(123456,&quot;港币&quot;);
-            send(mon.getInfo());
-            mon.name.value=&quot;英镑&quot;;
-            send(mon.name.value);
-            return mon.getInfo();
-        &#125;
-    &#125;);
-</code></pre>
-<h4 id="java反射（对参数属性的修改）"><a href="#java反射（对参数属性的修改）" class="headerlink" title="java反射（对参数属性的修改）"></a>java反射（对参数属性的修改）</h4><p>使用反射的主要作用是可以让其他语言去调用java语言。基本思想：先找类，再找方法，再调用方法。</p>
-<pre><code class="javascript">Java.perform(function()&#123;
-        var Utils=Java.use(&#39;com.example.frida_new1.Utils&#39;);
-        var money=Java.use(&#39;com.example.frida_new1.Money&#39;);
-        var clazz=Java.use(&#39;java.lang.Class&#39;);//定义一个类的构造器
-        Utils.test.overload(&quot;com.example.frida_new1.Money&quot;).implementation=function(a)&#123;
-            var mon =money.$new(123456,&quot;港币&quot;);
-            send(mon.getInfo());
-            var num=Java.cast(mon.getClass(),clazz).getDeclaredField(&#39;num&#39;);
-            //cast中第一个参数是getClass获取类id，（对象所处的类）
-            //getDeclaredField(&#39;&#39;)用来获取字段id,参数为变量名
-            var name=Java.cast(mon.getClass(),clazz).getDeclaredField(&#39;name&#39;);
-            name.setAccessible(true);
-            num.setAccessible(true);//设置属性，不修改app会崩溃
-            var Value=num.get(mon);//获取类传到该变量中
-            console.log(Value);
-            //这里直接使用send()无法成功打印
-            var v1=name.get(mon);
-            console.log(v1);
-            //send(Value);这里直接用send无法输出
-            num.setInt(mon,5000);
-            name.set(mon,&quot;英镑&quot;);//修改变量使用set...()方法：setInt(),set()
-            send(mon.getInfo());
-            return mon.getInfo();
-        &#125;
-&#125;);
-</code></pre>
-<p>注：hook onCreat方法时应该在结尾继续执行该方法，因为onCreat在程序中是一直执行的。在末尾加上 this.onCreat()</p>
-<h4 id="hook内部类"><a href="#hook内部类" class="headerlink" title="hook内部类"></a>hook内部类</h4><p>内部类：在一个类中定义一个新的类。和直接引用不同的是需要在声明类的时候在主类和内部类中加“$”符号。其余写法完全相同。</p>
-<pre><code class="javascript"> Java.perform(function()&#123;
-        var intheclass=Java.use(&#39;com.example.frida_new1.Utils$intheclass&#39;);
-        console.log(intheclass);
-        intheclass.$init.implementation=function(a,b)&#123;
-            send(&#39;Hook start....&#39;);
-            send(a);
-            send(b);
-            b=6666
-            a=&quot;iu&quot;
-            send(&quot;修改后：&quot;+a+&quot; &quot;+b);
-            return this.$init(a,b);
-        &#125;
-   &#125;);
-</code></pre>
-<h4 id="hook匿名类"><a href="#hook匿名类" class="headerlink" title="hook匿名类"></a>hook匿名类</h4><p>匿名类：一个类中包含另一个类，且不需要任何类名直接实例化（没有类名）。主要用于创建一个对象来执行特定的任务，是代码更加简洁。一般匿名类只用一次。首先在smali代码中找到匿名类名（带有$）,其余代码与普通方法类似</p>
-<h4 id="枚举所有的类和类的所有方法。"><a href="#枚举所有的类和类的所有方法。" class="headerlink" title="枚举所有的类和类的所有方法。"></a>枚举所有的类和类的所有方法。</h4><p>枚举所有的类在js中有一个固定的函数：enumerateLoadedClasses，具体使用方法如下：</p>
-<pre><code class="js">Java.perform(function()&#123;
-    //这样枚举会列举出该模拟器中正在运行的所有进程
-        Java.enumerateLoadedClasses(&#123;//枚举加载所有的类
-            onMatch:function(name,handle)&#123;//输出
-                console.log(name);
-            &#125;,
-            onComplete:function()&#123;//枚举结束之后调用，该函数只会调用一次
-            &#125;
-        &#125;);
-    &#125;);
-</code></pre>
-<p>如果在onMatch中进行选择，指定包中的类，则会筛选输出指定类名。</p>
-<pre><code class="js">Java.perform(function()&#123;
-        Java.enumerateLoadedClasses(&#123;//枚举加载所有的类
-            onMatch:function(name,handle)&#123;//输出
-                if(name.indexOf(&quot;com.example.frida_new1&quot;)!=-1)&#123;
-                    console.log(name);
-                    var clazz =Java.use(name);
-                    console.log(clazz);
-                    var methods=clazz.class.getDeclaredMethods();
-                    for(var i=0;i&lt;methods.length;i++)&#123;
-                        console.log(methods[i]);
-                    &#125;
-                &#125;
-            &#125;,
-            onComplete:function()&#123;//枚举结束之后调用，该函数只会调用一次
-            
-            &#125;
-        &#125;);
-    &#125;);
-&quot;&quot;&quot;
-</code></pre>
-<p>枚举所有的方法使用clazz.class.getDeclaredMethods()；</p>
-<pre><code class="javascript">var clazz =Java.use(name);
-console.log(clazz);
-var methods=clazz.class.getDeclaredMethods();
-for(var i=0;i&lt;methods.length;i++)&#123;
-       console.log(methods[i]);
-&#125;
-</code></pre>
-<h4 id="Java层打印函数堆栈定位关键代码"><a href="#Java层打印函数堆栈定位关键代码" class="headerlink" title="Java层打印函数堆栈定位关键代码"></a>Java层打印函数堆栈定位关键代码</h4><p>在xposed中打印函数堆栈一般使用：</p>
-<pre><code class="java">log.d(&quot;TAG&quot;,&quot;MSG&quot;,new Trowable());
-</code></pre>
-<p>在frida中一般不使用，而使用Log.getStackTranceString()方法。（该方法也可以打印信息）。</p>
-<p> java.cast()：强制类型转换。                                                                                                                                                  </p>
-<p>java.openClassFile()；    //注入dex文件                                                                                                                                                  </p>
-<p> java.registerClass()    //在Frida中注册一个类写进app，很少用到。                                                                               </p>
-<p>java.array();//构造任意类型的数组。</p>
-<h4 id="frida注入多dex文件"><a href="#frida注入多dex文件" class="headerlink" title="frida注入多dex文件"></a>frida注入多dex文件</h4><p>当hook比较复杂时（需要大量使用java函数，想为app添加大量函数），很多函数不方便引入js中使用，就需要正向的java函数来注入到frida中，此时引入注入dex文件这一方法，方便hook。<strong>首先需要获取dex文件</strong>，建议直接将所需要的函数在另一个app中实现，打包成apk分离出dex文件即可（分离出dex文件后需要把他放在adnroid的缓存区：“adb push 文件路径 、data/local/tmp/xxx.dex）。再使用openClassFile函数来打开这个文件。获取到这个包后可以直接调用包中 的函数。相当于正向调用。</p>
-<pre><code class="js">Java.perform(function()&#123;
-        Java.openClassFile(&quot;/data/local/tmp/fridadex.dex&quot;).load();
-        var frida=Java.use(&quot;简单实现函数的打包的apk的包名&quot;);//dex中的函数所在类名
-        var main=Java.use(&quot;com.example.frida_new1.Money&quot;);//开始hook
-        main.fridadex.implementation=function(a,b)&#123;
-            var cal=frida.xxx(a,b);
-            send(cal);
-            return cal;
-        &#125;
-    &#125;);
-</code></pre>
-<h4 id="Frida-server端口启动与非标准端口启动"><a href="#Frida-server端口启动与非标准端口启动" class="headerlink" title="Frida-server端口启动与非标准端口启动"></a>Frida-server端口启动与非标准端口启动</h4><p>启动Frida-server一般采用默认端口：</p>
-<pre><code>adb forward tcp:27042 tcp:27042
-adb forward tcp:27043 tcp:24043
-</code></pre>
-<p>为了防止被检测，会使用非标准端口：                                                                                                    </p>
-<p> 1、启动frida-server时使用”./data/local/tmp/frida-server -l 127.0.0.1:9999 “                                            </p>
-<p> 2、转发端口时”adb forward tcp:9999”                                                                                                         </p>
-<p> 3、在frida中修改为：</p>
-<pre><code class="python">process = frida.get_device_manager().add_remote_device(&#39;127.0.0.1:9999&#39;).attch(&#39;Frida_new1&#39;)
-</code></pre>
-]]></content>
-      <categories>
-        <category>Frida框架</category>
-      </categories>
-      <tags>
-        <tag>Android</tag>
-        <tag>hook</tag>
-        <tag>Frida框架</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>初识Frida框架</title>
-    <url>/2021/09/09/%E5%88%9D%E8%AF%86Frida%E6%A1%86%E6%9E%B6/</url>
-    <content><![CDATA[<h2 id="初识Frida框架"><a href="#初识Frida框架" class="headerlink" title="初识Frida框架"></a>初识Frida框架</h2><span id="more"></span>
-
-<p>Frida是一款基于Python + JavaScript 的hook框架，本质是一种动态插桩技术。可以用于Android、Windows、iOS等各大平台，其执行脚本基于Python或者Node.js写成，而注入代码用JavaScript写成。相比于Xposed更加便捷，环境安装简单，使用方便。</p>
-<h3 id="Frida安装"><a href="#Frida安装" class="headerlink" title="Frida安装"></a>Frida安装</h3><p>1、安装Python（这里不做介绍）。</p>
-<p>2、安装frida、frida-tools(两个版本必须一致，我这里都为15.1.2)</p>
-<pre><code>pip install pipfrida 
-pip install frida-tools
-</code></pre>
-<p>安装之后可以检查版本是否一致。</p>
-<p><img src="https://s2.loli.net/2022/01/21/sZ46KVfCmnMktuj.png" alt="QQ截图20211011210105.png"></p>
-<p>2、连接模拟器，安装frida-server。</p>
-<p><a href="https://github.com/frida/frida/releases">frida-server下载链接</a>，找到对应的版本，手机是arm64，模拟器是x86，下载之后解压，将文件改名为fs。</p>
-<p>连接模拟器，adb devices 显示不到打开的模拟器时手动连接。如下：</p>
-<pre><code>夜神模拟器：adb connect 127.0.0.1:62001
-逍遥安卓模拟器：adb connect 127.0.0.1:21503
-天天模拟器：adb connect 127.0.0.1:6555
-海马玩模拟器：adb connect 127.0.0.1:53001
-网易MUMU模拟器：adb connect 127.0.0.1:7555 MacOS:adb connect 127.0.0.1:5555
-genymotion模拟器：adb connect 127.0.0.1:5555
-谷歌原生模拟器：adb connect &lt;设备的IP地址&gt;：5555
-</code></pre>
-<p>连接之后进行如下操作：</p>
-<pre><code>1、adb push fs文件所在地址/fa /data/local/tmp
-2、adb shell
-3、su
-4、cd /data/local/tmp
-5、chmod 777 fs
-6、./fs
-(如果此时光标在下一行闪，说明frida运行成功)
-</code></pre>
-<p><img src="https://s2.loli.net/2022/01/21/IVaptHr3NfkxTZj.png" alt="QQ截图20211011212732.png"></p>
-<p>3、、验证是否安装成功</p>
-<p>不要关闭此页面，另外打开一个cmd窗口，执行以下指令：frida-ps -U，如果该模拟器中运行的所有进程都显示出来，说明frida安装成功。</p>
-<h3 id="Frida初体验"><a href="#Frida初体验" class="headerlink" title="Frida初体验"></a>Frida初体验</h3><p>frida框架最大的优势就是操作简单，相比于Xposed来说不需要另生成一个项目来运行，只需要编写一个插件直接再命令框执行即可。Frida的编写可以用js、python、js+python三种方法来写。初学者建议使用js+python方式来写，只需要编写相应的js代码，python文件基本固定。</p>
-<p>在使用插件进行hook时，首先应该转发端口。具体操作如下：</p>
-<p><img src="https://s2.loli.net/2022/01/21/cQ2DnkFjBvYu9ao.png" alt="QQ截图20211011214700.png"></p>
-<p>脚本样例：</p>
-<pre><code>import frida
-import sys
-
-def on_message(message,data): 
-    print(message)
-
-jscode = &quot;&quot;&quot;
-Java.perform(function()&#123;
-    var MainActivity=Java.use(&#39;com.example.frida_new1.MainActivity&#39;);
-    MainActivity.getCale.implementation=function()&#123;
-        send(&#39;Hook start....&#39;);
-        return &#39;hook成功!!!&#39;
-    &#125;
-   &#125;);
-&quot;&quot;&quot;
-process = frida.get_remote_device().attach(&#39;Frida_new1&#39;)//这里踩了很多坑，attach里面抓包并不是完整包名，而是文件名
-script = process.create_script(jscode)
-script.on(&#39;message&#39;, on_message)
-script.load()
-sys.stdin.read()
-</code></pre>
-<p>这里有两种方法运行该插件：</p>
-<p>1、打开python所在的目录，打开cmd页面执行</p>
-<pre><code>python test.py
-</code></pre>
-<p>2、在NotePad++等高级记事本中，直接运行。建议将如下命令保存以便后面可以直接使用该文件运行。</p>
-<pre><code>cmd /k python &quot;D:\Desktop\test.py&quot; &amp; ECHO &amp; PAUSE &amp; EXIT//双引号中表示脚本的路径
-</code></pre>
-<p>运行之后点击按钮(这里hook 的是Button事件的显示方法)</p>
-<p><img src="https://s2.loli.net/2022/01/21/v8ab6grsUD7IqiO.png" alt="QQ截图20211011214839.png"></p>
-<p>Hook 成功。</p>
-]]></content>
-      <categories>
-        <category>Frida框架</category>
-      </categories>
-      <tags>
-        <tag>Android</tag>
-        <tag>hook</tag>
-        <tag>Frida框架</tag>
       </tags>
   </entry>
 </search>
