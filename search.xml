@@ -2496,4 +2496,283 @@ if __name__ == &quot;__main__&quot;:
         <tag>非对称加密算法</tag>
       </tags>
   </entry>
+  <entry>
+    <title>《深入理解LTE-A》学习笔记（一）</title>
+    <url>/2023/08/28/%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3LTE-A%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%20/</url>
+    <content><![CDATA[<span id="more"></span>
+
+<p><img src="D:/Desktop/1/photo/image-20230728184032279.png" alt="image-20230728184032279"></p>
+<h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>eNode(Evolved Node B)</strong></td>
+<td>一个基站，负责无线信号的传输和接收，用于连接移动设备和核心网络。</td>
+</tr>
+<tr>
+<td align="left"><strong>UE</strong></td>
+<td>移动终端，由移动设备（ME）和通用用户识别模块（USIM）组成。</td>
+</tr>
+<tr>
+<td align="left"><strong>PCI</strong></td>
+<td>物理小区标识</td>
+</tr>
+<tr>
+<td align="left"><strong>PSS/SSS</strong></td>
+<td>小区同步信号</td>
+</tr>
+<tr>
+<td align="left"><strong>MIB/SIB</strong></td>
+<td>小区相关的系统信息</td>
+</tr>
+<tr>
+<td align="left"><strong>RA Preamble</strong></td>
+<td>随机前导码，UE发给eNode，告诉eNode有个接入请求。</td>
+</tr>
+<tr>
+<td align="left"><strong>PDSCH</strong></td>
+<td>物理下行共享信道</td>
+</tr>
+<tr>
+<td align="left"><strong>PDCCH</strong></td>
+<td>物理下行控制信道，传输上下行的资源调度信息</td>
+</tr>
+<tr>
+<td align="left"><strong>PUSCH</strong></td>
+<td>物理上行共享信道</td>
+</tr>
+<tr>
+<td align="left"><strong>PUCCH</strong></td>
+<td>物理上行控制信道，传输ACK/NACK，调度请求，信道质量指示等信息。</td>
+</tr>
+<tr>
+<td align="left"><strong>CSI</strong></td>
+<td>信道状态信息，UE上传给基站的。</td>
+</tr>
+<tr>
+<td align="left"><strong>Paging</strong></td>
+<td>呼叫请求，由eNode发起。</td>
+</tr>
+<tr>
+<td align="left"><strong>msg3</strong></td>
+<td>包含UE的随机接入标识符（RAI）和初始接入参数，用于告知基站UE的身份和请求建立连接。</td>
+</tr>
+<tr>
+<td align="left"><strong>SRS</strong></td>
+<td>在无线通信中，用于估计上行信道频域信息，做频率选择性调度；用于估计下行信道，做下行波束赋形。</td>
+</tr>
+<tr>
+<td align="left"><strong>SR</strong></td>
+<td>上行调度请求</td>
+</tr>
+<tr>
+<td align="left"><strong>BSR</strong></td>
+<td>缓冲状态报告，基站接收BSR并为UE分配资源</td>
+</tr>
+<tr>
+<td align="left"><strong>PHICH</strong></td>
+<td>物理混合自动重传指示信道。</td>
+</tr>
+<tr>
+<td align="left"><strong>RLC PDU</strong></td>
+<td>RLC层协议数据单元</td>
+</tr>
+<tr>
+<td align="left"><strong>RLC SDU</strong></td>
+<td>将接收到的RLC PDU重组并排序</td>
+</tr>
+<tr>
+<td align="left"><strong>MAC SDU</strong></td>
+<td>服务数据单元，RLC PDU在MAC层被称作MAC SDU</td>
+</tr>
+<tr>
+<td align="left"><strong>MAC PDU</strong></td>
+<td>若干个MAC SDU串联在一起，加上MAC子头封装成MAC PDU</td>
+</tr>
+<tr>
+<td align="left"><strong>HARQ</strong></td>
+<td>混合式自动重传请求</td>
+</tr>
+<tr>
+<td align="left"><strong>SRB</strong></td>
+<td>信令无线承载，在控制平面，RLC 承载上层的业务称之为信令无线承载，为RRC 层传递信令</td>
+</tr>
+<tr>
+<td align="left"><strong>CCCH</strong></td>
+<td>公共控制信道，是一种“一点对多点”的双向控制信道，在呼叫接续阶段，传输链路连接所需要的控制信令与信息。</td>
+</tr>
+<tr>
+<td align="left"><strong>PCCH</strong></td>
+<td>物理控制信道，用于发送寻呼消息，网络到用户的下行信道</td>
+</tr>
+<tr>
+<td align="left"><strong>BCCH</strong></td>
+<td>广播控制信道，在实际工作之前，协调、控制、管理用户行为。</td>
+</tr>
+<tr>
+<td align="left"><strong>DCCH</strong></td>
+<td>专用控制信道，点对点的双向控制信道，在呼叫接续阶段和在通信进行当中，在基站和移动台之间传输必要的控制信息。</td>
+</tr>
+<tr>
+<td align="left"><strong>DTCH</strong></td>
+<td>专用业务信道，UE和网络之间点对点和上下行双向业务数据传送渠道。</td>
+</tr>
+<tr>
+<td align="left"><strong>MCCH</strong></td>
+<td>多播控制信道，点对多点的从网络侧到UE的MBMS控制信息的传送通道，包括正在进行通信或即将要进行通信的MBMS会话信息。</td>
+</tr>
+<tr>
+<td align="left"><strong>MTCH</strong></td>
+<td>多播业务信道，用于承载MBMS业务数据。</td>
+</tr>
+<tr>
+<td align="left"><strong>MBMS</strong></td>
+<td>多媒体广播组播业务</td>
+</tr>
+<tr>
+<td align="left"><strong>EPC</strong></td>
+<td>4G核心网络</td>
+</tr>
+<tr>
+<td align="left"><strong>S-GW</strong></td>
+<td>服务网关，终止于E-UTRAN接口的网关。</td>
+</tr>
+<tr>
+<td align="left"><strong>P-GW</strong></td>
+<td>分组数据网关，面向PDN终结于SGi接口的网关。</td>
+</tr>
+<tr>
+<td align="left"><strong>S5/S8 bearer</strong></td>
+<td>S-GW和P-GW间的传输承载。</td>
+</tr>
+<tr>
+<td align="left"><strong>RDB</strong></td>
+<td>Radio Bearer，是指UE与基站(eNB)间的传输承载。</td>
+</tr>
+<tr>
+<td align="left"><strong>S1 Bearer</strong></td>
+<td>指eNB与服务网关(Serving Gateway，S-GW)间对于特定UE的承载。</td>
+</tr>
+<tr>
+<td align="left">。。。</td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="第一章-概述"><a href="#第一章-概述" class="headerlink" title="第一章 概述"></a>第一章 概述</h1><h2 id="一、空口传输"><a href="#一、空口传输" class="headerlink" title="一、空口传输"></a>一、空口传输</h2><h3 id="1、上行传输"><a href="#1、上行传输" class="headerlink" title="1、上行传输"></a>1、上行传输</h3><p>由nNode发送，UE负责接收的传输。</p>
+<p><img src="https://raw.githubusercontent.com/L61q4Cheng/photos/main/img/202308282342438.png" alt="image-20230823202111190"></p>
+<p>下行相关流程：</p>
+<p>1、UE在进入基站前，会选择一个运营商，即PLMN。</p>
+<p>2、eNode每隔5ms会发送一次同步信号PSS/SSS。UE通过PSS/SSS，来选择eNode并获得时间与频率上的同步（并没有上行时间的同步），以及eNode的PCI（物理标识）。</p>
+<p>3、小区会不停发送与小区相关的系统信息（MIB/SIB），UE在需要的时候获取这些信息。</p>
+<p>4、UE获得信息后，会发起随机接入过程与小区建立连接（RA Preamble），同时产生反馈信息（RAR）。</p>
+<p>5、建立连接完成，可以进行数据传输。eNode通过PDSCH信道来给UE传输数据，同时通过PDCCH告诉UE对应的PDSCH在哪些无限资源上传输以及如何传输。UE使用ACK/NACK信号告诉基站是否接收成功（通过PUCCH和PUSCH信道发送），基站没有接收则会重传。</p>
+<p>6、信道条件动态变化，UE将下行无线信道条件通过CSI反馈给基站，使基站在下行调度时将信道质量考虑在内。</p>
+<p>7、当双方没有数据传输时，UE不需要一直保持连接状态（RRC_CONNECTED）。UE可以处于RRC_IDLE状态，定期唤醒去接收paging信息，确定是否有呼叫请求。</p>
+<h3 id="2、上行传输"><a href="#2、上行传输" class="headerlink" title="2、上行传输"></a>2、上行传输</h3><p>由UE发送，nNode负责接收的传输。</p>
+<p><img src="https://raw.githubusercontent.com/L61q4Cheng/photos/main/img/202308282343070.png" alt="image-20230827130438050"></p>
+<p>上行相关流程：</p>
+<p>1、随机接入过程中，UE会发送Preamble和Msg3以便和基站建立连接。</p>
+<p>2、基站在上行调度时，需要进行上行信道估计，通过UE发送的SRS进行测量得到。</p>
+<p>3、eNode通过PDCCH给UE发送UL grant（物理控制信息）时，UE才能够使用对应的资源进行上行传输。当UE没有被分配上行PUSCH资源但有上行数据需要发送时，UE会发送SR告诉eNode，并请求eNode分配上行PUSCH资源。</p>
+<p>4、发送了调度请求后，UE发送了BSR告诉基站有多少数据要发送。</p>
+<p>5、UE通过PUSCH给eNode发送数据，同时eNode发送确认信号ACK/NACK（通过PHICH信道发送）给UE。UE没有接收到确认信号则会重传。</p>
+<p>6、信道条件动态变化，UE将下行无线信道条件通过CSI反馈给基站（通过PUCCH或PUSCH传输）。</p>
+<h2 id="二、LTE协议栈结构"><a href="#二、LTE协议栈结构" class="headerlink" title="二、LTE协议栈结构"></a>二、LTE协议栈结构</h2><p>主要说明基站和UE如何进行用户面和控制面的数据传输。</p>
+<p><strong>下行无线协议框架：</strong></p>
+<p><img src="https://raw.githubusercontent.com/L61q4Cheng/photos/main/img/202308282343017.png" alt="image-20230827134709982"></p>
+<p><strong>上行无线协议框架：</strong></p>
+<p><img src="https://raw.githubusercontent.com/L61q4Cheng/photos/main/img/202308282343402.png" alt="image-20230827134759898"></p>
+<h3 id="1、用户面协议"><a href="#1、用户面协议" class="headerlink" title="1、用户面协议"></a>1、用户面协议</h3><p><img src="https://raw.githubusercontent.com/L61q4Cheng/photos/main/img/202308282343826.png" alt="image-20230827135801461"></p>
+<p>1、PDCP层（分组数据汇聚协议层）：针对来自控制面的RRC和来自数据面的IP包进行处理，主要实现加密和完整性保护。</p>
+<ul>
+<li>头部压缩和解压缩：使用ROHC，应用于用户面数据</li>
+<li>加解密：用于用户面和控制面数据</li>
+<li>完整性保护：用于控制面数据</li>
+<li>传输用户数据和控制面数据</li>
+<li>切换时重排序和重传处理</li>
+<li>由于超时而丢弃用户面数据</li>
+</ul>
+<p>2、RLC层（无线链路控制层）：主要实现无线链路控制功能ARQ纠错。<strong>以无线承载的方式为PDCP层提供服务</strong></p>
+<p>三种模式：</p>
+<ol>
+<li>TM透明模式</li>
+<li>UM重发非确认模式</li>
+<li>AM重发确认模式</li>
+</ol>
+<ul>
+<li><strong>分段串联和重组RLC SDU</strong>：适用于UM和AM。由于RLC PDU的大小由MAC决定，大小并不等于RLC SDU的大小，因此在发送端需要分段/串联RLC SDU以便适合MAC层指定的大小，接收端需要将分组的RLC SDU重组，以便恢复出原来的RLC SDU并发往上层。</li>
+<li><strong>ARQ纠错（适用于AM）</strong>：重传机制。MAC层的HARQ机制实现快速重传，反馈出错率约1%，不适用于要求过高的业务。RLC重传处理能够降低反馈出错率。</li>
+<li><strong>对RLC PDU重排序</strong>：MAC层的HARQ可能导致到达RLC层的报文路乱序，需要RLC层进行重排序。</li>
+<li><strong>重复包检测</strong>：适用于 UM 和 AM 模式。出现重复包的最大可能性为发送端反馈了HARQ ACK，但接收端错误地将其解释NACK，从而导致了不必要的MAC PDU 重传。</li>
+<li><strong>对RLC PDU进行重分段</strong>：适用于AM模式。当RLC PDU数据需要重传时，也可能需要重分段（要求大小不一致时）。</li>
+</ul>
+<p>3、MAC层（媒体接入层）：以逻辑信道的方式为RLC层提供服务，为RLC层业务与物理层之间提供一个有效的连接。</p>
+<ul>
+<li><strong>匹配逻辑信道和传输信道。</strong></li>
+<li><strong>复用/解复用</strong>：将属于一个或不同的逻辑信道的多个MAC SDU复用到同一个MAC PDU上，发给物理层。</li>
+<li><strong>通过HARQ来纠错</strong>：重传机制。</li>
+<li><strong>调度处理</strong></li>
+<li><strong>逻辑信道优先级处理</strong>：从不同的等待队列选出一个分组，将其传递到物理层，并通过无线接口发送的过程。</li>
+<li><strong>调度信息上报</strong></li>
+<li><strong>随机接入过程处理</strong></li>
+</ul>
+<h4 id="UE与核心网进行用户面的数据通信过程"><a href="#UE与核心网进行用户面的数据通信过程" class="headerlink" title="UE与核心网进行用户面的数据通信过程"></a>UE与核心网进行用户面的数据通信过程</h4><p>核心网（EPC）通过外部承载与因特网建立连接，并通过EPS bearer 与UE建立连接。即核心网和UE之间的数据通信是承载在EPS bearer上的。</p>
+<p><img src="https://raw.githubusercontent.com/L61q4Cheng/photos/main/img/202308282343937.png" alt="image-20230827233230528"></p>
+<p>一个EPS bearer跨越多个接口：</p>
+<ul>
+<li>P-GW和S-GW之间的S5/S8接口。</li>
+<li>S-GW 和 eNodeB 之间的 S1 接口。</li>
+<li>eNodeB 和 UE 之间的无线接口。</li>
+</ul>
+<p>一个 EPS bearer 由一个 S5/S8 bearer 和一个 E-RAB 组成。一个 E-RAB 由一个 S1 bearer 和一个DRB 组成。</p>
+<ul>
+<li> 一个 E-RAB 在 UE 和 EPC 之间传输一个 EPS bearer 的数据。如果存在一个 E-RAB，则该 E-RAB 与一个 EPS bearer 存在一一映射关系。</li>
+<li>个 DRB 在 UE 和 eNodeB 之间（Uu 接口）传输一个 EPS bearer 的数据。如果存在一个 DRB，则该 DRB 与一个 EPS bearer/E-RAB 存在一一映射关系。</li>
+<li>一个 S1 bearer 在 eNodeB 和 S-GW 之间（S1 接口）传输一个 EPS bearer 的数据。</li>
+<li>一个 S5/S8 bearer 在 S-GW 和 P-GW 之间（S5/S8 接口）传输一个 EPS bearer 的数据。</li>
+</ul>
+<p><strong>S-GW</strong>：</p>
+<ul>
+<li>进行eNodeB间切换时，可以作为本地锚定点，并协助完成eNodeB的重排序功能；</li>
+<li>在3GPP不同接入系统间切换时，作为移动性锚点（终结在S4接口，在2G/3G系统和P-GW间实现业务路由），同样具有重排序功能；</li>
+<li>执行合法侦听功能；</li>
+<li>进行数据包的路由和前转；</li>
+<li>在上行和下行传输层进行分组标记；</li>
+<li>空闲状态下，下行分组缓冲和发起网络触发的服务请求功能；</li>
+<li>用于运营商间的计费</li>
+</ul>
+<h3 id="2、控制面协议"><a href="#2、控制面协议" class="headerlink" title="2、控制面协议"></a>2、控制面协议</h3><p><img src="https://raw.githubusercontent.com/L61q4Cheng/photos/main/img/202308282343706.png" alt="image-20230827205208886"></p>
+<p>1、RRC层（无线资源控制层）：完成广播、寻呼、RRC连接管理、资源控制、移动性管理、UE测量报告与控制。</p>
+<ul>
+<li>广播系统消息</li>
+<li>RRC连接控制</li>
+<li>Inter-RAT 移动性管理</li>
+<li>测量配置和上报</li>
+<li>发动专用的NAS消息</li>
+<li>传输UE接入能力信息</li>
+</ul>
+<p>RRC和NAS消息使用SRB来传输，LTE中定义了三种SRB：SRB0、SRB1、SRB2。</p>
+<p><strong>SRB（信令无线承载）</strong>：</p>
+<p>SRB0是默认的无线承载，使用SRB0的RRC消息都使用CCCH来传输，SRB0并没有一个对应的PDCP实体，在PDCP层是透明传输，既没有完整性保护，也没有加解密处理。</p>
+<p>SRB1用于发送RRC消息，并在SRB2发送之前，用于发送NAS消息，都使用DCCH发送。</p>
+<p>SRB2用于发送包含记录的测量信息在内的RRC消息，并发送SRB消息，都使用DCCH发送。</p>
+<p>除SRB0，每个RB都有一个PDCP实体（完整性保护和加解密），每个PDCP实体都有1个或2个RLC实体，取决于RB的属性和RLC模式。</p>
+<h3 id="下行峰值速率计算"><a href="#下行峰值速率计算" class="headerlink" title="下行峰值速率计算"></a>下行峰值速率计算</h3><p>满足以下条件的最大吞吐量：</p>
+<ol>
+<li>整个带宽均分配给一个UE。</li>
+<li>使用最高阶的MCS。</li>
+<li>使用可支持的最大天线数。</li>
+</ol>
+<p>参考文章：</p>
+<p><a href="https://blog.51cto.com/u_16099211/6506095">https://blog.51cto.com/u_16099211/6506095</a></p>
+<p><a href="https://blog.csdn.net/qq_40232834/article/details/131807104">https://blog.csdn.net/qq_40232834/article/details/131807104</a></p>
+]]></content>
+      <categories>
+        <category>LTE</category>
+      </categories>
+  </entry>
 </search>

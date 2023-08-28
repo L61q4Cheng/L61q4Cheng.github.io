@@ -20,25 +20,36 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="一个逆向小白 安卓逆向日常学习、分享">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Welcome to L61q4_Cheng&#39;Blog">
-<meta property="og:url" content="http://example.com/index.html">
+<meta name="description" content="名词解释   名称 解释    eNode(Evolved Node B) 一个基站，负责无线信号的传输和接收，用于连接移动设备和核心网络。   UE 移动终端，由移动设备（ME）和通用用户识别模块（USIM）组成。   PCI 物理小区标识   PSS&#x2F;SSS 小区同步信号   MIB&#x2F;SIB 小区相关的系统信息   RA Preamble 随机前导码，UE发给eNode，告诉eNode有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《深入理解LTE-A》学习笔记（一）">
+<meta property="og:url" content="http://example.com/2023/08/28/%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3LTE-A%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%20/index.html">
 <meta property="og:site_name" content="Welcome to L61q4_Cheng&#39;Blog">
-<meta property="og:description" content="一个逆向小白 安卓逆向日常学习、分享">
+<meta property="og:description" content="名词解释   名称 解释    eNode(Evolved Node B) 一个基站，负责无线信号的传输和接收，用于连接移动设备和核心网络。   UE 移动终端，由移动设备（ME）和通用用户识别模块（USIM）组成。   PCI 物理小区标识   PSS&#x2F;SSS 小区同步信号   MIB&#x2F;SIB 小区相关的系统信息   RA Preamble 随机前导码，UE发给eNode，告诉eNode有">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="d:/Desktop/1/photo/image-20230728184032279.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/L61q4Cheng/photos/main/img/202308282342438.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/L61q4Cheng/photos/main/img/202308282343070.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/L61q4Cheng/photos/main/img/202308282343017.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/L61q4Cheng/photos/main/img/202308282343402.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/L61q4Cheng/photos/main/img/202308282343826.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/L61q4Cheng/photos/main/img/202308282343937.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/L61q4Cheng/photos/main/img/202308282343706.png">
+<meta property="article:published_time" content="2023-08-28T15:49:32.152Z">
+<meta property="article:modified_time" content="2023-08-28T15:49:08.585Z">
 <meta property="article:author" content="L61q4_Cheng">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="d:/Desktop/1/photo/image-20230728184032279.png">
 
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2023/08/28/%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3LTE-A%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%20/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/08/28/%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3LTE-A%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%20/","path":"2023/08/28/《深入理解LTE-A》学习笔记1 /","title":"《深入理解LTE-A》学习笔记（一）"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Welcome to L61q4_Cheng'Blog</title>
+<title>《深入理解LTE-A》学习笔记（一） | Welcome to L61q4_Cheng'Blog</title>
   
 
 
@@ -132,7 +143,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -145,6 +156,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A"><span class="nav-number">1.</span> <span class="nav-text">名词解释</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%A6%82%E8%BF%B0"><span class="nav-number">2.</span> <span class="nav-text">第一章 概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%A9%BA%E5%8F%A3%E4%BC%A0%E8%BE%93"><span class="nav-number">2.1.</span> <span class="nav-text">一、空口传输</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E4%B8%8A%E8%A1%8C%E4%BC%A0%E8%BE%93"><span class="nav-number">2.1.1.</span> <span class="nav-text">1、上行传输</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E4%B8%8A%E8%A1%8C%E4%BC%A0%E8%BE%93"><span class="nav-number">2.1.2.</span> <span class="nav-text">2、上行传输</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81LTE%E5%8D%8F%E8%AE%AE%E6%A0%88%E7%BB%93%E6%9E%84"><span class="nav-number">2.2.</span> <span class="nav-text">二、LTE协议栈结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E7%94%A8%E6%88%B7%E9%9D%A2%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.2.1.</span> <span class="nav-text">1、用户面协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#UE%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%BD%91%E8%BF%9B%E8%A1%8C%E7%94%A8%E6%88%B7%E9%9D%A2%E7%9A%84%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E8%BF%87%E7%A8%8B"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">UE与核心网进行用户面的数据通信过程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E6%8E%A7%E5%88%B6%E9%9D%A2%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.2.2.</span> <span class="nav-text">2、控制面协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%A1%8C%E5%B3%B0%E5%80%BC%E9%80%9F%E7%8E%87%E8%AE%A1%E7%AE%97"><span class="nav-number">2.2.3.</span> <span class="nav-text">下行峰值速率计算</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -200,16 +212,17 @@
 </noscript>
 
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/28/%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3LTE-A%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%20/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -222,9 +235,9 @@
       <meta itemprop="name" content="Welcome to L61q4_Cheng'Blog">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/08/28/%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3LTE-A%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%20/" class="post-title-link" itemprop="url">《深入理解LTE-A》学习笔记（一）</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          《深入理解LTE-A》学习笔记（一）
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -247,6 +260,13 @@
     </span>
 
   
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
 </div>
 
         </div>
@@ -256,7 +276,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <span id="more"></span>
+        <span id="more"></span>
 
 <p><img src="D:/Desktop/1/photo/image-20230728184032279.png" alt="image-20230728184032279"></p>
 <h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><table>
@@ -528,7 +548,6 @@
 <p><a target="_blank" rel="noopener" href="https://blog.51cto.com/u_16099211/6506095">https://blog.51cto.com/u_16099211/6506095</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40232834/article/details/131807104">https://blog.csdn.net/qq_40232834/article/details/131807104</a></p>
 
-      
     </div>
 
     
@@ -536,248 +555,18 @@
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
 
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/15/Frdia%E6%A1%86%E6%9E%B6%E2%80%94%E2%80%94hook%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="L61q4_Cheng">
-      <meta itemprop="description" content="一个逆向小白 安卓逆向日常学习、分享">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Welcome to L61q4_Cheng'Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/10/15/Frdia%E6%A1%86%E6%9E%B6%E2%80%94%E2%80%94hook%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">Frida——Java层hook方法</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-10-15 19:22:42" itemprop="dateCreated datePublished" datetime="2021-10-15T19:22:42+08:00">2021-10-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Frida%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">Frida框架</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="Frdia框架——hook方法详解"><a href="#Frdia框架——hook方法详解" class="headerlink" title="Frdia框架——hook方法详解"></a>Frdia框架——hook方法详解</h3>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/10/15/Frdia%E6%A1%86%E6%9E%B6%E2%80%94%E2%80%94hook%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/09/%E5%88%9D%E8%AF%86Frida%E6%A1%86%E6%9E%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="L61q4_Cheng">
-      <meta itemprop="description" content="一个逆向小白 安卓逆向日常学习、分享">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Welcome to L61q4_Cheng'Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/09/09/%E5%88%9D%E8%AF%86Frida%E6%A1%86%E6%9E%B6/" class="post-title-link" itemprop="url">初识Frida框架</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-9-9 17:38:55" itemprop="dateCreated datePublished" datetime="2021-09-09T17:38:55+08:00">2021-9-9</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Frida%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">Frida框架</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="初识Frida框架"><a href="#初识Frida框架" class="headerlink" title="初识Frida框架"></a>初识Frida框架</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/09/09/%E5%88%9D%E8%AF%86Frida%E6%A1%86%E6%9E%B6/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/10/15/Frdia%E6%A1%86%E6%9E%B6%E2%80%94%E2%80%94hook%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/" rel="prev" title="Frida——Java层hook方法">
+                  <i class="fa fa-chevron-left"></i> Frida——Java层hook方法
+                </a>
             </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/31/Xposed%20%E2%80%94hook%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="L61q4_Cheng">
-      <meta itemprop="description" content="一个逆向小白 安卓逆向日常学习、分享">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Welcome to L61q4_Cheng'Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/08/31/Xposed%20%E2%80%94hook%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/" class="post-title-link" itemprop="url">Xposed——hook方法学习</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-8-31 20:06:59" itemprop="dateCreated datePublished" datetime="2021-08-31T20:06:59+08:00">2021-8-31</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Xposed%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">Xposed框架</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Xposed是基于java层的hook框架，在不修改apk源码的情况下，编写自己的模块来改变apk的行为。以下总结了常见的Xposed的hook方法：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/08/31/Xposed%20%E2%80%94hook%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
+            <div class="post-nav-item">
             </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+          </div>
     </footer>
   </article>
 </div>
@@ -785,490 +574,9 @@
 
 
 
-    
 
 
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/31/%E7%BC%96%E5%86%99Xposed%E6%A1%86%E6%9E%B6%E5%88%9D%E4%BD%93%E9%AA%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="L61q4_Cheng">
-      <meta itemprop="description" content="一个逆向小白 安卓逆向日常学习、分享">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Welcome to L61q4_Cheng'Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/08/31/%E7%BC%96%E5%86%99Xposed%E6%A1%86%E6%9E%B6%E5%88%9D%E4%BD%93%E9%AA%8C/" class="post-title-link" itemprop="url">编写Xposed框架初体验</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-8-31 17:46:55" itemprop="dateCreated datePublished" datetime="2021-08-31T17:46:55+08:00">2021-8-31</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Xposed%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">Xposed框架</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h4 id="具体步骤："><a href="#具体步骤：" class="headerlink" title="具体步骤："></a>具体步骤：</h4>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/08/31/%E7%BC%96%E5%86%99Xposed%E6%A1%86%E6%9E%B6%E5%88%9D%E4%BD%93%E9%AA%8C/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/15/Android%E5%90%84%E7%89%88%E6%9C%AC%E5%AF%B9%E5%BA%94%E7%9A%84SDK%E7%89%88%E6%9C%AC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="L61q4_Cheng">
-      <meta itemprop="description" content="一个逆向小白 安卓逆向日常学习、分享">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Welcome to L61q4_Cheng'Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/08/15/Android%E5%90%84%E7%89%88%E6%9C%AC%E5%AF%B9%E5%BA%94%E7%9A%84SDK%E7%89%88%E6%9C%AC/" class="post-title-link" itemprop="url">Android各版本对应的SDK版本</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-8-15 18:27:03" itemprop="dateCreated datePublished" datetime="2021-08-15T18:27:03+08:00">2021-8-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Xposed%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">Xposed框架</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="Android各版本对应的SDK版本"><a href="#Android各版本对应的SDK版本" class="headerlink" title="Android各版本对应的SDK版本"></a>Android各版本对应的SDK版本</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/08/15/Android%E5%90%84%E7%89%88%E6%9C%AC%E5%AF%B9%E5%BA%94%E7%9A%84SDK%E7%89%88%E6%9C%AC/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/15/%E8%A7%A3%E5%86%B3%E5%AE%89%E5%8D%93%E6%A8%A1%E6%8B%9F%E5%99%A8%E5%AE%89%E8%A3%85Xposed%E6%A1%86%E6%9E%B6%E9%97%AE%E9%A2%98Could%20not%20load%20available%20ZIP%20files.Pull%20down%20to%20try%20again/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="L61q4_Cheng">
-      <meta itemprop="description" content="一个逆向小白 安卓逆向日常学习、分享">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Welcome to L61q4_Cheng'Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/08/15/%E8%A7%A3%E5%86%B3%E5%AE%89%E5%8D%93%E6%A8%A1%E6%8B%9F%E5%99%A8%E5%AE%89%E8%A3%85Xposed%E6%A1%86%E6%9E%B6%E9%97%AE%E9%A2%98Could%20not%20load%20available%20ZIP%20files.Pull%20down%20to%20try%20again/" class="post-title-link" itemprop="url">解决安卓模拟器安装Xposed框架问题Could not load available ZIP files.Pull down to try again</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-8-15 18:19:28" itemprop="dateCreated datePublished" datetime="2021-08-15T18:19:28+08:00">2021-8-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Xposed%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">Xposed框架</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>将Xposed Installer安装在模拟器上显示如下界面：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/08/15/%E8%A7%A3%E5%86%B3%E5%AE%89%E5%8D%93%E6%A8%A1%E6%8B%9F%E5%99%A8%E5%AE%89%E8%A3%85Xposed%E6%A1%86%E6%9E%B6%E9%97%AE%E9%A2%98Could%20not%20load%20available%20ZIP%20files.Pull%20down%20to%20try%20again/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/15/%E5%88%9D%E8%AF%86Xposed%E6%A1%86%E6%9E%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="L61q4_Cheng">
-      <meta itemprop="description" content="一个逆向小白 安卓逆向日常学习、分享">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Welcome to L61q4_Cheng'Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/08/15/%E5%88%9D%E8%AF%86Xposed%E6%A1%86%E6%9E%B6/" class="post-title-link" itemprop="url">初识Xposed框架</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-8-15 16:13:26" itemprop="dateCreated datePublished" datetime="2021-08-15T16:13:26+08:00">2021-8-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Xposed%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">Xposed框架</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p><strong>Xposed</strong>（也被称作Xposed框架、XP框架、Xposed framework），是一个运行于Android操作系统的hook框架。其通过替换Android系统的关键文件，可以拦截几乎所有Java函数的调用，并允许通过Xposed模块中的自定义代码更改调用这些函数时的行为。因此，Xposed常被用来<strong>修改Android系统和应用程序的功能。</strong></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/08/15/%E5%88%9D%E8%AF%86Xposed%E6%A1%86%E6%9E%B6/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/08/%E5%AF%B9%E7%A7%B0%E7%AE%97%E6%B3%95%EF%BC%88AES%E7%AF%87%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="L61q4_Cheng">
-      <meta itemprop="description" content="一个逆向小白 安卓逆向日常学习、分享">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Welcome to L61q4_Cheng'Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/08/08/%E5%AF%B9%E7%A7%B0%E7%AE%97%E6%B3%95%EF%BC%88AES%E7%AF%87%EF%BC%89/" class="post-title-link" itemprop="url">对称算法（AES篇）</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-8-8 16:25:55" itemprop="dateCreated datePublished" datetime="2021-08-08T16:25:55+08:00">2021-8-8</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%8A%A0%E5%AF%86%E4%B8%8E%E8%A7%A3%E5%AF%86/" itemprop="url" rel="index"><span itemprop="name">加密与解密</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>高级加密标准（英语：Advanced Encryption Standard，缩写：AES），在密码学中又称Rijndael加密法，是美国联邦政府采用的一种区块加密标准。这个标准用来替代原先的DES，已经被多方分析且广为全世界所使用。经过五年的甄选流程，高级加密标准由美国国家标准</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/08/08/%E5%AF%B9%E7%A7%B0%E7%AE%97%E6%B3%95%EF%BC%88AES%E7%AF%87%EF%BC%89/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/05/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E7%AE%97%E6%B3%95%EF%BC%88RSA%E7%AF%87%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="L61q4_Cheng">
-      <meta itemprop="description" content="一个逆向小白 安卓逆向日常学习、分享">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Welcome to L61q4_Cheng'Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/08/05/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E7%AE%97%E6%B3%95%EF%BC%88RSA%E7%AF%87%EF%BC%89/" class="post-title-link" itemprop="url">非对称算法（RSA篇）</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-8-5 18:20:59" itemprop="dateCreated datePublished" datetime="2021-08-05T18:20:59+08:00">2021-8-5</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%8A%A0%E5%AF%86%E4%B8%8E%E8%A7%A3%E5%AF%86/" itemprop="url" rel="index"><span itemprop="name">加密与解密</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>RSA加密算法是一种非对称加密算法，在RSA算法中，加密密钥（即公开密钥）PK是公开信息，而解密密钥（即秘密密钥）SK是需要保密的。加密算法E和解密算法D也都是公开的。对极大整数做因数分解的难度决定了RSA算法的可靠性。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/08/05/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E7%AE%97%E6%B3%95%EF%BC%88RSA%E7%AF%87%EF%BC%89/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
-
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC8zODU3Mi8xNTEwMA=="></div>
 </div>
   </main>
 
