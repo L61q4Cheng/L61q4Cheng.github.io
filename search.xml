@@ -1,138 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Android各版本对应的SDK版本</title>
-    <url>/2021/08/15/Android%E5%90%84%E7%89%88%E6%9C%AC%E5%AF%B9%E5%BA%94%E7%9A%84SDK%E7%89%88%E6%9C%AC/</url>
-    <content><![CDATA[<h2 id="Android各版本对应的SDK版本"><a href="#Android各版本对应的SDK版本" class="headerlink" title="Android各版本对应的SDK版本"></a>Android各版本对应的SDK版本</h2><span id="more"></span>
-<table>
-<thead>
-<tr>
-<th>安卓版本</th>
-<th align="center">SDK版本</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Android 8.0</td>
-<td align="center">26</td>
-</tr>
-<tr>
-<td>Android 7.1</td>
-<td align="center">25</td>
-</tr>
-<tr>
-<td>Android 7.0</td>
-<td align="center">24</td>
-</tr>
-<tr>
-<td>Android 6.0</td>
-<td align="center">23</td>
-</tr>
-<tr>
-<td>Android 5.1</td>
-<td align="center">22</td>
-</tr>
-<tr>
-<td>Android 5.0</td>
-<td align="center">21</td>
-</tr>
-<tr>
-<td>Android 4.4</td>
-<td align="center">19</td>
-</tr>
-<tr>
-<td>Android 4.3</td>
-<td align="center">18</td>
-</tr>
-<tr>
-<td>Android 4.2, 4.2.2</td>
-<td align="center">17</td>
-</tr>
-<tr>
-<td>Android 4.1, 4.1.1</td>
-<td align="center">16</td>
-</tr>
-<tr>
-<td>Android 4.0.3, 4.0.4</td>
-<td align="center">15</td>
-</tr>
-<tr>
-<td>Android 4.0, 4.0.1, 4.0.2</td>
-<td align="center">14</td>
-</tr>
-<tr>
-<td>Android 3.2</td>
-<td align="center">13</td>
-</tr>
-<tr>
-<td>Android 3.1.x</td>
-<td align="center">12</td>
-</tr>
-<tr>
-<td>Android 3.0.x</td>
-<td align="center">11</td>
-</tr>
-<tr>
-<td>Android 2.3.4</td>
-<td align="center">10</td>
-</tr>
-<tr>
-<td>Android 2.3.3</td>
-<td align="center">10</td>
-</tr>
-<tr>
-<td>Android 2.3.2</td>
-<td align="center">9</td>
-</tr>
-<tr>
-<td>Android 2.3.1</td>
-<td align="center">9</td>
-</tr>
-<tr>
-<td>Android 2.3</td>
-<td align="center">9</td>
-</tr>
-<tr>
-<td>Android 2.2.x</td>
-<td align="center">8</td>
-</tr>
-<tr>
-<td>Android 2.1.x</td>
-<td align="center">7</td>
-</tr>
-<tr>
-<td>Android 2.0.1</td>
-<td align="center">6</td>
-</tr>
-<tr>
-<td>Android 2.0</td>
-<td align="center">5</td>
-</tr>
-<tr>
-<td>Android 1.6</td>
-<td align="center">4</td>
-</tr>
-<tr>
-<td>Android 1.5</td>
-<td align="center">3</td>
-</tr>
-<tr>
-<td>Android 1.1</td>
-<td align="center">2</td>
-</tr>
-<tr>
-<td>Android 1.0</td>
-<td align="center">1</td>
-</tr>
-</tbody></table>
-]]></content>
-      <categories>
-        <category>Xposed框架</category>
-      </categories>
-      <tags>
-        <tag>Android</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Dalvik指令集</title>
     <url>/2021/07/22/Dalvik%E6%8C%87%E4%BB%A4%E9%9B%86/</url>
     <content><![CDATA[<p>Dalvik是Google公司自己设计的用于Android平台的虚拟机。Dalvik虚拟机是Google等厂商合作开发的Android移动设备平台的核心组成部分之一。它可以支持已转换为 .dex（即Dalvik Executable）格式的Java应用程序的运行，.dex格式是专为Dalvik设计的一种压缩格式，适合内存和处理器速度有限的系统。<span id="more"></span>Dalvik 经过优化，允许在有限的内存中同时运行多个虚拟机的实例，并且每一个Dalvik 应用作为一个独立的Linux 进程执行。独立的进程可以防止在虚拟机崩溃的时候所有程序都被关闭。一段Dalvik汇编代码由一系列Dalvik指令组成，指令语法由指令的位描述与指令格式标识来决定。</p>
@@ -307,6 +175,590 @@
       <tags>
         <tag>ARM汇编</tag>
         <tag>汇编语言</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Android各版本对应的SDK版本</title>
+    <url>/2021/08/15/Android%E5%90%84%E7%89%88%E6%9C%AC%E5%AF%B9%E5%BA%94%E7%9A%84SDK%E7%89%88%E6%9C%AC/</url>
+    <content><![CDATA[<h2 id="Android各版本对应的SDK版本"><a href="#Android各版本对应的SDK版本" class="headerlink" title="Android各版本对应的SDK版本"></a>Android各版本对应的SDK版本</h2><span id="more"></span>
+<table>
+<thead>
+<tr>
+<th>安卓版本</th>
+<th align="center">SDK版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Android 8.0</td>
+<td align="center">26</td>
+</tr>
+<tr>
+<td>Android 7.1</td>
+<td align="center">25</td>
+</tr>
+<tr>
+<td>Android 7.0</td>
+<td align="center">24</td>
+</tr>
+<tr>
+<td>Android 6.0</td>
+<td align="center">23</td>
+</tr>
+<tr>
+<td>Android 5.1</td>
+<td align="center">22</td>
+</tr>
+<tr>
+<td>Android 5.0</td>
+<td align="center">21</td>
+</tr>
+<tr>
+<td>Android 4.4</td>
+<td align="center">19</td>
+</tr>
+<tr>
+<td>Android 4.3</td>
+<td align="center">18</td>
+</tr>
+<tr>
+<td>Android 4.2, 4.2.2</td>
+<td align="center">17</td>
+</tr>
+<tr>
+<td>Android 4.1, 4.1.1</td>
+<td align="center">16</td>
+</tr>
+<tr>
+<td>Android 4.0.3, 4.0.4</td>
+<td align="center">15</td>
+</tr>
+<tr>
+<td>Android 4.0, 4.0.1, 4.0.2</td>
+<td align="center">14</td>
+</tr>
+<tr>
+<td>Android 3.2</td>
+<td align="center">13</td>
+</tr>
+<tr>
+<td>Android 3.1.x</td>
+<td align="center">12</td>
+</tr>
+<tr>
+<td>Android 3.0.x</td>
+<td align="center">11</td>
+</tr>
+<tr>
+<td>Android 2.3.4</td>
+<td align="center">10</td>
+</tr>
+<tr>
+<td>Android 2.3.3</td>
+<td align="center">10</td>
+</tr>
+<tr>
+<td>Android 2.3.2</td>
+<td align="center">9</td>
+</tr>
+<tr>
+<td>Android 2.3.1</td>
+<td align="center">9</td>
+</tr>
+<tr>
+<td>Android 2.3</td>
+<td align="center">9</td>
+</tr>
+<tr>
+<td>Android 2.2.x</td>
+<td align="center">8</td>
+</tr>
+<tr>
+<td>Android 2.1.x</td>
+<td align="center">7</td>
+</tr>
+<tr>
+<td>Android 2.0.1</td>
+<td align="center">6</td>
+</tr>
+<tr>
+<td>Android 2.0</td>
+<td align="center">5</td>
+</tr>
+<tr>
+<td>Android 1.6</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td>Android 1.5</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td>Android 1.1</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td>Android 1.0</td>
+<td align="center">1</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>Xposed框架</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Frida——Java层hook方法</title>
+    <url>/2021/10/15/Frdia%E6%A1%86%E6%9E%B6%E2%80%94%E2%80%94hook%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[<h3 id="Frdia框架——hook方法详解"><a href="#Frdia框架——hook方法详解" class="headerlink" title="Frdia框架——hook方法详解"></a>Frdia框架——hook方法详解</h3><span id="more"></span>
+<h4 id="Hook普通方法"><a href="#Hook普通方法" class="headerlink" title="Hook普通方法"></a>Hook普通方法</h4><p>普通方法包含静态方法、公开方法、私有方法。</p>
+<pre><code class="javascript">Java.perform(function()&#123;
+    var MainActivity=Java.use(&#39;com.example.frida_new1.MainActivity&#39;);//完整包名（注意大小写）
+    MainActivity.getCalc.implementation=function(a,b)&#123;
+        send(&#39;Hook start....&#39;);
+        send(arguments[0]);
+        send(b);//两种打印参数的方式
+        var num=this.getCalc(a,b); 
+        send(num);
+        return num;
+    &#125;
+   &#125;);
+</code></pre>
+<p>详解：arguments[n]在js中相当于类数组对象，在function(a,b)中参数既可以用a、b来表示，也可以用arguments来表示。虽然function指代getCalc方法，但仍然可以在function中调用包中的其他函数，只是在function中可以对getCalc的方法进行参数调整和改变。</p>
+<h4 id="hook构造方法"><a href="#hook构造方法" class="headerlink" title="hook构造方法"></a>hook构造方法</h4><p>大致方法和普通方法相同。因为构造方法与报名相同，所以不需要Util.Util这种写法（我试过直接用构造方法名，直接报错了。。。）构造方法有特有的表示方法：</p>
+<pre><code>类名.$init //这里的$init就表示构造方法。
+</code></pre>
+<p>具体代码：</p>
+<pre><code class="javascript">Java.perform(function()&#123;
+        var money=Java.use(&#39;com.example.frida_new1.Money&#39;);
+        money.$init.implementation=function(a,b)&#123;
+            send(&#39;hook到Money构造函数&#39;);
+            send(arguments[0]);
+            send(b);
+            return this.$init(10000,&quot;美元&quot;);//用this.方法名来表示需要调用的方法（直接用不明确，会报错）
+        &#125;
+    &#125;);
+</code></pre>
+<p>修改函数时，注意参数类型。</p>
+<h4 id="hook重载方法"><a href="#hook重载方法" class="headerlink" title="hook重载方法"></a>hook重载方法</h4><p>和普通方法不同的区别是在寻找方法时使用：</p>
+<pre><code>Utils.cz.overload(&quot;int&quot;).implementation=function(参数)
+</code></pre>
+<p>详解：cz为重载方法名，overload为注明此方法为重载方法并在括号中标明所要hook的重载方法中的参数，并传入。例如:需要hook的重载方法有一个int参数：overload(“int”)即可。但是String类型有点特殊，需要写为overload(“java.lang.String”)因为overload中需要标明的实际是类型所处的全路径。</p>
+<pre><code class="javascript">Java.perform(function()&#123;
+        var Utils=Java.use(&#39;com.example.frida_new1.Utils&#39;);
+        Utils.cz.overload(&quot;int&quot;,&quot;java.lang.String&quot;).implementation=function(a,b)&#123;
+            send(&#39;hook成功！&#39;);
+            send(arguments[0]);
+            send(b);
+            return this.cz();
+        &#125;
+    &#125;);
+</code></pre>
+<h5 id="hook方法的所有重载"><a href="#hook方法的所有重载" class="headerlink" title="hook方法的所有重载"></a>hook方法的所有重载</h5><p>获取一方法的所有重载方法，只需utils.test.overloads，其余操作和正常重载方法相同。</p>
+<pre><code class="js">Java.perform(function()&#123;
+        var utils=Java.use(&#39;com.example.frida_new1.Utils&#39;);
+        console.log(utils.test.overloads.length);//获取重载方法的个数
+        for(var i=0;i&lt;utils.test.overloads.length;i++)&#123;
+            utils.test.overloads[i].implementation=function()&#123;
+                console.log(arguments);//arguments是一个储存所有重载方法的参数
+                return this.test.apply(this,arguments);//只用apply将不同的重载方法返回对应的参数
+                //如果apply中参数有arguments，则直接返回。
+                //如果apply中只有this一个参数，则循环重载方法的个数次。
+            &#125;
+        &#125;
+   &#125;);
+</code></pre>
+<p>如果只想修改无参的重载方法，只需加上一个判断：</p>
+<pre><code class="js">if(arguments.length==0)&#123;
+     return &quot;hook到没有参数的重载方法&quot;;
+&#125;
+</code></pre>
+<h4 id="hook自定义参数"><a href="#hook自定义参数" class="headerlink" title="hook自定义参数"></a>hook自定义参数</h4><p>自定义参数类型时，对于对象参数可以直接调用对象中的方法。如果需要更改参数时，需要重新实例化一个对象来返回：</p>
+<pre><code class="javascript">var 变量名=对象类名.$new(构造参数) 如：var mon =money.$new(123456,&quot;港币&quot;);
+</code></pre>
+<p>注意如果是重载方法中参数为某一对象，在overload中需要标明对象类 的全路径。例如：</p>
+<pre><code class="javascript">Utils.method.overload(&quot;com.example.frida_new1.Money&quot;).implementation=function(参数)
+</code></pre>
+<pre><code class="javascript">Java.perform(function()&#123;
+        var Utils=Java.use(&#39;com.example.frida_new1.Utils&#39;);
+        var money=Java.use(&#39;com.example.frida_new1.Money&#39;);
+        Utils.test.implementation=function(a)&#123;
+            send(&#39;hook到对象参数&#39;);
+            send(a.getInfo());
+            var mon =money.$new(123456,&quot;港币&quot;);
+            send(mon.getInfo());
+            return mon.getInfo();//这里返回值可更改为this.test(mon)，要注意返回值的参数类型！！
+        &#125;
+&#125;);
+</code></pre>
+<h4 id="对象参数属性的修改"><a href="#对象参数属性的修改" class="headerlink" title="对象参数属性的修改"></a>对象参数属性的修改</h4><p>在获取某一实例对象的属性时不能直接通过”类名.变量名”的方法来直接获取。需要表示为“类名.变量名.value”</p>
+<pre><code class="javascript">Java.perform(function()&#123;
+        var Utils=Java.use(&#39;com.example.frida_new1.Utils&#39;);
+        var money=Java.use(&#39;com.example.frida_new1.Money&#39;);
+        Utils.test.overload(&quot;com.example.frida_new1.Money&quot;).implementation=function(a)&#123;
+            send(&#39;hook到对象参数&#39;);
+            var mon =money.$new(123456,&quot;港币&quot;);
+            send(mon.getInfo());
+            mon.name.value=&quot;英镑&quot;;
+            send(mon.name.value);
+            return mon.getInfo();
+        &#125;
+    &#125;);
+</code></pre>
+<h4 id="java反射（对参数属性的修改）"><a href="#java反射（对参数属性的修改）" class="headerlink" title="java反射（对参数属性的修改）"></a>java反射（对参数属性的修改）</h4><p>使用反射的主要作用是可以让其他语言去调用java语言。基本思想：先找类，再找方法，再调用方法。</p>
+<pre><code class="javascript">Java.perform(function()&#123;
+        var Utils=Java.use(&#39;com.example.frida_new1.Utils&#39;);
+        var money=Java.use(&#39;com.example.frida_new1.Money&#39;);
+        var clazz=Java.use(&#39;java.lang.Class&#39;);//定义一个类的构造器
+        Utils.test.overload(&quot;com.example.frida_new1.Money&quot;).implementation=function(a)&#123;
+            var mon =money.$new(123456,&quot;港币&quot;);
+            send(mon.getInfo());
+            var num=Java.cast(mon.getClass(),clazz).getDeclaredField(&#39;num&#39;);
+            //cast中第一个参数是getClass获取类id，（对象所处的类）
+            //getDeclaredField(&#39;&#39;)用来获取字段id,参数为变量名
+            var name=Java.cast(mon.getClass(),clazz).getDeclaredField(&#39;name&#39;);
+            name.setAccessible(true);
+            num.setAccessible(true);//设置属性，不修改app会崩溃
+            var Value=num.get(mon);//获取类传到该变量中
+            console.log(Value);
+            //这里直接使用send()无法成功打印
+            var v1=name.get(mon);
+            console.log(v1);
+            //send(Value);这里直接用send无法输出
+            num.setInt(mon,5000);
+            name.set(mon,&quot;英镑&quot;);//修改变量使用set...()方法：setInt(),set()
+            send(mon.getInfo());
+            return mon.getInfo();
+        &#125;
+&#125;);
+</code></pre>
+<p>注：hook onCreat方法时应该在结尾继续执行该方法，因为onCreat在程序中是一直执行的。在末尾加上 this.onCreat()</p>
+<h4 id="hook内部类"><a href="#hook内部类" class="headerlink" title="hook内部类"></a>hook内部类</h4><p>内部类：在一个类中定义一个新的类。和直接引用不同的是需要在声明类的时候在主类和内部类中加“$”符号。其余写法完全相同。</p>
+<pre><code class="javascript"> Java.perform(function()&#123;
+        var intheclass=Java.use(&#39;com.example.frida_new1.Utils$intheclass&#39;);
+        console.log(intheclass);
+        intheclass.$init.implementation=function(a,b)&#123;
+            send(&#39;Hook start....&#39;);
+            send(a);
+            send(b);
+            b=6666
+            a=&quot;iu&quot;
+            send(&quot;修改后：&quot;+a+&quot; &quot;+b);
+            return this.$init(a,b);
+        &#125;
+   &#125;);
+</code></pre>
+<h4 id="hook匿名类"><a href="#hook匿名类" class="headerlink" title="hook匿名类"></a>hook匿名类</h4><p>匿名类：一个类中包含另一个类，且不需要任何类名直接实例化（没有类名）。主要用于创建一个对象来执行特定的任务，是代码更加简洁。一般匿名类只用一次。首先在smali代码中找到匿名类名（带有$）,其余代码与普通方法类似</p>
+<h4 id="枚举所有的类和类的所有方法。"><a href="#枚举所有的类和类的所有方法。" class="headerlink" title="枚举所有的类和类的所有方法。"></a>枚举所有的类和类的所有方法。</h4><p>枚举所有的类在js中有一个固定的函数：enumerateLoadedClasses，具体使用方法如下：</p>
+<pre><code class="js">Java.perform(function()&#123;
+    //这样枚举会列举出该模拟器中正在运行的所有进程
+        Java.enumerateLoadedClasses(&#123;//枚举加载所有的类
+            onMatch:function(name,handle)&#123;//输出
+                console.log(name);
+            &#125;,
+            onComplete:function()&#123;//枚举结束之后调用，该函数只会调用一次
+            &#125;
+        &#125;);
+    &#125;);
+</code></pre>
+<p>如果在onMatch中进行选择，指定包中的类，则会筛选输出指定类名。</p>
+<pre><code class="js">Java.perform(function()&#123;
+        Java.enumerateLoadedClasses(&#123;//枚举加载所有的类
+            onMatch:function(name,handle)&#123;//输出
+                if(name.indexOf(&quot;com.example.frida_new1&quot;)!=-1)&#123;
+                    console.log(name);
+                    var clazz =Java.use(name);
+                    console.log(clazz);
+                    var methods=clazz.class.getDeclaredMethods();
+                    for(var i=0;i&lt;methods.length;i++)&#123;
+                        console.log(methods[i]);
+                    &#125;
+                &#125;
+            &#125;,
+            onComplete:function()&#123;//枚举结束之后调用，该函数只会调用一次
+            
+            &#125;
+        &#125;);
+    &#125;);
+&quot;&quot;&quot;
+</code></pre>
+<p>枚举所有的方法使用clazz.class.getDeclaredMethods()；</p>
+<pre><code class="javascript">var clazz =Java.use(name);
+console.log(clazz);
+var methods=clazz.class.getDeclaredMethods();
+for(var i=0;i&lt;methods.length;i++)&#123;
+       console.log(methods[i]);
+&#125;
+</code></pre>
+<h4 id="Java层打印函数堆栈定位关键代码"><a href="#Java层打印函数堆栈定位关键代码" class="headerlink" title="Java层打印函数堆栈定位关键代码"></a>Java层打印函数堆栈定位关键代码</h4><p>在xposed中打印函数堆栈一般使用：</p>
+<pre><code class="java">log.d(&quot;TAG&quot;,&quot;MSG&quot;,new Trowable());
+</code></pre>
+<p>在frida中一般不使用，而使用Log.getStackTranceString()方法。（该方法也可以打印信息）。</p>
+<p> java.cast()：强制类型转换。                                                                                                                                                  </p>
+<p>java.openClassFile()；    //注入dex文件                                                                                                                                                  </p>
+<p> java.registerClass()    //在Frida中注册一个类写进app，很少用到。                                                                               </p>
+<p>java.array();//构造任意类型的数组。</p>
+<h4 id="frida注入多dex文件"><a href="#frida注入多dex文件" class="headerlink" title="frida注入多dex文件"></a>frida注入多dex文件</h4><p>当hook比较复杂时（需要大量使用java函数，想为app添加大量函数），很多函数不方便引入js中使用，就需要正向的java函数来注入到frida中，此时引入注入dex文件这一方法，方便hook。<strong>首先需要获取dex文件</strong>，建议直接将所需要的函数在另一个app中实现，打包成apk分离出dex文件即可（分离出dex文件后需要把他放在adnroid的缓存区：“adb push 文件路径 、data/local/tmp/xxx.dex）。再使用openClassFile函数来打开这个文件。获取到这个包后可以直接调用包中 的函数。相当于正向调用。</p>
+<pre><code class="js">Java.perform(function()&#123;
+        Java.openClassFile(&quot;/data/local/tmp/fridadex.dex&quot;).load();
+        var frida=Java.use(&quot;简单实现函数的打包的apk的包名&quot;);//dex中的函数所在类名
+        var main=Java.use(&quot;com.example.frida_new1.Money&quot;);//开始hook
+        main.fridadex.implementation=function(a,b)&#123;
+            var cal=frida.xxx(a,b);
+            send(cal);
+            return cal;
+        &#125;
+    &#125;);
+</code></pre>
+<h4 id="Frida-server端口启动与非标准端口启动"><a href="#Frida-server端口启动与非标准端口启动" class="headerlink" title="Frida-server端口启动与非标准端口启动"></a>Frida-server端口启动与非标准端口启动</h4><p>启动Frida-server一般采用默认端口：</p>
+<pre><code>adb forward tcp:27042 tcp:27042
+adb forward tcp:27043 tcp:24043
+</code></pre>
+<p>为了防止被检测，会使用非标准端口：                                                                                                    </p>
+<p> 1、启动frida-server时使用”./data/local/tmp/frida-server -l 127.0.0.1:9999 “                                            </p>
+<p> 2、转发端口时”adb forward tcp:9999”                                                                                                         </p>
+<p> 3、在frida中修改为：</p>
+<pre><code class="python">process = frida.get_device_manager().add_remote_device(&#39;127.0.0.1:9999&#39;).attch(&#39;Frida_new1&#39;)
+</code></pre>
+]]></content>
+      <categories>
+        <category>Frida框架</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+        <tag>Frida框架</tag>
+        <tag>hook</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Xposed——hook方法学习</title>
+    <url>/2021/08/31/Xposed%20%E2%80%94hook%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/</url>
+    <content><![CDATA[<p>Xposed是基于java层的hook框架，在不修改apk源码的情况下，编写自己的模块来改变apk的行为。以下总结了常见的Xposed的hook方法：</p>
+<span id="more"></span>
+
+<h3 id="hook普通方法"><a href="#hook普通方法" class="headerlink" title="hook普通方法"></a>hook普通方法</h3><p>创建一个类继承IXposedHookLoadPackage，修改 handleLoadPackage方法，首先要判断是否为特定的包。</p>
+<pre><code class="java">public void handleLoadPackage(XC_LoadPackage.LoadPackageParam Param) throws Throwable &#123;
+    if(Param.packageName.equals(&quot;com.example.xposed_new3&quot;))&#123;......&#125;
+&#125;
+</code></pre>
+<p>hook普通方法调用的函数都是<strong>XposedHelpers.findAndHookMethod</strong></p>
+<pre><code class="java">XposedHelpers.findAndHookMethod(
+className(包名+类名),
+Param.classLoader(固定参数),
+methodName(被hook的函数名)
+**.class(函数的参数),
+new XC_MethodHook()&#123;&#125;
+)
+</code></pre>
+<h4 id="XC-MethodHook方法详解"><a href="#XC-MethodHook方法详解" class="headerlink" title="XC_MethodHook方法详解"></a>XC_MethodHook方法详解</h4><p><img src="https://i.loli.net/2021/09/02/Uk2MhKwNJPtTLSa.png" alt="QQ截图20210901190645.png"></p>
+<p>hook普通方法的主要作用是打印各种参数信息，或者修改某些参数使其直接通过程序。</p>
+<h3 id="hook匿名内部类"><a href="#hook匿名内部类" class="headerlink" title="hook匿名内部类"></a>hook匿名内部类</h3><p>匿名内部类一般为普通方法，所以仍然用findAndHookMethod的hook方法。</p>
+<p>注：匿名内部类辨别方法：在smali代码中一个类为一个文件，且匿名内部类后缀会加上”$”符号，在工程管理器中直接找出相关类。</p>
+<blockquote>
+<p>Lcom/example/xposed_new4/MainActivity$1</p>
+</blockquote>
+<pre><code class="java">@Override
+public void handleLoadPackage(XC_LoadPackage.LoadPackageParam loadPackageParam) throws Throwable &#123;
+    if(loadPackageParam.packageName.equals(&quot;com.example.xposed_new4&quot;))&#123;
+        XposedHelpers.findAndHookMethod(
+        &quot;com.example.xposed_new4.MainActivity$1&quot;,
+        loadPackageParam.classLoader,
+        &quot;onClick&quot;,
+        View.class,
+        new XC_MethodHook() &#123;
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable &#123;
+                super.beforeHookedMethod(param);
+                View v=(View)param.args[0];
+                XposedBridge.log(&quot;view:&quot;+v.getId());
+            &#125;
+         &#125;);
+     &#125;
+&#125;
+</code></pre>
+<p>在findAndHookMethod方法中的包名类名参数使用smali代码中的包名加类名，其余操作与普通方法hook相同。</p>
+<h3 id="Xposed—java-反射"><a href="#Xposed—java-反射" class="headerlink" title="Xposed—java 反射"></a>Xposed—java 反射</h3><p> java反射主要作用为突破修饰符的限制，如获取私有方法和私有字段。</p>
+<p>以hook某一私有控件为例</p>
+<pre><code class="java">//获取类
+Class&lt;?&gt; clazz=param.thisObject.getClass();
+//获取字段
+Field field=clazz.getDeclaredField(&quot;Text&quot;);
+//设置可见
+field.setAccessible(true);
+
+EditText ed_sn= (EditText) field.get(param.thisObject);//把类中的控件参数传给ed_sn
+XposedBridge.log(&quot;输入结果为：&quot;+ed_sn.getText().toString().trim());
+//修改编辑框
+ed_sn.setText(&quot;L61q4_cheng&quot;);
+</code></pre>
+<p>hook某一私有方法</p>
+<pre><code class="java">//获取方法
+Method method=clazz.getDeclaredMethod(&quot;MethodName&quot;,new Class[]&#123;.class,.class...&#125;);
+//显示可见
+method.setAccessible(true);
+//调用方法
+返回值=method.invoke(param.thisObject,new Object()&#123;...&#125;);//调用函数的参数
+</code></pre>
+<h3 id="hook主动调用"><a href="#hook主动调用" class="headerlink" title="hook主动调用"></a>hook主动调用</h3><p>主动调用，直接调用apk中的函数来实现hook操作，方便对数据进行直接操作。主动调用函数为XposedHelpers。该方法一般用于获取某一数据来通过某一入口，而不是直接修改方法的返回值。Xposed通过主动调用可以直接使用Android项目中某些方法，使其可以有更强大的功能。</p>
+<h4 id="XposedHelpers方法详解"><a href="#XposedHelpers方法详解" class="headerlink" title="XposedHelpers方法详解"></a>XposedHelpers方法详解</h4><pre><code class="java">XposedHelpers.callMethod();//调用普通方法
+XposedHelpers.callStaticMethod();//调用静态方法
+</code></pre>
+<pre><code class="java">XposedHelpers.callMethod(
+    param.getClass(),//固定句式
+    &quot;methodName&quot;//需要主动调用的方法名
+    new Object[]&#123;...,...&#125;,//大括号中为调用函数中的参数，
+)
+</code></pre>
+<p>在调用方法之前，可将程序中对参数的操作直接复制过来，例如加密操作，格式操作。</p>
+<p>如果该方法有返回值且需要获取，可将该方法直接用在某一变量上，例如：</p>
+<pre><code class="java">String str=(String)XposedHelpers.callMethod(
+    param.getClass(),
+    &quot;methodName&quot;
+    new Object[]&#123;...,...&#125;,
+)
+param.args[1]=str.toString();
+</code></pre>
+<h3 id="Xposed—hook静态变量"><a href="#Xposed—hook静态变量" class="headerlink" title="Xposed—hook静态变量"></a>Xposed—hook静态变量</h3><p>实例变量在每一份实例出来的类中都有不同的值，先有对象才有实例变量，因此在没有对象之前是不能hook修改实例变量。在内存中静态变量不会改变。因此可以在对象之前hook。</p>
+<p>故hook静态变量不需要获取类对象，直接修改类中私有静态变量。hook的方法有XposedHelpers，以变量类型Int为例。</p>
+<pre><code class="java">final Class&lt;?&gt; clazz= XposedHelpers.findClass(
+            &quot;com.example.xposed_new5.MainActivity&quot;,
+            loadPackageParam.classLoader);//方便起见提前赋给clazz
+XposedHelper.setStaticIntField(clazz,&quot;变量名&quot;,value(修改的值));
+</code></pre>
+<pre><code class="java">XposedHelpers.setStaticObjectField();//修改字符串
+</code></pre>
+<p>注：不同变量类型使用不同方法。</p>
+<pre><code class="java">final Class&lt;?&gt;clazz=XposedHelpers.findClass(
+        &quot;com.example.xposed_new5.MainActivity&quot;,
+        loadPackageParam.classLoader);        
+XposedHelpers.setStaticIntField(clazz,&quot;staticInt&quot;,99);
+</code></pre>
+<h3 id="Xposed—hook构造方法"><a href="#Xposed—hook构造方法" class="headerlink" title="Xposed—hook构造方法"></a>Xposed—hook构造方法</h3><h4 id="Java构造方法"><a href="#Java构造方法" class="headerlink" title="Java构造方法"></a>Java构造方法</h4><p>与类同名，通过关键字new调用，每个类至少有一个或一个以上的构造方法（如果没有定义构造方法，系统会自动定义一个无参数的构造方法）。构造方法可以无参、一个或多个参数，且构造方法没有返回值。例如：</p>
+<pre><code class="java">MainActivity()&#123;
+&#125;
+MainActivity(int a,int b)&#123;
+&#125;
+MainActivity(String str)&#123;
+&#125;
+</code></pre>
+<h4 id="hook构造方法"><a href="#hook构造方法" class="headerlink" title="hook构造方法"></a>hook构造方法</h4><p>hook构造方法不需要添加方法名，采用的hook方法为XposedHelpers.findAndHookConstructor。</p>
+<p>此时不能hook实例变量，因为对象还没有产生。</p>
+<h4 id="findAndHookConstructor详解"><a href="#findAndHookConstructor详解" class="headerlink" title="findAndHookConstructor详解"></a>findAndHookConstructor详解</h4><pre><code class="java">final Class&lt;?&gt; clazz=XposedHelpers.findClass(
+&quot;com.example.xposed_new6.MainActivity&quot;,//包名加类名
+loadPackageParam.classLoader);//固定格式
+XposedHelpers.findAndHookConstructor(
+clazz,//可以提前定义，也可以直接在这里写出来
+int.class,//构造方法的参数
+String.class,//无参数也可以不写
+new XC_MethodHook()&#123;
+//和普通方法写法一样
+@Override
+protected void beforeHookedMethod(MethodHookParam param) throws Throwable &#123;
+        XposedBridge.log(&quot;Haha, HookDemo constructed was hooked&quot; );
+        &#125;
+@Override
+protected void afterHookedMethod(MethodHookParam param) throws Throwable &#123;
+        super.afterHookedMethod(param);
+        &#125;        
+&#125;);
+</code></pre>
+<h3 id="Xposed—hook所有函数遍历所有类"><a href="#Xposed—hook所有函数遍历所有类" class="headerlink" title="Xposed—hook所有函数遍历所有类"></a>Xposed—hook所有函数遍历所有类</h3><p>对于动态dex文件可以采用这种方法来hook。</p>
+<pre><code class="java"> XposedHelpers.findAndHookMethod(
+        ClassLoader.class,
+        &quot;isok&quot;,
+        String.class,
+        new XC_MethodHook() &#123;
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable &#123;
+                     super.afterHookedMethod(param);
+                     Class&lt;?&gt; clazz=(Class&lt;?&gt;) loadPackageParam.getResult();
+                     XposedBridge.log(&quot;Clazz：&quot;+clazz.getName());
+                     &#125;
+         &#125;
+&#125;);
+</code></pre>
+<h3 id="通过hook主动调用获取相关数据"><a href="#通过hook主动调用获取相关数据" class="headerlink" title="通过hook主动调用获取相关数据"></a>通过hook主动调用获取相关数据</h3><h4 id="获取类"><a href="#获取类" class="headerlink" title="获取类"></a>获取类</h4><pre><code class="java">Class&lt;?&gt; clazz=param.thisObject.getClass();
+</code></pre>
+<h4 id="对类进行操作-获取字段"><a href="#对类进行操作-获取字段" class="headerlink" title="对类进行操作(获取字段)"></a>对类进行操作(获取字段)</h4><pre><code class="java">Field[] fields=clazz.getDeclaredFields();
+for(Field field:fields)&#123;
+     XposedBridge.log(&quot;字段名称：&quot;+field.getName());
+&#125;
+</code></pre>
+<h4 id="获取类中的所有方法"><a href="#获取类中的所有方法" class="headerlink" title="获取类中的所有方法"></a>获取类中的所有方法</h4><pre><code class="java">Method[] methods=clazz.getDeclaredMethods();
+for(Method method:methods)
+&#123;
+      XposedBridge.log(&quot;方法名称：&quot;+method.getName());
+&#125;
+</code></pre>
+<h4 id="通过主动调用获取普通方法"><a href="#通过主动调用获取普通方法" class="headerlink" title="通过主动调用获取普通方法"></a>通过主动调用获取普通方法</h4><pre><code class="java">XposedHelpers.callMethod(loadPackageParam.getClass(),&quot;methodName&quot;,new Object()&#123;...&#125;);
+</code></pre>
+<h4 id="通过主动调用获取静态方法"><a href="#通过主动调用获取静态方法" class="headerlink" title="通过主动调用获取静态方法"></a>通过主动调用获取静态方法</h4><pre><code class="java">Class&lt;?&gt; clazz1=XposedHelpers.findClass(
+    &quot;com.example.xposed_new7.MainActivity&quot;,
+    loadPackageParam.classLoader);
+XposedHelpers.callStaticMethod(clazz1,&quot;methodName&quot;,new Object()&#123;...&#125;);
+</code></pre>
+<h4 id="通过主动调用获取普通字段（不是方法中的特定字段）"><a href="#通过主动调用获取普通字段（不是方法中的特定字段）" class="headerlink" title="通过主动调用获取普通字段（不是方法中的特定字段）"></a>通过主动调用获取普通字段（不是方法中的特定字段）</h4><pre><code class="java">XposedHelpers.getBooleanField(loadPackageParam.getClass(),&quot;fieldName&quot;);
+</code></pre>
+<h4 id="获取静态字段"><a href="#获取静态字段" class="headerlink" title="获取静态字段"></a>获取静态字段</h4><pre><code class="java">Class&lt;?&gt; clazz2=XposedHelpers.findClass(
+    &quot;com.example.xposed_new7.MainActivity&quot;,
+    loadPackageParam.classLoader);
+XposedHelpers.getStaticBooleanField(clazz2,&quot;fieldName&quot;);
+</code></pre>
+<h3 id="Xposed—hook替换函数"><a href="#Xposed—hook替换函数" class="headerlink" title="Xposed—hook替换函数"></a>Xposed—hook替换函数</h3><pre><code class="java">if(loadPackageParam.packageName.equals(&quot;com.example.xposed_new8&quot;))&#123;
+            Class&lt;?&gt;clazz=XposedHelpers.findClass(
+                &quot;com.example.xposed_new8.MainActivity&quot;,
+                loadPackageParam.classLoader);
+            XposedHelpers.findAndHookMethod(
+                    &quot;com.example.xposed_new8.MainActivity&quot;,
+                    loadPackageParam.classLoader,
+                    &quot;ButtonTest1&quot;,
+                    new XC_MethodReplacement() &#123;
+                    @Override
+                    protected Object replaceHookedMethod(MethodHookParam methodHookParam) throws Throwable &#123;
+                            XposedBridge.log(&quot;方法替换成功&quot;);
+                            XposedHelpers.callMethod(clazz,&quot;ButtonTest2&quot;);//主动调用ButtonTest2
+                            return null;
+                        &#125;
+                    &#125;
+            );
+&#125;
+</code></pre>
+<h3 id="Xposed—hook多DEX"><a href="#Xposed—hook多DEX" class="headerlink" title="*Xposed—hook多DEX"></a>*Xposed—hook多DEX</h3><p>在一个apk中有多个dex文件时，在apk打包的时候优先加载主dex文件，会优先有些类hook不到，采用attach方法来解决。</p>
+<pre><code class="java">XposedHelpers.findAndHookMethod(
+        Application.class,
+        &quot;attach&quot;,
+        Context.class,
+        new XC_MethodHook() &#123;
+                 @Override
+                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable &#123;
+                 super.beforeHookedMethod(param);
+                 Context context= (Context) param.args[0];
+                 ClassLoader loader=context.getClassLoader();
+                 XposedHelpers.findAndHookMethod(
+                         &quot;com.example.xposed_new8.MainActivity&quot;,
+                         loader,
+                         &quot;ButtonTest1&quot;,
+                         new XC_MethodHook() &#123;
+                                 @Override
+                                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable &#123;
+                                            super.beforeHookedMethod(param);
+                              &#125;
+                         &#125;
+                );
+           &#125;
+       &#125;
+);
+</code></pre>
+]]></content>
+      <categories>
+        <category>Xposed框架</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+        <tag>hook</tag>
+        <tag>Xposed框架</tag>
       </tags>
   </entry>
   <entry>
@@ -624,227 +1076,300 @@ public class SHAUtil &#123;
       </tags>
   </entry>
   <entry>
-    <title>Frida——Java层hook方法</title>
-    <url>/2021/10/15/Frdia%E6%A1%86%E6%9E%B6%E2%80%94%E2%80%94hook%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/</url>
-    <content><![CDATA[<h3 id="Frdia框架——hook方法详解"><a href="#Frdia框架——hook方法详解" class="headerlink" title="Frdia框架——hook方法详解"></a>Frdia框架——hook方法详解</h3><span id="more"></span>
-<h4 id="Hook普通方法"><a href="#Hook普通方法" class="headerlink" title="Hook普通方法"></a>Hook普通方法</h4><p>普通方法包含静态方法、公开方法、私有方法。</p>
-<pre><code class="javascript">Java.perform(function()&#123;
-    var MainActivity=Java.use(&#39;com.example.frida_new1.MainActivity&#39;);//完整包名（注意大小写）
-    MainActivity.getCalc.implementation=function(a,b)&#123;
-        send(&#39;Hook start....&#39;);
-        send(arguments[0]);
-        send(b);//两种打印参数的方式
-        var num=this.getCalc(a,b); 
-        send(num);
-        return num;
-    &#125;
-   &#125;);
+    <title>Hello World</title>
+    <url>/2021/07/22/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<span id="more"></span>
+
+
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;
 </code></pre>
-<p>详解：arguments[n]在js中相当于类数组对象，在function(a,b)中参数既可以用a、b来表示，也可以用arguments来表示。虽然function指代getCalc方法，但仍然可以在function中调用包中的其他函数，只是在function中可以对getCalc的方法进行参数调整和改变。</p>
-<h4 id="hook构造方法"><a href="#hook构造方法" class="headerlink" title="hook构造方法"></a>hook构造方法</h4><p>大致方法和普通方法相同。因为构造方法与报名相同，所以不需要Util.Util这种写法（我试过直接用构造方法名，直接报错了。。。）构造方法有特有的表示方法：</p>
-<pre><code>类名.$init //这里的$init就表示构造方法。
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server
 </code></pre>
-<p>具体代码：</p>
-<pre><code class="javascript">Java.perform(function()&#123;
-        var money=Java.use(&#39;com.example.frida_new1.Money&#39;);
-        money.$init.implementation=function(a,b)&#123;
-            send(&#39;hook到Money构造函数&#39;);
-            send(arguments[0]);
-            send(b);
-            return this.$init(10000,&quot;美元&quot;);//用this.方法名来表示需要调用的方法（直接用不明确，会报错）
-        &#125;
-    &#125;);
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate
 </code></pre>
-<p>修改函数时，注意参数类型。</p>
-<h4 id="hook重载方法"><a href="#hook重载方法" class="headerlink" title="hook重载方法"></a>hook重载方法</h4><p>和普通方法不同的区别是在寻找方法时使用：</p>
-<pre><code>Utils.cz.overload(&quot;int&quot;).implementation=function(参数)
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy
 </code></pre>
-<p>详解：cz为重载方法名，overload为注明此方法为重载方法并在括号中标明所要hook的重载方法中的参数，并传入。例如:需要hook的重载方法有一个int参数：overload(“int”)即可。但是String类型有点特殊，需要写为overload(“java.lang.String”)因为overload中需要标明的实际是类型所处的全路径。</p>
-<pre><code class="javascript">Java.perform(function()&#123;
-        var Utils=Java.use(&#39;com.example.frida_new1.Utils&#39;);
-        Utils.cz.overload(&quot;int&quot;,&quot;java.lang.String&quot;).implementation=function(a,b)&#123;
-            send(&#39;hook成功！&#39;);
-            send(arguments[0]);
-            send(b);
-            return this.cz();
-        &#125;
-    &#125;);
-</code></pre>
-<h5 id="hook方法的所有重载"><a href="#hook方法的所有重载" class="headerlink" title="hook方法的所有重载"></a>hook方法的所有重载</h5><p>获取一方法的所有重载方法，只需utils.test.overloads，其余操作和正常重载方法相同。</p>
-<pre><code class="js">Java.perform(function()&#123;
-        var utils=Java.use(&#39;com.example.frida_new1.Utils&#39;);
-        console.log(utils.test.overloads.length);//获取重载方法的个数
-        for(var i=0;i&lt;utils.test.overloads.length;i++)&#123;
-            utils.test.overloads[i].implementation=function()&#123;
-                console.log(arguments);//arguments是一个储存所有重载方法的参数
-                return this.test.apply(this,arguments);//只用apply将不同的重载方法返回对应的参数
-                //如果apply中参数有arguments，则直接返回。
-                //如果apply中只有this一个参数，则循环重载方法的个数次。
-            &#125;
-        &#125;
-   &#125;);
-</code></pre>
-<p>如果只想修改无参的重载方法，只需加上一个判断：</p>
-<pre><code class="js">if(arguments.length==0)&#123;
-     return &quot;hook到没有参数的重载方法&quot;;
-&#125;
-</code></pre>
-<h4 id="hook自定义参数"><a href="#hook自定义参数" class="headerlink" title="hook自定义参数"></a>hook自定义参数</h4><p>自定义参数类型时，对于对象参数可以直接调用对象中的方法。如果需要更改参数时，需要重新实例化一个对象来返回：</p>
-<pre><code class="javascript">var 变量名=对象类名.$new(构造参数) 如：var mon =money.$new(123456,&quot;港币&quot;);
-</code></pre>
-<p>注意如果是重载方法中参数为某一对象，在overload中需要标明对象类 的全路径。例如：</p>
-<pre><code class="javascript">Utils.method.overload(&quot;com.example.frida_new1.Money&quot;).implementation=function(参数)
-</code></pre>
-<pre><code class="javascript">Java.perform(function()&#123;
-        var Utils=Java.use(&#39;com.example.frida_new1.Utils&#39;);
-        var money=Java.use(&#39;com.example.frida_new1.Money&#39;);
-        Utils.test.implementation=function(a)&#123;
-            send(&#39;hook到对象参数&#39;);
-            send(a.getInfo());
-            var mon =money.$new(123456,&quot;港币&quot;);
-            send(mon.getInfo());
-            return mon.getInfo();//这里返回值可更改为this.test(mon)，要注意返回值的参数类型！！
-        &#125;
-&#125;);
-</code></pre>
-<h4 id="对象参数属性的修改"><a href="#对象参数属性的修改" class="headerlink" title="对象参数属性的修改"></a>对象参数属性的修改</h4><p>在获取某一实例对象的属性时不能直接通过”类名.变量名”的方法来直接获取。需要表示为“类名.变量名.value”</p>
-<pre><code class="javascript">Java.perform(function()&#123;
-        var Utils=Java.use(&#39;com.example.frida_new1.Utils&#39;);
-        var money=Java.use(&#39;com.example.frida_new1.Money&#39;);
-        Utils.test.overload(&quot;com.example.frida_new1.Money&quot;).implementation=function(a)&#123;
-            send(&#39;hook到对象参数&#39;);
-            var mon =money.$new(123456,&quot;港币&quot;);
-            send(mon.getInfo());
-            mon.name.value=&quot;英镑&quot;;
-            send(mon.name.value);
-            return mon.getInfo();
-        &#125;
-    &#125;);
-</code></pre>
-<h4 id="java反射（对参数属性的修改）"><a href="#java反射（对参数属性的修改）" class="headerlink" title="java反射（对参数属性的修改）"></a>java反射（对参数属性的修改）</h4><p>使用反射的主要作用是可以让其他语言去调用java语言。基本思想：先找类，再找方法，再调用方法。</p>
-<pre><code class="javascript">Java.perform(function()&#123;
-        var Utils=Java.use(&#39;com.example.frida_new1.Utils&#39;);
-        var money=Java.use(&#39;com.example.frida_new1.Money&#39;);
-        var clazz=Java.use(&#39;java.lang.Class&#39;);//定义一个类的构造器
-        Utils.test.overload(&quot;com.example.frida_new1.Money&quot;).implementation=function(a)&#123;
-            var mon =money.$new(123456,&quot;港币&quot;);
-            send(mon.getInfo());
-            var num=Java.cast(mon.getClass(),clazz).getDeclaredField(&#39;num&#39;);
-            //cast中第一个参数是getClass获取类id，（对象所处的类）
-            //getDeclaredField(&#39;&#39;)用来获取字段id,参数为变量名
-            var name=Java.cast(mon.getClass(),clazz).getDeclaredField(&#39;name&#39;);
-            name.setAccessible(true);
-            num.setAccessible(true);//设置属性，不修改app会崩溃
-            var Value=num.get(mon);//获取类传到该变量中
-            console.log(Value);
-            //这里直接使用send()无法成功打印
-            var v1=name.get(mon);
-            console.log(v1);
-            //send(Value);这里直接用send无法输出
-            num.setInt(mon,5000);
-            name.set(mon,&quot;英镑&quot;);//修改变量使用set...()方法：setInt(),set()
-            send(mon.getInfo());
-            return mon.getInfo();
-        &#125;
-&#125;);
-</code></pre>
-<p>注：hook onCreat方法时应该在结尾继续执行该方法，因为onCreat在程序中是一直执行的。在末尾加上 this.onCreat()</p>
-<h4 id="hook内部类"><a href="#hook内部类" class="headerlink" title="hook内部类"></a>hook内部类</h4><p>内部类：在一个类中定义一个新的类。和直接引用不同的是需要在声明类的时候在主类和内部类中加“$”符号。其余写法完全相同。</p>
-<pre><code class="javascript"> Java.perform(function()&#123;
-        var intheclass=Java.use(&#39;com.example.frida_new1.Utils$intheclass&#39;);
-        console.log(intheclass);
-        intheclass.$init.implementation=function(a,b)&#123;
-            send(&#39;Hook start....&#39;);
-            send(a);
-            send(b);
-            b=6666
-            a=&quot;iu&quot;
-            send(&quot;修改后：&quot;+a+&quot; &quot;+b);
-            return this.$init(a,b);
-        &#125;
-   &#125;);
-</code></pre>
-<h4 id="hook匿名类"><a href="#hook匿名类" class="headerlink" title="hook匿名类"></a>hook匿名类</h4><p>匿名类：一个类中包含另一个类，且不需要任何类名直接实例化（没有类名）。主要用于创建一个对象来执行特定的任务，是代码更加简洁。一般匿名类只用一次。首先在smali代码中找到匿名类名（带有$）,其余代码与普通方法类似</p>
-<h4 id="枚举所有的类和类的所有方法。"><a href="#枚举所有的类和类的所有方法。" class="headerlink" title="枚举所有的类和类的所有方法。"></a>枚举所有的类和类的所有方法。</h4><p>枚举所有的类在js中有一个固定的函数：enumerateLoadedClasses，具体使用方法如下：</p>
-<pre><code class="js">Java.perform(function()&#123;
-    //这样枚举会列举出该模拟器中正在运行的所有进程
-        Java.enumerateLoadedClasses(&#123;//枚举加载所有的类
-            onMatch:function(name,handle)&#123;//输出
-                console.log(name);
-            &#125;,
-            onComplete:function()&#123;//枚举结束之后调用，该函数只会调用一次
-            &#125;
-        &#125;);
-    &#125;);
-</code></pre>
-<p>如果在onMatch中进行选择，指定包中的类，则会筛选输出指定类名。</p>
-<pre><code class="js">Java.perform(function()&#123;
-        Java.enumerateLoadedClasses(&#123;//枚举加载所有的类
-            onMatch:function(name,handle)&#123;//输出
-                if(name.indexOf(&quot;com.example.frida_new1&quot;)!=-1)&#123;
-                    console.log(name);
-                    var clazz =Java.use(name);
-                    console.log(clazz);
-                    var methods=clazz.class.getDeclaredMethods();
-                    for(var i=0;i&lt;methods.length;i++)&#123;
-                        console.log(methods[i]);
-                    &#125;
-                &#125;
-            &#125;,
-            onComplete:function()&#123;//枚举结束之后调用，该函数只会调用一次
-            
-            &#125;
-        &#125;);
-    &#125;);
-&quot;&quot;&quot;
-</code></pre>
-<p>枚举所有的方法使用clazz.class.getDeclaredMethods()；</p>
-<pre><code class="javascript">var clazz =Java.use(name);
-console.log(clazz);
-var methods=clazz.class.getDeclaredMethods();
-for(var i=0;i&lt;methods.length;i++)&#123;
-       console.log(methods[i]);
-&#125;
-</code></pre>
-<h4 id="Java层打印函数堆栈定位关键代码"><a href="#Java层打印函数堆栈定位关键代码" class="headerlink" title="Java层打印函数堆栈定位关键代码"></a>Java层打印函数堆栈定位关键代码</h4><p>在xposed中打印函数堆栈一般使用：</p>
-<pre><code class="java">log.d(&quot;TAG&quot;,&quot;MSG&quot;,new Trowable());
-</code></pre>
-<p>在frida中一般不使用，而使用Log.getStackTranceString()方法。（该方法也可以打印信息）。</p>
-<p> java.cast()：强制类型转换。                                                                                                                                                  </p>
-<p>java.openClassFile()；    //注入dex文件                                                                                                                                                  </p>
-<p> java.registerClass()    //在Frida中注册一个类写进app，很少用到。                                                                               </p>
-<p>java.array();//构造任意类型的数组。</p>
-<h4 id="frida注入多dex文件"><a href="#frida注入多dex文件" class="headerlink" title="frida注入多dex文件"></a>frida注入多dex文件</h4><p>当hook比较复杂时（需要大量使用java函数，想为app添加大量函数），很多函数不方便引入js中使用，就需要正向的java函数来注入到frida中，此时引入注入dex文件这一方法，方便hook。<strong>首先需要获取dex文件</strong>，建议直接将所需要的函数在另一个app中实现，打包成apk分离出dex文件即可（分离出dex文件后需要把他放在adnroid的缓存区：“adb push 文件路径 、data/local/tmp/xxx.dex）。再使用openClassFile函数来打开这个文件。获取到这个包后可以直接调用包中 的函数。相当于正向调用。</p>
-<pre><code class="js">Java.perform(function()&#123;
-        Java.openClassFile(&quot;/data/local/tmp/fridadex.dex&quot;).load();
-        var frida=Java.use(&quot;简单实现函数的打包的apk的包名&quot;);//dex中的函数所在类名
-        var main=Java.use(&quot;com.example.frida_new1.Money&quot;);//开始hook
-        main.fridadex.implementation=function(a,b)&#123;
-            var cal=frida.xxx(a,b);
-            send(cal);
-            return cal;
-        &#125;
-    &#125;);
-</code></pre>
-<h4 id="Frida-server端口启动与非标准端口启动"><a href="#Frida-server端口启动与非标准端口启动" class="headerlink" title="Frida-server端口启动与非标准端口启动"></a>Frida-server端口启动与非标准端口启动</h4><p>启动Frida-server一般采用默认端口：</p>
-<pre><code>adb forward tcp:27042 tcp:27042
-adb forward tcp:27043 tcp:24043
-</code></pre>
-<p>为了防止被检测，会使用非标准端口：                                                                                                    </p>
-<p> 1、启动frida-server时使用”./data/local/tmp/frida-server -l 127.0.0.1:9999 “                                            </p>
-<p> 2、转发端口时”adb forward tcp:9999”                                                                                                         </p>
-<p> 3、在frida中修改为：</p>
-<pre><code class="python">process = frida.get_device_manager().add_remote_device(&#39;127.0.0.1:9999&#39;).attch(&#39;Frida_new1&#39;)
-</code></pre>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
-      <categories>
-        <category>Frida框架</category>
-      </categories>
-      <tags>
-        <tag>Android</tag>
-        <tag>Frida框架</tag>
-        <tag>hook</tag>
-      </tags>
+  </entry>
+  <entry>
+    <title>《深入理解LTE-A》学习笔记（一）</title>
+    <url>/2023/08/28/%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3LTE-A%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%20/</url>
+    <content><![CDATA[<h1 id="《深入理解LTE-A》学习笔记（一）"><a href="#《深入理解LTE-A》学习笔记（一）" class="headerlink" title="《深入理解LTE-A》学习笔记（一）"></a>《深入理解LTE-A》学习笔记（一）</h1><span id="more"></span>
+<p><img src="https://s2.loli.net/2023/08/29/Jzwd1DZ3fq4nuPT.png" alt="image-20230728184032279"></p>
+<h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>eNode(Evolved Node B)</strong></td>
+<td>一个基站，负责无线信号的传输和接收，用于连接移动设备和核心网络。</td>
+</tr>
+<tr>
+<td align="left"><strong>UE</strong></td>
+<td>移动终端，由移动设备（ME）和通用用户识别模块（USIM）组成。</td>
+</tr>
+<tr>
+<td align="left"><strong>PCI</strong></td>
+<td>物理小区标识</td>
+</tr>
+<tr>
+<td align="left"><strong>PSS/SSS</strong></td>
+<td>小区同步信号</td>
+</tr>
+<tr>
+<td align="left"><strong>MIB/SIB</strong></td>
+<td>小区相关的系统信息</td>
+</tr>
+<tr>
+<td align="left"><strong>RA Preamble</strong></td>
+<td>随机前导码，UE发给eNode，告诉eNode有个接入请求。</td>
+</tr>
+<tr>
+<td align="left"><strong>PDSCH</strong></td>
+<td>物理下行共享信道</td>
+</tr>
+<tr>
+<td align="left"><strong>PDCCH</strong></td>
+<td>物理下行控制信道，传输上下行的资源调度信息</td>
+</tr>
+<tr>
+<td align="left"><strong>PUSCH</strong></td>
+<td>物理上行共享信道</td>
+</tr>
+<tr>
+<td align="left"><strong>PUCCH</strong></td>
+<td>物理上行控制信道，传输ACK/NACK，调度请求，信道质量指示等信息。</td>
+</tr>
+<tr>
+<td align="left"><strong>CSI</strong></td>
+<td>信道状态信息，UE上传给基站的。</td>
+</tr>
+<tr>
+<td align="left"><strong>Paging</strong></td>
+<td>呼叫请求，由eNode发起。</td>
+</tr>
+<tr>
+<td align="left"><strong>msg3</strong></td>
+<td>包含UE的随机接入标识符（RAI）和初始接入参数，用于告知基站UE的身份和请求建立连接。</td>
+</tr>
+<tr>
+<td align="left"><strong>SRS</strong></td>
+<td>在无线通信中，用于估计上行信道频域信息，做频率选择性调度；用于估计下行信道，做下行波束赋形。</td>
+</tr>
+<tr>
+<td align="left"><strong>SR</strong></td>
+<td>上行调度请求</td>
+</tr>
+<tr>
+<td align="left"><strong>BSR</strong></td>
+<td>缓冲状态报告，基站接收BSR并为UE分配资源</td>
+</tr>
+<tr>
+<td align="left"><strong>PHICH</strong></td>
+<td>物理混合自动重传指示信道。</td>
+</tr>
+<tr>
+<td align="left"><strong>RLC PDU</strong></td>
+<td>RLC层协议数据单元</td>
+</tr>
+<tr>
+<td align="left"><strong>RLC SDU</strong></td>
+<td>将接收到的RLC PDU重组并排序</td>
+</tr>
+<tr>
+<td align="left"><strong>MAC SDU</strong></td>
+<td>服务数据单元，RLC PDU在MAC层被称作MAC SDU</td>
+</tr>
+<tr>
+<td align="left"><strong>MAC PDU</strong></td>
+<td>若干个MAC SDU串联在一起，加上MAC子头封装成MAC PDU</td>
+</tr>
+<tr>
+<td align="left"><strong>HARQ</strong></td>
+<td>混合式自动重传请求</td>
+</tr>
+<tr>
+<td align="left"><strong>SRB</strong></td>
+<td>信令无线承载，在控制平面，RLC 承载上层的业务称之为信令无线承载，为RRC 层传递信令</td>
+</tr>
+<tr>
+<td align="left"><strong>CCCH</strong></td>
+<td>公共控制信道，是一种“一点对多点”的双向控制信道，在呼叫接续阶段，传输链路连接所需要的控制信令与信息。</td>
+</tr>
+<tr>
+<td align="left"><strong>PCCH</strong></td>
+<td>物理控制信道，用于发送寻呼消息，网络到用户的下行信道</td>
+</tr>
+<tr>
+<td align="left"><strong>BCCH</strong></td>
+<td>广播控制信道，在实际工作之前，协调、控制、管理用户行为。</td>
+</tr>
+<tr>
+<td align="left"><strong>DCCH</strong></td>
+<td>专用控制信道，点对点的双向控制信道，在呼叫接续阶段和在通信进行当中，在基站和移动台之间传输必要的控制信息。</td>
+</tr>
+<tr>
+<td align="left"><strong>DTCH</strong></td>
+<td>专用业务信道，UE和网络之间点对点和上下行双向业务数据传送渠道。</td>
+</tr>
+<tr>
+<td align="left"><strong>MCCH</strong></td>
+<td>多播控制信道，点对多点的从网络侧到UE的MBMS控制信息的传送通道，包括正在进行通信或即将要进行通信的MBMS会话信息。</td>
+</tr>
+<tr>
+<td align="left"><strong>MTCH</strong></td>
+<td>多播业务信道，用于承载MBMS业务数据。</td>
+</tr>
+<tr>
+<td align="left"><strong>MBMS</strong></td>
+<td>多媒体广播组播业务</td>
+</tr>
+<tr>
+<td align="left"><strong>EPC</strong></td>
+<td>4G核心网络</td>
+</tr>
+<tr>
+<td align="left"><strong>S-GW</strong></td>
+<td>服务网关，终止于E-UTRAN接口的网关。</td>
+</tr>
+<tr>
+<td align="left"><strong>P-GW</strong></td>
+<td>分组数据网关，面向PDN终结于SGi接口的网关。</td>
+</tr>
+<tr>
+<td align="left"><strong>S5/S8 bearer</strong></td>
+<td>S-GW和P-GW间的传输承载。</td>
+</tr>
+<tr>
+<td align="left"><strong>RDB</strong></td>
+<td>Radio Bearer，是指UE与基站(eNB)间的传输承载。</td>
+</tr>
+<tr>
+<td align="left"><strong>S1 Bearer</strong></td>
+<td>指eNB与服务网关(Serving Gateway，S-GW)间对于特定UE的承载。</td>
+</tr>
+<tr>
+<td align="left">。。。</td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="第一章-概述"><a href="#第一章-概述" class="headerlink" title="第一章 概述"></a>第一章 概述</h1><h2 id="一、空口传输"><a href="#一、空口传输" class="headerlink" title="一、空口传输"></a>一、空口传输</h2><h3 id="1、上行传输"><a href="#1、上行传输" class="headerlink" title="1、上行传输"></a>1、上行传输</h3><p>由nNode发送，UE负责接收的传输。</p>
+<p><img src="https://s2.loli.net/2023/08/29/23nu9FifLExajmY.png" alt="image-20230823202111190"></p>
+<p>下行相关流程：</p>
+<p>1、UE在进入基站前，会选择一个运营商，即PLMN。</p>
+<p>2、eNode每隔5ms会发送一次同步信号PSS/SSS。UE通过PSS/SSS，来选择eNode并获得时间与频率上的同步（并没有上行时间的同步），以及eNode的PCI（物理标识）。</p>
+<p>3、小区会不停发送与小区相关的系统信息（MIB/SIB），UE在需要的时候获取这些信息。</p>
+<p>4、UE获得信息后，会发起随机接入过程与小区建立连接（RA Preamble），同时产生反馈信息（RAR）。</p>
+<p>5、建立连接完成，可以进行数据传输。eNode通过PDSCH信道来给UE传输数据，同时通过PDCCH告诉UE对应的PDSCH在哪些无限资源上传输以及如何传输。UE使用ACK/NACK信号告诉基站是否接收成功（通过PUCCH和PUSCH信道发送），基站没有接收则会重传。</p>
+<p>6、信道条件动态变化，UE将下行无线信道条件通过CSI反馈给基站，使基站在下行调度时将信道质量考虑在内。</p>
+<p>7、当双方没有数据传输时，UE不需要一直保持连接状态（RRC_CONNECTED）。UE可以处于RRC_IDLE状态，定期唤醒去接收paging信息，确定是否有呼叫请求。</p>
+<h3 id="2、上行传输"><a href="#2、上行传输" class="headerlink" title="2、上行传输"></a>2、上行传输</h3><p>由UE发送，nNode负责接收的传输。</p>
+<p><img src="https://s2.loli.net/2023/08/29/C9sxXoSmfqu6Uec.png" alt="image-20230827130438050"></p>
+<p>上行相关流程：</p>
+<p>1、随机接入过程中，UE会发送Preamble和Msg3以便和基站建立连接。</p>
+<p>2、基站在上行调度时，需要进行上行信道估计，通过UE发送的SRS进行测量得到。</p>
+<p>3、eNode通过PDCCH给UE发送UL grant（物理控制信息）时，UE才能够使用对应的资源进行上行传输。当UE没有被分配上行PUSCH资源但有上行数据需要发送时，UE会发送SR告诉eNode，并请求eNode分配上行PUSCH资源。</p>
+<p>4、发送了调度请求后，UE发送了BSR告诉基站有多少数据要发送。</p>
+<p>5、UE通过PUSCH给eNode发送数据，同时eNode发送确认信号ACK/NACK（通过PHICH信道发送）给UE。UE没有接收到确认信号则会重传。</p>
+<p>6、信道条件动态变化，UE将下行无线信道条件通过CSI反馈给基站（通过PUCCH或PUSCH传输）。</p>
+<h2 id="二、LTE协议栈结构"><a href="#二、LTE协议栈结构" class="headerlink" title="二、LTE协议栈结构"></a>二、LTE协议栈结构</h2><p>主要说明基站和UE如何进行用户面和控制面的数据传输。</p>
+<p><strong>下行无线协议框架：</strong></p>
+<p><img src="https://s2.loli.net/2023/08/29/P8zlhmxgEtAwrY9.png" alt="image-20230827134709982"></p>
+<p><strong>上行无线协议框架：</strong></p>
+<p><img src="https://s2.loli.net/2023/08/29/xdiS6FnmguZNOQc.png" alt="image-20230827134759898"></p>
+<h3 id="1、用户面协议"><a href="#1、用户面协议" class="headerlink" title="1、用户面协议"></a>1、用户面协议</h3><p><img src="https://s2.loli.net/2023/08/29/RwOEjsCd6pPnqyU.png" alt="image-20230827135801461"></p>
+<p>1、PDCP层（分组数据汇聚协议层）：针对来自控制面的RRC和来自数据面的IP包进行处理，主要实现加密和完整性保护。</p>
+<ul>
+<li>头部压缩和解压缩：使用ROHC，应用于用户面数据</li>
+<li>加解密：用于用户面和控制面数据</li>
+<li>完整性保护：用于控制面数据</li>
+<li>传输用户数据和控制面数据</li>
+<li>切换时重排序和重传处理</li>
+<li>由于超时而丢弃用户面数据</li>
+</ul>
+<p>2、RLC层（无线链路控制层）：主要实现无线链路控制功能ARQ纠错。<strong>以无线承载的方式为PDCP层提供服务</strong></p>
+<p>三种模式：</p>
+<ol>
+<li>TM透明模式</li>
+<li>UM重发非确认模式</li>
+<li>AM重发确认模式</li>
+</ol>
+<ul>
+<li><strong>分段串联和重组RLC SDU</strong>：适用于UM和AM。由于RLC PDU的大小由MAC决定，大小并不等于RLC SDU的大小，因此在发送端需要分段/串联RLC SDU以便适合MAC层指定的大小，接收端需要将分组的RLC SDU重组，以便恢复出原来的RLC SDU并发往上层。</li>
+<li><strong>ARQ纠错（适用于AM）</strong>：重传机制。MAC层的HARQ机制实现快速重传，反馈出错率约1%，不适用于要求过高的业务。RLC重传处理能够降低反馈出错率。</li>
+<li><strong>对RLC PDU重排序</strong>：MAC层的HARQ可能导致到达RLC层的报文路乱序，需要RLC层进行重排序。</li>
+<li><strong>重复包检测</strong>：适用于 UM 和 AM 模式。出现重复包的最大可能性为发送端反馈了HARQ ACK，但接收端错误地将其解释NACK，从而导致了不必要的MAC PDU 重传。</li>
+<li><strong>对RLC PDU进行重分段</strong>：适用于AM模式。当RLC PDU数据需要重传时，也可能需要重分段（要求大小不一致时）。</li>
+</ul>
+<p>3、MAC层（媒体接入层）：以逻辑信道的方式为RLC层提供服务，为RLC层业务与物理层之间提供一个有效的连接。</p>
+<ul>
+<li><strong>匹配逻辑信道和传输信道。</strong></li>
+<li><strong>复用/解复用</strong>：将属于一个或不同的逻辑信道的多个MAC SDU复用到同一个MAC PDU上，发给物理层。</li>
+<li><strong>通过HARQ来纠错</strong>：重传机制。</li>
+<li><strong>调度处理</strong></li>
+<li><strong>逻辑信道优先级处理</strong>：从不同的等待队列选出一个分组，将其传递到物理层，并通过无线接口发送的过程。</li>
+<li><strong>调度信息上报</strong></li>
+<li><strong>随机接入过程处理</strong></li>
+</ul>
+<h4 id="UE与核心网进行用户面的数据通信过程"><a href="#UE与核心网进行用户面的数据通信过程" class="headerlink" title="UE与核心网进行用户面的数据通信过程"></a>UE与核心网进行用户面的数据通信过程</h4><p>核心网（EPC）通过外部承载与因特网建立连接，并通过EPS bearer 与UE建立连接。即核心网和UE之间的数据通信是承载在EPS bearer上的。</p>
+<p><img src="https://s2.loli.net/2023/08/29/6bikx7vGXKwzPJd.png" alt="image-20230827233230528"></p>
+<p>一个EPS bearer跨越多个接口：</p>
+<ul>
+<li>P-GW和S-GW之间的S5/S8接口。</li>
+<li>S-GW 和 eNodeB 之间的 S1 接口。</li>
+<li>eNodeB 和 UE 之间的无线接口。</li>
+</ul>
+<p>一个 EPS bearer 由一个 S5/S8 bearer 和一个 E-RAB 组成。一个 E-RAB 由一个 S1 bearer 和一个DRB 组成。</p>
+<ul>
+<li> 一个 E-RAB 在 UE 和 EPC 之间传输一个 EPS bearer 的数据。如果存在一个 E-RAB，则该 E-RAB 与一个 EPS bearer 存在一一映射关系。</li>
+<li>个 DRB 在 UE 和 eNodeB 之间（Uu 接口）传输一个 EPS bearer 的数据。如果存在一个 DRB，则该 DRB 与一个 EPS bearer/E-RAB 存在一一映射关系。</li>
+<li>一个 S1 bearer 在 eNodeB 和 S-GW 之间（S1 接口）传输一个 EPS bearer 的数据。</li>
+<li>一个 S5/S8 bearer 在 S-GW 和 P-GW 之间（S5/S8 接口）传输一个 EPS bearer 的数据。</li>
+</ul>
+<p><strong>S-GW</strong>：</p>
+<ul>
+<li>进行eNodeB间切换时，可以作为本地锚定点，并协助完成eNodeB的重排序功能；</li>
+<li>在3GPP不同接入系统间切换时，作为移动性锚点（终结在S4接口，在2G/3G系统和P-GW间实现业务路由），同样具有重排序功能；</li>
+<li>执行合法侦听功能；</li>
+<li>进行数据包的路由和前转；</li>
+<li>在上行和下行传输层进行分组标记；</li>
+<li>空闲状态下，下行分组缓冲和发起网络触发的服务请求功能；</li>
+<li>用于运营商间的计费</li>
+</ul>
+<h3 id="2、控制面协议"><a href="#2、控制面协议" class="headerlink" title="2、控制面协议"></a>2、控制面协议</h3><p><img src="https://s2.loli.net/2023/08/29/pOal51gvh6zo2xF.png" alt="image-20230827205208886"></p>
+<p>1、RRC层（无线资源控制层）：完成广播、寻呼、RRC连接管理、资源控制、移动性管理、UE测量报告与控制。</p>
+<ul>
+<li>广播系统消息</li>
+<li>RRC连接控制</li>
+<li>Inter-RAT 移动性管理</li>
+<li>测量配置和上报</li>
+<li>发动专用的NAS消息</li>
+<li>传输UE接入能力信息</li>
+</ul>
+<p>RRC和NAS消息使用SRB来传输，LTE中定义了三种SRB：SRB0、SRB1、SRB2。</p>
+<p><strong>SRB（信令无线承载）</strong>：</p>
+<p>SRB0是默认的无线承载，使用SRB0的RRC消息都使用CCCH来传输，SRB0并没有一个对应的PDCP实体，在PDCP层是透明传输，既没有完整性保护，也没有加解密处理。</p>
+<p>SRB1用于发送RRC消息，并在SRB2发送之前，用于发送NAS消息，都使用DCCH发送。</p>
+<p>SRB2用于发送包含记录的测量信息在内的RRC消息，并发送SRB消息，都使用DCCH发送。</p>
+<p>除SRB0，每个RB都有一个PDCP实体（完整性保护和加解密），每个PDCP实体都有1个或2个RLC实体，取决于RB的属性和RLC模式。</p>
+<h3 id="下行峰值速率计算"><a href="#下行峰值速率计算" class="headerlink" title="下行峰值速率计算"></a>下行峰值速率计算</h3><p>满足以下条件的最大吞吐量：</p>
+<ol>
+<li>整个带宽均分配给一个UE。</li>
+<li>使用最高阶的MCS。</li>
+<li>使用可支持的最大天线数。</li>
+</ol>
+<p>参考文章：</p>
+<p><a href="https://blog.51cto.com/u_16099211/6506095">https://blog.51cto.com/u_16099211/6506095</a></p>
+<p><a href="https://blog.csdn.net/qq_40232834/article/details/131807104">https://blog.csdn.net/qq_40232834/article/details/131807104</a></p>
+]]></content>
   </entry>
   <entry>
     <title>初识Frida框架</title>
@@ -928,256 +1453,6 @@ sys.stdin.read()
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2021/07/22/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<span id="more"></span>
-
-
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;
-</code></pre>
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server
-</code></pre>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate
-</code></pre>
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy
-</code></pre>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>Xposed——hook方法学习</title>
-    <url>/2021/08/31/Xposed%20%E2%80%94hook%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/</url>
-    <content><![CDATA[<p>Xposed是基于java层的hook框架，在不修改apk源码的情况下，编写自己的模块来改变apk的行为。以下总结了常见的Xposed的hook方法：</p>
-<span id="more"></span>
-
-<h3 id="hook普通方法"><a href="#hook普通方法" class="headerlink" title="hook普通方法"></a>hook普通方法</h3><p>创建一个类继承IXposedHookLoadPackage，修改 handleLoadPackage方法，首先要判断是否为特定的包。</p>
-<pre><code class="java">public void handleLoadPackage(XC_LoadPackage.LoadPackageParam Param) throws Throwable &#123;
-    if(Param.packageName.equals(&quot;com.example.xposed_new3&quot;))&#123;......&#125;
-&#125;
-</code></pre>
-<p>hook普通方法调用的函数都是<strong>XposedHelpers.findAndHookMethod</strong></p>
-<pre><code class="java">XposedHelpers.findAndHookMethod(
-className(包名+类名),
-Param.classLoader(固定参数),
-methodName(被hook的函数名)
-**.class(函数的参数),
-new XC_MethodHook()&#123;&#125;
-)
-</code></pre>
-<h4 id="XC-MethodHook方法详解"><a href="#XC-MethodHook方法详解" class="headerlink" title="XC_MethodHook方法详解"></a>XC_MethodHook方法详解</h4><p><img src="https://i.loli.net/2021/09/02/Uk2MhKwNJPtTLSa.png" alt="QQ截图20210901190645.png"></p>
-<p>hook普通方法的主要作用是打印各种参数信息，或者修改某些参数使其直接通过程序。</p>
-<h3 id="hook匿名内部类"><a href="#hook匿名内部类" class="headerlink" title="hook匿名内部类"></a>hook匿名内部类</h3><p>匿名内部类一般为普通方法，所以仍然用findAndHookMethod的hook方法。</p>
-<p>注：匿名内部类辨别方法：在smali代码中一个类为一个文件，且匿名内部类后缀会加上”$”符号，在工程管理器中直接找出相关类。</p>
-<blockquote>
-<p>Lcom/example/xposed_new4/MainActivity$1</p>
-</blockquote>
-<pre><code class="java">@Override
-public void handleLoadPackage(XC_LoadPackage.LoadPackageParam loadPackageParam) throws Throwable &#123;
-    if(loadPackageParam.packageName.equals(&quot;com.example.xposed_new4&quot;))&#123;
-        XposedHelpers.findAndHookMethod(
-        &quot;com.example.xposed_new4.MainActivity$1&quot;,
-        loadPackageParam.classLoader,
-        &quot;onClick&quot;,
-        View.class,
-        new XC_MethodHook() &#123;
-            @Override
-            protected void beforeHookedMethod(MethodHookParam param) throws Throwable &#123;
-                super.beforeHookedMethod(param);
-                View v=(View)param.args[0];
-                XposedBridge.log(&quot;view:&quot;+v.getId());
-            &#125;
-         &#125;);
-     &#125;
-&#125;
-</code></pre>
-<p>在findAndHookMethod方法中的包名类名参数使用smali代码中的包名加类名，其余操作与普通方法hook相同。</p>
-<h3 id="Xposed—java-反射"><a href="#Xposed—java-反射" class="headerlink" title="Xposed—java 反射"></a>Xposed—java 反射</h3><p> java反射主要作用为突破修饰符的限制，如获取私有方法和私有字段。</p>
-<p>以hook某一私有控件为例</p>
-<pre><code class="java">//获取类
-Class&lt;?&gt; clazz=param.thisObject.getClass();
-//获取字段
-Field field=clazz.getDeclaredField(&quot;Text&quot;);
-//设置可见
-field.setAccessible(true);
-
-EditText ed_sn= (EditText) field.get(param.thisObject);//把类中的控件参数传给ed_sn
-XposedBridge.log(&quot;输入结果为：&quot;+ed_sn.getText().toString().trim());
-//修改编辑框
-ed_sn.setText(&quot;L61q4_cheng&quot;);
-</code></pre>
-<p>hook某一私有方法</p>
-<pre><code class="java">//获取方法
-Method method=clazz.getDeclaredMethod(&quot;MethodName&quot;,new Class[]&#123;.class,.class...&#125;);
-//显示可见
-method.setAccessible(true);
-//调用方法
-返回值=method.invoke(param.thisObject,new Object()&#123;...&#125;);//调用函数的参数
-</code></pre>
-<h3 id="hook主动调用"><a href="#hook主动调用" class="headerlink" title="hook主动调用"></a>hook主动调用</h3><p>主动调用，直接调用apk中的函数来实现hook操作，方便对数据进行直接操作。主动调用函数为XposedHelpers。该方法一般用于获取某一数据来通过某一入口，而不是直接修改方法的返回值。Xposed通过主动调用可以直接使用Android项目中某些方法，使其可以有更强大的功能。</p>
-<h4 id="XposedHelpers方法详解"><a href="#XposedHelpers方法详解" class="headerlink" title="XposedHelpers方法详解"></a>XposedHelpers方法详解</h4><pre><code class="java">XposedHelpers.callMethod();//调用普通方法
-XposedHelpers.callStaticMethod();//调用静态方法
-</code></pre>
-<pre><code class="java">XposedHelpers.callMethod(
-    param.getClass(),//固定句式
-    &quot;methodName&quot;//需要主动调用的方法名
-    new Object[]&#123;...,...&#125;,//大括号中为调用函数中的参数，
-)
-</code></pre>
-<p>在调用方法之前，可将程序中对参数的操作直接复制过来，例如加密操作，格式操作。</p>
-<p>如果该方法有返回值且需要获取，可将该方法直接用在某一变量上，例如：</p>
-<pre><code class="java">String str=(String)XposedHelpers.callMethod(
-    param.getClass(),
-    &quot;methodName&quot;
-    new Object[]&#123;...,...&#125;,
-)
-param.args[1]=str.toString();
-</code></pre>
-<h3 id="Xposed—hook静态变量"><a href="#Xposed—hook静态变量" class="headerlink" title="Xposed—hook静态变量"></a>Xposed—hook静态变量</h3><p>实例变量在每一份实例出来的类中都有不同的值，先有对象才有实例变量，因此在没有对象之前是不能hook修改实例变量。在内存中静态变量不会改变。因此可以在对象之前hook。</p>
-<p>故hook静态变量不需要获取类对象，直接修改类中私有静态变量。hook的方法有XposedHelpers，以变量类型Int为例。</p>
-<pre><code class="java">final Class&lt;?&gt; clazz= XposedHelpers.findClass(
-            &quot;com.example.xposed_new5.MainActivity&quot;,
-            loadPackageParam.classLoader);//方便起见提前赋给clazz
-XposedHelper.setStaticIntField(clazz,&quot;变量名&quot;,value(修改的值));
-</code></pre>
-<pre><code class="java">XposedHelpers.setStaticObjectField();//修改字符串
-</code></pre>
-<p>注：不同变量类型使用不同方法。</p>
-<pre><code class="java">final Class&lt;?&gt;clazz=XposedHelpers.findClass(
-        &quot;com.example.xposed_new5.MainActivity&quot;,
-        loadPackageParam.classLoader);        
-XposedHelpers.setStaticIntField(clazz,&quot;staticInt&quot;,99);
-</code></pre>
-<h3 id="Xposed—hook构造方法"><a href="#Xposed—hook构造方法" class="headerlink" title="Xposed—hook构造方法"></a>Xposed—hook构造方法</h3><h4 id="Java构造方法"><a href="#Java构造方法" class="headerlink" title="Java构造方法"></a>Java构造方法</h4><p>与类同名，通过关键字new调用，每个类至少有一个或一个以上的构造方法（如果没有定义构造方法，系统会自动定义一个无参数的构造方法）。构造方法可以无参、一个或多个参数，且构造方法没有返回值。例如：</p>
-<pre><code class="java">MainActivity()&#123;
-&#125;
-MainActivity(int a,int b)&#123;
-&#125;
-MainActivity(String str)&#123;
-&#125;
-</code></pre>
-<h4 id="hook构造方法"><a href="#hook构造方法" class="headerlink" title="hook构造方法"></a>hook构造方法</h4><p>hook构造方法不需要添加方法名，采用的hook方法为XposedHelpers.findAndHookConstructor。</p>
-<p>此时不能hook实例变量，因为对象还没有产生。</p>
-<h4 id="findAndHookConstructor详解"><a href="#findAndHookConstructor详解" class="headerlink" title="findAndHookConstructor详解"></a>findAndHookConstructor详解</h4><pre><code class="java">final Class&lt;?&gt; clazz=XposedHelpers.findClass(
-&quot;com.example.xposed_new6.MainActivity&quot;,//包名加类名
-loadPackageParam.classLoader);//固定格式
-XposedHelpers.findAndHookConstructor(
-clazz,//可以提前定义，也可以直接在这里写出来
-int.class,//构造方法的参数
-String.class,//无参数也可以不写
-new XC_MethodHook()&#123;
-//和普通方法写法一样
-@Override
-protected void beforeHookedMethod(MethodHookParam param) throws Throwable &#123;
-        XposedBridge.log(&quot;Haha, HookDemo constructed was hooked&quot; );
-        &#125;
-@Override
-protected void afterHookedMethod(MethodHookParam param) throws Throwable &#123;
-        super.afterHookedMethod(param);
-        &#125;        
-&#125;);
-</code></pre>
-<h3 id="Xposed—hook所有函数遍历所有类"><a href="#Xposed—hook所有函数遍历所有类" class="headerlink" title="Xposed—hook所有函数遍历所有类"></a>Xposed—hook所有函数遍历所有类</h3><p>对于动态dex文件可以采用这种方法来hook。</p>
-<pre><code class="java"> XposedHelpers.findAndHookMethod(
-        ClassLoader.class,
-        &quot;isok&quot;,
-        String.class,
-        new XC_MethodHook() &#123;
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable &#123;
-                     super.afterHookedMethod(param);
-                     Class&lt;?&gt; clazz=(Class&lt;?&gt;) loadPackageParam.getResult();
-                     XposedBridge.log(&quot;Clazz：&quot;+clazz.getName());
-                     &#125;
-         &#125;
-&#125;);
-</code></pre>
-<h3 id="通过hook主动调用获取相关数据"><a href="#通过hook主动调用获取相关数据" class="headerlink" title="通过hook主动调用获取相关数据"></a>通过hook主动调用获取相关数据</h3><h4 id="获取类"><a href="#获取类" class="headerlink" title="获取类"></a>获取类</h4><pre><code class="java">Class&lt;?&gt; clazz=param.thisObject.getClass();
-</code></pre>
-<h4 id="对类进行操作-获取字段"><a href="#对类进行操作-获取字段" class="headerlink" title="对类进行操作(获取字段)"></a>对类进行操作(获取字段)</h4><pre><code class="java">Field[] fields=clazz.getDeclaredFields();
-for(Field field:fields)&#123;
-     XposedBridge.log(&quot;字段名称：&quot;+field.getName());
-&#125;
-</code></pre>
-<h4 id="获取类中的所有方法"><a href="#获取类中的所有方法" class="headerlink" title="获取类中的所有方法"></a>获取类中的所有方法</h4><pre><code class="java">Method[] methods=clazz.getDeclaredMethods();
-for(Method method:methods)
-&#123;
-      XposedBridge.log(&quot;方法名称：&quot;+method.getName());
-&#125;
-</code></pre>
-<h4 id="通过主动调用获取普通方法"><a href="#通过主动调用获取普通方法" class="headerlink" title="通过主动调用获取普通方法"></a>通过主动调用获取普通方法</h4><pre><code class="java">XposedHelpers.callMethod(loadPackageParam.getClass(),&quot;methodName&quot;,new Object()&#123;...&#125;);
-</code></pre>
-<h4 id="通过主动调用获取静态方法"><a href="#通过主动调用获取静态方法" class="headerlink" title="通过主动调用获取静态方法"></a>通过主动调用获取静态方法</h4><pre><code class="java">Class&lt;?&gt; clazz1=XposedHelpers.findClass(
-    &quot;com.example.xposed_new7.MainActivity&quot;,
-    loadPackageParam.classLoader);
-XposedHelpers.callStaticMethod(clazz1,&quot;methodName&quot;,new Object()&#123;...&#125;);
-</code></pre>
-<h4 id="通过主动调用获取普通字段（不是方法中的特定字段）"><a href="#通过主动调用获取普通字段（不是方法中的特定字段）" class="headerlink" title="通过主动调用获取普通字段（不是方法中的特定字段）"></a>通过主动调用获取普通字段（不是方法中的特定字段）</h4><pre><code class="java">XposedHelpers.getBooleanField(loadPackageParam.getClass(),&quot;fieldName&quot;);
-</code></pre>
-<h4 id="获取静态字段"><a href="#获取静态字段" class="headerlink" title="获取静态字段"></a>获取静态字段</h4><pre><code class="java">Class&lt;?&gt; clazz2=XposedHelpers.findClass(
-    &quot;com.example.xposed_new7.MainActivity&quot;,
-    loadPackageParam.classLoader);
-XposedHelpers.getStaticBooleanField(clazz2,&quot;fieldName&quot;);
-</code></pre>
-<h3 id="Xposed—hook替换函数"><a href="#Xposed—hook替换函数" class="headerlink" title="Xposed—hook替换函数"></a>Xposed—hook替换函数</h3><pre><code class="java">if(loadPackageParam.packageName.equals(&quot;com.example.xposed_new8&quot;))&#123;
-            Class&lt;?&gt;clazz=XposedHelpers.findClass(
-                &quot;com.example.xposed_new8.MainActivity&quot;,
-                loadPackageParam.classLoader);
-            XposedHelpers.findAndHookMethod(
-                    &quot;com.example.xposed_new8.MainActivity&quot;,
-                    loadPackageParam.classLoader,
-                    &quot;ButtonTest1&quot;,
-                    new XC_MethodReplacement() &#123;
-                    @Override
-                    protected Object replaceHookedMethod(MethodHookParam methodHookParam) throws Throwable &#123;
-                            XposedBridge.log(&quot;方法替换成功&quot;);
-                            XposedHelpers.callMethod(clazz,&quot;ButtonTest2&quot;);//主动调用ButtonTest2
-                            return null;
-                        &#125;
-                    &#125;
-            );
-&#125;
-</code></pre>
-<h3 id="Xposed—hook多DEX"><a href="#Xposed—hook多DEX" class="headerlink" title="*Xposed—hook多DEX"></a>*Xposed—hook多DEX</h3><p>在一个apk中有多个dex文件时，在apk打包的时候优先加载主dex文件，会优先有些类hook不到，采用attach方法来解决。</p>
-<pre><code class="java">XposedHelpers.findAndHookMethod(
-        Application.class,
-        &quot;attach&quot;,
-        Context.class,
-        new XC_MethodHook() &#123;
-                 @Override
-                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable &#123;
-                 super.beforeHookedMethod(param);
-                 Context context= (Context) param.args[0];
-                 ClassLoader loader=context.getClassLoader();
-                 XposedHelpers.findAndHookMethod(
-                         &quot;com.example.xposed_new8.MainActivity&quot;,
-                         loader,
-                         &quot;ButtonTest1&quot;,
-                         new XC_MethodHook() &#123;
-                                 @Override
-                                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable &#123;
-                                            super.beforeHookedMethod(param);
-                              &#125;
-                         &#125;
-                );
-           &#125;
-       &#125;
-);
-</code></pre>
-]]></content>
-      <categories>
-        <category>Xposed框架</category>
-      </categories>
-      <tags>
-        <tag>Android</tag>
-        <tag>hook</tag>
-        <tag>Xposed框架</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>初识Xposed框架</title>
     <url>/2021/08/15/%E5%88%9D%E8%AF%86Xposed%E6%A1%86%E6%9E%B6/</url>
     <content><![CDATA[<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p><strong>Xposed</strong>（也被称作Xposed框架、XP框架、Xposed framework），是一个运行于Android操作系统的hook框架。其通过替换Android系统的关键文件，可以拦截几乎所有Java函数的调用，并允许通过Xposed模块中的自定义代码更改调用这些函数时的行为。因此，Xposed常被用来<strong>修改Android系统和应用程序的功能。</strong></p>
@@ -1201,377 +1476,54 @@ XposedHelpers.getStaticBooleanField(clazz2,&quot;fieldName&quot;);
       </tags>
   </entry>
   <entry>
-    <title>对称算法（AES篇）</title>
-    <url>/2021/08/08/%E5%AF%B9%E7%A7%B0%E7%AE%97%E6%B3%95%EF%BC%88AES%E7%AF%87%EF%BC%89/</url>
-    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>高级加密标准（英语：Advanced Encryption Standard，缩写：AES），在密码学中又称Rijndael加密法，是美国联邦政府采用的一种区块加密标准。这个标准用来替代原先的DES，已经被多方分析且广为全世界所使用。经过五年的甄选流程，高级加密标准由美国国家标准</p>
-<span id="more"></span>与技术研究院（NIST）于2001年11月26日发布于FIPS PUB 197，并在2002年5月26日成为有效的标准。2006年，高级加密标准已然成为对称密钥加密中最流行的算法之一。
+    <title>编写Xposed框架初体验</title>
+    <url>/2021/08/31/%E7%BC%96%E5%86%99Xposed%E6%A1%86%E6%9E%B6%E5%88%9D%E4%BD%93%E9%AA%8C/</url>
+    <content><![CDATA[<h4 id="具体步骤："><a href="#具体步骤：" class="headerlink" title="具体步骤："></a>具体步骤：</h4><span id="more"></span>
+<ol>
+<li>修改配置文件，添加xposed插件相关数据。在AndroidManifest.xml中添加以下代码：</li>
+</ol>
+<pre><code class="java">        &lt;!--添加标识--&gt;
+        &lt;meta-data
+            android:name=&quot;xposedmodule&quot;
+            android:value=&quot;true&quot;/&gt;
+        &lt;!--载入HOOK模块之后显示的信息--&gt;
+        &lt;meta-data
+            android:name=&quot;xposeddescription&quot;
+            android:value=&quot;Xposed框架初体验&quot;/&gt;
+        &lt;!--规定jar包的版本信息--&gt;
+        &lt;meta-data
+            android:name=&quot;xposedminversion&quot;
+            android:value=&quot;54&quot;/&gt;
+</code></pre>
+<p>2、新建lib文件夹，将Xposed框架提供的jar包放到此文件夹中。具体流程：右击app-&gt;new-&gt;Directory-&gt;输入lib-&gt;将jar包复制到此文件夹中-&gt;右击文件夹-&gt;Add as Library-&gt;在build.gradle中将implementation改为compileOnly files。</p>
+<p>3、新建一个类Xposedhook实现IXposedHookLoadPackage接口。</p>
+<pre><code class="java">import android.util.Log;
+import de.robv.android.xposed.IXposedHookLoadPackage;
+import de.robv.android.xposed.XposedBridge;
+import de.robv.android.xposed.callbacks.XC_LoadPackage;
+public class Xposedhook implements IXposedHookLoadPackage &#123;
+    //Xposed插件入口点
+    @Override
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam Param) throws Throwable &#123;
+        XposedBridge.log(&quot;cly hook start-------&gt;当前启动的程序是：&quot;+Param.processName);
 
-<p>AES为最常见的对称加密算法(微信小程序加密传输就是用这个加密算法的)。对称加密算法也就是加密和解密用相同的密钥。具体的加密流程如下：</p>
-<pre><code>graph LR
-A(L61q4_Cheng)--&gt;B(公钥A)
-B--&gt;C(密文)
-C--&gt;D(私钥B)
-D--&gt;E(L61q4_Cheng)
-</code></pre>
-<hr>
-<h2 id="加密原理"><a href="#加密原理" class="headerlink" title="加密原理"></a>加密原理</h2><p>AES为分组加密法，把明文分成一组一组的，每组长度相等，每次加密一组数据，直到加密完整个明文，在AES标准规范中，分组长度只能是128位，AES是按照字节进行加密的，也就是说每个分组为16个字节（每个字节8位）。密钥的长度可以使用128位、192位或256位。这导致密钥长度不同，推荐加密的轮数也不同。</p>
-<table>
-<thead>
-<tr>
-<th>AES</th>
-<th>密钥长度（32位比特字)</th>
-<th>分组长度(32位比特字)</th>
-<th>加密轮数</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>AES-128</td>
-<td>4</td>
-<td>4</td>
-<td>10</td>
-</tr>
-<tr>
-<td>AES-192</td>
-<td>6</td>
-<td>4</td>
-<td>12</td>
-</tr>
-<tr>
-<td>AES-256</td>
-<td>8</td>
-<td>4</td>
-<td>14</td>
-</tr>
-</tbody></table>
-<p>这里实现的是AES-128，也就是密钥的长度为128位，加密轮数为10轮。上面说到，AES的加密公式为C = E(K,P)，在加密函数E中，会执行一个轮函数，并且执行10次这个轮函数，这个轮函数的前9次执行的操作是一样的，只有第10次有所不同。也就是说，一个明文分组会被加密10轮。AES的核心就是实现一轮中的所有操作。</p>
-<p>AES的处理单位是字节，128位的输入明文分组P和输入密钥K都被分成16个字节，分别记为P = P0 P1 … P15 和 K = K0 K1 …K15。如，明文分组为P=abcdefghijklmnop,其中的字符a对应P0，p对应P15。一般地，明文分组用字节为单位的正方形矩阵描述，称为状态矩阵。在算法的每一轮中，状态矩阵的内容不断发生变化，最后的结果作为密文输出。该矩阵中字节的排列顺序为从上到下、从左至右依次排列。明文经过AES加密后，已经面目全非。</p>
-<h2 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h2><p>AES算法可以归纳为四种操作处理，分别为<strong>密钥加法层、字节代换层、行位移层、列混淆层</strong></p>
-<p>标准的AES算法密钥和明文都是等长的，一共有128位，196位和256位三种长度，这里重点讲解128位的情况：</p>
-<h3 id="1、密钥加法层"><a href="#1、密钥加法层" class="headerlink" title="1、密钥加法层"></a>1、密钥加法层</h3><p>在密钥加法层中有两个输入的参数，分别是明文和子密钥k[0]，而且这两个输入都是128位的。k[0]实际上就等同于密钥k，只需要将两个输入的数据进行按字节异或操作就会得到运算的结果。</p>
-<p>代码如下（C语言）：</p>
-<pre><code>int AddRoundKey(unsigned char(*PlainArray)[4], unsigned char(*ExtendKeyArray)[44], unsigned int MinCol)
-&#123;
-    int ret = 0;
- 
-    for (int i = 0; i &lt; 4; i++)
-    &#123;
-        for (int j = 0; j &lt; 4; j++)
-        &#123;
-            PlainArray[i][j] ^= ExtendKeyArray[i][MinCol + j];
-        &#125;
+        Log.d(&quot;L61q4_Cheng&quot;, &quot;hook Start......&quot;);
     &#125;
- 
-    return ret;
 &#125;
 </code></pre>
-<h3 id="2、字节代换层"><a href="#2、字节代换层" class="headerlink" title="2、字节代换层"></a>2、字节代换层</h3><p>字节代换层的主要功能是让数据通过S盒完成从一个字节到另一个字节的映射，S盒的计算方式和密钥中S盒计算方式相同。S盒是一个拥有256个字节元素的数组，逆S盒与S盒对应用于AES算法的解密，字节代换层将明文的每一个字节作为数组下标，对进行相关索引操作</p>
-<p>若将S盒作为一维数组处理，则只需要将每个字节作为索引下标进行索引</p>
-<p>若将S盒作为二维数组，则需要将每个字节的高4位作为第一个下标，第四位作为第二个下标来进行索引</p>
-<p>S盒形成过程：S盒是通过将输入的数据进行乘法逆元计算、然后将计算结果进行仿射映射得到的。</p>
-<p>状态矩阵中的元素按照下面的方式映射为一个新的字节：把该字节的高4位作为行值，低4位作为列值，取出S盒或者逆S盒中对应的行的元素作为输出。例如，加密时，输出的字节S1为0x12,则查S盒的第0x01行和0x02列，得到值0xc9,然后替换S1原有的0x12为0xc9。</p>
-<p>代码如下（C语言）：</p>
-<pre><code>//S盒
-const unsigned char S_Table[16][16] =
-&#123;
-    0x63, 0x7C, 0x77, 0x7B, 0xF2, 0x6B, 0x6F, 0xC5, 0x30, 0x01, 0x67, 0x2B, 0xFE, 0xD7, 0xAB, 0x76,
-    0xCA, 0x82, 0xC9, 0x7D, 0xFA, 0x59, 0x47, 0xF0, 0xAD, 0xD4, 0xA2, 0xAF, 0x9C, 0xA4, 0x72, 0xC0,
-    0xB7, 0xFD, 0x93, 0x26, 0x36, 0x3F, 0xF7, 0xCC, 0x34, 0xA5, 0xE5, 0xF1, 0x71, 0xD8, 0x31, 0x15,
-    0x04, 0xC7, 0x23, 0xC3, 0x18, 0x96, 0x05, 0x9A, 0x07, 0x12, 0x80, 0xE2, 0xEB, 0x27, 0xB2, 0x75,
-    0x09, 0x83, 0x2C, 0x1A, 0x1B, 0x6E, 0x5A, 0xA0, 0x52, 0x3B, 0xD6, 0xB3, 0x29, 0xE3, 0x2F, 0x84,
-    0x53, 0xD1, 0x00, 0xED, 0x20, 0xFC, 0xB1, 0x5B, 0x6A, 0xCB, 0xBE, 0x39, 0x4A, 0x4C, 0x58, 0xCF,
-    0xD0, 0xEF, 0xAA, 0xFB, 0x43, 0x4D, 0x33, 0x85, 0x45, 0xF9, 0x02, 0x7F, 0x50, 0x3C, 0x9F, 0xA8,
-    0x51, 0xA3, 0x40, 0x8F, 0x92, 0x9D, 0x38, 0xF5, 0xBC, 0xB6, 0xDA, 0x21, 0x10, 0xFF, 0xF3, 0xD2,
-    0xCD, 0x0C, 0x13, 0xEC, 0x5F, 0x97, 0x44, 0x17, 0xC4, 0xA7, 0x7E, 0x3D, 0x64, 0x5D, 0x19, 0x73,
-    0x60, 0x81, 0x4F, 0xDC, 0x22, 0x2A, 0x90, 0x88, 0x46, 0xEE, 0xB8, 0x14, 0xDE, 0x5E, 0x0B, 0xDB,
-    0xE0, 0x32, 0x3A, 0x0A, 0x49, 0x06, 0x24, 0x5C, 0xC2, 0xD3, 0xAC, 0x62, 0x91, 0x95, 0xE4, 0x79,
-    0xE7, 0xC8, 0x37, 0x6D, 0x8D, 0xD5, 0x4E, 0xA9, 0x6C, 0x56, 0xF4, 0xEA, 0x65, 0x7A, 0xAE, 0x08,
-    0xBA, 0x78, 0x25, 0x2E, 0x1C, 0xA6, 0xB4, 0xC6, 0xE8, 0xDD, 0x74, 0x1F, 0x4B, 0xBD, 0x8B, 0x8A,
-    0x70, 0x3E, 0xB5, 0x66, 0x48, 0x03, 0xF6, 0x0E, 0x61, 0x35, 0x57, 0xB9, 0x86, 0xC1, 0x1D, 0x9E,
-    0xE1, 0xF8, 0x98, 0x11, 0x69, 0xD9, 0x8E, 0x94, 0x9B, 0x1E, 0x87, 0xE9, 0xCE, 0x55, 0x28, 0xDF,
-    0x8C, 0xA1, 0x89, 0x0D, 0xBF, 0xE6, 0x42, 0x68, 0x41, 0x99, 0x2D, 0x0F, 0xB0, 0x54, 0xBB, 0x16
-&#125;;
- 
-//字节代换
-int Plain_S_Substitution(unsigned char *PlainArray)
-&#123;
-    int ret = 0;
- 
-    for (int i = 0; i &lt; 16; i++)
-    &#123;
-        PlainArray[i] = S_Table[PlainArray[i] &gt;&gt; 4][PlainArray[i] &amp; 0x0F];
-    &#125;
- 
-    return ret;
-&#125;
- 
- 
-//逆S盒
-const unsigned char ReS_Table[16][16] =
-&#123;
-    0x52, 0x09, 0x6A, 0xD5, 0x30, 0x36, 0xA5, 0x38, 0xBF, 0x40, 0xA3, 0x9E, 0x81, 0xF3, 0xD7, 0xFB,
-    0x7C, 0xE3, 0x39, 0x82, 0x9B, 0x2F, 0xFF, 0x87, 0x34, 0x8E, 0x43, 0x44, 0xC4, 0xDE, 0xE9, 0xCB,
-    0x54, 0x7B, 0x94, 0x32, 0xA6, 0xC2, 0x23, 0x3D, 0xEE, 0x4C, 0x95, 0x0B, 0x42, 0xFA, 0xC3, 0x4E,
-    0x08, 0x2E, 0xA1, 0x66, 0x28, 0xD9, 0x24, 0xB2, 0x76, 0x5B, 0xA2, 0x49, 0x6D, 0x8B, 0xD1, 0x25,
-    0x72, 0xF8, 0xF6, 0x64, 0x86, 0x68, 0x98, 0x16, 0xD4, 0xA4, 0x5C, 0xCC, 0x5D, 0x65, 0xB6, 0x92,
-    0x6C, 0x70, 0x48, 0x50, 0xFD, 0xED, 0xB9, 0xDA, 0x5E, 0x15, 0x46, 0x57, 0xA7, 0x8D, 0x9D, 0x84,
-    0x90, 0xD8, 0xAB, 0x00, 0x8C, 0xBC, 0xD3, 0x0A, 0xF7, 0xE4, 0x58, 0x05, 0xB8, 0xB3, 0x45, 0x06,
-    0xD0, 0x2C, 0x1E, 0x8F, 0xCA, 0x3F, 0x0F, 0x02, 0xC1, 0xAF, 0xBD, 0x03, 0x01, 0x13, 0x8A, 0x6B,
-    0x3A, 0x91, 0x11, 0x41, 0x4F, 0x67, 0xDC, 0xEA, 0x97, 0xF2, 0xCF, 0xCE, 0xF0, 0xB4, 0xE6, 0x73,
-    0x96, 0xAC, 0x74, 0x22, 0xE7, 0xAD, 0x35, 0x85, 0xE2, 0xF9, 0x37, 0xE8, 0x1C, 0x75, 0xDF, 0x6E,
-    0x47, 0xF1, 0x1A, 0x71, 0x1D, 0x29, 0xC5, 0x89, 0x6F, 0xB7, 0x62, 0x0E, 0xAA, 0x18, 0xBE, 0x1B,
-    0xFC, 0x56, 0x3E, 0x4B, 0xC6, 0xD2, 0x79, 0x20, 0x9A, 0xDB, 0xC0, 0xFE, 0x78, 0xCD, 0x5A, 0xF4,
-    0x1F, 0xDD, 0xA8, 0x33, 0x88, 0x07, 0xC7, 0x31, 0xB1, 0x12, 0x10, 0x59, 0x27, 0x80, 0xEC, 0x5F,
-    0x60, 0x51, 0x7F, 0xA9, 0x19, 0xB5, 0x4A, 0x0D, 0x2D, 0xE5, 0x7A, 0x9F, 0x93, 0xC9, 0x9C, 0xEF,
-    0xA0, 0xE0, 0x3B, 0x4D, 0xAE, 0x2A, 0xF5, 0xB0, 0xC8, 0xEB, 0xBB, 0x3C, 0x83, 0x53, 0x99, 0x61,
-    0x17, 0x2B, 0x04, 0x7E, 0xBA, 0x77, 0xD6, 0x26, 0xE1, 0x69, 0x14, 0x63, 0x55, 0x21, 0x0C, 0x7D
-&#125;;
-//逆字节代换
-int Cipher_S_Substitution(unsigned char *CipherArray)
-&#123;
-    int ret = 0;
- 
-    for (int i = 0; i &lt; 16; i++)
-    &#123;
-        CipherArray[i] = ReS_Table[CipherArray[i] &gt;&gt; 4][CipherArray[i] &amp; 0x0F];
-    &#125;
- 
-    return ret;
-&#125;
-</code></pre>
-<h3 id="3、行位移层"><a href="#3、行位移层" class="headerlink" title="3、行位移层"></a>3、行位移层</h3><p>行位移操作最为简单，它是用来将输入数据作为一个4·4的字节矩阵进行处理的，然后将这个矩阵的字节进行位置上的置换。<br><strong>将第一行保持不变，第二行整体向左移1个字节，第三行整体向左位移2个字节，第四行整体左移3个字节</strong></p>
-<pre><code>int ShiftRows(unsigned int *PlainArray)
-&#123;
-    int ret = 0;
- 
-    //第一行 不移位
-    //PlainArray[0] = PlainArray[0];
- 
-    //第二行 左移8Bit
-    PlainArray[1] = (PlainArray[1] &gt;&gt; 8) | (PlainArray[1] &lt;&lt; 24);
- 
-    //第三行 左移16Bit
-    PlainArray[2] = (PlainArray[2] &gt;&gt; 16) | (PlainArray[2] &lt;&lt; 16);
- 
-    //第四行 左移24Bit
-    PlainArray[3] = (PlainArray[3] &gt;&gt; 24) | (PlainArray[3] &lt;&lt; 8);
- 
-    return ret;
-&#125;
-</code></pre>
-<h3 id="4、列混淆层"><a href="#4、列混淆层" class="headerlink" title="4、列混淆层"></a>4、列混淆层</h3><p>列混淆子层是AES算法中最为复杂的部分，属于扩散层，列混淆操作是AES算法中主要的扩散元素，它混淆了输入矩阵的每一列，使输入的每个字节都会影响到4个输出字节。其中包含了矩阵乘法、伽罗瓦域内加法和乘法的相关知识。<br><strong>伽罗瓦域乘法：</strong></p>
-<pre><code>///
-//功能:   伽罗瓦域内的乘法运算  GF(128)
-//参数:   Num_L           输入的左参数
-//      Num_R           输入的右参数
-//返回值:计算结果
-char GaloisMultiplication(unsigned char Num_L, unsigned char Num_R)
-&#123;
-    //定义变量
-    unsigned char Result = 0;       //伽罗瓦域内乘法计算的结果
- 
-    while (Num_L)
-    &#123;
-        //如果Num_L最低位是1就异或Num_R，相当于加上Num_R * 1
-        if (Num_L &amp; 0x01)
-        &#123;
-            Result ^= Num_R;
-        &#125;
- 
-        //Num_L右移一位，相当于除以2
-        Num_L = Num_L &gt;&gt; 1;
- 
-        //如果Num_R最高位为1
-        if (Num_R &amp; 0x80)
-        &#123;
-            //左移一位相当于乘二
-            Num_R = Num_R &lt;&lt; 1;     //注：这里会丢失最高位，但是不用担心
- 
-            Num_R ^= 0x1B;  //计算伽罗瓦域内除法Num_R = Num_R / (x^8(刚好丢失最高位) + x^4 + x^3 + x^1 + 1)
-        &#125;
-        else
-        &#123;
-            //左移一位相当于乘二
-            Num_R = Num_R &lt;&lt; 1;
-        &#125;
-    &#125;
-    return Result;
-&#125;
-</code></pre>
-<p><strong>矩阵乘法：</strong></p>
-<pre><code>//列混淆左乘矩阵
-const unsigned char MixArray[4][4] =
-&#123;
-    0x02, 0x03, 0x01, 0x01,
-    0x01, 0x02, 0x03, 0x01,
-    0x01, 0x01, 0x02, 0x03,
-    0x03, 0x01, 0x01, 0x02
-&#125;;
- 
-int MixColum(unsigned char(*PlainArray)[4])
-&#123;
-    int ret = 0;
-    //定义变量
-    unsigned char ArrayTemp[4][4];
- 
-    //初始化变量
-    memcpy(ArrayTemp, PlainArray, 16);
- 
-    //矩阵乘法 4*4
-    for (int i = 0; i &lt; 4; i++)
-    &#123;
-        for (int j = 0; j &lt; 4; j++)
-        &#123;
-            PlainArray[i][j] =
-                MixArray[i][0] * ArrayTemp[0][j] +
-                MixArray[i][1] * ArrayTemp[1][j] +
-                MixArray[i][2] * ArrayTemp[2][j] +
-                MixArray[i][3] * ArrayTemp[3][j];
-        &#125;
-    &#125;
- 
-    return ret;
-&#125;
-</code></pre>
-<p><strong>整体列混淆代码：</strong></p>
-<pre><code>const unsigned char MixArray[4][4] =
-&#123;
-    0x02, 0x03, 0x01, 0x01,
-    0x01, 0x02, 0x03, 0x01,
-    0x01, 0x01, 0x02, 0x03,
-    0x03, 0x01, 0x01, 0x02
-&#125;;
- 
-int MixColum(unsigned char(*PlainArray)[4])
-&#123;
-    int ret = 0;
-    //定义变量
-    unsigned char ArrayTemp[4][4];
- 
-    //初始化变量
-    memcpy(ArrayTemp, PlainArray, 16);
- 
-    //矩阵乘法 4*4
-    for (int i = 0; i &lt; 4; i++)
-    &#123;
-        for (int j = 0; j &lt; 4; j++)
-        &#123;
-            PlainArray[i][j] =
-                GaloisMultiplication(MixArray[i][0], ArrayTemp[0][j]) ^
-                GaloisMultiplication(MixArray[i][1], ArrayTemp[1][j]) ^
-                GaloisMultiplication(MixArray[i][2], ArrayTemp[2][j]) ^
-                GaloisMultiplication(MixArray[i][3], ArrayTemp[3][j]);
-        &#125;
-    &#125;
-    return ret;
-&#125;
-</code></pre>
-<h3 id="加密代码："><a href="#加密代码：" class="headerlink" title="加密代码："></a>加密代码：</h3><pre><code>package abc;
-import java.security.Key;
-import java.security.SecureRandom;
- 
-import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
-import java.util.Base64;
-import java.util.Base64.Decoder;
-import java.util.Base64.Encoder;
-public class Aes2 &#123;
- 
-    // optional value AES/DES/DESede
-    public static String DES = &quot;AES&quot;;
-    // optional value AES/DES/DESede
-    public static String CIPHER_ALGORITHM = &quot;AES&quot;;
- 
-    public static Key getKey(String strKey) &#123;
-        try &#123;
-            if (strKey == null) &#123;
-                strKey = &quot;&quot;;
-            &#125;
-            KeyGenerator _generator = KeyGenerator.getInstance(&quot;AES&quot;);
-            SecureRandom secureRandom = SecureRandom.getInstance(&quot;SHA1PRNG&quot;);
-            secureRandom.setSeed(strKey.getBytes());
-            _generator.init(128, secureRandom);
-            return _generator.generateKey();
-        &#125; catch (Exception e) &#123;
-            throw new RuntimeException(&quot; 密钥出现异常 &quot;);
-        &#125;
-    &#125;
-    public static String decrypt(String message, String key) throws Exception &#123;
-        SecureRandom sr = new SecureRandom();
-        Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
-        Key secureKey = getKey(key);
-        cipher.init(Cipher.DECRYPT_MODE, secureKey, sr);
-        byte[] res = Base64.getDecoder().decode(message);
-        res = cipher.doFinal(res);
-        return new String(res);
-    &#125;
- 
-    public static void main(String[] args) throws Exception &#123;
-        String message = &quot;123456&quot;;
-        String key = &quot;1234567890abcdef&quot;;
-        String encryptMsg = encrypt(message, key);
-        System.out.println(&quot;加密信息&quot;);
-        System.out.println(encryptMsg);
- 
-        
-    &#125;
- 
-&#125;
-</code></pre>
-<h2 id="解密"><a href="#解密" class="headerlink" title="解密"></a>解密</h2><pre><code>import java.security.Key;
-import java.security.SecureRandom;
-import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
-import java.util.Base64;
-import java.util.Base64.Decoder;
-import java.util.Base64.Encoder;
-public class Aes2 &#123;
- 
-    // optional value AES/DES/DESede
-    public static String DES = &quot;AES&quot;;
-    // optional value AES/DES/DESede
-    public static String CIPHER_ALGORITHM = &quot;AES&quot;;
- 
-    public static Key getKey(String strKey) &#123;
-        try &#123;
-            if (strKey == null) &#123;
-                strKey = &quot;&quot;;
-            &#125;
-            KeyGenerator _generator = KeyGenerator.getInstance(&quot;AES&quot;);
-            SecureRandom secureRandom = SecureRandom.getInstance(&quot;SHA1PRNG&quot;);
-            secureRandom.setSeed(strKey.getBytes());
-            _generator.init(128, secureRandom);
-            return _generator.generateKey();
-        &#125; catch (Exception e) &#123;
-            throw new RuntimeException(&quot; 密钥出现异常 &quot;);
-        &#125;
-    &#125;
- 
-    public static String decrypt(String message, String key) throws Exception &#123;
-        SecureRandom sr = new SecureRandom();
-        Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
-        Key secureKey = getKey(key);
-        cipher.init(Cipher.DECRYPT_MODE, secureKey, sr);
-        byte[] res = Base64.getDecoder().decode(message);
-        res = cipher.doFinal(res);
-        return new String(res);
-    &#125;
- 
-    public static void main(String[] args) throws Exception &#123;
-        String message = &quot;123456&quot;;
-        String key = &quot;1234567890abcdef&quot;;
-        String decryptedMsg = decrypt(encryptMsg, key);
-        System.out.println(&quot;解密信息&quot;);
-        System.out.println(decryptedMsg);
-    &#125;
- 
-&#125;
-</code></pre>
+<p>4、在Main/assets中新建一个文本文件xposed_init,并在其中添加新建的类，包名加类名，</p>
+<blockquote>
+<p>com.example.xposed_new3.Xposedhook</p>
+</blockquote>
+<p><img src="https://i.loli.net/2021/09/02/V7Ed16pDAlcXawL.png" alt="QQ截图20210831173424.png"></p>
+<p>5、编译成apk并运行，在xposed Installer中查看日志。</p>
+<p><img src="https://i.loli.net/2021/09/02/L2JmEZDSCeIMGAT.png" alt="QQ截图20210831174541.png"></p>
 ]]></content>
       <categories>
-        <category>加密与解密</category>
+        <category>Xposed框架</category>
       </categories>
       <tags>
-        <tag>对称加密算法</tag>
+        <tag>Android</tag>
       </tags>
   </entry>
   <entry>
@@ -2208,54 +2160,377 @@ public static void main(String[] args) throws Exception &#123;
       </tags>
   </entry>
   <entry>
-    <title>编写Xposed框架初体验</title>
-    <url>/2021/08/31/%E7%BC%96%E5%86%99Xposed%E6%A1%86%E6%9E%B6%E5%88%9D%E4%BD%93%E9%AA%8C/</url>
-    <content><![CDATA[<h4 id="具体步骤："><a href="#具体步骤：" class="headerlink" title="具体步骤："></a>具体步骤：</h4><span id="more"></span>
-<ol>
-<li>修改配置文件，添加xposed插件相关数据。在AndroidManifest.xml中添加以下代码：</li>
-</ol>
-<pre><code class="java">        &lt;!--添加标识--&gt;
-        &lt;meta-data
-            android:name=&quot;xposedmodule&quot;
-            android:value=&quot;true&quot;/&gt;
-        &lt;!--载入HOOK模块之后显示的信息--&gt;
-        &lt;meta-data
-            android:name=&quot;xposeddescription&quot;
-            android:value=&quot;Xposed框架初体验&quot;/&gt;
-        &lt;!--规定jar包的版本信息--&gt;
-        &lt;meta-data
-            android:name=&quot;xposedminversion&quot;
-            android:value=&quot;54&quot;/&gt;
-</code></pre>
-<p>2、新建lib文件夹，将Xposed框架提供的jar包放到此文件夹中。具体流程：右击app-&gt;new-&gt;Directory-&gt;输入lib-&gt;将jar包复制到此文件夹中-&gt;右击文件夹-&gt;Add as Library-&gt;在build.gradle中将implementation改为compileOnly files。</p>
-<p>3、新建一个类Xposedhook实现IXposedHookLoadPackage接口。</p>
-<pre><code class="java">import android.util.Log;
-import de.robv.android.xposed.IXposedHookLoadPackage;
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.callbacks.XC_LoadPackage;
-public class Xposedhook implements IXposedHookLoadPackage &#123;
-    //Xposed插件入口点
-    @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam Param) throws Throwable &#123;
-        XposedBridge.log(&quot;cly hook start-------&gt;当前启动的程序是：&quot;+Param.processName);
+    <title>对称算法（AES篇）</title>
+    <url>/2021/08/08/%E5%AF%B9%E7%A7%B0%E7%AE%97%E6%B3%95%EF%BC%88AES%E7%AF%87%EF%BC%89/</url>
+    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>高级加密标准（英语：Advanced Encryption Standard，缩写：AES），在密码学中又称Rijndael加密法，是美国联邦政府采用的一种区块加密标准。这个标准用来替代原先的DES，已经被多方分析且广为全世界所使用。经过五年的甄选流程，高级加密标准由美国国家标准</p>
+<span id="more"></span>与技术研究院（NIST）于2001年11月26日发布于FIPS PUB 197，并在2002年5月26日成为有效的标准。2006年，高级加密标准已然成为对称密钥加密中最流行的算法之一。
 
-        Log.d(&quot;L61q4_Cheng&quot;, &quot;hook Start......&quot;);
+<p>AES为最常见的对称加密算法(微信小程序加密传输就是用这个加密算法的)。对称加密算法也就是加密和解密用相同的密钥。具体的加密流程如下：</p>
+<pre><code>graph LR
+A(L61q4_Cheng)--&gt;B(公钥A)
+B--&gt;C(密文)
+C--&gt;D(私钥B)
+D--&gt;E(L61q4_Cheng)
+</code></pre>
+<hr>
+<h2 id="加密原理"><a href="#加密原理" class="headerlink" title="加密原理"></a>加密原理</h2><p>AES为分组加密法，把明文分成一组一组的，每组长度相等，每次加密一组数据，直到加密完整个明文，在AES标准规范中，分组长度只能是128位，AES是按照字节进行加密的，也就是说每个分组为16个字节（每个字节8位）。密钥的长度可以使用128位、192位或256位。这导致密钥长度不同，推荐加密的轮数也不同。</p>
+<table>
+<thead>
+<tr>
+<th>AES</th>
+<th>密钥长度（32位比特字)</th>
+<th>分组长度(32位比特字)</th>
+<th>加密轮数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AES-128</td>
+<td>4</td>
+<td>4</td>
+<td>10</td>
+</tr>
+<tr>
+<td>AES-192</td>
+<td>6</td>
+<td>4</td>
+<td>12</td>
+</tr>
+<tr>
+<td>AES-256</td>
+<td>8</td>
+<td>4</td>
+<td>14</td>
+</tr>
+</tbody></table>
+<p>这里实现的是AES-128，也就是密钥的长度为128位，加密轮数为10轮。上面说到，AES的加密公式为C = E(K,P)，在加密函数E中，会执行一个轮函数，并且执行10次这个轮函数，这个轮函数的前9次执行的操作是一样的，只有第10次有所不同。也就是说，一个明文分组会被加密10轮。AES的核心就是实现一轮中的所有操作。</p>
+<p>AES的处理单位是字节，128位的输入明文分组P和输入密钥K都被分成16个字节，分别记为P = P0 P1 … P15 和 K = K0 K1 …K15。如，明文分组为P=abcdefghijklmnop,其中的字符a对应P0，p对应P15。一般地，明文分组用字节为单位的正方形矩阵描述，称为状态矩阵。在算法的每一轮中，状态矩阵的内容不断发生变化，最后的结果作为密文输出。该矩阵中字节的排列顺序为从上到下、从左至右依次排列。明文经过AES加密后，已经面目全非。</p>
+<h2 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h2><p>AES算法可以归纳为四种操作处理，分别为<strong>密钥加法层、字节代换层、行位移层、列混淆层</strong></p>
+<p>标准的AES算法密钥和明文都是等长的，一共有128位，196位和256位三种长度，这里重点讲解128位的情况：</p>
+<h3 id="1、密钥加法层"><a href="#1、密钥加法层" class="headerlink" title="1、密钥加法层"></a>1、密钥加法层</h3><p>在密钥加法层中有两个输入的参数，分别是明文和子密钥k[0]，而且这两个输入都是128位的。k[0]实际上就等同于密钥k，只需要将两个输入的数据进行按字节异或操作就会得到运算的结果。</p>
+<p>代码如下（C语言）：</p>
+<pre><code>int AddRoundKey(unsigned char(*PlainArray)[4], unsigned char(*ExtendKeyArray)[44], unsigned int MinCol)
+&#123;
+    int ret = 0;
+ 
+    for (int i = 0; i &lt; 4; i++)
+    &#123;
+        for (int j = 0; j &lt; 4; j++)
+        &#123;
+            PlainArray[i][j] ^= ExtendKeyArray[i][MinCol + j];
+        &#125;
     &#125;
+ 
+    return ret;
 &#125;
 </code></pre>
-<p>4、在Main/assets中新建一个文本文件xposed_init,并在其中添加新建的类，包名加类名，</p>
-<blockquote>
-<p>com.example.xposed_new3.Xposedhook</p>
-</blockquote>
-<p><img src="https://i.loli.net/2021/09/02/V7Ed16pDAlcXawL.png" alt="QQ截图20210831173424.png"></p>
-<p>5、编译成apk并运行，在xposed Installer中查看日志。</p>
-<p><img src="https://i.loli.net/2021/09/02/L2JmEZDSCeIMGAT.png" alt="QQ截图20210831174541.png"></p>
+<h3 id="2、字节代换层"><a href="#2、字节代换层" class="headerlink" title="2、字节代换层"></a>2、字节代换层</h3><p>字节代换层的主要功能是让数据通过S盒完成从一个字节到另一个字节的映射，S盒的计算方式和密钥中S盒计算方式相同。S盒是一个拥有256个字节元素的数组，逆S盒与S盒对应用于AES算法的解密，字节代换层将明文的每一个字节作为数组下标，对进行相关索引操作</p>
+<p>若将S盒作为一维数组处理，则只需要将每个字节作为索引下标进行索引</p>
+<p>若将S盒作为二维数组，则需要将每个字节的高4位作为第一个下标，第四位作为第二个下标来进行索引</p>
+<p>S盒形成过程：S盒是通过将输入的数据进行乘法逆元计算、然后将计算结果进行仿射映射得到的。</p>
+<p>状态矩阵中的元素按照下面的方式映射为一个新的字节：把该字节的高4位作为行值，低4位作为列值，取出S盒或者逆S盒中对应的行的元素作为输出。例如，加密时，输出的字节S1为0x12,则查S盒的第0x01行和0x02列，得到值0xc9,然后替换S1原有的0x12为0xc9。</p>
+<p>代码如下（C语言）：</p>
+<pre><code>//S盒
+const unsigned char S_Table[16][16] =
+&#123;
+    0x63, 0x7C, 0x77, 0x7B, 0xF2, 0x6B, 0x6F, 0xC5, 0x30, 0x01, 0x67, 0x2B, 0xFE, 0xD7, 0xAB, 0x76,
+    0xCA, 0x82, 0xC9, 0x7D, 0xFA, 0x59, 0x47, 0xF0, 0xAD, 0xD4, 0xA2, 0xAF, 0x9C, 0xA4, 0x72, 0xC0,
+    0xB7, 0xFD, 0x93, 0x26, 0x36, 0x3F, 0xF7, 0xCC, 0x34, 0xA5, 0xE5, 0xF1, 0x71, 0xD8, 0x31, 0x15,
+    0x04, 0xC7, 0x23, 0xC3, 0x18, 0x96, 0x05, 0x9A, 0x07, 0x12, 0x80, 0xE2, 0xEB, 0x27, 0xB2, 0x75,
+    0x09, 0x83, 0x2C, 0x1A, 0x1B, 0x6E, 0x5A, 0xA0, 0x52, 0x3B, 0xD6, 0xB3, 0x29, 0xE3, 0x2F, 0x84,
+    0x53, 0xD1, 0x00, 0xED, 0x20, 0xFC, 0xB1, 0x5B, 0x6A, 0xCB, 0xBE, 0x39, 0x4A, 0x4C, 0x58, 0xCF,
+    0xD0, 0xEF, 0xAA, 0xFB, 0x43, 0x4D, 0x33, 0x85, 0x45, 0xF9, 0x02, 0x7F, 0x50, 0x3C, 0x9F, 0xA8,
+    0x51, 0xA3, 0x40, 0x8F, 0x92, 0x9D, 0x38, 0xF5, 0xBC, 0xB6, 0xDA, 0x21, 0x10, 0xFF, 0xF3, 0xD2,
+    0xCD, 0x0C, 0x13, 0xEC, 0x5F, 0x97, 0x44, 0x17, 0xC4, 0xA7, 0x7E, 0x3D, 0x64, 0x5D, 0x19, 0x73,
+    0x60, 0x81, 0x4F, 0xDC, 0x22, 0x2A, 0x90, 0x88, 0x46, 0xEE, 0xB8, 0x14, 0xDE, 0x5E, 0x0B, 0xDB,
+    0xE0, 0x32, 0x3A, 0x0A, 0x49, 0x06, 0x24, 0x5C, 0xC2, 0xD3, 0xAC, 0x62, 0x91, 0x95, 0xE4, 0x79,
+    0xE7, 0xC8, 0x37, 0x6D, 0x8D, 0xD5, 0x4E, 0xA9, 0x6C, 0x56, 0xF4, 0xEA, 0x65, 0x7A, 0xAE, 0x08,
+    0xBA, 0x78, 0x25, 0x2E, 0x1C, 0xA6, 0xB4, 0xC6, 0xE8, 0xDD, 0x74, 0x1F, 0x4B, 0xBD, 0x8B, 0x8A,
+    0x70, 0x3E, 0xB5, 0x66, 0x48, 0x03, 0xF6, 0x0E, 0x61, 0x35, 0x57, 0xB9, 0x86, 0xC1, 0x1D, 0x9E,
+    0xE1, 0xF8, 0x98, 0x11, 0x69, 0xD9, 0x8E, 0x94, 0x9B, 0x1E, 0x87, 0xE9, 0xCE, 0x55, 0x28, 0xDF,
+    0x8C, 0xA1, 0x89, 0x0D, 0xBF, 0xE6, 0x42, 0x68, 0x41, 0x99, 0x2D, 0x0F, 0xB0, 0x54, 0xBB, 0x16
+&#125;;
+ 
+//字节代换
+int Plain_S_Substitution(unsigned char *PlainArray)
+&#123;
+    int ret = 0;
+ 
+    for (int i = 0; i &lt; 16; i++)
+    &#123;
+        PlainArray[i] = S_Table[PlainArray[i] &gt;&gt; 4][PlainArray[i] &amp; 0x0F];
+    &#125;
+ 
+    return ret;
+&#125;
+ 
+ 
+//逆S盒
+const unsigned char ReS_Table[16][16] =
+&#123;
+    0x52, 0x09, 0x6A, 0xD5, 0x30, 0x36, 0xA5, 0x38, 0xBF, 0x40, 0xA3, 0x9E, 0x81, 0xF3, 0xD7, 0xFB,
+    0x7C, 0xE3, 0x39, 0x82, 0x9B, 0x2F, 0xFF, 0x87, 0x34, 0x8E, 0x43, 0x44, 0xC4, 0xDE, 0xE9, 0xCB,
+    0x54, 0x7B, 0x94, 0x32, 0xA6, 0xC2, 0x23, 0x3D, 0xEE, 0x4C, 0x95, 0x0B, 0x42, 0xFA, 0xC3, 0x4E,
+    0x08, 0x2E, 0xA1, 0x66, 0x28, 0xD9, 0x24, 0xB2, 0x76, 0x5B, 0xA2, 0x49, 0x6D, 0x8B, 0xD1, 0x25,
+    0x72, 0xF8, 0xF6, 0x64, 0x86, 0x68, 0x98, 0x16, 0xD4, 0xA4, 0x5C, 0xCC, 0x5D, 0x65, 0xB6, 0x92,
+    0x6C, 0x70, 0x48, 0x50, 0xFD, 0xED, 0xB9, 0xDA, 0x5E, 0x15, 0x46, 0x57, 0xA7, 0x8D, 0x9D, 0x84,
+    0x90, 0xD8, 0xAB, 0x00, 0x8C, 0xBC, 0xD3, 0x0A, 0xF7, 0xE4, 0x58, 0x05, 0xB8, 0xB3, 0x45, 0x06,
+    0xD0, 0x2C, 0x1E, 0x8F, 0xCA, 0x3F, 0x0F, 0x02, 0xC1, 0xAF, 0xBD, 0x03, 0x01, 0x13, 0x8A, 0x6B,
+    0x3A, 0x91, 0x11, 0x41, 0x4F, 0x67, 0xDC, 0xEA, 0x97, 0xF2, 0xCF, 0xCE, 0xF0, 0xB4, 0xE6, 0x73,
+    0x96, 0xAC, 0x74, 0x22, 0xE7, 0xAD, 0x35, 0x85, 0xE2, 0xF9, 0x37, 0xE8, 0x1C, 0x75, 0xDF, 0x6E,
+    0x47, 0xF1, 0x1A, 0x71, 0x1D, 0x29, 0xC5, 0x89, 0x6F, 0xB7, 0x62, 0x0E, 0xAA, 0x18, 0xBE, 0x1B,
+    0xFC, 0x56, 0x3E, 0x4B, 0xC6, 0xD2, 0x79, 0x20, 0x9A, 0xDB, 0xC0, 0xFE, 0x78, 0xCD, 0x5A, 0xF4,
+    0x1F, 0xDD, 0xA8, 0x33, 0x88, 0x07, 0xC7, 0x31, 0xB1, 0x12, 0x10, 0x59, 0x27, 0x80, 0xEC, 0x5F,
+    0x60, 0x51, 0x7F, 0xA9, 0x19, 0xB5, 0x4A, 0x0D, 0x2D, 0xE5, 0x7A, 0x9F, 0x93, 0xC9, 0x9C, 0xEF,
+    0xA0, 0xE0, 0x3B, 0x4D, 0xAE, 0x2A, 0xF5, 0xB0, 0xC8, 0xEB, 0xBB, 0x3C, 0x83, 0x53, 0x99, 0x61,
+    0x17, 0x2B, 0x04, 0x7E, 0xBA, 0x77, 0xD6, 0x26, 0xE1, 0x69, 0x14, 0x63, 0x55, 0x21, 0x0C, 0x7D
+&#125;;
+//逆字节代换
+int Cipher_S_Substitution(unsigned char *CipherArray)
+&#123;
+    int ret = 0;
+ 
+    for (int i = 0; i &lt; 16; i++)
+    &#123;
+        CipherArray[i] = ReS_Table[CipherArray[i] &gt;&gt; 4][CipherArray[i] &amp; 0x0F];
+    &#125;
+ 
+    return ret;
+&#125;
+</code></pre>
+<h3 id="3、行位移层"><a href="#3、行位移层" class="headerlink" title="3、行位移层"></a>3、行位移层</h3><p>行位移操作最为简单，它是用来将输入数据作为一个4·4的字节矩阵进行处理的，然后将这个矩阵的字节进行位置上的置换。<br><strong>将第一行保持不变，第二行整体向左移1个字节，第三行整体向左位移2个字节，第四行整体左移3个字节</strong></p>
+<pre><code>int ShiftRows(unsigned int *PlainArray)
+&#123;
+    int ret = 0;
+ 
+    //第一行 不移位
+    //PlainArray[0] = PlainArray[0];
+ 
+    //第二行 左移8Bit
+    PlainArray[1] = (PlainArray[1] &gt;&gt; 8) | (PlainArray[1] &lt;&lt; 24);
+ 
+    //第三行 左移16Bit
+    PlainArray[2] = (PlainArray[2] &gt;&gt; 16) | (PlainArray[2] &lt;&lt; 16);
+ 
+    //第四行 左移24Bit
+    PlainArray[3] = (PlainArray[3] &gt;&gt; 24) | (PlainArray[3] &lt;&lt; 8);
+ 
+    return ret;
+&#125;
+</code></pre>
+<h3 id="4、列混淆层"><a href="#4、列混淆层" class="headerlink" title="4、列混淆层"></a>4、列混淆层</h3><p>列混淆子层是AES算法中最为复杂的部分，属于扩散层，列混淆操作是AES算法中主要的扩散元素，它混淆了输入矩阵的每一列，使输入的每个字节都会影响到4个输出字节。其中包含了矩阵乘法、伽罗瓦域内加法和乘法的相关知识。<br><strong>伽罗瓦域乘法：</strong></p>
+<pre><code>///
+//功能:   伽罗瓦域内的乘法运算  GF(128)
+//参数:   Num_L           输入的左参数
+//      Num_R           输入的右参数
+//返回值:计算结果
+char GaloisMultiplication(unsigned char Num_L, unsigned char Num_R)
+&#123;
+    //定义变量
+    unsigned char Result = 0;       //伽罗瓦域内乘法计算的结果
+ 
+    while (Num_L)
+    &#123;
+        //如果Num_L最低位是1就异或Num_R，相当于加上Num_R * 1
+        if (Num_L &amp; 0x01)
+        &#123;
+            Result ^= Num_R;
+        &#125;
+ 
+        //Num_L右移一位，相当于除以2
+        Num_L = Num_L &gt;&gt; 1;
+ 
+        //如果Num_R最高位为1
+        if (Num_R &amp; 0x80)
+        &#123;
+            //左移一位相当于乘二
+            Num_R = Num_R &lt;&lt; 1;     //注：这里会丢失最高位，但是不用担心
+ 
+            Num_R ^= 0x1B;  //计算伽罗瓦域内除法Num_R = Num_R / (x^8(刚好丢失最高位) + x^4 + x^3 + x^1 + 1)
+        &#125;
+        else
+        &#123;
+            //左移一位相当于乘二
+            Num_R = Num_R &lt;&lt; 1;
+        &#125;
+    &#125;
+    return Result;
+&#125;
+</code></pre>
+<p><strong>矩阵乘法：</strong></p>
+<pre><code>//列混淆左乘矩阵
+const unsigned char MixArray[4][4] =
+&#123;
+    0x02, 0x03, 0x01, 0x01,
+    0x01, 0x02, 0x03, 0x01,
+    0x01, 0x01, 0x02, 0x03,
+    0x03, 0x01, 0x01, 0x02
+&#125;;
+ 
+int MixColum(unsigned char(*PlainArray)[4])
+&#123;
+    int ret = 0;
+    //定义变量
+    unsigned char ArrayTemp[4][4];
+ 
+    //初始化变量
+    memcpy(ArrayTemp, PlainArray, 16);
+ 
+    //矩阵乘法 4*4
+    for (int i = 0; i &lt; 4; i++)
+    &#123;
+        for (int j = 0; j &lt; 4; j++)
+        &#123;
+            PlainArray[i][j] =
+                MixArray[i][0] * ArrayTemp[0][j] +
+                MixArray[i][1] * ArrayTemp[1][j] +
+                MixArray[i][2] * ArrayTemp[2][j] +
+                MixArray[i][3] * ArrayTemp[3][j];
+        &#125;
+    &#125;
+ 
+    return ret;
+&#125;
+</code></pre>
+<p><strong>整体列混淆代码：</strong></p>
+<pre><code>const unsigned char MixArray[4][4] =
+&#123;
+    0x02, 0x03, 0x01, 0x01,
+    0x01, 0x02, 0x03, 0x01,
+    0x01, 0x01, 0x02, 0x03,
+    0x03, 0x01, 0x01, 0x02
+&#125;;
+ 
+int MixColum(unsigned char(*PlainArray)[4])
+&#123;
+    int ret = 0;
+    //定义变量
+    unsigned char ArrayTemp[4][4];
+ 
+    //初始化变量
+    memcpy(ArrayTemp, PlainArray, 16);
+ 
+    //矩阵乘法 4*4
+    for (int i = 0; i &lt; 4; i++)
+    &#123;
+        for (int j = 0; j &lt; 4; j++)
+        &#123;
+            PlainArray[i][j] =
+                GaloisMultiplication(MixArray[i][0], ArrayTemp[0][j]) ^
+                GaloisMultiplication(MixArray[i][1], ArrayTemp[1][j]) ^
+                GaloisMultiplication(MixArray[i][2], ArrayTemp[2][j]) ^
+                GaloisMultiplication(MixArray[i][3], ArrayTemp[3][j]);
+        &#125;
+    &#125;
+    return ret;
+&#125;
+</code></pre>
+<h3 id="加密代码："><a href="#加密代码：" class="headerlink" title="加密代码："></a>加密代码：</h3><pre><code>package abc;
+import java.security.Key;
+import java.security.SecureRandom;
+ 
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import java.util.Base64;
+import java.util.Base64.Decoder;
+import java.util.Base64.Encoder;
+public class Aes2 &#123;
+ 
+    // optional value AES/DES/DESede
+    public static String DES = &quot;AES&quot;;
+    // optional value AES/DES/DESede
+    public static String CIPHER_ALGORITHM = &quot;AES&quot;;
+ 
+    public static Key getKey(String strKey) &#123;
+        try &#123;
+            if (strKey == null) &#123;
+                strKey = &quot;&quot;;
+            &#125;
+            KeyGenerator _generator = KeyGenerator.getInstance(&quot;AES&quot;);
+            SecureRandom secureRandom = SecureRandom.getInstance(&quot;SHA1PRNG&quot;);
+            secureRandom.setSeed(strKey.getBytes());
+            _generator.init(128, secureRandom);
+            return _generator.generateKey();
+        &#125; catch (Exception e) &#123;
+            throw new RuntimeException(&quot; 密钥出现异常 &quot;);
+        &#125;
+    &#125;
+    public static String decrypt(String message, String key) throws Exception &#123;
+        SecureRandom sr = new SecureRandom();
+        Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
+        Key secureKey = getKey(key);
+        cipher.init(Cipher.DECRYPT_MODE, secureKey, sr);
+        byte[] res = Base64.getDecoder().decode(message);
+        res = cipher.doFinal(res);
+        return new String(res);
+    &#125;
+ 
+    public static void main(String[] args) throws Exception &#123;
+        String message = &quot;123456&quot;;
+        String key = &quot;1234567890abcdef&quot;;
+        String encryptMsg = encrypt(message, key);
+        System.out.println(&quot;加密信息&quot;);
+        System.out.println(encryptMsg);
+ 
+        
+    &#125;
+ 
+&#125;
+</code></pre>
+<h2 id="解密"><a href="#解密" class="headerlink" title="解密"></a>解密</h2><pre><code>import java.security.Key;
+import java.security.SecureRandom;
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import java.util.Base64;
+import java.util.Base64.Decoder;
+import java.util.Base64.Encoder;
+public class Aes2 &#123;
+ 
+    // optional value AES/DES/DESede
+    public static String DES = &quot;AES&quot;;
+    // optional value AES/DES/DESede
+    public static String CIPHER_ALGORITHM = &quot;AES&quot;;
+ 
+    public static Key getKey(String strKey) &#123;
+        try &#123;
+            if (strKey == null) &#123;
+                strKey = &quot;&quot;;
+            &#125;
+            KeyGenerator _generator = KeyGenerator.getInstance(&quot;AES&quot;);
+            SecureRandom secureRandom = SecureRandom.getInstance(&quot;SHA1PRNG&quot;);
+            secureRandom.setSeed(strKey.getBytes());
+            _generator.init(128, secureRandom);
+            return _generator.generateKey();
+        &#125; catch (Exception e) &#123;
+            throw new RuntimeException(&quot; 密钥出现异常 &quot;);
+        &#125;
+    &#125;
+ 
+    public static String decrypt(String message, String key) throws Exception &#123;
+        SecureRandom sr = new SecureRandom();
+        Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
+        Key secureKey = getKey(key);
+        cipher.init(Cipher.DECRYPT_MODE, secureKey, sr);
+        byte[] res = Base64.getDecoder().decode(message);
+        res = cipher.doFinal(res);
+        return new String(res);
+    &#125;
+ 
+    public static void main(String[] args) throws Exception &#123;
+        String message = &quot;123456&quot;;
+        String key = &quot;1234567890abcdef&quot;;
+        String decryptedMsg = decrypt(encryptMsg, key);
+        System.out.println(&quot;解密信息&quot;);
+        System.out.println(decryptedMsg);
+    &#125;
+ 
+&#125;
+</code></pre>
 ]]></content>
       <categories>
-        <category>Xposed框架</category>
+        <category>加密与解密</category>
       </categories>
       <tags>
-        <tag>Android</tag>
+        <tag>对称加密算法</tag>
       </tags>
   </entry>
   <entry>
@@ -2495,280 +2770,5 @@ if __name__ == &quot;__main__&quot;:
       <tags>
         <tag>非对称加密算法</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>《深入理解LTE-A》学习笔记（一）</title>
-    <url>/2023/08/28/%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3LTE-A%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%20/</url>
-    <content><![CDATA[<h1 id="《深入理解LTE-A》学习笔记（一）"><a href="#《深入理解LTE-A》学习笔记（一）" class="headerlink" title="《深入理解LTE-A》学习笔记（一）"></a>《深入理解LTE-A》学习笔记（一）</h1><span id="more"></span>
-<p><img src="https://s2.loli.net/2023/08/29/Jzwd1DZ3fq4nuPT.png" alt="image-20230728184032279"></p>
-<h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th>解释</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><strong>eNode(Evolved Node B)</strong></td>
-<td>一个基站，负责无线信号的传输和接收，用于连接移动设备和核心网络。</td>
-</tr>
-<tr>
-<td align="left"><strong>UE</strong></td>
-<td>移动终端，由移动设备（ME）和通用用户识别模块（USIM）组成。</td>
-</tr>
-<tr>
-<td align="left"><strong>PCI</strong></td>
-<td>物理小区标识</td>
-</tr>
-<tr>
-<td align="left"><strong>PSS/SSS</strong></td>
-<td>小区同步信号</td>
-</tr>
-<tr>
-<td align="left"><strong>MIB/SIB</strong></td>
-<td>小区相关的系统信息</td>
-</tr>
-<tr>
-<td align="left"><strong>RA Preamble</strong></td>
-<td>随机前导码，UE发给eNode，告诉eNode有个接入请求。</td>
-</tr>
-<tr>
-<td align="left"><strong>PDSCH</strong></td>
-<td>物理下行共享信道</td>
-</tr>
-<tr>
-<td align="left"><strong>PDCCH</strong></td>
-<td>物理下行控制信道，传输上下行的资源调度信息</td>
-</tr>
-<tr>
-<td align="left"><strong>PUSCH</strong></td>
-<td>物理上行共享信道</td>
-</tr>
-<tr>
-<td align="left"><strong>PUCCH</strong></td>
-<td>物理上行控制信道，传输ACK/NACK，调度请求，信道质量指示等信息。</td>
-</tr>
-<tr>
-<td align="left"><strong>CSI</strong></td>
-<td>信道状态信息，UE上传给基站的。</td>
-</tr>
-<tr>
-<td align="left"><strong>Paging</strong></td>
-<td>呼叫请求，由eNode发起。</td>
-</tr>
-<tr>
-<td align="left"><strong>msg3</strong></td>
-<td>包含UE的随机接入标识符（RAI）和初始接入参数，用于告知基站UE的身份和请求建立连接。</td>
-</tr>
-<tr>
-<td align="left"><strong>SRS</strong></td>
-<td>在无线通信中，用于估计上行信道频域信息，做频率选择性调度；用于估计下行信道，做下行波束赋形。</td>
-</tr>
-<tr>
-<td align="left"><strong>SR</strong></td>
-<td>上行调度请求</td>
-</tr>
-<tr>
-<td align="left"><strong>BSR</strong></td>
-<td>缓冲状态报告，基站接收BSR并为UE分配资源</td>
-</tr>
-<tr>
-<td align="left"><strong>PHICH</strong></td>
-<td>物理混合自动重传指示信道。</td>
-</tr>
-<tr>
-<td align="left"><strong>RLC PDU</strong></td>
-<td>RLC层协议数据单元</td>
-</tr>
-<tr>
-<td align="left"><strong>RLC SDU</strong></td>
-<td>将接收到的RLC PDU重组并排序</td>
-</tr>
-<tr>
-<td align="left"><strong>MAC SDU</strong></td>
-<td>服务数据单元，RLC PDU在MAC层被称作MAC SDU</td>
-</tr>
-<tr>
-<td align="left"><strong>MAC PDU</strong></td>
-<td>若干个MAC SDU串联在一起，加上MAC子头封装成MAC PDU</td>
-</tr>
-<tr>
-<td align="left"><strong>HARQ</strong></td>
-<td>混合式自动重传请求</td>
-</tr>
-<tr>
-<td align="left"><strong>SRB</strong></td>
-<td>信令无线承载，在控制平面，RLC 承载上层的业务称之为信令无线承载，为RRC 层传递信令</td>
-</tr>
-<tr>
-<td align="left"><strong>CCCH</strong></td>
-<td>公共控制信道，是一种“一点对多点”的双向控制信道，在呼叫接续阶段，传输链路连接所需要的控制信令与信息。</td>
-</tr>
-<tr>
-<td align="left"><strong>PCCH</strong></td>
-<td>物理控制信道，用于发送寻呼消息，网络到用户的下行信道</td>
-</tr>
-<tr>
-<td align="left"><strong>BCCH</strong></td>
-<td>广播控制信道，在实际工作之前，协调、控制、管理用户行为。</td>
-</tr>
-<tr>
-<td align="left"><strong>DCCH</strong></td>
-<td>专用控制信道，点对点的双向控制信道，在呼叫接续阶段和在通信进行当中，在基站和移动台之间传输必要的控制信息。</td>
-</tr>
-<tr>
-<td align="left"><strong>DTCH</strong></td>
-<td>专用业务信道，UE和网络之间点对点和上下行双向业务数据传送渠道。</td>
-</tr>
-<tr>
-<td align="left"><strong>MCCH</strong></td>
-<td>多播控制信道，点对多点的从网络侧到UE的MBMS控制信息的传送通道，包括正在进行通信或即将要进行通信的MBMS会话信息。</td>
-</tr>
-<tr>
-<td align="left"><strong>MTCH</strong></td>
-<td>多播业务信道，用于承载MBMS业务数据。</td>
-</tr>
-<tr>
-<td align="left"><strong>MBMS</strong></td>
-<td>多媒体广播组播业务</td>
-</tr>
-<tr>
-<td align="left"><strong>EPC</strong></td>
-<td>4G核心网络</td>
-</tr>
-<tr>
-<td align="left"><strong>S-GW</strong></td>
-<td>服务网关，终止于E-UTRAN接口的网关。</td>
-</tr>
-<tr>
-<td align="left"><strong>P-GW</strong></td>
-<td>分组数据网关，面向PDN终结于SGi接口的网关。</td>
-</tr>
-<tr>
-<td align="left"><strong>S5/S8 bearer</strong></td>
-<td>S-GW和P-GW间的传输承载。</td>
-</tr>
-<tr>
-<td align="left"><strong>RDB</strong></td>
-<td>Radio Bearer，是指UE与基站(eNB)间的传输承载。</td>
-</tr>
-<tr>
-<td align="left"><strong>S1 Bearer</strong></td>
-<td>指eNB与服务网关(Serving Gateway，S-GW)间对于特定UE的承载。</td>
-</tr>
-<tr>
-<td align="left">。。。</td>
-<td></td>
-</tr>
-</tbody></table>
-<h1 id="第一章-概述"><a href="#第一章-概述" class="headerlink" title="第一章 概述"></a>第一章 概述</h1><h2 id="一、空口传输"><a href="#一、空口传输" class="headerlink" title="一、空口传输"></a>一、空口传输</h2><h3 id="1、上行传输"><a href="#1、上行传输" class="headerlink" title="1、上行传输"></a>1、上行传输</h3><p>由nNode发送，UE负责接收的传输。</p>
-<p><img src="https://s2.loli.net/2023/08/29/23nu9FifLExajmY.png" alt="image-20230823202111190"></p>
-<p>下行相关流程：</p>
-<p>1、UE在进入基站前，会选择一个运营商，即PLMN。</p>
-<p>2、eNode每隔5ms会发送一次同步信号PSS/SSS。UE通过PSS/SSS，来选择eNode并获得时间与频率上的同步（并没有上行时间的同步），以及eNode的PCI（物理标识）。</p>
-<p>3、小区会不停发送与小区相关的系统信息（MIB/SIB），UE在需要的时候获取这些信息。</p>
-<p>4、UE获得信息后，会发起随机接入过程与小区建立连接（RA Preamble），同时产生反馈信息（RAR）。</p>
-<p>5、建立连接完成，可以进行数据传输。eNode通过PDSCH信道来给UE传输数据，同时通过PDCCH告诉UE对应的PDSCH在哪些无限资源上传输以及如何传输。UE使用ACK/NACK信号告诉基站是否接收成功（通过PUCCH和PUSCH信道发送），基站没有接收则会重传。</p>
-<p>6、信道条件动态变化，UE将下行无线信道条件通过CSI反馈给基站，使基站在下行调度时将信道质量考虑在内。</p>
-<p>7、当双方没有数据传输时，UE不需要一直保持连接状态（RRC_CONNECTED）。UE可以处于RRC_IDLE状态，定期唤醒去接收paging信息，确定是否有呼叫请求。</p>
-<h3 id="2、上行传输"><a href="#2、上行传输" class="headerlink" title="2、上行传输"></a>2、上行传输</h3><p>由UE发送，nNode负责接收的传输。</p>
-<p><img src="https://s2.loli.net/2023/08/29/C9sxXoSmfqu6Uec.png" alt="image-20230827130438050"></p>
-<p>上行相关流程：</p>
-<p>1、随机接入过程中，UE会发送Preamble和Msg3以便和基站建立连接。</p>
-<p>2、基站在上行调度时，需要进行上行信道估计，通过UE发送的SRS进行测量得到。</p>
-<p>3、eNode通过PDCCH给UE发送UL grant（物理控制信息）时，UE才能够使用对应的资源进行上行传输。当UE没有被分配上行PUSCH资源但有上行数据需要发送时，UE会发送SR告诉eNode，并请求eNode分配上行PUSCH资源。</p>
-<p>4、发送了调度请求后，UE发送了BSR告诉基站有多少数据要发送。</p>
-<p>5、UE通过PUSCH给eNode发送数据，同时eNode发送确认信号ACK/NACK（通过PHICH信道发送）给UE。UE没有接收到确认信号则会重传。</p>
-<p>6、信道条件动态变化，UE将下行无线信道条件通过CSI反馈给基站（通过PUCCH或PUSCH传输）。</p>
-<h2 id="二、LTE协议栈结构"><a href="#二、LTE协议栈结构" class="headerlink" title="二、LTE协议栈结构"></a>二、LTE协议栈结构</h2><p>主要说明基站和UE如何进行用户面和控制面的数据传输。</p>
-<p><strong>下行无线协议框架：</strong></p>
-<p><img src="https://s2.loli.net/2023/08/29/P8zlhmxgEtAwrY9.png" alt="image-20230827134709982"></p>
-<p><strong>上行无线协议框架：</strong></p>
-<p><img src="https://s2.loli.net/2023/08/29/xdiS6FnmguZNOQc.png" alt="image-20230827134759898"></p>
-<h3 id="1、用户面协议"><a href="#1、用户面协议" class="headerlink" title="1、用户面协议"></a>1、用户面协议</h3><p><img src="https://s2.loli.net/2023/08/29/RwOEjsCd6pPnqyU.png" alt="image-20230827135801461"></p>
-<p>1、PDCP层（分组数据汇聚协议层）：针对来自控制面的RRC和来自数据面的IP包进行处理，主要实现加密和完整性保护。</p>
-<ul>
-<li>头部压缩和解压缩：使用ROHC，应用于用户面数据</li>
-<li>加解密：用于用户面和控制面数据</li>
-<li>完整性保护：用于控制面数据</li>
-<li>传输用户数据和控制面数据</li>
-<li>切换时重排序和重传处理</li>
-<li>由于超时而丢弃用户面数据</li>
-</ul>
-<p>2、RLC层（无线链路控制层）：主要实现无线链路控制功能ARQ纠错。<strong>以无线承载的方式为PDCP层提供服务</strong></p>
-<p>三种模式：</p>
-<ol>
-<li>TM透明模式</li>
-<li>UM重发非确认模式</li>
-<li>AM重发确认模式</li>
-</ol>
-<ul>
-<li><strong>分段串联和重组RLC SDU</strong>：适用于UM和AM。由于RLC PDU的大小由MAC决定，大小并不等于RLC SDU的大小，因此在发送端需要分段/串联RLC SDU以便适合MAC层指定的大小，接收端需要将分组的RLC SDU重组，以便恢复出原来的RLC SDU并发往上层。</li>
-<li><strong>ARQ纠错（适用于AM）</strong>：重传机制。MAC层的HARQ机制实现快速重传，反馈出错率约1%，不适用于要求过高的业务。RLC重传处理能够降低反馈出错率。</li>
-<li><strong>对RLC PDU重排序</strong>：MAC层的HARQ可能导致到达RLC层的报文路乱序，需要RLC层进行重排序。</li>
-<li><strong>重复包检测</strong>：适用于 UM 和 AM 模式。出现重复包的最大可能性为发送端反馈了HARQ ACK，但接收端错误地将其解释NACK，从而导致了不必要的MAC PDU 重传。</li>
-<li><strong>对RLC PDU进行重分段</strong>：适用于AM模式。当RLC PDU数据需要重传时，也可能需要重分段（要求大小不一致时）。</li>
-</ul>
-<p>3、MAC层（媒体接入层）：以逻辑信道的方式为RLC层提供服务，为RLC层业务与物理层之间提供一个有效的连接。</p>
-<ul>
-<li><strong>匹配逻辑信道和传输信道。</strong></li>
-<li><strong>复用/解复用</strong>：将属于一个或不同的逻辑信道的多个MAC SDU复用到同一个MAC PDU上，发给物理层。</li>
-<li><strong>通过HARQ来纠错</strong>：重传机制。</li>
-<li><strong>调度处理</strong></li>
-<li><strong>逻辑信道优先级处理</strong>：从不同的等待队列选出一个分组，将其传递到物理层，并通过无线接口发送的过程。</li>
-<li><strong>调度信息上报</strong></li>
-<li><strong>随机接入过程处理</strong></li>
-</ul>
-<h4 id="UE与核心网进行用户面的数据通信过程"><a href="#UE与核心网进行用户面的数据通信过程" class="headerlink" title="UE与核心网进行用户面的数据通信过程"></a>UE与核心网进行用户面的数据通信过程</h4><p>核心网（EPC）通过外部承载与因特网建立连接，并通过EPS bearer 与UE建立连接。即核心网和UE之间的数据通信是承载在EPS bearer上的。</p>
-<p><img src="https://s2.loli.net/2023/08/29/6bikx7vGXKwzPJd.png" alt="image-20230827233230528"></p>
-<p>一个EPS bearer跨越多个接口：</p>
-<ul>
-<li>P-GW和S-GW之间的S5/S8接口。</li>
-<li>S-GW 和 eNodeB 之间的 S1 接口。</li>
-<li>eNodeB 和 UE 之间的无线接口。</li>
-</ul>
-<p>一个 EPS bearer 由一个 S5/S8 bearer 和一个 E-RAB 组成。一个 E-RAB 由一个 S1 bearer 和一个DRB 组成。</p>
-<ul>
-<li> 一个 E-RAB 在 UE 和 EPC 之间传输一个 EPS bearer 的数据。如果存在一个 E-RAB，则该 E-RAB 与一个 EPS bearer 存在一一映射关系。</li>
-<li>个 DRB 在 UE 和 eNodeB 之间（Uu 接口）传输一个 EPS bearer 的数据。如果存在一个 DRB，则该 DRB 与一个 EPS bearer/E-RAB 存在一一映射关系。</li>
-<li>一个 S1 bearer 在 eNodeB 和 S-GW 之间（S1 接口）传输一个 EPS bearer 的数据。</li>
-<li>一个 S5/S8 bearer 在 S-GW 和 P-GW 之间（S5/S8 接口）传输一个 EPS bearer 的数据。</li>
-</ul>
-<p><strong>S-GW</strong>：</p>
-<ul>
-<li>进行eNodeB间切换时，可以作为本地锚定点，并协助完成eNodeB的重排序功能；</li>
-<li>在3GPP不同接入系统间切换时，作为移动性锚点（终结在S4接口，在2G/3G系统和P-GW间实现业务路由），同样具有重排序功能；</li>
-<li>执行合法侦听功能；</li>
-<li>进行数据包的路由和前转；</li>
-<li>在上行和下行传输层进行分组标记；</li>
-<li>空闲状态下，下行分组缓冲和发起网络触发的服务请求功能；</li>
-<li>用于运营商间的计费</li>
-</ul>
-<h3 id="2、控制面协议"><a href="#2、控制面协议" class="headerlink" title="2、控制面协议"></a>2、控制面协议</h3><p><img src="https://s2.loli.net/2023/08/29/pOal51gvh6zo2xF.png" alt="image-20230827205208886"></p>
-<p>1、RRC层（无线资源控制层）：完成广播、寻呼、RRC连接管理、资源控制、移动性管理、UE测量报告与控制。</p>
-<ul>
-<li>广播系统消息</li>
-<li>RRC连接控制</li>
-<li>Inter-RAT 移动性管理</li>
-<li>测量配置和上报</li>
-<li>发动专用的NAS消息</li>
-<li>传输UE接入能力信息</li>
-</ul>
-<p>RRC和NAS消息使用SRB来传输，LTE中定义了三种SRB：SRB0、SRB1、SRB2。</p>
-<p><strong>SRB（信令无线承载）</strong>：</p>
-<p>SRB0是默认的无线承载，使用SRB0的RRC消息都使用CCCH来传输，SRB0并没有一个对应的PDCP实体，在PDCP层是透明传输，既没有完整性保护，也没有加解密处理。</p>
-<p>SRB1用于发送RRC消息，并在SRB2发送之前，用于发送NAS消息，都使用DCCH发送。</p>
-<p>SRB2用于发送包含记录的测量信息在内的RRC消息，并发送SRB消息，都使用DCCH发送。</p>
-<p>除SRB0，每个RB都有一个PDCP实体（完整性保护和加解密），每个PDCP实体都有1个或2个RLC实体，取决于RB的属性和RLC模式。</p>
-<h3 id="下行峰值速率计算"><a href="#下行峰值速率计算" class="headerlink" title="下行峰值速率计算"></a>下行峰值速率计算</h3><p>满足以下条件的最大吞吐量：</p>
-<ol>
-<li>整个带宽均分配给一个UE。</li>
-<li>使用最高阶的MCS。</li>
-<li>使用可支持的最大天线数。</li>
-</ol>
-<p>参考文章：</p>
-<p><a href="https://blog.51cto.com/u_16099211/6506095">https://blog.51cto.com/u_16099211/6506095</a></p>
-<p><a href="https://blog.csdn.net/qq_40232834/article/details/131807104">https://blog.csdn.net/qq_40232834/article/details/131807104</a></p>
-]]></content>
   </entry>
 </search>
