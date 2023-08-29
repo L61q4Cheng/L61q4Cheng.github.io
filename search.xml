@@ -2499,9 +2499,8 @@ if __name__ == &quot;__main__&quot;:
   <entry>
     <title>《深入理解LTE-A》学习笔记（一）</title>
     <url>/2023/08/28/%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3LTE-A%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%20/</url>
-    <content><![CDATA[<span id="more"></span>
-
-<p><img src="D:/Desktop/1/photo/image-20230728184032279.png" alt="image-20230728184032279"></p>
+    <content><![CDATA[<h1 id="《深入理解LTE-A》学习笔记（一）"><a href="#《深入理解LTE-A》学习笔记（一）" class="headerlink" title="《深入理解LTE-A》学习笔记（一）"></a>《深入理解LTE-A》学习笔记（一）</h1><span id="more"></span>
+<p><img src="https://s2.loli.net/2023/08/29/Jzwd1DZ3fq4nuPT.png" alt="image-20230728184032279"></p>
 <h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><table>
 <thead>
 <tr>
@@ -2663,7 +2662,7 @@ if __name__ == &quot;__main__&quot;:
 </tr>
 </tbody></table>
 <h1 id="第一章-概述"><a href="#第一章-概述" class="headerlink" title="第一章 概述"></a>第一章 概述</h1><h2 id="一、空口传输"><a href="#一、空口传输" class="headerlink" title="一、空口传输"></a>一、空口传输</h2><h3 id="1、上行传输"><a href="#1、上行传输" class="headerlink" title="1、上行传输"></a>1、上行传输</h3><p>由nNode发送，UE负责接收的传输。</p>
-<p><img src="https://raw.githubusercontent.com/L61q4Cheng/photos/main/img/202308282342438.png" alt="image-20230823202111190"></p>
+<p><img src="https://s2.loli.net/2023/08/29/23nu9FifLExajmY.png" alt="image-20230823202111190"></p>
 <p>下行相关流程：</p>
 <p>1、UE在进入基站前，会选择一个运营商，即PLMN。</p>
 <p>2、eNode每隔5ms会发送一次同步信号PSS/SSS。UE通过PSS/SSS，来选择eNode并获得时间与频率上的同步（并没有上行时间的同步），以及eNode的PCI（物理标识）。</p>
@@ -2673,7 +2672,7 @@ if __name__ == &quot;__main__&quot;:
 <p>6、信道条件动态变化，UE将下行无线信道条件通过CSI反馈给基站，使基站在下行调度时将信道质量考虑在内。</p>
 <p>7、当双方没有数据传输时，UE不需要一直保持连接状态（RRC_CONNECTED）。UE可以处于RRC_IDLE状态，定期唤醒去接收paging信息，确定是否有呼叫请求。</p>
 <h3 id="2、上行传输"><a href="#2、上行传输" class="headerlink" title="2、上行传输"></a>2、上行传输</h3><p>由UE发送，nNode负责接收的传输。</p>
-<p><img src="https://raw.githubusercontent.com/L61q4Cheng/photos/main/img/202308282343070.png" alt="image-20230827130438050"></p>
+<p><img src="https://s2.loli.net/2023/08/29/C9sxXoSmfqu6Uec.png" alt="image-20230827130438050"></p>
 <p>上行相关流程：</p>
 <p>1、随机接入过程中，UE会发送Preamble和Msg3以便和基站建立连接。</p>
 <p>2、基站在上行调度时，需要进行上行信道估计，通过UE发送的SRS进行测量得到。</p>
@@ -2683,10 +2682,10 @@ if __name__ == &quot;__main__&quot;:
 <p>6、信道条件动态变化，UE将下行无线信道条件通过CSI反馈给基站（通过PUCCH或PUSCH传输）。</p>
 <h2 id="二、LTE协议栈结构"><a href="#二、LTE协议栈结构" class="headerlink" title="二、LTE协议栈结构"></a>二、LTE协议栈结构</h2><p>主要说明基站和UE如何进行用户面和控制面的数据传输。</p>
 <p><strong>下行无线协议框架：</strong></p>
-<p><img src="https://raw.githubusercontent.com/L61q4Cheng/photos/main/img/202308282343017.png" alt="image-20230827134709982"></p>
+<p><img src="https://s2.loli.net/2023/08/29/P8zlhmxgEtAwrY9.png" alt="image-20230827134709982"></p>
 <p><strong>上行无线协议框架：</strong></p>
-<p><img src="https://raw.githubusercontent.com/L61q4Cheng/photos/main/img/202308282343402.png" alt="image-20230827134759898"></p>
-<h3 id="1、用户面协议"><a href="#1、用户面协议" class="headerlink" title="1、用户面协议"></a>1、用户面协议</h3><p><img src="https://raw.githubusercontent.com/L61q4Cheng/photos/main/img/202308282343826.png" alt="image-20230827135801461"></p>
+<p><img src="https://s2.loli.net/2023/08/29/xdiS6FnmguZNOQc.png" alt="image-20230827134759898"></p>
+<h3 id="1、用户面协议"><a href="#1、用户面协议" class="headerlink" title="1、用户面协议"></a>1、用户面协议</h3><p><img src="https://s2.loli.net/2023/08/29/RwOEjsCd6pPnqyU.png" alt="image-20230827135801461"></p>
 <p>1、PDCP层（分组数据汇聚协议层）：针对来自控制面的RRC和来自数据面的IP包进行处理，主要实现加密和完整性保护。</p>
 <ul>
 <li>头部压缩和解压缩：使用ROHC，应用于用户面数据</li>
@@ -2721,7 +2720,7 @@ if __name__ == &quot;__main__&quot;:
 <li><strong>随机接入过程处理</strong></li>
 </ul>
 <h4 id="UE与核心网进行用户面的数据通信过程"><a href="#UE与核心网进行用户面的数据通信过程" class="headerlink" title="UE与核心网进行用户面的数据通信过程"></a>UE与核心网进行用户面的数据通信过程</h4><p>核心网（EPC）通过外部承载与因特网建立连接，并通过EPS bearer 与UE建立连接。即核心网和UE之间的数据通信是承载在EPS bearer上的。</p>
-<p><img src="https://raw.githubusercontent.com/L61q4Cheng/photos/main/img/202308282343937.png" alt="image-20230827233230528"></p>
+<p><img src="https://s2.loli.net/2023/08/29/6bikx7vGXKwzPJd.png" alt="image-20230827233230528"></p>
 <p>一个EPS bearer跨越多个接口：</p>
 <ul>
 <li>P-GW和S-GW之间的S5/S8接口。</li>
@@ -2745,7 +2744,7 @@ if __name__ == &quot;__main__&quot;:
 <li>空闲状态下，下行分组缓冲和发起网络触发的服务请求功能；</li>
 <li>用于运营商间的计费</li>
 </ul>
-<h3 id="2、控制面协议"><a href="#2、控制面协议" class="headerlink" title="2、控制面协议"></a>2、控制面协议</h3><p><img src="https://raw.githubusercontent.com/L61q4Cheng/photos/main/img/202308282343706.png" alt="image-20230827205208886"></p>
+<h3 id="2、控制面协议"><a href="#2、控制面协议" class="headerlink" title="2、控制面协议"></a>2、控制面协议</h3><p><img src="https://s2.loli.net/2023/08/29/pOal51gvh6zo2xF.png" alt="image-20230827205208886"></p>
 <p>1、RRC层（无线资源控制层）：完成广播、寻呼、RRC连接管理、资源控制、移动性管理、UE测量报告与控制。</p>
 <ul>
 <li>广播系统消息</li>
