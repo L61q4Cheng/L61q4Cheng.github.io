@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="《深入理解LTE-A》学习笔记（二）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《深入理解LTE-A》学习笔记（二）">
+<meta property="og:url" content="http://example.com/2023/09/07/%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3LTE-A%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/index.html">
+<meta property="og:site_name" content="Welcome to L61q4_Cheng&#39;Blog">
+<meta property="og:description" content="《深入理解LTE-A》学习笔记（二）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/09/07/3t4FD8agBbPpsKv.png">
+<meta property="og:image" content="https://s2.loli.net/2023/09/07/4csE2OyGxwiILvT.png">
+<meta property="og:image" content="https://s2.loli.net/2023/09/07/YP8wIAvtcdzRQ4L.png">
+<meta property="og:image" content="https://s2.loli.net/2023/09/07/dkzqD35r7ogeNfx.png">
+<meta property="og:image" content="https://s2.loli.net/2023/09/07/8hipe79nFx5TZzr.png">
+<meta property="og:image" content="https://s2.loli.net/2023/09/07/R2MXr8A46k7PJh5.png">
+<meta property="og:image" content="https://s2.loli.net/2023/09/07/xpkDVZv56YPMNEB.png">
+<meta property="og:image" content="https://s2.loli.net/2023/09/07/PQwfisRKqJ6nbTG.png">
+<meta property="article:published_time" content="2023-09-07T15:27:11.171Z">
+<meta property="article:modified_time" content="2023-09-07T15:33:56.041Z">
+<meta property="article:author" content="L61q4_Cheng">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/09/07/3t4FD8agBbPpsKv.png">
+
+
+<link rel="canonical" href="http://example.com/2023/09/07/%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3LTE-A%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/09/07/%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3LTE-A%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/","path":"2023/09/07/《深入理解LTE-A》学习笔记2/","title":"《深入理解LTE-A》学习笔记（二）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>《深入理解LTE-A》学习笔记（二） | Welcome to L61q4_Cheng'Blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Welcome to L61q4_Cheng'Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">海压竹枝低复举 风吹山角晦还明</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-主页"><a href="/" rel="section"><i class="home fa-fw"></i>主页</a></li>
+        <li class="menu-item menu-item-文章"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>文章</a></li>
+        <li class="menu-item menu-item-标签"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-关于我"><a href="/about/" rel="section"><i class="user fa-fw"></i>关于我</a></li>
+        <li class="menu-item menu-item-分类"><a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3LTE-A%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">《深入理解LTE-A》学习笔记（二）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A"><span class="nav-number">2.</span> <span class="nav-text">名词解释</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-LTE%E6%97%B6%E5%9F%9F%E3%80%81%E9%A2%91%E5%9F%9F%E5%92%8C%E7%A9%BA%E9%97%B4%E5%9F%9F%E8%B5%84%E6%BA%90"><span class="nav-number">3.</span> <span class="nav-text">第二章  LTE时域、频域和空间域资源</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%97%B6%E5%9F%9F"><span class="nav-number">3.1.</span> <span class="nav-text">一、时域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E5%9F%BA%E6%9C%AC%E6%97%B6%E9%97%B4%E5%8D%95%E4%BD%8D"><span class="nav-number">3.1.1.</span> <span class="nav-text">1、基本时间单位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E7%B3%BB%E7%BB%9F%E5%B8%A7%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB"><span class="nav-number">3.1.2.</span> <span class="nav-text">2、系统帧结构分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E7%89%B9%E6%AE%8A%E5%AD%90%E5%B8%A7"><span class="nav-number">3.1.3.</span> <span class="nav-text">3、特殊子帧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81%E7%B3%BB%E7%BB%9F%E5%B8%A7"><span class="nav-number">3.1.4.</span> <span class="nav-text">4、系统帧</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E9%A2%91%E5%9F%9F"><span class="nav-number">3.2.</span> <span class="nav-text">二、频域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E5%9F%BA%E6%9C%AC%E5%8D%95%E4%BD%8D"><span class="nav-number">3.2.1.</span> <span class="nav-text">1、基本单位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E7%B3%BB%E7%BB%9F%E5%B8%A6%E5%AE%BD"><span class="nav-number">3.2.2.</span> <span class="nav-text">2、系统带宽</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81DC%E5%AD%90%E8%BD%BD%E6%B3%A2"><span class="nav-number">3.2.3.</span> <span class="nav-text">3、DC子载波</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%A9%BA%E9%97%B4%E5%9F%9F"><span class="nav-number">3.3.</span> <span class="nav-text">三、空间域</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="L61q4_Cheng"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">L61q4_Cheng</p>
+  <div class="site-description" itemprop="description">一个逆向小白 安卓逆向日常学习、分享</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/07/%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3LTE-A%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="L61q4_Cheng">
+      <meta itemprop="description" content="一个逆向小白 安卓逆向日常学习、分享">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Welcome to L61q4_Cheng'Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          《深入理解LTE-A》学习笔记（二）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-9-7 23:27:11" itemprop="dateCreated datePublished" datetime="2023-09-07T23:27:11+08:00">2023-9-7</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="《深入理解LTE-A》学习笔记（二）"><a href="#《深入理解LTE-A》学习笔记（二）" class="headerlink" title="《深入理解LTE-A》学习笔记（二）"></a>《深入理解LTE-A》学习笔记（二）</h1><span id="more"></span>
+
+<h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><table>
+<thead>
+<tr>
+<th>名词</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>OFDM</td>
+<td>正交频分复用，将信道分为若干子信道，将高速数据信号转换成并行的低速子数据流，调制在每个子信道上进行传输。</td>
+</tr>
+<tr>
+<td>SC-FDMA</td>
+<td>单载波频分复用接入技术。实现动态频带分配，通过DFT-S-OFDM技术实现，带宽大小取决于用户的需求和系统调度的结果。</td>
+</tr>
+<tr>
+<td>FDD</td>
+<td>上下行数据在不同的频率内传输，使用成对频谱，支持全双工和半双工。</td>
+</tr>
+<tr>
+<td>slot</td>
+<td>时隙，每个子帧由slot数量取决于子载波的间隔。</td>
+</tr>
+<tr>
+<td>DwPTS</td>
+<td>下行导频时隙</td>
+</tr>
+<tr>
+<td>GP</td>
+<td>主保护时隙</td>
+</tr>
+<tr>
+<td>UpPTS</td>
+<td>行导频时隙</td>
+</tr>
+<tr>
+<td>ISI</td>
+<td>符号间干扰，由无线电波传输多径与衰落以及抽样失真引起的</td>
+</tr>
+<tr>
+<td>ICI</td>
+<td>载波间干扰，子载波的正交性被破坏，影响接收侧的解调</td>
+</tr>
+<tr>
+<td>PDSCH</td>
+<td>物理下行链路共享通道</td>
+</tr>
+<tr>
+<td>SRS</td>
+<td>探测（侦听）参考信号</td>
+</tr>
+<tr>
+<td>PRACH</td>
+<td>物理随机接入信道</td>
+</tr>
+<tr>
+<td>RE</td>
+<td>LTE中，频率上一个子载波及时域上一个symbol，称为一个RE。</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="第二章-LTE时域、频域和空间域资源"><a href="#第二章-LTE时域、频域和空间域资源" class="headerlink" title="第二章  LTE时域、频域和空间域资源"></a>第二章  LTE时域、频域和空间域资源</h1><p>本章分别从时域、频域、空间域来说明LTE中的空口资源。LTE在下行使用OFDM，上行使用SC-FDMA。</p>
+<h2 id="一、时域"><a href="#一、时域" class="headerlink" title="一、时域"></a>一、时域</h2><h3 id="1、基本时间单位"><a href="#1、基本时间单位" class="headerlink" title="1、基本时间单位"></a>1、基本时间单位</h3><p>Ts=1/(15000* 2048) =1/ 30720000 秒。</p>
+<p>基于FFT(快速傅里叶变换)且FFT大小等于2048的发射机/接收机所使用的采样时间。</p>
+<h3 id="2、系统帧结构分类"><a href="#2、系统帧结构分类" class="headerlink" title="2、系统帧结构分类"></a>2、系统帧结构分类</h3><p>上下行传输都被组织成10ms（T<del>f</del>=307200*T<del>s</del>=10ms）的系统帧（无线帧）。LTE支持两种系统帧结构：用于FDD的类型1和用于TDD的类型2。</p>
+<ul>
+<li><p><strong>用于FDD的类型1</strong></p>
+<p>FDD：上下行数据在不同的频率内传输，使用成对频谱，支持全双工和半双工。</p>
+<p>每个系统帧长10ms，由10个子帧组成。每个子帧1ms，由两个连续的slot时隙组成，每个slot长达0.5ms（T<del>slot</del>=155360*T<del>s</del>=0.5ms）</p>
+<p>在FDD中，上下行传输通过频域区分，在每个10ms内，各有10个子帧可用于上行传输和下行传输。</p>
+<p><img src="https://s2.loli.net/2023/09/07/3t4FD8agBbPpsKv.png" alt="image-20230907164712669"></p>
+</li>
+<li><p><strong>用于TDD的类型2</strong></p>
+<p>TDD：上下行数据在同一频道内传输，使用非成对频道。</p>
+<p>每个系统帧长10ms，由2个长5ms的半帧组成。每个半帧由5个1ms的子帧组成。其中包括正常子帧和特殊子帧。每个子帧由2个连续的slot时隙组成，每个slot长达0.5ms。</p>
+<p>在TDD中，上下行传输通过时域区分。子帧0、5以及DwPTS总是用于下行传输，UpPTS以及紧随特殊子帧之后的子帧总是用于上行传输。</p>
+<p><img src="https://s2.loli.net/2023/09/07/4csE2OyGxwiILvT.png" alt="image-20230907165730600"></p>
+</li>
+</ul>
+<p>注：TDD支持7种上下行配置，对应不同的上下行配比，“D”对应下行子帧，“U”对应上行子帧，“S”对应特殊子帧。</p>
+<p>同时TDD上下行配置支持5ms和10ms的下行到上行的切换周期。在5ms的切换周期中，在2个半帧中都存在特殊子帧。在10ms的切换周期中，只有第一个半帧存在特殊子帧。</p>
+<p><img src="https://s2.loli.net/2023/09/07/YP8wIAvtcdzRQ4L.png" alt="image-20230907175500956"></p>
+<h3 id="3、特殊子帧"><a href="#3、特殊子帧" class="headerlink" title="3、特殊子帧"></a>3、特殊子帧</h3><p>TDD中的正常子帧和FDD中的子帧结构相同。</p>
+<p>TDD中的特殊子帧包含3个域：DwPTS、GP和UpPTS，三个域相加等于1ms。特殊子帧有9种不同的配置，对应不同的DwPTS和UpPTS长度。</p>
+<p>特殊子帧的配置是通过RRC消息种的 <em>TDD-Config</em> -&gt; <em>specialSubframePatterns</em>字段来设置的。</p>
+<h3 id="4、系统帧"><a href="#4、系统帧" class="headerlink" title="4、系统帧"></a>4、系统帧</h3><p>系统帧的编号范围0<del>1023 ，一个系统帧的子帧编号范围0</del>9。 协议种系统帧号使用n<del>f</del>表示，一个系统帧内slot号用n<del>s</del>表示。</p>
+<p>1、符号symbol</p>
+<p>一个slot由多个符号组成，每个符号（用<em><strong>l</strong></em> 表示）由循环前缀CP和可用符号时间组成。上行使用SC-FDMA符号，下行使用OFDM符号。一个slot包含的符号数取决于循环前缀的长度和子载波的间距。</p>
+<p>下行：<img src="https://s2.loli.net/2023/09/07/dkzqD35r7ogeNfx.png" alt="image-20230907182741811"></p>
+<p>上行：<img src="https://s2.loli.net/2023/09/07/8hipe79nFx5TZzr.png" alt="image-20230907182815298"></p>
+<p>注：每个slot由7个符号（0-6组成）。当正常子帧使用扩展的循环前缀时，每个slot由6个符号（0-5组成）。</p>
+<p>2、循环前缀</p>
+<p>OFDM系统中会插入一段空白符号作为保护间隔，这样虽然能消除ISI（符号间干扰）但不能消除ICI（子载波间干扰）。循环前缀是将OFDM信号的最后一定长度内的部分提取出来放在OFDM信号的头部，将加入了循环前缀后变长了的OFDM信号作为新的OFDM信号，这样就可以完全消除ISI和ICI。</p>
+<p>循环前缀也存在正常的循环前缀和扩展的循环前缀之分，其区别在于长度的不同。UE在小区搜索过程中确定下行的循环前缀的长度，并接受RRC消息中UL-CyclicPrefixLength 字段确定上行的循环前缀长度。</p>
+<p>下行：<img src="https://s2.loli.net/2023/09/07/R2MXr8A46k7PJh5.png" alt="image-20230907192548387"></p>
+<p>上行：<img src="https://s2.loli.net/2023/09/07/xpkDVZv56YPMNEB.png" alt="image-20230907192600569"></p>
+<p>对于正常的循环前缀，每个slot的第一个符号的循环前缀长度比其它的符号要大。（因为0.5ms的slot不能被7整除，所有第一个符号的循环前缀要长一些。对于扩展的循环前缀则不存在这个问题）。</p>
+<p>一个slot长度为所有符号的长度相加。</p>
+<p>对于正常的循环前缀0.5ms=15360* T<del>s</del>=((160+2048)+(114+2048) *6) *T<del>s</del></p>
+<p>对于扩展的循环前缀0.5ms=15360* T<del>s</del>=((512+2048)*6) * T<del>s</del></p>
+<p>对于TDD下的特殊子帧，DwPTS、GP、UpPTS三个时长相加等于1ms=30720*T<del>s</del></p>
+<p><strong>DwPTS</strong>可被当做正常的下行子帧来看待，既可用于PDSCH传输。但由于DwPTS小于正常的下行子帧，所以其携带的数据量要更少。（通常为下行子帧的0.5倍）。</p>
+<p><strong>UpPTS</strong> 由于长度太短，不能用于 PUSCH 传输，而只能用于 SRS 或 PRACH 传输。</p>
+<p>注：1、循环前缀更长，虽然从开销的角度来说效率更低，但适合带有广泛的传输延迟的特定场景。但不是所有情况都能给大型小区带来好处，比如链路的性能受限于噪声，而不是受限于循环前缀不能覆盖剩余的时间弥散所导致的信号损坏，此时使用更长的循环前缀所带来的额外的无线信道时间弥散的可靠性，无法证明使用更长的循环前缀所需要的额外能量开销是合理的。</p>
+<p>2、同一个系统帧的不同子可能使用不同的循环前缀长度。</p>
+<h2 id="二、频域"><a href="#二、频域" class="headerlink" title="二、频域"></a>二、频域</h2><h3 id="1、基本单位"><a href="#1、基本单位" class="headerlink" title="1、基本单位"></a>1、基本单位</h3><p>一个子载波，上下行的子载波的间距均为15kHz。每个间隔对应每个符号内可用的符号时间为2048*T<del>s</del></p>
+<h3 id="2、系统带宽"><a href="#2、系统带宽" class="headerlink" title="2、系统带宽"></a>2、系统带宽</h3><p>频域上可用的所有资源称之为系统带宽，RB是单位，每个RB包含12个子载波。</p>
+<p>下行系统带宽使用N^DL^<del>RB</del>，eNode通过MIB告知UE使用的下行系统带宽。</p>
+<p>上行系统带宽使用N^UL^<del>RB</del>，eNode通过SIB2告知UE使用的上行系统带宽。</p>
+<p>注：对于TDD而言，上下行的系统带宽是相同的。</p>
+<p>下行时频资源网络：<img src="https://s2.loli.net/2023/09/07/PQwfisRKqJ6nbTG.png" alt="image-20230907205009505"></p>
+<p>注：</p>
+<p>N^*^<del>RB</del>表示系统带宽，对于下行，为N^DL^<del>RB</del>，对于上行，为N^UL^<del>RB</del></p>
+<p>N^*^<del>symb</del>表示每个slot包含的符号数，对于下行，为N^DL^<del>symb</del>，对于上行，为N^UL^<del>symb</del></p>
+<p>N^RB^<del>sc</del>表示每个RB包含的子载波数。</p>
+<p>网格中的每一个元素称为一个RE，用（k,l）来索引。</p>
+<p><strong>RE</strong>是LTE中最小的物理资源。<strong>一个RE可存放一个调制符号</strong>（symbol，强调数据，与时域中的符号不是一个概念），该调制符号可使用QPSK（一个RE存放2比特数据）、16QAM（一个RE存放4比特数据）或64QAM调制（一个RE存放6比特数据）。</p>
+<p>一个RB在时域上包含6或7个连续的符号，在频域上包含12个连续的子载波，因此对于一个正常的循环前缀，一个RB包含84个RE，对于扩展的循环前缀，每个RB包含6*12=72个RE。（这里的RB既包含时域上的信息（1个slot），又包含频域上的信息（12个子载波），和前面系统带宽中的RB不同）。</p>
+<p>注：RB的基本单位是一个slot（0.5ms），LTE中调度的基本时间单位是一个子帧，称为一个TTI。一个TTI内的调度的最小单位实际上由同一个子帧上时间相连的2个RB组成，称为RB pair。对于一个RB，最小分配2个RB。</p>
+<h3 id="3、DC子载波"><a href="#3、DC子载波" class="headerlink" title="3、DC子载波"></a>3、DC子载波</h3><p>对于下行而言，在载波中心频点的位置有一个未使用的DC子载波。DC子载波未被下行传输使用的原因在于该子载波可能由本地晶振泄露等原因而遭受不成比例的高干扰。</p>
+<p>对于上行来说，载波中心频率上并不存在DC子载波。因为中心频点处的未使用DC子载波会导致无法将整个上行系统带宽分配给一个单一UE的同时，将其映射到OFDM调制器的连续输入上，而对于保持上行数据传输的DFTS-OFDM调制的低立方度量特性是必须的。</p>
+<h2 id="三、空间域"><a href="#三、空间域" class="headerlink" title="三、空间域"></a>三、空间域</h2><p>在空间维度中，以“层”来度量，并使用多天线传输和多天线接收技术来实现。每一层对应一条有效的数据流，并会映射到逻辑上的“天线端口”上。每个天线端口对应一个时频资源网格，并有一个对应的参考信息，以便接收端进行信道估计和相干解调。</p>
+<p>采用空分复用，在相同的时频资源上，可同时存在多层，同时传输多条数据流，这样频谱的利用率更高，吞吐量也越高。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/09/07/%E7%A7%BB%E5%8A%A8%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF-PPT/" rel="prev" title="移动通信安全技术学习笔记">
+                  <i class="fa fa-chevron-left"></i> 移动通信安全技术学习笔记
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC8zODU3Mi8xNTEwMA=="></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">L61q4_Cheng</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script src="/js/third-party/comments/livere.js"></script>
+
+</body>
+</html>
