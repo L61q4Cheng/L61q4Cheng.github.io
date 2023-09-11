@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="《深入理解LTE-A》学习笔记（三）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《深入理解LTE-A》学习笔记（三）">
+<meta property="og:url" content="http://example.com/2023/09/11/%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3LTE-A%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03/index.html">
+<meta property="og:site_name" content="Welcome to L61q4_Cheng&#39;Blog">
+<meta property="og:description" content="《深入理解LTE-A》学习笔记（三）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/09/11/Vh9vGDzWJwaQA54.png">
+<meta property="og:image" content="https://s2.loli.net/2023/09/11/hsB8yulWjCe1U9O.png">
+<meta property="og:image" content="https://s2.loli.net/2023/09/11/IkRrDQwm5F1qLYa.png">
+<meta property="og:image" content="https://s2.loli.net/2023/09/11/DNTS8rBXHJjtEYn.png">
+<meta property="og:image" content="https://s2.loli.net/2023/09/11/jnpo3kW7uURqYFA.png">
+<meta property="og:image" content="https://s2.loli.net/2023/09/11/U5WBioFhNSnqEPQ.png">
+<meta property="article:published_time" content="2023-09-11T12:57:17.909Z">
+<meta property="article:modified_time" content="2023-09-11T13:04:26.324Z">
+<meta property="article:author" content="L61q4_Cheng">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/09/11/Vh9vGDzWJwaQA54.png">
+
+
+<link rel="canonical" href="http://example.com/2023/09/11/%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3LTE-A%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/09/11/%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3LTE-A%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03/","path":"2023/09/11/《深入理解LTE-A》学习笔记3/","title":"《深入理解LTE-A》学习笔记（三）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>《深入理解LTE-A》学习笔记（三） | Welcome to L61q4_Cheng'Blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Welcome to L61q4_Cheng'Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">海压竹枝低复举 风吹山角晦还明</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-主页"><a href="/" rel="section"><i class="home fa-fw"></i>主页</a></li>
+        <li class="menu-item menu-item-文章"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>文章</a></li>
+        <li class="menu-item menu-item-标签"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-关于我"><a href="/about/" rel="section"><i class="user fa-fw"></i>关于我</a></li>
+        <li class="menu-item menu-item-分类"><a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3LTE-A%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">《深入理解LTE-A》学习笔记（三）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A"><span class="nav-number">2.</span> <span class="nav-text">名词解释</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E4%B8%8B%E8%A1%8C%E5%8F%82%E8%80%83%E4%BF%A1%E5%8F%B7"><span class="nav-number">3.</span> <span class="nav-text">第三章 下行参考信号</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E4%B8%8B%E8%A1%8C%E5%8F%82%E8%80%83%E4%BF%A1%E5%8F%B7%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.0.1.</span> <span class="nav-text">1、下行参考信号的类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E5%B0%8F%E5%8C%BA%E7%89%B9%E5%AE%9A%E7%9A%84%E5%8F%82%E8%80%83%E4%BF%A1%E5%8F%B7"><span class="nav-number">3.0.2.</span> <span class="nav-text">2、小区特定的参考信号</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E5%8C%BA%E7%89%B9%E5%AE%9A%E7%9A%84%E5%8F%82%E8%80%83%E7%AC%A6%E5%8F%B7%E6%98%A0%E5%B0%84%E9%81%93RE%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="nav-number">3.0.2.1.</span> <span class="nav-text">小区特定的参考符号映射道RE的过程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81UE%E7%89%B9%E5%AE%9A%E7%9A%84%E5%8F%82%E8%80%83%E4%BF%A1%E5%8F%B7"><span class="nav-number">3.0.3.</span> <span class="nav-text">3、UE特定的参考信号</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E3%80%81Rel-8%E4%B8%AD%E7%9A%84UE%E7%89%B9%E5%AE%9A%E7%9A%84%E5%8F%82%E8%80%83%E4%BF%A1%E5%8F%B7"><span class="nav-number">3.0.3.1.</span> <span class="nav-text">一、Rel-8中的UE特定的参考信号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Rel-9%E3%80%81Rel-10%E4%B8%AD%E7%9A%84UE%E7%89%B9%E5%AE%9A%E7%9A%84%E5%8F%82%E8%80%83%E4%BF%A1%E5%8F%B7"><span class="nav-number">3.0.3.2.</span> <span class="nav-text">二、Rel-9、Rel-10中的UE特定的参考信号</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="L61q4_Cheng"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">L61q4_Cheng</p>
+  <div class="site-description" itemprop="description">一个逆向小白 安卓逆向日常学习、分享</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/11/%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3LTE-A%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="L61q4_Cheng">
+      <meta itemprop="description" content="一个逆向小白 安卓逆向日常学习、分享">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Welcome to L61q4_Cheng'Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          《深入理解LTE-A》学习笔记（三）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-9-11 20:57:17" itemprop="dateCreated datePublished" datetime="2023-09-11T20:57:17+08:00">2023-9-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/LTE/" itemprop="url" rel="index"><span itemprop="name">LTE</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="《深入理解LTE-A》学习笔记（三）"><a href="#《深入理解LTE-A》学习笔记（三）" class="headerlink" title="《深入理解LTE-A》学习笔记（三）"></a>《深入理解LTE-A》学习笔记（三）</h1><span id="more"></span>
+<h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><table>
+<thead>
+<tr>
+<th>名词</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MBSFN</td>
+<td>多播广播单频网络</td>
+</tr>
+<tr>
+<td>Reference Signal</td>
+<td>由发射端提供给接收端用于信道估计和信道探测的一种已知信号。为eNode的调度资源提供参考。</td>
+</tr>
+<tr>
+<td>PMCH</td>
+<td>物理多播信道/物理层广播信道</td>
+</tr>
+<tr>
+<td>CSI</td>
+<td>信道状态信息</td>
+</tr>
+<tr>
+<td>TM7</td>
+<td>是TDD模式的波束赋性</td>
+</tr>
+<tr>
+<td>TM8</td>
+<td>是双流波束赋性，即基站同时发送两数据流，类似于空间复用，可以理解为波束赋性和空间复用的组合。</td>
+</tr>
+<tr>
+<td>TM9</td>
+<td>8流的波束赋形。</td>
+</tr>
+<tr>
+<td>PCI</td>
+<td>Physical Cell Identifier，物理小区标识</td>
+</tr>
+<tr>
+<td>SIR</td>
+<td>信息送出率</td>
+</tr>
+<tr>
+<td>DMRS</td>
+<td>解调参考信号，用于PUSCH和PUCCH信道的相关解调</td>
+</tr>
+<tr>
+<td>RB</td>
+<td>Resource Block，资源块。</td>
+</tr>
+<tr>
+<td>PDSCH</td>
+<td>物理下行链路共享通道</td>
+</tr>
+<tr>
+<td>RNTI</td>
+<td>无线网络临时标识符</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="第三章-下行参考信号"><a href="#第三章-下行参考信号" class="headerlink" title="第三章 下行参考信号"></a>第三章 下行参考信号</h1><p>下行参考信号是预先定义好的，并占用时频资源网络中的某些特定RE。在LTE中定义了多种下行参考信号信息，每种参考信号有个字不同的应用场景。接下来重点介绍MBSFN参考信号和定位参考信号外的其他下行参考信号。</p>
+<p>每个天线端口对应一个时频资源网格，并对应一个参考信号RS（Reference Signal）。对于下行，一个小区支持的天线端口集合依赖于该小区的参考信号配置，下行参考信号在时频资源网格上占据特定的RE。</p>
+<h3 id="1、下行参考信号的类型"><a href="#1、下行参考信号的类型" class="headerlink" title="1、下行参考信号的类型"></a>1、下行参考信号的类型</h3><ul>
+<li>小区特定的参考信号（CRS）：支持1、2、4个天线端口配置，并在天线端口p=0、p={0,1}、p={0,1,2,3}上传输</li>
+<li>MBSFN参考信号：天线端口p=4上传输。</li>
+<li>UE特定的参考信号：在天线端口p=5、p=6、p=7、p=8或p={7,8,9,10,11,12,13,14}中的一个或几个传输。</li>
+<li>定位参考信号：在天线端口p=6上传输。</li>
+<li>CSI参考信号（CSI-RS）：支持1、2、4、8个天线端口配置，并在天线端口 p=5 、p=15,16、p=15,…,18和p=15,…,22 上传输。</li>
+</ul>
+<h3 id="2、小区特定的参考信号"><a href="#2、小区特定的参考信号" class="headerlink" title="2、小区特定的参考信号"></a>2、小区特定的参考信号</h3><p>小区特定的参考信号对小区内所有的UE都有效，其作用包括：</p>
+<ol>
+<li>可被UE用于除PMCH和TM7/8/9（对应基于非码本的预编码）下PDSCH传输之外的其他任何下行物理信道的信道估计。</li>
+<li>可被UE用来获取CSI。</li>
+<li>基于小区特定的参考信号的终端测量可用作决定小区选择和切换的基础。</li>
+</ol>
+<p>注：波束成形用于提高信号强度，波束的意思是一组天线系统的电磁波辐射模式，波束成形就是建立天线辐射模式的技术。</p>
+<p>TM7/8/9都只用于TDD，都基于8道通信。TM7使用天线端口5、TM8使用天线端口7和8、TM9使用天线端口7~14，都使用UE特定的参考信息来进行相干解调，这些TM模式都不使用小区特定的参考信息来进行解调。</p>
+<p>特点：</p>
+<ul>
+<li>小区特定的参考信号只在天线端口0~3中的一个或几个中传输。</li>
+<li>小区特定的参考信号在每个下行子帧，整个下行带宽内的每个RB上都会发送。</li>
+<li>在MBSFN子帧上，小区特定的参考信号只能在该子帧的非MBSFN区域。</li>
+</ul>
+<p>小区特定的参考信号序列由一系列的参考符号组成，每个参考符号占一个RE。序列的生成与小区的PCI、一个系统帧内的slot号，一个slot内的symbol号以及循环前缀的类型相关。这个序列的变化周期为10ms，即一个系统帧。小区特定的参考信号由带预定义值的一系列参考符号组成。</p>
+<p>参考信号序列都是以频域上的最大可能的系统带宽110RB来定义的。</p>
+<h4 id="小区特定的参考符号映射道RE的过程"><a href="#小区特定的参考符号映射道RE的过程" class="headerlink" title="小区特定的参考符号映射道RE的过程"></a>小区特定的参考符号映射道RE的过程</h4><p><strong>1、使用1个小区特定的参考信号的情况（对应单天线端口0）</strong></p>
+<p>此时参考符号会插入到每个slot的第一个和倒数第三个OFDM符号中，同一个OFDM符号内相邻的2个参考符号在频域上间隔6个子载波。倒数第 3 个 OFDM 符号中的参考符号和第一个 OFDM 符号中的参考符号在频域上间隔 3 个子载波。此时一个RB pair内有8个RE用于发送小区特定的参考信号。<img src="https://s2.loli.net/2023/09/11/Vh9vGDzWJwaQA54.png" alt="image-20230909140625222"></p>
+<p>参考符号在每个RB内的起始位置还和小区特定的频率偏移相关。LTE定义了6个频率偏移，此值和小区的PCI相关，其值为PCI mod 6。可以避免至多6个相邻小区特定的参考信号之间时频资源冲突。分配给小区合适的PCI，使得相邻小区之间拥有不同的频率移位。</p>
+<p><strong>分配不同频率的原因</strong>：当相邻小区的参考信号使用相同的时频资源，则某个小区上提升了功率的参考信号将会被所有相邻小区同样提升了功率的参考信号所干扰，这样就抵消了功率提升带来的参考信号SIR的增益。当相邻小区的参考信号之间使用不同的频率偏移的话，小区的参考信号只会被相邻小区的非参考信号的符号所干扰，这样参考信号功率提升就能够特高参考信号SIR。</p>
+<p>参考信号功率提升：为提高参考信号的SIR，可以让参考信号比其他RE拥有更高的能量。</p>
+<p><strong>2、使用2或4个小区特定的参考信号的情况</strong></p>
+<p><img src="https://s2.loli.net/2023/09/11/hsB8yulWjCe1U9O.png" alt="image-20230909142431566"></p>
+<p>当小区使用2个参考信号时，第1个天线端口上的参考信号与第2个天线端口的参考信号在频域上复用，二者在频域上偏移了3个子载波。</p>
+<p>当小区使用4个参考信号时，第3个天线端口上的参考信号和第4个天线端口上的参考信号在频域上复用，二者在频域上偏移了3个子载波。且第3个和第4个天线端口上的参考信号在每个slot的第2个OFDM符号上传输，这样就与第1个和第2个天线端口上的参考信号在时域上进行了复用。为降低参考信号的开销，第3个和第4个天线端口上的参考符号密度是第1个和第2个天线端口的一半。</p>
+<p>每个天线端口上，被小区特定的参考信号占据的RE都不能用于其他传输。如果某个天线端口上的某个RE被用于发送参考信号，则其他天线端口上时频位置相同的RE上不能传输任何东西。这是为了避免小区特定的参考信号被其他天线端口上的传输干扰。为了获得良好的信道估计以及在接收端获得较好的干扰抑制，应降低对一个天线端口上的参考信号的干扰。</p>
+<p><strong>3、从协议的角度详细的描述如何将小区特定的参考信号序列映射到RE</strong></p>
+<p><img src="https://s2.loli.net/2023/09/11/IkRrDQwm5F1qLYa.png" alt="image-20230909150900040"></p>
+<p>注：在通过小区搜索之后，UE就指导了该小区的小区特定参考信号序列及其时频位置。</p>
+<p>通过接收MIB，UE又知道了小区特定的天线端口数（1、2、4），从而知道了小区特定的参考信号，即小区特定的参考信号在哪几个天线端口上传输。</p>
+<h3 id="3、UE特定的参考信号"><a href="#3、UE特定的参考信号" class="headerlink" title="3、UE特定的参考信号"></a>3、UE特定的参考信号</h3><p>1、UE特定的参考信号又称调制解调器（DMRS）。该参考信号只在某个分配给某个特定UE的RB上传输，并只对该UE有效。用于配置了TM7/8/9的UE的PDSCH信道估计，即应用于基于非码本的预编码的场景。</p>
+<p>2、UE特定的意思是每个UE特定的参考信号只能用于单个UE，不同UE之间是不同的。</p>
+<p>3、UE特定的参考信号与PDSCH传输使用的预编码相同，因此eNode不需要告诉UE所使用的预编码信息。</p>
+<p>4、Rel-8中，UE特定的参考信号只能用于单层传输（TM7），即不支持空分复用，每个UE至多只有1个UE特定的参考信号。</p>
+<p>5、Rel-9中，UE特定的参考信号的传输扩展到支持至多2层传输（TM8），对应同时传输至多2个参考信号，每层各1个。结构并不是直接扩展来自Rel-8中定义的UE特定的参考信号，而是重新定义了一个结构，支持单层和双层传输。</p>
+<p>6、在Rel-10中，基于UE特定的参考信号的传输扩展支持至多8层传输（TM9），对应同时至多8个参考信号。直接扩展REl-9中定义的结构，就可支持至多8层传输。</p>
+<p>7、UE特定的参考信号与小区特定的参考信号在不同的天线端口上传输，并在时频位置上使用不同的RE，因此UE特定的参考信号不会影响小区特定的参考信号相关的特性。</p>
+<h4 id="一、Rel-8中的UE特定的参考信号"><a href="#一、Rel-8中的UE特定的参考信号" class="headerlink" title="一、Rel-8中的UE特定的参考信号"></a>一、Rel-8中的UE特定的参考信号</h4><p>这里定义的UE特定的参考信号只用于TM7，并只在天线端口5上传输。同一小区的不同UE对应的UE特定的参考信号位于不同的频域资源上，彼此互补干扰。Rel-8中的UE特定的参考信号序列由一系列的参考符号组成，每个参考符号占一个RE。</p>
+<p>这里的UE特定的参考信号的初始化与UE的RNTI相关，并且会在每个子帧开始时进行重新初始化。<img src="https://s2.loli.net/2023/09/11/DNTS8rBXHJjtEYn.png" alt="image-20230909190735380"></p>
+<p>UE特定的参考信号映射到RE的方式，与小区特定的参考信号类似，UE特定的参考信号在每个RB内的起始位置也和小区特定的频率偏移相关。该偏移与小区的PCI相关，其值PCI mod 3。<img src="https://s2.loli.net/2023/09/11/jnpo3kW7uURqYFA.png" alt="image-20230909191028361"></p>
+<h4 id="二、Rel-9、Rel-10中的UE特定的参考信号"><a href="#二、Rel-9、Rel-10中的UE特定的参考信号" class="headerlink" title="二、Rel-9、Rel-10中的UE特定的参考信号"></a>二、Rel-9、Rel-10中的UE特定的参考信号</h4><p>这里定义的UE特定的参考信号序列用于TM8/TM9中，并只在port7~14上传输。<strong>没有基于PCI的频率偏移</strong><img src="https://s2.loli.net/2023/09/11/U5WBioFhNSnqEPQ.png" alt="image-20230909192440099"></p>
+<p>未完结。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/09/07/%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3LTE-A%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/" rel="prev" title="《深入理解LTE-A》学习笔记（二）">
+                  <i class="fa fa-chevron-left"></i> 《深入理解LTE-A》学习笔记（二）
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC8zODU3Mi8xNTEwMA=="></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">L61q4_Cheng</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script src="/js/third-party/comments/livere.js"></script>
+
+</body>
+</html>
